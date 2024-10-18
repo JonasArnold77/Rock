@@ -20,11 +20,13 @@ public class GravityObject : MonoBehaviour
     {
         //Instantiate(obj, position: GetClosestPointOnSprite(), Quaternion.identity);
         isActive = true;
+        GetComponent<SpriteRenderer>().color = Color.red;
     }
 
     public void SetAsNotActive()
     {
         isActive = false;
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public Vector2 GetClosestPointOnSprite()
