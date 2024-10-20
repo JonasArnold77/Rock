@@ -57,12 +57,17 @@ public class LevelManager : MonoBehaviour
                 spawnPosition = lastSpawnedObject.transform.position + new Vector3(lastObjectWidth + 6, 0, 0);
             }
 
+            objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
+
+            spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
+            
+
             // Erstelle das neue Objekt an der berechneten Position
             GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
 
             // Setze eine zufällige Skalierung für das neue Objekt
             float randomScale = Random.Range(minScale, maxScale);
-            newObject.transform.localScale = new Vector3(randomScale, 1f, 1f);
+            newObject.transform.localScale = new Vector3(newObject.transform.localScale.x, newObject.transform.localScale.y, 1f);
 
             // Aktualisiere das zuletzt generierte Objekt
             lastSpawnedObject = newObject;
