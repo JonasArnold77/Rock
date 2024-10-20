@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = false;       // Überprüft, ob der Spieler den Boden berührt hat
     private bool isJumping = false;
 
+    public LayerMask groundLayer; // Layer des Bodens, um nur mit dem Boden zu kollidieren
+    public float raycastDistance = 0.1f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
         {
             MagneticFall();
         }
+
+        IsGrounded();
     }
 
     void Jump()
@@ -50,13 +55,36 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, -fallSpeedMultiplier);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    // Überprüfen, ob der Spieler den Boden berührt hat
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        isGrounded = true;
+    //        isJumping = false;
+    //    }
+    //}
+
+    public void IsGrounded()
     {
-        // Überprüfen, ob der Spieler den Boden berührt hat
-        if (collision.gameObject.CompareTag("Ground"))
+        // Startpunkt des Raycasts ist die Position des Charakters
+        Vector2 position = transform.position;
+        // Der Raycast geht nach unten, also ist die Richtung Vector2.down
+        Vector2 direction = Vector2.down;
+
+        // Führe den Raycast durch und überprüfe, ob er auf den Boden trifft
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, raycastDistance, groundLayer);
+
+        // Wenn der Raycast ein Objekt trifft, das auf dem Ground-Layer liegt, ist der Charakter grounded
+        if(hit.collider != null)
         {
             isGrounded = true;
             isJumping = false;
+        }
+        else
+        {
+            isGrounded = false;
+            isJumping = true;
         }
     }
 

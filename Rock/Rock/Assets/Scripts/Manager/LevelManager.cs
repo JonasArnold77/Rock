@@ -12,7 +12,9 @@ public class LevelManager : MonoBehaviour
     public float spawnDistanceAhead = 15f; // Entfernung, in der die Objekte vor dem Spieler generiert werden
     public float minScale = 0.5f;          // Minimale Skalierung des Objekts
     public float maxScale = 2f;            // Maximale Skalierung des Objekts
-    public float spawnInterval = 2f;
+    public float spawnInterval = 1f;
+
+    private GameObject lastSpawnedObject;
 
     private void Awake()
     {
@@ -41,21 +43,32 @@ public class LevelManager : MonoBehaviour
     {
         if (objectPrefab != null && PlayerTransform != null)
         {
-            // Berechne die Position, an der das Objekt generiert werden soll
-            Vector3 spawnPosition = PlayerTransform.position + new Vector3(spawnDistanceAhead, 0, 0);
+            Vector3 spawnPosition;
 
-            // Erstelle eine Kopie des GameObjects an der berechneten Position
+            // Wenn dies das erste Objekt ist, platziere es basierend auf dem Spieler
+            if (lastSpawnedObject == null)
+            {
+                spawnPosition = PlayerTransform.position + new Vector3(spawnDistanceAhead, 0, 0);
+            }
+            else
+            {
+                // Berechne die Position direkt rechts vom zuletzt generierten Objekt
+                float lastObjectWidth = lastSpawnedObject.GetComponent<SpriteRenderer>().bounds.size.x;
+                spawnPosition = lastSpawnedObject.transform.position + new Vector3(lastObjectWidth + 6, 0, 0);
+            }
+
+            // Erstelle das neue Objekt an der berechneten Position
             GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
 
             // Setze eine zufällige Skalierung für das neue Objekt
             float randomScale = Random.Range(minScale, maxScale);
-            newObject.transform.localScale = new Vector3(randomScale, randomScale, 1f);
+            newObject.transform.localScale = new Vector3(randomScale, 1f, 1f);
 
-            // Berechne die Breite des neu erstellten Objekts
-            float objectWidth = newObject.GetComponent<SpriteRenderer>().bounds.size.x;
+            // Aktualisiere das zuletzt generierte Objekt
+            lastSpawnedObject = newObject;
 
-            // Starte das nächste Objekt-Spawning nach einem Intervall, das der Breite des Objekts entspricht
-            Invoke("SpawnObject", objectWidth);
+            // Starte das nächste Objekt-Spawning nach dem festgelegten Intervall
+            Invoke("SpawnObject", spawnInterval);
         }
         else
         {
