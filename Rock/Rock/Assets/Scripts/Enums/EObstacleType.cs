@@ -2,5 +2,8 @@ public enum EObstacleType
 {
     Bottom,
     Top,
-    Middle
+    Middle,
+    StairUp,
+    StairDown,
+    All
 }

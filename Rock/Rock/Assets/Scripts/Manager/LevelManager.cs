@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -54,11 +55,30 @@ public class LevelManager : MonoBehaviour
             {
                 // Berechne die Position direkt rechts vom zuletzt generierten Objekt
                 float lastObjectWidth = lastSpawnedObject.GetComponent<SpriteRenderer>().bounds.size.x;
-                spawnPosition = lastSpawnedObject.transform.position + new Vector3(lastObjectWidth + 6, 0, 0);
+
+                int offsetX = 6;
+
+                if(lastSpawnedObject.GetComponent<Obstacle>().nextNeededType == EObstacleType.All || lastSpawnedObject.GetComponent<Obstacle>().nextNeededType == EObstacleType.StairDown)
+                {
+                    offsetX = 6;
+                }
+                else
+                {
+                    offsetX = 0;
+                }
+
+                spawnPosition = lastSpawnedObject.transform.position + new Vector3(lastObjectWidth + offsetX, 0, 0);
             }
 
-            objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
-
+            if (lastSpawnedObject != null  && lastSpawnedObject.GetComponent<Obstacle>().nextNeededType == EObstacleType.All)
+            {
+                objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
+            }
+            else if(lastSpawnedObject != null && LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList().Count>0)
+            {
+                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList().Count)];
+            }
+           
             spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
             
 
