@@ -5,5 +5,6 @@ public enum EObstacleType
     Middle,
     StairUp,
     StairDown,
-    All
+    All,
+    Free
 }
