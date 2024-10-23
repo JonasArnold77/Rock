@@ -42,77 +42,66 @@ public class LevelManager : MonoBehaviour
 
     void SpawnObject()
     {
-        if (objectPrefab != null && PlayerTransform != null)
+        if (objectPrefab == null || PlayerTransform == null)
         {
-            Vector3 spawnPosition;
+            Debug.LogWarning("ObjectPrefab or PlayerTransform is not assigned.");
+            return;
+        }
 
-            
-
-            //if (lastSpawnedObject != null  && lastSpawnedObject.GetComponent<Obstacle>().nextNeededType == EObstacleType.All)
-            //{
-            //    objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
-            //}
-            //else if(lastSpawnedObject != null && LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList().Count>0)
-            //{
-            //    objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList().Count)];
-            //}
-
-            if (lastSpawnedObject != null)
+        Vector3 spawnPosition;
+        if (lastSpawnedObject != null)
+        {
+            var obstacle = lastSpawnedObject.GetComponent<Obstacle>();
+            if (obstacle == null)
             {
-                var chunkType = ControlPanel.Instance.GetNextLevelChunk(lastSpawnedObject.GetComponent<Obstacle>().actualType);
-                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList().Count)];
+                Debug.LogWarning("Last spawned object does not have an Obstacle component.");
+                return;
+            }
 
+            var chunkType = ControlPanel.Instance.GetNextLevelChunk(obstacle.actualType);
+            var potentialChunks = LevelChunkManager.Instance.Chunks
+                .Where(c => c.GetComponent<Obstacle>().actualType == chunkType)
+                .ToList();
+
+            if (potentialChunks.Count > 0)
+            {
+                objectPrefab = potentialChunks[Random.Range(0, potentialChunks.Count)];
             }
             else
             {
-                objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
+                Debug.LogWarning("No chunks available for the specified chunk type.");
+                return;
             }
-
-            //objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList().Count)];
-            // Wenn dies das erste Objekt ist, platziere es basierend auf dem Spieler
-            if (lastSpawnedObject == null)
-            {
-                spawnPosition = PlayerTransform.position + new Vector3(spawnDistanceAhead, 0, 0);
-            }
-            else
-            {
-                // Berechne die Position direkt rechts vom zuletzt generierten Objekt
-                float lastObjectWidth = lastSpawnedObject.GetComponent<SpriteRenderer>().bounds.size.x;
-
-                int offsetX = 0;
-
-                //if(lastSpawnedObject.GetComponent<Obstacle>().nextNeededType == EObstacleType.All || lastSpawnedObject.GetComponent<Obstacle>().nextNeededType == EObstacleType.StairDown)
-                //{
-                //    offsetX = 6;
-                //}
-                //else
-                //{
-                //    offsetX = 0;
-                //}
-
-                spawnPosition = lastSpawnedObject.transform.position + new Vector3(lastObjectWidth + offsetX, 0, 0);
-            }
-
-            spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
-            
-
-            // Erstelle das neue Objekt an der berechneten Position
-            GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
-
-            // Setze eine zufällige Skalierung für das neue Objekt
-            float randomScale = Random.Range(minScale, maxScale);
-            newObject.transform.localScale = new Vector3(newObject.transform.localScale.x, newObject.transform.localScale.y, 1f);
-
-            // Aktualisiere das zuletzt generierte Objekt
-            lastSpawnedObject = newObject;
-
-            // Starte das nächste Objekt-Spawning nach dem festgelegten Intervall
-            Invoke("SpawnObject", spawnInterval);
         }
         else
         {
-            Debug.LogWarning("ObjectPrefab oder PlayerTransform ist nicht zugewiesen.");
+            objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
         }
+
+        // Berechne die Spawn-Position
+        if (lastSpawnedObject == null)
+        {
+            spawnPosition = PlayerTransform.position + new Vector3(spawnDistanceAhead, 0, 0);
+        }
+        else
+        {
+            float lastObjectWidth = lastSpawnedObject.GetComponent<SpriteRenderer>().bounds.size.x;
+            float objectWidth = objectPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
+            float offset = 0.0f; // optionaler Abstand zwischen den Objekten
+
+            // Berechne die Position direkt neben dem letzten Objekt
+            spawnPosition = lastSpawnedObject.transform.position + new Vector3(lastObjectWidth / 2 + objectWidth / 2 + offset, 0, 0);
+        }
+
+        spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
+
+        GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
+        float randomScale = Random.Range(minScale, maxScale);
+        newObject.transform.localScale = new Vector3(newObject.transform.localScale.x, newObject.transform.localScale.y, 1f);
+
+        lastSpawnedObject = newObject;
+
+        Invoke("SpawnObject", spawnInterval);
     }
 
     void CreateCloneToTheRight()
