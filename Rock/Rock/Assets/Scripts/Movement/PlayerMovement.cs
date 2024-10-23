@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded = false;       // Überprüft, ob der Spieler den Boden berührt hat
     private bool isJumping = false;
+    private bool isDoingMagneticFall = false;
 
     public LayerMask groundLayer; // Layer des Bodens, um nur mit dem Boden zu kollidieren
     public float raycastDistance = 0.1f;
@@ -43,8 +44,10 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         // Setze den Spieler in den Sprungzustand und füge eine Aufwärtskraft hinzu
-        isJumping = true;
-        isGrounded = false;
+        //isJumping = true;
+        //isGrounded = false;
+        //Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f));
+
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
@@ -53,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Erhöht die Fallgeschwindigkeit, um den Spieler schnell zu Boden zu ziehen
         rb.velocity = new Vector2(rb.velocity.x, -fallSpeedMultiplier);
+        isDoingMagneticFall = true;
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
@@ -78,6 +82,12 @@ public class PlayerMovement : MonoBehaviour
         // Wenn der Raycast ein Objekt trifft, das auf dem Ground-Layer liegt, ist der Charakter grounded
         if(hit.collider != null)
         {
+            if (isJumping && isDoingMagneticFall)
+            {
+                Instantiate(PrefabManager.Instance.GroundDashEffect, position: transform.position, new Quaternion(0, 0.707106829f, -0.707106829f, 0));
+                isDoingMagneticFall = false;
+            }
+
             isGrounded = true;
             isJumping = false;
         }
