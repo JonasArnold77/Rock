@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
     public float spawnDistanceAhead = 15f; // Entfernung, in der die Objekte vor dem Spieler generiert werden
     public float minScale = 0.5f;          // Minimale Skalierung des Objekts
     public float maxScale = 2f;            // Maximale Skalierung des Objekts
-    public float spawnInterval = 1f;
+    public float spawnInterval = 0f;
 
     private GameObject lastSpawnedObject;
 
@@ -46,6 +46,29 @@ public class LevelManager : MonoBehaviour
         {
             Vector3 spawnPosition;
 
+            
+
+            //if (lastSpawnedObject != null  && lastSpawnedObject.GetComponent<Obstacle>().nextNeededType == EObstacleType.All)
+            //{
+            //    objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
+            //}
+            //else if(lastSpawnedObject != null && LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList().Count>0)
+            //{
+            //    objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList().Count)];
+            //}
+
+            if (lastSpawnedObject != null)
+            {
+                var chunkType = ControlPanel.Instance.GetNextLevelChunk(lastSpawnedObject.GetComponent<Obstacle>().actualType);
+                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList().Count)];
+
+            }
+            else
+            {
+                objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
+            }
+
+            //objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList().Count)];
             // Wenn dies das erste Objekt ist, platziere es basierend auf dem Spieler
             if (lastSpawnedObject == null)
             {
@@ -69,29 +92,6 @@ public class LevelManager : MonoBehaviour
 
                 spawnPosition = lastSpawnedObject.transform.position + new Vector3(lastObjectWidth + offsetX, 0, 0);
             }
-
-            //if (lastSpawnedObject != null  && lastSpawnedObject.GetComponent<Obstacle>().nextNeededType == EObstacleType.All)
-            //{
-            //    objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
-            //}
-            //else if(lastSpawnedObject != null && LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList().Count>0)
-            //{
-            //    objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == lastSpawnedObject.GetComponent<Obstacle>().nextNeededType).ToList().Count)];
-            //}
-
-            if (lastSpawnedObject != null)
-            {
-                var chunkType = ControlPanel.Instance.GetNextLevelChunk(lastSpawnedObject.GetComponent<Obstacle>().actualType);
-                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList().Count)];
-
-            }
-            else
-            {
-                objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
-            }
-
-            //objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList()[Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().actualType == chunkType).ToList().Count)];
-
 
             spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
             
