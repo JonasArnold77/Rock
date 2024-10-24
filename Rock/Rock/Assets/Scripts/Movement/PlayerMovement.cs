@@ -18,9 +18,16 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer; // Layer des Bodens, um nur mit dem Boden zu kollidieren
     public float raycastDistance = 0.1f;
 
+    private List<GameObject> ActualFireEffect = new List<GameObject>();
+    public GameObject FireBallEffect;
+    public GameObject MagneticBallEffect;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        FireBallEffect.SetActive(false);
+        MagneticBallEffect.SetActive(false);
     }
 
     void Update()
@@ -37,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         {
             MagneticFall();
         }
-
         IsGrounded();
     }
 
@@ -46,7 +52,8 @@ public class PlayerMovement : MonoBehaviour
         // Setze den Spieler in den Sprungzustand und füge eine Aufwärtskraft hinzu
         //isJumping = true;
         //isGrounded = false;
-        Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f));
+        ActualFireEffect.Add(Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f)));
+        FireBallEffect.SetActive(true);
 
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -55,6 +62,14 @@ public class PlayerMovement : MonoBehaviour
     void MagneticFall()
     {
         // Erhöht die Fallgeschwindigkeit, um den Spieler schnell zu Boden zu ziehen
+        //Destroy(ActualFireEffect);
+
+        ActualFireEffect.ForEach(a => Destroy(a));
+        ActualFireEffect.Clear();
+
+        FireBallEffect.SetActive(false);
+        MagneticBallEffect.SetActive(true);
+
         rb.velocity = new Vector2(rb.velocity.x, -fallSpeedMultiplier);
         isDoingMagneticFall = true;
     }
@@ -88,8 +103,17 @@ public class PlayerMovement : MonoBehaviour
                 isDoingMagneticFall = false;
             }
 
+            //if(ActualFireEffect != null)
+            //{
+            //    Destroy(ActualFireEffect);
+            //    FireBallEffect.SetActive(false);
+            //}
+
+            MagneticBallEffect.SetActive(false);
+
             isGrounded = true;
             isJumping = false;
+            
         }
         else
         {
