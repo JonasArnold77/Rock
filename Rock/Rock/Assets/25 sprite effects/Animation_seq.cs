@@ -14,6 +14,8 @@ public class Animation_seq: MonoBehaviour
 
     private Transform PlayerTransform;
 
+    public float offsetY;
+    public float offsetX;
 
     void Start()
     {
@@ -30,7 +32,7 @@ public class Animation_seq: MonoBehaviour
             transform.position = new Vector3(PlayerTransform.position.x, transform.position.y, transform.position.z);
         }else if (FollowExactly)
         {
-            transform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y - 4, PlayerTransform.position.z);
+            transform.position = new Vector3(PlayerTransform.position.x - offsetX, PlayerTransform.position.y - offsetY, PlayerTransform.position.z);
         }
     }
 

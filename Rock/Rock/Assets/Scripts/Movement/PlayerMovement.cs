@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         // Setze den Spieler in den Sprungzustand und füge eine Aufwärtskraft hinzu
         //isJumping = true;
         //isGrounded = false;
-        //Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f));
+        Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f));
 
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
