@@ -19,7 +19,7 @@ public class Animation_seq: MonoBehaviour
 
     void Start()
     {
-        PlayerTransform = FindObjectOfType<PlayerMovement>().gameObject.transform;
+        //PlayerTransform = FindObjectOfType<PlayerMovement>().gameObject.transform;
         rendererMy = GetComponent<MeshRenderer>();
         NextFrame();
         InvokeRepeating("NextFrame", 1 / fps, 1 / fps);
