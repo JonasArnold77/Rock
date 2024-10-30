@@ -652,7 +652,9 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: FMCOLOR_URP
+    Android: VOL_FX;FMCOLOR_URP
+    Standalone: FMCOLOR_URP;VOL_FX
+    WebGL: VOL_FX
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

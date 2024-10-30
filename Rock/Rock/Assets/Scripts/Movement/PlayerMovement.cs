@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         // Setze den Spieler in den Sprungzustand und füge eine Aufwärtskraft hinzu
         //isJumping = true;
         //isGrounded = false;
-        ActualFireEffect.Add(Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f)));
+        //ActualFireEffect.Add(Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f)));
         FireBallEffect.SetActive(true);
 
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
@@ -63,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
     {
         // Erhöht die Fallgeschwindigkeit, um den Spieler schnell zu Boden zu ziehen
         //Destroy(ActualFireEffect);
+
+        GetComponent<PlayerSound>().PlayWhoosh();
 
         ActualFireEffect.ForEach(a => Destroy(a));
         ActualFireEffect.Clear();
@@ -101,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Instantiate(PrefabManager.Instance.GroundDashEffect, position: transform.position, new Quaternion(0, 0.707106829f, -0.707106829f, 0));
                 isDoingMagneticFall = false;
+                GetComponent<PlayerSound>().PlayMetal();
             }
 
             //if(ActualFireEffect != null)
