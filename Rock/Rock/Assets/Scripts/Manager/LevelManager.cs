@@ -58,9 +58,9 @@ public class LevelManager : MonoBehaviour
                 return;
             }
 
-            var chunkType = ControlPanel.Instance.GetNextLevelChunk(obstacle.actualType);
+            var chunkType = ControlPanel.Instance.GetNextLevelChunk(obstacle.endType);
             var potentialChunks = LevelChunkManager.Instance.Chunks
-                .Where(c => c.GetComponent<Obstacle>().actualType == chunkType)
+                .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                 .ToList();
 
             if (potentialChunks.Count > 0)

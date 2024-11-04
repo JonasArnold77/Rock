@@ -5,6 +5,6 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     public float height;
-    public EObstacleType actualType;
-    public EObstacleType nextNeededType;
+    public EObstacleType startType;
+    public EObstacleType endType;
 }
