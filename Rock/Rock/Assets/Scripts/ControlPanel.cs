@@ -6,6 +6,8 @@ public class ControlPanel : MonoBehaviour
 {
     public static ControlPanel Instance;
 
+    public int CountTillStair = 3;
+
     private void Awake()
     {
         Instance = this;
@@ -14,16 +16,26 @@ public class ControlPanel : MonoBehaviour
     public EObstacleType GetNextLevelChunk(EObstacleType CurrentObstacleType)
     {
         var chunkTypeList = new List<EObstacleType>();
+
+        if(CountTillStair > 0)
+        {
+            CountTillStair--;
+        }
+        else
+        {
+            CountTillStair = Random.Range(3,5);
+        }
+
         if(CurrentObstacleType == EObstacleType.Bottom)
         {
             chunkTypeList.Add(EObstacleType.Bottom);
-            chunkTypeList.Add(EObstacleType.StairUp);
+            if(CountTillStair == 0)return EObstacleType.StairUp;
             return chunkTypeList[Random.Range(0, chunkTypeList.Count)];
         }
         else if(CurrentObstacleType == EObstacleType.Middle)
         {
             chunkTypeList.Add(EObstacleType.Middle);
-            chunkTypeList.Add(EObstacleType.StairDown);
+            if (CountTillStair == 0)return EObstacleType.StairDown;
             return chunkTypeList[Random.Range(0, chunkTypeList.Count)];
         }
         else if (CurrentObstacleType == EObstacleType.StairDown)
