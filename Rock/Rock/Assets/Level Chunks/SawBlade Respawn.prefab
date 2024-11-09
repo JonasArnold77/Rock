@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2256843764695391679}
   - component: {fileID: 5864231080432435244}
   m_Layer: 0
-  m_Name: Obstacle 1 (1) 5
+  m_Name: SawBlade Respawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1850,6 +1850,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8939043013621857291}
     - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+      propertyPath: Respawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: StartPos
       value: 
       objectReference: {fileID: 8476448121044660000}
@@ -1861,17 +1865,25 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 2369963058747796156}
     - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.033333335
+      value: 0.023666667
       objectReference: {fileID: 0}
     - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.026622
+      value: 1.4389017
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03385002
+      value: 0.03385
       objectReference: {fileID: 0}
     - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1909,6 +1921,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1917,6 +1933,11 @@ PrefabInstance:
 --- !u!4 &2128303526443924422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+  m_PrefabInstance: {fileID: 5317674615682643179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &2369963058747796156 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7579523245747330647, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
   m_PrefabInstance: {fileID: 5317674615682643179}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7896354926578064517
@@ -1940,6 +1961,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8476448121044660000}
     - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+      propertyPath: Respawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: StartPos
       value: 
       objectReference: {fileID: 8939043013621857291}
@@ -1951,13 +1976,21 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: -100
       objectReference: {fileID: 0}
+    - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 340757087288197842}
     - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.033333335
+      value: 0.023666667
       objectReference: {fileID: 0}
     - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.026622
+      value: 1.4389017
+      objectReference: {fileID: 0}
+    - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2004,6 +2037,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+--- !u!212 &340757087288197842 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7579523245747330647, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
+  m_PrefabInstance: {fileID: 7896354926578064517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4165848194041893800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6072378576349859629, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
