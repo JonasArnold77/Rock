@@ -19,6 +19,13 @@ public class SawBlade : MonoBehaviour
 
     private bool IsMoving = true;
 
+    public SpriteRenderer spriteRenderer;  // Referenz zum SpriteRenderer
+    public float blinkInterval = 0.5f;     // Intervall in Sekunden zwischen den Farbwechseln
+
+    public Color grayColor;
+    public Color whiteColor;
+    private bool isGray = true;
+
     private void Start()
     {
         transform.parent = null;
@@ -66,13 +73,14 @@ public class SawBlade : MonoBehaviour
             {
                 IsMoving = false;
                 StartCoroutine(CheckIfAnimationFinished(transform, StartPos.position - new Vector3(0, 4, 0), StartPos.position, 2f));
+                StartCoroutine(BlinkSprite());
             }
         }   
     }
 
     private IEnumerator CheckIfAnimationFinished(Transform objectTransform, Vector3 startPosition, Vector3 endPosition, float duration)
     {
-        GetComponent<SpriteRenderer>().color = Color.grey;
+        spriteRenderer.color = Color.grey;
 
         transform.position = StartPos.position - new Vector3(0, 4, 0);
 
@@ -88,9 +96,23 @@ public class SawBlade : MonoBehaviour
             yield return null;
         }
 
+
         IsMoving = true;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        spriteRenderer.color = Color.white;
         // Setzt die Position am Ende auf die exakte Zielposition
         objectTransform.position = endPosition;
+    }
+
+    IEnumerator BlinkSprite()
+    {
+        while (!IsMoving)
+        {
+            // Farbe umschalten
+            spriteRenderer.color = isGray ? grayColor : whiteColor;
+            isGray = !isGray;
+
+            // Warte für das angegebene Intervall
+            yield return new WaitForSeconds(blinkInterval);
+        }
     }
 }
