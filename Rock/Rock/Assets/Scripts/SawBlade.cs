@@ -17,7 +17,7 @@ public class SawBlade : MonoBehaviour
 
     private bool movingToB = true;
 
-    private bool IsMoving = true;
+    public bool IsMoving = true;
 
     public SpriteRenderer spriteRenderer;  // Referenz zum SpriteRenderer
     public float blinkInterval = 0.5f;     // Intervall in Sekunden zwischen den Farbwechseln
@@ -25,6 +25,9 @@ public class SawBlade : MonoBehaviour
     public Color grayColor;
     public Color whiteColor;
     private bool isGray = true;
+
+    public Transform LastParent;
+    public bool Started;
 
     private void Start()
     {
@@ -34,6 +37,16 @@ public class SawBlade : MonoBehaviour
 
     private void Update()
     {
+        if(LastParent.position.x - FindObjectOfType<PlayerMovement>().gameObject.transform.position.x >= 100)
+        {
+            return;
+        }
+        else if(!Started && LastParent.position.x - FindObjectOfType<PlayerMovement>().gameObject.transform.position.x <= 100)
+        {
+            IsMoving = true;
+            Started = true;
+        }
+
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime, Space.Self);
 
        
@@ -55,10 +68,25 @@ public class SawBlade : MonoBehaviour
         // Zielposition festlegen basierend darauf, wohin das Sprite gerade bewegt wird
         Vector2 targetPosition = movingToB ? flatEndPos : flatStartPos;
 
+        if((Vector2)transform.position == flatEndPos)
+        {
+            movingToB = false;
+            targetPosition = flatStartPos;
+        }
+        else if((Vector2)transform.position == flatStartPos)
+        {
+            movingToB = true;
+            targetPosition = flatEndPos;
+        }
+
         if (IsMoving)
         {
             // Sprite zur Zielposition bewegen
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        }
+        else
+        {
+            return; 
         }
 
         // Prüfen, ob das Sprite die Zielposition erreicht hat
@@ -71,18 +99,23 @@ public class SawBlade : MonoBehaviour
             }
             else
             {
-                IsMoving = false;
-                StartCoroutine(CheckIfAnimationFinished(transform, StartPos.position - new Vector3(0, 4, 0), StartPos.position, 2f));
-                StartCoroutine(BlinkSprite());
+                StartCoroutine(InitRespawn());
             }
         }   
+    }
+
+    public IEnumerator InitRespawn()
+    {
+        StartCoroutine(BlinkSprite());
+        IsMoving = false;
+        yield return StartCoroutine(CheckIfAnimationFinished(transform, EndPos.position, EndPos.position - new Vector3(0,4,0), 2f));
+        yield return StartCoroutine(CheckIfAnimationFinished(transform, StartPos.position - new Vector3(0, 4, 0), StartPos.position, 2f));
+        IsMoving = true;
     }
 
     private IEnumerator CheckIfAnimationFinished(Transform objectTransform, Vector3 startPosition, Vector3 endPosition, float duration)
     {
         spriteRenderer.color = Color.grey;
-
-        transform.position = StartPos.position - new Vector3(0, 4, 0);
 
         float elapsedTime = 0f;
 
@@ -96,8 +129,6 @@ public class SawBlade : MonoBehaviour
             yield return null;
         }
 
-
-        IsMoving = true;
         spriteRenderer.color = Color.white;
         // Setzt die Position am Ende auf die exakte Zielposition
         objectTransform.position = endPosition;
