@@ -12,6 +12,7 @@ public class SawBlade : MonoBehaviour
     public bool yAxisFixed;
 
     public bool Respawn;
+    public bool RandomSpeed;
 
     public float speed = 1.0f; // Geschwindigkeit der Bewegung
 
@@ -29,10 +30,21 @@ public class SawBlade : MonoBehaviour
     public Transform LastParent;
     public bool Started;
 
+    public bool StartFromSetPosition;
+
     private void Start()
     {
         transform.parent = null;
-        transform.position = StartPos.position;
+
+        if (!StartFromSetPosition)
+        {
+            transform.position = StartPos.position;
+        }
+
+        if (RandomSpeed)
+        {
+            speed = Random.Range(11, 16);
+        }
     }
 
     private void Update()
@@ -111,6 +123,7 @@ public class SawBlade : MonoBehaviour
         yield return StartCoroutine(CheckIfAnimationFinished(transform, EndPos.position, EndPos.position - new Vector3(0,4,0), 2f));
         yield return StartCoroutine(CheckIfAnimationFinished(transform, StartPos.position - new Vector3(0, 4, 0), StartPos.position, 2f));
         IsMoving = true;
+        spriteRenderer.color = Color.white;
     }
 
     private IEnumerator CheckIfAnimationFinished(Transform objectTransform, Vector3 startPosition, Vector3 endPosition, float duration)

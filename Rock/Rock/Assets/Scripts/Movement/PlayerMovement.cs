@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce = 10f;          // Die Stärke des Sprungs
     public float fallSpeedMultiplier = 10f; // Wie schnell der Spieler magnetisch zu Boden gezogen wird
-    public KeyCode jumpKey = KeyCode.Mouse0; // Taste für den Sprung
+    public KeyCode jumpKey = KeyCode.Space; // Taste für den Sprung
 
     private Rigidbody2D rb;
     private bool isGrounded = false;       // Überprüft, ob der Spieler den Boden berührt hat
