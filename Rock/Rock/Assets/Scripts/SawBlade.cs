@@ -31,6 +31,8 @@ public class SawBlade : MonoBehaviour
     public bool Started;
 
     public bool StartFromSetPosition;
+    public bool Teleport;
+    public int StartOffset = 4;
 
     private void Start()
     {
@@ -111,7 +113,15 @@ public class SawBlade : MonoBehaviour
             }
             else
             {
-                StartCoroutine(InitRespawn());
+                //if (!Teleport)
+                //{
+                   StartCoroutine(InitRespawn());
+                //}
+                //else
+                //{
+                //    transform.position = StartPos.position;
+                //}
+                
             }
         }   
     }
@@ -120,8 +130,8 @@ public class SawBlade : MonoBehaviour
     {
         StartCoroutine(BlinkSprite());
         IsMoving = false;
-        yield return StartCoroutine(CheckIfAnimationFinished(transform, EndPos.position, EndPos.position - new Vector3(0,4,0), 2f));
-        yield return StartCoroutine(CheckIfAnimationFinished(transform, StartPos.position - new Vector3(0, 4, 0), StartPos.position, 2f));
+        yield return StartCoroutine(CheckIfAnimationFinished(transform, EndPos.position, EndPos.position - new Vector3(0, StartOffset, 0), 2f));
+        yield return StartCoroutine(CheckIfAnimationFinished(transform, StartPos.position - new Vector3(0, StartOffset, 0), StartPos.position, 2f));
         IsMoving = true;
         spriteRenderer.color = Color.white;
     }
