@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
 
     void SpawnObject()
     {
-        if (objectPrefab == null || PlayerTransform == null)
+        if (/*objectPrefab == null ||*/ PlayerTransform == null)
         {
             Debug.LogWarning("ObjectPrefab or PlayerTransform is not assigned.");
             return;

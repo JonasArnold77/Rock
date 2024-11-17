@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded = false;       // Überprüft, ob der Spieler den Boden berührt hat
-    private bool isJumping = false;
+    public bool isJumping = false;
     private bool isDoingMagneticFall = false;
 
     public LayerMask groundLayer; // Layer des Bodens, um nur mit dem Boden zu kollidieren
@@ -22,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject FireBallEffect;
     public GameObject MagneticBallEffect;
 
+    public bool GameIsStarted;
+
 
     void Start()
     {
@@ -30,8 +33,20 @@ public class PlayerMovement : MonoBehaviour
         MagneticBallEffect.SetActive(false);
     }
 
+
     void Update()
     {
+        if (!GameIsStarted && Input.GetKeyDown(KeyCode.F))
+        {
+            GameIsStarted = true;
+            rb.simulated = true;
+        }
+        if (!GameIsStarted)
+        {
+            rb.simulated = false;
+            return;
+        }
+
         MoveToRight();
 
         // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
@@ -76,16 +91,6 @@ public class PlayerMovement : MonoBehaviour
         isDoingMagneticFall = true;
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    // Überprüfen, ob der Spieler den Boden berührt hat
-    //    if (collision.gameObject.CompareTag("Ground"))
-    //    {
-    //        isGrounded = true;
-    //        isJumping = false;
-    //    }
-    //}
-
     public void IsGrounded()
     {
         // Startpunkt des Raycasts ist die Position des Charakters
@@ -128,5 +133,20 @@ public class PlayerMovement : MonoBehaviour
     private void MoveToRight()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Überprüfen, ob der Spieler den Boden berührt hat
+        if (collision.gameObject.CompareTag("Spikes"))
+        {
+            if (collision.gameObject.GetComponent<SawBlade>() != null &&!collision.gameObject.GetComponent<SawBlade>().IsMoving)
+            {
+                return;
+            }
+
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
+        }
     }
 }
