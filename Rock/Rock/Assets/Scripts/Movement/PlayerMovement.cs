@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce = 10f;          // Die Stärke des Sprungs
     public float fallSpeedMultiplier = 10f; // Wie schnell der Spieler magnetisch zu Boden gezogen wird
-    private KeyCode jumpKey = KeyCode.Space; // Taste für den Sprung
+    private KeyCode jumpKey = KeyCode.Mouse0; // Taste für den Sprung
 
     private Rigidbody2D rb;
     private bool isGrounded = false;       // Überprüft, ob der Spieler den Boden berührt hat
@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private List<GameObject> ActualFireEffect = new List<GameObject>();
     public GameObject FireBallEffect;
     public GameObject MagneticBallEffect;
+    public GameObject BallEffect;
+    public GameObject BallEffect2;
 
     public bool GameIsStarted;
 
@@ -36,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!GameIsStarted && Input.GetKeyDown(KeyCode.F))
+        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameIsStarted = true;
             rb.simulated = true;
@@ -137,16 +139,56 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        return;
         // Überprüfen, ob der Spieler den Boden berührt hat
         if (collision.gameObject.CompareTag("Spikes"))
         {
-            if (collision.gameObject.GetComponent<SawBlade>() != null &&!collision.gameObject.GetComponent<SawBlade>().IsMoving)
+            if (collision.gameObject.GetComponent<SawBlade>() != null && !collision.gameObject.GetComponent<SawBlade>().IsMoving)
             {
                 return;
             }
 
-            string currentSceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(currentSceneName);
+            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
+            speed = 0;
+            FireBallEffect.SetActive(false);
+            MagneticBallEffect.SetActive(false);
+            BallEffect.SetActive(false);
+            BallEffect2.SetActive(false);
+
+            rb.simulated = true;
+            GetComponent<Collider2D>().enabled = false;
+
+            StartCoroutine(WaitForReset());
+            //string currentSceneName = SceneManager.GetActiveScene().name;
+            //SceneManager.LoadScene(currentSceneName);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        return;
+        if (collision.gameObject.CompareTag("Spikes"))
+        {
+            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
+            speed = 0;
+            FireBallEffect.SetActive(false);
+            MagneticBallEffect.SetActive(false);
+            BallEffect.SetActive(false);
+            BallEffect2.SetActive(false);
+
+            rb.simulated = true;
+            GetComponent<Collider2D>().enabled = false;
+
+            StartCoroutine(WaitForReset());
+        }
+
+    }
+
+    private IEnumerator WaitForReset()
+    {
+        yield return new WaitForSeconds(1f);
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }

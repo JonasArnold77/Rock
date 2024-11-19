@@ -8,6 +8,7 @@ public class PrefabManager : MonoBehaviour
 
     public GameObject GroundDashEffect;
     public GameObject JumpDashEffect;
+    public GameObject DieEffect;
 
     private void Awake()
     {

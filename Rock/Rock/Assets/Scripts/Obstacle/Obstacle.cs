@@ -13,6 +13,8 @@ public class Obstacle : MonoBehaviour
 
     public Collider2D AreaCollider;
 
+    public EChunkType ChunkType;
+
     private void Start()
     {
         PlayerTransform = FindObjectOfType<PlayerMovement>().transform;
@@ -22,7 +24,7 @@ public class Obstacle : MonoBehaviour
     {
         if (!IsPlayerInsideCollider() && Vector2.Distance(PlayerTransform.position,transform.position)>200 && PlayerTransform.position.x > transform.position.x)
         {
-            Destroy(gameObject);
+             Destroy(gameObject);
         }
     }
 

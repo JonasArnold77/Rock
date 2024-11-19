@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,9 @@ public class LevelManager : MonoBehaviour
     public float minScale = 0.5f;          // Minimale Skalierung des Objekts
     public float maxScale = 2f;            // Maximale Skalierung des Objekts
     public float spawnInterval = 0f;
+
+    public int countOfArea;
+    public EChunkType actualChunkType;
 
     private GameObject lastSpawnedObject;
 
@@ -59,13 +63,26 @@ public class LevelManager : MonoBehaviour
             }
 
             var chunkType = ControlPanel.Instance.GetNextLevelChunk(obstacle.endType);
+
+            
+
+            if(countOfArea <= 0)
+            {
+                actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType);
+                countOfArea = UnityEngine.Random.Range(4,6);
+            }
+            else if(chunkType != EObstacleType.StairDown || chunkType != EObstacleType.StairUp)
+            {
+                countOfArea--;
+            }
+
             var potentialChunks = LevelChunkManager.Instance.Chunks
-                .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
+                .Where(c => c.GetComponent<Obstacle>().startType == chunkType && c.GetComponent<Obstacle>().ChunkType == actualChunkType)
                 .ToList();
 
             if (potentialChunks.Count > 0)
             {
-                objectPrefab = potentialChunks[Random.Range(0, potentialChunks.Count)];
+                objectPrefab = potentialChunks[UnityEngine.Random.Range(0, potentialChunks.Count)];
             }
             else
             {
@@ -75,7 +92,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            objectPrefab = LevelChunkManager.Instance.Chunks[Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
+            objectPrefab = LevelChunkManager.Instance.Chunks[UnityEngine.Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
         }
 
         // Berechne die Spawn-Position
@@ -96,7 +113,7 @@ public class LevelManager : MonoBehaviour
         spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
 
         GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
-        float randomScale = Random.Range(minScale, maxScale);
+        float randomScale = UnityEngine.Random.Range(minScale, maxScale);
         newObject.transform.localScale = new Vector3(newObject.transform.localScale.x, newObject.transform.localScale.y, 1f);
 
         lastSpawnedObject = newObject;
@@ -122,5 +139,17 @@ public class LevelManager : MonoBehaviour
         {
             Debug.LogWarning("spriteToClone ist nicht zugewiesen.");
         }
+    }
+
+    public T GetRandomEnumValueExcluding<T>(T excludedValue) where T : Enum
+    {
+        // Alle Werte der Enum laden
+        T[] allValues = (T[])Enum.GetValues(typeof(T));
+
+        // Werte filtern, um den ausgeschlossenen Wert zu entfernen
+        T[] filteredValues = allValues.Where(value => !value.Equals(excludedValue)).ToArray();
+
+        // Zufälligen Wert aus den gefilterten Werten auswählen
+        return filteredValues[UnityEngine.Random.Range(0, filteredValues.Length)];
     }
 }
