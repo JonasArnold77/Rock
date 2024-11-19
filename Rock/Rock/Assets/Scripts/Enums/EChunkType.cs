@@ -6,6 +6,5 @@ public enum EChunkType
 {
     UpAndDown,
     Saw,
-    Stairs,
     FloorIsLava
 }

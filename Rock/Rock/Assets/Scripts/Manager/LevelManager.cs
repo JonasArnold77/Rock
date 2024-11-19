@@ -64,8 +64,6 @@ public class LevelManager : MonoBehaviour
 
             var chunkType = ControlPanel.Instance.GetNextLevelChunk(obstacle.endType);
 
-            
-
             if(countOfArea <= 0)
             {
                 actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType);
@@ -77,8 +75,15 @@ public class LevelManager : MonoBehaviour
             }
 
             var potentialChunks = LevelChunkManager.Instance.Chunks
-                .Where(c => c.GetComponent<Obstacle>().startType == chunkType && c.GetComponent<Obstacle>().ChunkType == actualChunkType)
+                .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                 .ToList();
+
+            if (chunkType != EObstacleType.StairDown || chunkType != EObstacleType.StairUp)
+            {
+                potentialChunks = potentialChunks
+                .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType)
+                .ToList();
+            }
 
             if (potentialChunks.Count > 0)
             {
@@ -86,7 +91,7 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("No chunks available for the specified chunk type.");
+                Debug.LogWarning(actualChunkType + "No chunks available for the specified chunk type.");
                 return;
             }
         }
