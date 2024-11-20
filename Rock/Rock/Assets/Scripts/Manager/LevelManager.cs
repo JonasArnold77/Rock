@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
 
     public void GenerateNewLevelPart()
     {
-        if(PlayerTransform.position.x >= LevelBorderGameObject.transform.position.x)
+        if(PlayerTransform.position.x >= LevelBorderGameObject.transform.position.x-8)
         {
             CreateCloneToTheRight();
         }
@@ -74,16 +74,20 @@ public class LevelManager : MonoBehaviour
                 countOfArea--;
             }
 
-            var potentialChunks = LevelChunkManager.Instance.Chunks
-                .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
-                .ToList();
+            //var potentialChunks = LevelChunkManager.Instance.Chunks
+            //    .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
+            //    .ToList();
 
-            if (chunkType != EObstacleType.StairDown || chunkType != EObstacleType.StairUp)
-            {
-                potentialChunks = potentialChunks
-                .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType)
+            //if (chunkType != EObstacleType.StairDown || chunkType != EObstacleType.StairUp)
+            //{
+            //    potentialChunks = potentialChunks
+            //    .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType)
+            //    .ToList();
+            //}
+
+            var potentialChunks = LevelChunkManager.Instance.Chunks
+                .Where(c => c.GetComponent<Obstacle>().startType == chunkType/* && c.GetComponent<Obstacle>().ChunkType == actualChunkType*/)
                 .ToList();
-            }
 
             if (potentialChunks.Count > 0)
             {

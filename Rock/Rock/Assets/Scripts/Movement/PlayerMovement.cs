@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (isJumping && isDoingMagneticFall)
             {
-                Instantiate(PrefabManager.Instance.GroundDashEffect, position: transform.position, new Quaternion(0, 0.707106829f, -0.707106829f, 0));
+                //Instantiate(PrefabManager.Instance.GroundDashEffect, position: transform.position, new Quaternion(0, 0.707106829f, -0.707106829f, 0));
                 isDoingMagneticFall = false;
                 GetComponent<PlayerSound>().PlayMetal();
             }
