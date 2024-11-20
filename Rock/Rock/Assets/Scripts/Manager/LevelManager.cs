@@ -69,25 +69,25 @@ public class LevelManager : MonoBehaviour
                 actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType);
                 countOfArea = UnityEngine.Random.Range(4,6);
             }
-            else if(chunkType != EObstacleType.StairDown || chunkType != EObstacleType.StairUp)
+            else if(chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
             {
                 countOfArea--;
             }
 
-            //var potentialChunks = LevelChunkManager.Instance.Chunks
-            //    .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
-            //    .ToList();
-
-            //if (chunkType != EObstacleType.StairDown || chunkType != EObstacleType.StairUp)
-            //{
-            //    potentialChunks = potentialChunks
-            //    .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType)
-            //    .ToList();
-            //}
-
             var potentialChunks = LevelChunkManager.Instance.Chunks
-                .Where(c => c.GetComponent<Obstacle>().startType == chunkType/* && c.GetComponent<Obstacle>().ChunkType == actualChunkType*/)
+                .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                 .ToList();
+
+            if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
+            {
+                potentialChunks = potentialChunks
+                .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType)
+                .ToList();
+            }
+
+            //var potentialChunks = LevelChunkManager.Instance.Chunks
+            //    .Where(c => c.GetComponent<Obstacle>().startType == chunkType/* && c.GetComponent<Obstacle>().ChunkType == actualChunkType*/)
+            //    .ToList();
 
             if (potentialChunks.Count > 0)
             {
@@ -95,7 +95,7 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning(actualChunkType + "No chunks available for the specified chunk type.");
+                Debug.LogWarning(actualChunkType + " and  " + chunkType + " " + "No chunks available for the specified chunk type.");
                 return;
             }
         }
