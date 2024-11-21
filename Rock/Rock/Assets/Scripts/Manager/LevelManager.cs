@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     public float maxScale = 2f;            // Maximale Skalierung des Objekts
     public float spawnInterval = 0f;
 
+    public float spawnDistanceThreshold;
+
     public int countOfArea;
     public EChunkType actualChunkType;
 
@@ -34,6 +36,18 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         GenerateNewLevelPart();
+
+        if (lastSpawnedObject != null && PlayerTransform != null)
+        {
+            // Berechne die Distanz zwischen dem Spieler und dem letzten Objekt
+            float distanceToLastObject = Mathf.Abs(PlayerTransform.position.x - lastSpawnedObject.transform.position.x);
+
+            // Wenn die Distanz kleiner als der Schwellenwert ist, spawne das nächste Objekt
+            if (distanceToLastObject <= spawnDistanceThreshold)
+            {
+                SpawnObject();
+            }
+        }
     }
 
     public void GenerateNewLevelPart()
@@ -46,9 +60,9 @@ public class LevelManager : MonoBehaviour
 
     void SpawnObject()
     {
-        if (/*objectPrefab == null ||*/ PlayerTransform == null)
+        if (PlayerTransform == null)
         {
-            Debug.LogWarning("ObjectPrefab or PlayerTransform is not assigned.");
+            Debug.LogWarning("PlayerTransform is not assigned.");
             return;
         }
 
@@ -64,12 +78,12 @@ public class LevelManager : MonoBehaviour
 
             var chunkType = ControlPanel.Instance.GetNextLevelChunk(obstacle.endType);
 
-            if(countOfArea <= 0)
+            if (countOfArea <= 0)
             {
                 actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType);
-                countOfArea = UnityEngine.Random.Range(4,6);
+                countOfArea = UnityEngine.Random.Range(4, 6);
             }
-            else if(chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
+            else if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
             {
                 countOfArea--;
             }
@@ -78,24 +92,20 @@ public class LevelManager : MonoBehaviour
                 .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                 .ToList();
 
-            if(actualChunkType == EChunkType.FloorIsLava)
+            if (actualChunkType == EChunkType.FloorIsLava)
             {
                 chunkType = EObstacleType.Bottom;
                 potentialChunks = LevelChunkManager.Instance.Chunks
-                .Where(c => c.GetComponent<Obstacle>().startType == chunkType/* && c.GetComponent<Obstacle>().endType == EObstacleType.Bottom*/)
-                .ToList();
+                    .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
+                    .ToList();
             }
 
             if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
             {
                 potentialChunks = potentialChunks
-                .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType)
-                .ToList();
+                    .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType)
+                    .ToList();
             }
-
-            //var potentialChunks = LevelChunkManager.Instance.Chunks
-            //    .Where(c => c.GetComponent<Obstacle>().startType == chunkType/* && c.GetComponent<Obstacle>().ChunkType == actualChunkType*/)
-            //    .ToList();
 
             if (potentialChunks.Count > 0)
             {
@@ -112,7 +122,6 @@ public class LevelManager : MonoBehaviour
             objectPrefab = LevelChunkManager.Instance.Chunks[UnityEngine.Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
         }
 
-        // Berechne die Spawn-Position
         if (lastSpawnedObject == null)
         {
             spawnPosition = PlayerTransform.position + new Vector3(spawnDistanceAhead, 0, 0);
@@ -121,9 +130,8 @@ public class LevelManager : MonoBehaviour
         {
             float lastObjectWidth = lastSpawnedObject.GetComponent<SpriteRenderer>().bounds.size.x;
             float objectWidth = objectPrefab.GetComponent<SpriteRenderer>().bounds.size.x;
-            float offset = 0.0f; // optionaler Abstand zwischen den Objekten
+            float offset = 0.0f;
 
-            // Berechne die Position direkt neben dem letzten Objekt
             spawnPosition = lastSpawnedObject.transform.position + new Vector3(lastObjectWidth / 2 + objectWidth / 2 + offset, 0, 0);
         }
 
@@ -134,8 +142,6 @@ public class LevelManager : MonoBehaviour
         newObject.transform.localScale = new Vector3(newObject.transform.localScale.x, newObject.transform.localScale.y, 1f);
 
         lastSpawnedObject = newObject;
-
-        Invoke("SpawnObject", spawnInterval);
     }
 
     void CreateCloneToTheRight()
