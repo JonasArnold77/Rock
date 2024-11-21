@@ -78,6 +78,14 @@ public class LevelManager : MonoBehaviour
                 .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                 .ToList();
 
+            if(actualChunkType == EChunkType.FloorIsLava)
+            {
+                chunkType = EObstacleType.Bottom;
+                potentialChunks = LevelChunkManager.Instance.Chunks
+                .Where(c => c.GetComponent<Obstacle>().startType == chunkType/* && c.GetComponent<Obstacle>().endType == EObstacleType.Bottom*/)
+                .ToList();
+            }
+
             if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
             {
                 potentialChunks = potentialChunks
