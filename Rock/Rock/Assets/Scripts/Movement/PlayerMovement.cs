@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool GameIsStarted;
 
+    private List<GameObject> passedObjects = new List<GameObject>();
 
     void Start()
     {
@@ -38,6 +39,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Instantiate(PrefabManager.Instance.XpText);
+        }
+
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Spikes");
+
+        foreach (GameObject target in targets)
+        {
+            // Check if the player has passed the object
+            if (!passedObjects.Contains(target) &&  transform.position.x >= target.transform.position.x)
+            {
+                passedObjects.Add(target);
+                Instantiate(PrefabManager.Instance.XpText);
+            }
+        }
+
         if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameIsStarted = true;

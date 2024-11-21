@@ -10,6 +10,8 @@ public class PrefabManager : MonoBehaviour
     public GameObject JumpDashEffect;
     public GameObject DieEffect;
 
+    public GameObject XpText;
+
     private void Awake()
     {
         Instance = this;
