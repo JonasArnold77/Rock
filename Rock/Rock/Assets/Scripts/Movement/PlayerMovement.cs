@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce = 10f;          // Die Stärke des Sprungs
     public float fallSpeedMultiplier = 10f; // Wie schnell der Spieler magnetisch zu Boden gezogen wird
-    private KeyCode jumpKey = KeyCode.Mouse0; // Taste für den Sprung
+    private KeyCode jumpKey = KeyCode.Space; // Taste für den Sprung
 
     private Rigidbody2D rb;
     private bool isGrounded = false;       // Überprüft, ob der Spieler den Boden berührt hat
@@ -44,17 +44,17 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(PrefabManager.Instance.XpText);
         }
 
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("Spikes");
+        //GameObject[] targets = GameObject.FindGameObjectsWithTag("Spikes");
 
-        foreach (GameObject target in targets)
-        {
-            // Check if the player has passed the object
-            if (!passedObjects.Contains(target) &&  transform.position.x >= target.transform.position.x)
-            {
-                passedObjects.Add(target);
-                Instantiate(PrefabManager.Instance.XpText);
-            }
-        }
+        //foreach (GameObject target in targets)
+        //{
+        //    // Check if the player has passed the object
+        //    if (!passedObjects.Contains(target) &&  transform.position.x >= target.transform.position.x)
+        //    {
+        //        passedObjects.Add(target);
+        //        Instantiate(PrefabManager.Instance.XpText);
+        //    }
+        //}
 
         if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -157,8 +157,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        return;
-        // Überprüfen, ob der Spieler den Boden berührt hat
+
+        if (collision.gameObject.CompareTag("XP"))
+        {
+            Instantiate(PrefabManager.Instance.XpText);
+        }
+
+            return;
+            // Überprüfen, ob der Spieler den Boden berührt hat
         if (collision.gameObject.CompareTag("Spikes"))
         {
             if (collision.gameObject.GetComponent<SawBlade>() != null && !collision.gameObject.GetComponent<SawBlade>().IsMoving)
