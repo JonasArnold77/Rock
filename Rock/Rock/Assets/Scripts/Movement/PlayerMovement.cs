@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         //foreach (GameObject target in targets)
         //{
         //    // Check if the player has passed the object
-        //    if (!passedObjects.Contains(target) &&  transform.position.x >= target.transform.position.x)
+        //    if (!passedObjects.Contains(target) && transform.position.x >= target.transform.position.x)
         //    {
         //        passedObjects.Add(target);
         //        Instantiate(PrefabManager.Instance.XpText);
