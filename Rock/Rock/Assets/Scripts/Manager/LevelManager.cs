@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
     public GameObject LevelBorderGameObject;
 
+    public bool FirstChunkSetted;
+
     public GameObject objectPrefab;        // Das GameObject, das generiert werden soll
     public float spawnDistanceAhead = 15f; // Entfernung, in der die Objekte vor dem Spieler generiert werden
     public float minScale = 0.5f;          // Minimale Skalierung des Objekts
@@ -120,6 +122,12 @@ public class LevelManager : MonoBehaviour
         else
         {
             objectPrefab = LevelChunkManager.Instance.Chunks[UnityEngine.Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
+        }
+
+        if (!FirstChunkSetted)
+        {
+            objectPrefab = LevelChunkManager.Instance.StartChunk;
+            FirstChunkSetted = true;
         }
 
         if (lastSpawnedObject == null)
