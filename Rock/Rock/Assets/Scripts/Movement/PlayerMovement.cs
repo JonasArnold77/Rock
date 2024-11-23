@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -44,17 +45,18 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(PrefabManager.Instance.XpText);
         }
 
-        //GameObject[] targets = GameObject.FindGameObjectsWithTag("Spikes");
+        var targets = GameObject.FindObjectsOfType<SawBlade>().ToList().Select(s => s.gameObject);
 
-        //foreach (GameObject target in targets)
-        //{
-        //    // Check if the player has passed the object
-        //    if (!passedObjects.Contains(target) && transform.position.x >= target.transform.position.x)
-        //    {
-        //        passedObjects.Add(target);
-        //        Instantiate(PrefabManager.Instance.XpText);
-        //    }
-        //}
+        foreach (GameObject target in targets)
+        {
+            // Check if the player has passed the object
+            if (!passedObjects.Contains(target) && IsApproximatelyEqual(transform.position.x , target.transform.position.x, 0.5f) && target.GetComponent<SawBlade>().IsMoving)
+            {
+                passedObjects.Add(target);
+                Instantiate(PrefabManager.Instance.XpText);
+                StartCoroutine(ResetSawBladeXP(target));
+            }
+        }
 
         if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -80,6 +82,17 @@ public class PlayerMovement : MonoBehaviour
             MagneticFall();
         }
         IsGrounded();
+    }
+
+    public IEnumerator ResetSawBladeXP(GameObject actualObject)
+    {
+        yield return new WaitForSeconds(2f);
+        passedObjects.Remove(actualObject);
+    }
+
+    public bool IsApproximatelyEqual(float value1, float value2, float tolerance)
+    {
+        return Mathf.Abs(value1 - value2) < tolerance;
     }
 
     void Jump()
