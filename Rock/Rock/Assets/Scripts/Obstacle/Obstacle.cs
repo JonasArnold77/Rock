@@ -9,6 +9,8 @@ public class Obstacle : MonoBehaviour
     public EObstacleType startType;
     public EObstacleType endType;
 
+    public int DifficultyLevel;
+
     public Transform PlayerTransform;
 
     public Collider2D AreaCollider;

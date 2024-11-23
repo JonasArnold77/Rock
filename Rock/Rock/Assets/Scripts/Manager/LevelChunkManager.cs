@@ -7,6 +7,9 @@ public class LevelChunkManager : MonoBehaviour
     public List<GameObject> Chunks = new List<GameObject>();
 
     public GameObject StartChunk;
+    public GameObject TestChunk;
+
+    public bool TestMode;
 
     public static LevelChunkManager Instance;
 

@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2256843764695391679}
   - component: {fileID: 5864231080432435244}
   m_Layer: 0
-  m_Name: SawBladeNormal
+  m_Name: SawBlade Respawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ Transform:
   m_LocalScale: {x: 30, y: 0.4934319, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6697473884240589763}
+  - {fileID: 4481748272061927520}
   - {fileID: 7464254813930352382}
   - {fileID: 3261392427384590533}
   - {fileID: 4332272787429425176}
@@ -193,8 +193,9 @@ MonoBehaviour:
   height: -5.12
   startType: 0
   endType: 0
+  DifficultyLevel: 1
   PlayerTransform: {fileID: 0}
-  AreaCollider: {fileID: 1130281014809274629}
+  AreaCollider: {fileID: 246336346647855687}
   ChunkType: 1
 --- !u!1 &511082497405021034
 GameObject:
@@ -342,6 +343,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -491,6 +493,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -640,6 +643,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -674,7 +678,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7427011410231182889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2211514064571626174
+--- !u!1 &1933332696248626905
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -682,9 +686,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6697473884240589763}
-  - component: {fileID: 5419646451849953249}
-  - component: {fileID: 1130281014809274629}
+  - component: {fileID: 4481748272061927520}
+  - component: {fileID: 6813055583189979674}
+  - component: {fileID: 246336346647855687}
   m_Layer: 7
   m_Name: AreaCollider
   m_TagString: Untagged
@@ -692,28 +696,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6697473884240589763
+--- !u!4 &4481748272061927520
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2211514064571626174}
+  m_GameObject: {fileID: 1933332696248626905}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00121, y: 16.685925, z: 0}
-  m_LocalScale: {x: 1.0207683, y: 34.55579, z: 1}
+  m_LocalPosition: {x: -0.00075, y: 16.685925, z: 0}
+  m_LocalScale: {x: 1.0106655, y: 34.55579, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7427011410231182889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5419646451849953249
+--- !u!212 &6813055583189979674
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2211514064571626174}
+  m_GameObject: {fileID: 1933332696248626905}
   m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -759,13 +763,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1130281014809274629
+--- !u!61 &246336346647855687
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2211514064571626174}
+  m_GameObject: {fileID: 1933332696248626905}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -950,6 +954,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -1099,6 +1104,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -1248,6 +1254,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -1397,6 +1404,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -1546,6 +1554,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -1695,6 +1704,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -1844,6 +1854,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -1993,6 +2004,7 @@ MonoBehaviour:
   height: 2.84
   startType: 0
   endType: 0
+  DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
@@ -2022,7 +2034,7 @@ PrefabInstance:
       objectReference: {fileID: 8939043013621857291}
     - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: Respawn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: StartPos
@@ -2138,10 +2150,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 806813276319802700, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 346230723947694787}
+      addedObject: {fileID: 8438158954912617463}
     - targetCorrespondingSourceObject: {fileID: 806813276319802700, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8964027551851537117}
+      addedObject: {fileID: 1968185174330228022}
   m_SourcePrefab: {fileID: 100100000, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
 --- !u!4 &2128303526443924422 stripped
 Transform:
@@ -2158,7 +2170,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 806813276319802700, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
   m_PrefabInstance: {fileID: 5317674615682643179}
   m_PrefabAsset: {fileID: 0}
---- !u!58 &346230723947694787
+--- !u!58 &8438158954912617463
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2193,7 +2205,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.03
---- !u!114 &8964027551851537117
+--- !u!114 &1968185174330228022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2231,7 +2243,7 @@ PrefabInstance:
       objectReference: {fileID: 8476448121044660000}
     - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: Respawn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1931668816512950558, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       propertyPath: StartPos
@@ -2343,10 +2355,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 806813276319802700, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6088072836207529106}
+      addedObject: {fileID: 4794048095093618007}
     - targetCorrespondingSourceObject: {fileID: 806813276319802700, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5766046686088771310}
+      addedObject: {fileID: 2528533431268911307}
   m_SourcePrefab: {fileID: 100100000, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
 --- !u!212 &340757087288197842 stripped
 SpriteRenderer:
@@ -2363,7 +2375,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 806813276319802700, guid: 583cc59bf6770c445a54fcebcd204375, type: 3}
   m_PrefabInstance: {fileID: 7896354926578064517}
   m_PrefabAsset: {fileID: 0}
---- !u!58 &6088072836207529106
+--- !u!58 &4794048095093618007
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2398,7 +2410,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.03
---- !u!114 &5766046686088771310
+--- !u!114 &2528533431268911307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

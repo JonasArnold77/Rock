@@ -130,6 +130,11 @@ public class LevelManager : MonoBehaviour
             FirstChunkSetted = true;
         }
 
+        if (FirstChunkSetted && LevelChunkManager.Instance.TestChunk != null && LevelChunkManager.Instance.TestMode)
+        {
+            objectPrefab = LevelChunkManager.Instance.TestChunk;
+        }
+
         if (lastSpawnedObject == null)
         {
             spawnPosition = PlayerTransform.position + new Vector3(spawnDistanceAhead, 0, 0);
