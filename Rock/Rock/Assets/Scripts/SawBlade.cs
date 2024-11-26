@@ -38,6 +38,8 @@ public class SawBlade : MonoBehaviour
     {
         transform.parent = null;
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         if (!StartFromSetPosition)
         {
             transform.position = StartPos.position;

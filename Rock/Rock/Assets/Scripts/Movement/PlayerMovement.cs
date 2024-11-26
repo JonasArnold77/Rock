@@ -176,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(PrefabManager.Instance.XpText);
         }
 
-            return;
+            //return;
             // Überprüfen, ob der Spieler den Boden berührt hat
         if (collision.gameObject.CompareTag("Spikes"))
         {
@@ -203,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        return;
+        //return;
         if (collision.gameObject.CompareTag("Spikes"))
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
@@ -223,6 +223,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator WaitForReset()
     {
+        SaveManager.Instance.Save();
         yield return new WaitForSeconds(1f);
 
         string currentSceneName = SceneManager.GetActiveScene().name;
