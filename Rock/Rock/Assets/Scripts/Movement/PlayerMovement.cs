@@ -224,9 +224,10 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator WaitForReset()
     {
         SaveManager.Instance.Save();
+        DeathMenu.Instance.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
 
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        //string currentSceneName = SceneManager.GetActiveScene().name;
+        //SceneManager.LoadScene(currentSceneName);
     }
 }

@@ -11,8 +11,13 @@ public class ShopMenu : MonoBehaviour
 
     public static ShopMenu Instance;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
     }
 }
