@@ -157,7 +157,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.DefaultCompany.Rock
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -166,7 +167,7 @@ PlayerSettings:
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 22
-  AndroidTargetSdkVersion: 0
+  AndroidTargetSdkVersion: 32
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -246,7 +247,7 @@ PlayerSettings:
   clonedFromGUID: c19f32bac17ee4170b3bf8a6a0333fb9
   templatePackageId: com.unity.template.universal-2d@2.1.2
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  useCustomMainManifest: 0
+  useCustomMainManifest: 1
   useCustomLauncherManifest: 0
   useCustomMainGradleTemplate: 0
   useCustomLauncherGradleManifest: 0
@@ -653,7 +654,7 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Android: VOL_FX;FMCOLOR_URP;LEVELPLAY_DEPENDENCIES_INSTALLED
-    Standalone: VOL_FX;FMCOLOR_URP;LEVELPLAY_DEPENDENCIES_INSTALLED
+    Standalone: VOL_FX;FMCOLOR_URP
     WebGL: VOL_FX
   additionalCompilerArguments: {}
   platformArchitecture: {}
@@ -761,10 +762,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 8798e02b-e386-48ec-b8e3-b0697fd7682d
+  cloudProjectId: 9d8e575f-352e-4604-a376-269391fe6cd3
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Elemental Ball
+  projectName: Rock (1)
   organizationId: lynxian
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
