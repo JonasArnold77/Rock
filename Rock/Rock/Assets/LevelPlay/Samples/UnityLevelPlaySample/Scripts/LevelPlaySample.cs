@@ -10,9 +10,9 @@ public class LevelPlaySample : MonoBehaviour
     private LevelPlayInterstitialAd interstitialAd;
     
 #if UNITY_ANDROID
-    string appKey = "85460dcd";
-    string bannerAdUnitId = "thnfvcsog13bhn08";
-    string interstitialAdUnitId = "aeyqi3vqlv6o8sh9";
+    string appKey = "205015665";
+    string bannerAdUnitId = "plnozkbgnnfsdysv";
+    string interstitialAdUnitId = "a4qv00ggru16l9xg";
 #elif UNITY_IPHONE
     string appKey = "8545d445";
     string bannerAdUnitId = "iep3rxsyp9na3rw8";
@@ -23,6 +23,13 @@ public class LevelPlaySample : MonoBehaviour
     string interstitialAdUnitId = "unexpected_platform";
 #endif
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+
+        }
+    }
 
 
     public void Start()
