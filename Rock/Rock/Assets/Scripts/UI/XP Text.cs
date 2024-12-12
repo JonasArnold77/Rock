@@ -59,5 +59,6 @@ public class XPText : MonoBehaviour
 
         // Effekt abschlieﬂen
         uiText.color = new Color(initialColor.r, initialColor.g, initialColor.b, 0f); // Vollst‰ndig transparent
+        Destroy(gameObject);
     }
 }

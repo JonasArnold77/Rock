@@ -75,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && Input.GetKeyDown(jumpKey))
         {
             Jump();
+            //StartCoroutine(ElectricSoundCoroutine());
         }
         // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
         else if (isJumping && Input.GetKeyDown(jumpKey))
@@ -82,6 +83,21 @@ public class PlayerMovement : MonoBehaviour
             MagneticFall();
         }
         IsGrounded();
+    }
+
+    public IEnumerator ElectricSoundCoroutine()
+    {
+        yield return new WaitForSeconds(Random.Range(2,5));
+
+        if (isJumping)
+        {
+            GetComponent<PlayerSound>().PlayElectricalSound();
+            StartCoroutine(ElectricSoundCoroutine());
+        }
+        else
+        {
+            yield break;
+        }
     }
 
     public IEnumerator ResetSawBladeXP(GameObject actualObject)
@@ -103,6 +119,8 @@ public class PlayerMovement : MonoBehaviour
         //ActualFireEffect.Add(Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f)));
         FireBallEffect.SetActive(true);
 
+        GetComponent<PlayerSound>().PlayElectricalSound();
+
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
@@ -113,6 +131,8 @@ public class PlayerMovement : MonoBehaviour
         //Destroy(ActualFireEffect);
 
         GetComponent<PlayerSound>().PlayWhoosh();
+
+        GetComponent<PlayerSound>()._audioSource2.Stop();
 
         ActualFireEffect.ForEach(a => Destroy(a));
         ActualFireEffect.Clear();
@@ -176,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(PrefabManager.Instance.XpText);
         }
 
-            //return;
+            return;
             // Überprüfen, ob der Spieler den Boden berührt hat
         if (collision.gameObject.CompareTag("Spikes"))
         {
@@ -203,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //return;
+        return;
         if (collision.gameObject.CompareTag("Spikes"))
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));

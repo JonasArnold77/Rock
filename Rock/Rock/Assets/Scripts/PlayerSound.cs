@@ -7,25 +7,35 @@ public class PlayerSound : MonoBehaviour
     public AudioClip WooshSoundClip;
     public AudioClip MetalSoundClip;
 
-    private AudioSource _audioSource;
+    public List<AudioClip> ElectricSoundClipList = new List<AudioClip>();
+
+    public AudioSource _audioSource1;
+    public AudioSource _audioSource2;
 
     private void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
-        _audioSource.clip = WooshSoundClip;
+        _audioSource1.clip = WooshSoundClip;
     }
 
     public void PlayWhoosh()
     {
-        _audioSource.pitch = 0.91f;
-        _audioSource.clip = WooshSoundClip;
-        _audioSource.Play();
+        _audioSource1.pitch = 0.91f;
+        _audioSource1.clip = WooshSoundClip;
+        _audioSource1.Play();
     }
 
     public void PlayMetal()
     {
-        _audioSource.pitch = 1f;
-        _audioSource.clip = MetalSoundClip;
-        _audioSource.Play();
+        _audioSource1.pitch = 1f;
+        _audioSource1.clip = MetalSoundClip;
+        _audioSource1.Play();
+    }
+
+    public void PlayElectricalSound()
+    {
+        return;
+        //_audioSource2.pitch = 1f;
+        _audioSource2.clip = ElectricSoundClipList[Random.Range(0, ElectricSoundClipList.Count)];
+        _audioSource2.Play();
     }
 }
