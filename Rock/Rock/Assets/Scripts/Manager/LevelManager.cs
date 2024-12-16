@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour
 
     private GameObject lastSpawnedObject;
 
+    private GameObject lastObject;
+
     private void Awake()
     {
         Instance = this;
@@ -82,7 +84,7 @@ public class LevelManager : MonoBehaviour
 
             if (countOfArea <= 0)
             {
-                actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType);
+                actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType, EChunkType.FloorIsLava);
                 countOfArea = UnityEngine.Random.Range(4, 6);
             }
             else if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
@@ -105,7 +107,7 @@ public class LevelManager : MonoBehaviour
             if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
             {
                 potentialChunks = potentialChunks
-                    .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType)
+                    .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType && lastObject.GetComponent<Obstacle>().RuntimeID != c.GetComponent<Obstacle>().RuntimeID)
                     .ToList();
             }
 
@@ -151,6 +153,10 @@ public class LevelManager : MonoBehaviour
         spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
 
         GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
+
+        lastObject = newObject;
+
+
         float randomScale = UnityEngine.Random.Range(minScale, maxScale);
         newObject.transform.localScale = new Vector3(newObject.transform.localScale.x, newObject.transform.localScale.y, 1f);
 
@@ -177,13 +183,13 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public T GetRandomEnumValueExcluding<T>(T excludedValue) where T : Enum
+    public T GetRandomEnumValueExcluding<T>(T excludedValue, T excludedValue2) where T : Enum
     {
         // Alle Werte der Enum laden
         T[] allValues = (T[])Enum.GetValues(typeof(T));
 
         // Werte filtern, um den ausgeschlossenen Wert zu entfernen
-        T[] filteredValues = allValues.Where(value => !value.Equals(excludedValue)).ToArray();
+        T[] filteredValues = allValues.Where(value => !value.Equals(excludedValue) && !value.Equals(excludedValue2)).ToArray();
 
         // Zufälligen Wert aus den gefilterten Werten auswählen
         return filteredValues[UnityEngine.Random.Range(0, filteredValues.Length)];

@@ -17,6 +17,8 @@ public class Obstacle : MonoBehaviour
 
     public EChunkType ChunkType;
 
+    public int RuntimeID;
+
     private void Start()
     {
         PlayerTransform = FindObjectOfType<PlayerMovement>().transform;

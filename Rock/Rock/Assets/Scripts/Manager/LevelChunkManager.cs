@@ -17,4 +17,19 @@ public class LevelChunkManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    private void Start()
+    {
+        SetRuntimeIDs();
+    }
+
+    private void SetRuntimeIDs()
+    {
+        var count = 1;
+        foreach(var c in Chunks)
+        {
+            c.GetComponent<Obstacle>().RuntimeID = count;
+            count++;
+        }
+    }
 }

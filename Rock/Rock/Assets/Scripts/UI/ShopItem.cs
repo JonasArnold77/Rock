@@ -16,7 +16,7 @@ public class ShopItem : MonoBehaviour
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => ClickOnButton());
-        Equipment.SetActive(false);
+        //Equipment.SetActive(false);
     }
 
     private void ClickOnButton()
@@ -36,6 +36,9 @@ public class ShopItem : MonoBehaviour
 
                 Equipped = true;
 
+                SaveManager.Instance.ActualSkin = Equipment.ToString();
+                SaveManager.Instance.Save();
+
                 GetComponent<Button>().image.color = ShopMenu.Instance.SelectedColor;
             }
             else
@@ -46,6 +49,9 @@ public class ShopItem : MonoBehaviour
                     child.GetComponent<ShopItem>().GetComponent<Button>().image.color = ShopMenu.Instance.UnselectedColor;
                     child.GetComponent<ShopItem>().Equipped = false;
                 }
+
+                SaveManager.Instance.ActualSkin = "None";
+                SaveManager.Instance.Save();
             }
         }
         else
@@ -54,6 +60,9 @@ public class ShopItem : MonoBehaviour
             {
                 Unlocked = true;
                 Equipped = true;
+
+                SaveManager.Instance.ActualSkin = Equipment.ToString();
+                SaveManager.Instance.Save();
             }
         }
     }
