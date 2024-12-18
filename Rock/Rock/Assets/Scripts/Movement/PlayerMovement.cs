@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
             Instantiate(PrefabManager.Instance.XpText);
         }
 
+        
+
         var targets = GameObject.FindObjectsOfType<SawBlade>().ToList().Select(s => s.gameObject);
 
         foreach (GameObject target in targets)
@@ -72,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         MoveToRight();
+
+        Debug.Log("Velocity: " + rb.velocity);
 
         // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
         if (isGrounded && Input.GetKeyDown(jumpKey))
