@@ -191,7 +191,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveToRight()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        //transform.Translate(Vector2.right * speed * Time.deltaTime);
+        rb.velocity = new Vector2(4.5f, rb.velocity.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -238,6 +239,33 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //return;
+
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - new Vector2(0,0.5f), Vector2.right, raycastDistance*4, groundLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.5f), Vector2.right, raycastDistance*4, groundLayer);
+
+        if (hit.collider != null && hit2.collider != null)
+        {
+            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
+
+            if (LifePoints == 0)
+            {
+                speed = 0;
+                FireBallEffect.SetActive(false);
+                MagneticBallEffect.SetActive(false);
+                BallEffect.SetActive(false);
+                BallEffect2.SetActive(false);
+
+                rb.simulated = true;
+                GetComponent<Collider2D>().enabled = false;
+
+                StartCoroutine(WaitForReset());
+            }
+            else
+            {
+                LifePoints--;
+            }
+        }
+
         if (collision.gameObject.CompareTag("Spikes"))
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
