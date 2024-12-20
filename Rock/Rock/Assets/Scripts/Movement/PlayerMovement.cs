@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject BallEffect;
     public GameObject BallEffect2;
 
+    private float previousSpeedX = 4.5f;
+
+
     public bool GameIsStarted;
 
     public int LifePoints;
@@ -46,8 +49,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Instantiate(PrefabManager.Instance.XpText);
         }
-
-        
 
         var targets = GameObject.FindObjectsOfType<SawBlade>().ToList().Select(s => s.gameObject);
 
@@ -129,6 +130,26 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void DetectSpeedChange()
+    {
+        float currentSpeedX = rb.velocity.x;
+
+        // Überprüfen, ob sich die Geschwindigkeit verändert hat
+        if (currentSpeedX != previousSpeedX)
+        {
+            Debug.Log("Die Geschwindigkeit auf der X-Achse hat sich verändert!");
+
+            // Überprüfen, ob die Geschwindigkeit verringert wurde
+            if (currentSpeedX < previousSpeedX)
+            {
+                Debug.Log("Die Geschwindigkeit auf der X-Achse hat sich verringert!");
+            }
+        }
+
+        // Aktuelle Geschwindigkeit speichern
+        previousSpeedX = currentSpeedX;
     }
 
     void MagneticFall()
@@ -238,12 +259,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //return;
+        //RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - new Vector2(0,0.5f), Vector2.right, raycastDistance, groundLayer);
+        //RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.5f), Vector2.right, raycastDistance, groundLayer);
 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - new Vector2(0,0.5f), Vector2.right, raycastDistance*4, groundLayer);
-        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.5f), Vector2.right, raycastDistance*4, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, raycastDistance, groundLayer);
 
-        if (hit.collider != null && hit2.collider != null)
+
+        if (hit.collider != null /*&& hit2.collider != null*/)
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
 

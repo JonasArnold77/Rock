@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        actualChunkType = GetRandomEnumValueExcluding(EChunkType.FloorIsLava, EChunkType.FloorIsLava);
         SpawnObject();
     }
 
