@@ -42,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
         MagneticBallEffect.SetActive(false);
     }
 
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
@@ -259,13 +258,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - new Vector2(0,0.5f), Vector2.right, raycastDistance, groundLayer);
-        //RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.5f), Vector2.right, raycastDistance, groundLayer);
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, raycastDistance, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - new Vector2(0, 0.35f), Vector2.right, raycastDistance, groundLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.35f), Vector2.right, raycastDistance, groundLayer);
 
 
-        if (hit.collider != null /*&& hit2.collider != null*/)
+        
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, raycastDistance, groundLayer);
+
+
+        if ((hit.collider != null || hit2.collider != null) && !hit.collider.gameObject.GetComponent<SawBlade>() && !hit2.collider.gameObject.GetComponent<SawBlade>())
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
 
