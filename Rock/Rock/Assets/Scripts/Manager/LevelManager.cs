@@ -23,6 +23,8 @@ public class LevelManager : MonoBehaviour
     public int countOfArea;
     public EChunkType actualChunkType;
 
+    public int testLevelCount;
+
     private GameObject lastSpawnedObject;
 
     private GameObject lastObject;
@@ -136,6 +138,20 @@ public class LevelManager : MonoBehaviour
         if (FirstChunkSetted && LevelChunkManager.Instance.TestChunk != null && LevelChunkManager.Instance.TestMode)
         {
             objectPrefab = LevelChunkManager.Instance.TestChunk;
+        }
+
+        if (testLevelCount > 0)
+        {
+            if(testLevelCount == 4)
+            {
+                testLevelCount--;
+                objectPrefab = LevelChunkManager.Instance.BeginningChunks[0];
+            }
+            else
+            {
+                testLevelCount--;
+                objectPrefab = LevelChunkManager.Instance.BeginningChunks[UnityEngine.Random.Range(0, LevelChunkManager.Instance.BeginningChunks.Count)];
+            }  
         }
 
         if (lastSpawnedObject == null)
