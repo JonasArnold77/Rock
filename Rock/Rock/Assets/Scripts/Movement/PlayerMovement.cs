@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float previousSpeedX = 4.5f;
 
+    public Color MagneticColor;
+    public Color JumpingColor;
+
 
     public bool GameIsStarted;
 
@@ -125,6 +128,8 @@ public class PlayerMovement : MonoBehaviour
         //ActualFireEffect.Add(Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f)));
         FireBallEffect.SetActive(true);
 
+        //FindObjectsOfType<LightMovement>().ToList().ForEach(l => l.SetColor(JumpingColor));
+
         GetComponent<PlayerSound>().PlayElectricalSound();
 
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
@@ -165,6 +170,8 @@ public class PlayerMovement : MonoBehaviour
 
         FireBallEffect.SetActive(false);
         MagneticBallEffect.SetActive(true);
+
+        //FindObjectsOfType<LightMovement>().ToList().ForEach(l => l.SetColor(MagneticColor));
 
         rb.velocity = new Vector2(rb.velocity.x, -fallSpeedMultiplier);
         isDoingMagneticFall = true;

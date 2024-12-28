@@ -11,6 +11,9 @@ public class InventoryManager : MonoBehaviour
 
     public int MoneyAmount;
 
+    public Color JumpingColor;
+    public Color MagneticColor;
+
     private void Awake()
     {
         Instance = this; 
