@@ -13,10 +13,24 @@ public class ShopItem : MonoBehaviour
     public bool Equipped;
     public string EquipmentName;
 
+    public List<Image> Outlines = new List<Image>();
+
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => ClickOnButton());
+
+        Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
         //Equipment.SetActive(false);
+    }
+
+    public void SetOutlinesHighlighted()
+    {
+
+    }
+
+    public void SetOutlinesNotHighlighted()
+    {
+
     }
 
     private void ClickOnButton()
@@ -30,7 +44,7 @@ public class ShopItem : MonoBehaviour
 
                 foreach (Transform child in ShopMenu.Instance.Content)
                 {
-                    child.GetComponent<ShopItem>().GetComponent<Button>().image.color = ShopMenu.Instance.UnselectedColor;
+                    child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
                     child.GetComponent<ShopItem>().Equipped = false;
                 }
 
@@ -39,14 +53,14 @@ public class ShopItem : MonoBehaviour
                 SaveManager.Instance.ActualSkin = Equipment.ToString();
                 SaveManager.Instance.Save();
 
-                GetComponent<Button>().image.color = ShopMenu.Instance.SelectedColor;
+                Outlines.Select(o=> o.gameObject).ToList().ForEach(o => o.SetActive(true));
             }
             else
             {
                 FindObjectsOfType<Equipment>().ToList().Select(e => e.gameObject).ToList().ForEach(e => e.SetActive(false));
                 foreach (Transform child in ShopMenu.Instance.Content)
                 {
-                    child.GetComponent<ShopItem>().GetComponent<Button>().image.color = ShopMenu.Instance.UnselectedColor;
+                    child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
                     child.GetComponent<ShopItem>().Equipped = false;
                 }
 
