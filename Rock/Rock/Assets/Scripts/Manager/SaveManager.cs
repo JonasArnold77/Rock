@@ -20,6 +20,7 @@ public class SaveManager : MonoBehaviour
 
     private void Start()
     {
+        var path = Application.persistentDataPath;
         Load();
         FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().ForEach(s => s.SetActive(true));
         InventoryManager.Instance.SetActualSkin();

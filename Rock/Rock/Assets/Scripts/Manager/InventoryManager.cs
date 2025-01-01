@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -14,6 +14,13 @@ public class InventoryManager : MonoBehaviour
     public Color JumpingColor;
     public Color MagneticColor;
 
+    private int counter = 0; // Der Zähler
+    private float nextThreshold = 5f; // Nächster Schwellenwert auf der X-Achse
+
+    public Text HighscoreTicker;
+         
+    public int Score;
+
     private void Awake()
     {
         Instance = this; 
@@ -21,7 +28,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        
+        nextThreshold = FindObjectOfType<PlayerMovement>().transform.position.x + nextThreshold;
     }
 
     private void Update()
@@ -29,6 +36,28 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             ShopMenu.Instance.gameObject.SetActive(true);
+        }
+
+        // Aktuelle Position des Objekts auf der X-Achse
+        float currentX = FindObjectOfType<PlayerMovement>().transform.position.x;
+
+        // Prüfen, ob der aktuelle Schwellenwert überschritten wurde
+        if (currentX >= nextThreshold)
+        {
+            counter++; // Zähler um 1 erhöhen
+            Debug.Log("Zähler: " + counter);
+
+            Score++;
+
+            if(Score > SaveManager.Instance.Highscore)
+            {
+                SaveManager.Instance.Highscore = Score;
+            }
+
+            HighscoreTicker.text = Score.ToString();
+
+            // Nächsten Schwellenwert um 5 erhöhen
+            nextThreshold += 5f;
         }
     }
 

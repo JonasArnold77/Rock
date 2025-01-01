@@ -325,6 +325,12 @@ public class PlayerMovement : MonoBehaviour
     {
         SaveManager.Instance.Save();
         DeathMenu.Instance.gameObject.SetActive(true);
+
+        DeathMenu.Instance.ScoreText.text = InventoryManager.Instance.Score.ToString();
+        DeathMenu.Instance.HighscoreText.text = SaveManager.Instance.Highscore.ToString();
+
+        InventoryManager.Instance.HighscoreTicker.enabled = false;
+
         yield return new WaitForSeconds(1f);
 
         //string currentSceneName = SceneManager.GetActiveScene().name;

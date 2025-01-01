@@ -11,6 +11,9 @@ public class DeathMenu : MonoBehaviour
     public Button ShopButton;
     public Button RestartButton;
 
+    public Text ScoreText;
+    public Text HighscoreText;
+
     private void Start()
     {
         gameObject.SetActive(false);
