@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
         //FindObjectsOfType<LightMovement>().ToList().ForEach(l => l.SetColor(JumpingColor));
 
-        GetComponent<PlayerSound>().PlayElectricalSound();
+        GetComponent<PlayerSound>().PlayMetal();
 
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -161,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
         // Erhöht die Fallgeschwindigkeit, um den Spieler schnell zu Boden zu ziehen
         //Destroy(ActualFireEffect);
 
-        GetComponent<PlayerSound>().PlayWhoosh();
+        
 
         GetComponent<PlayerSound>()._audioSource2.Stop();
 
@@ -194,8 +194,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Instantiate(PrefabManager.Instance.GroundDashEffect, position: transform.position, new Quaternion(0, 0.707106829f, -0.707106829f, 0));
                 isDoingMagneticFall = false;
-                GetComponent<PlayerSound>().PlayMetal();
+                
             }
+
+            if (isJumping)
+            {
+                GetComponent<PlayerSound>().PlaySnare();
+            }
+
+            
 
             //if(ActualFireEffect != null)
             //{

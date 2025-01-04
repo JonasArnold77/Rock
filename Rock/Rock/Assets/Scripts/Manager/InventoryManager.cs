@@ -48,8 +48,9 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Zähler: " + counter);
 
             Score++;
+            
 
-            if(Score > SaveManager.Instance.Highscore)
+            if (Score > SaveManager.Instance.Highscore)
             {
                 SaveManager.Instance.Highscore = Score;
             }

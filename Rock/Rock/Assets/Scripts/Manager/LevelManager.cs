@@ -135,11 +135,6 @@ public class LevelManager : MonoBehaviour
             FirstChunkSetted = true;
         }
 
-        if (FirstChunkSetted && LevelChunkManager.Instance.TestChunk != null && LevelChunkManager.Instance.TestMode)
-        {
-            objectPrefab = LevelChunkManager.Instance.TestChunk;
-        }
-
         if (testLevelCount > 0)
         {
             if(testLevelCount == 4)
@@ -152,6 +147,11 @@ public class LevelManager : MonoBehaviour
                 testLevelCount--;
                 objectPrefab = LevelChunkManager.Instance.BeginningChunks[UnityEngine.Random.Range(0, LevelChunkManager.Instance.BeginningChunks.Count)];
             }  
+        }
+
+        if (FirstChunkSetted && LevelChunkManager.Instance.TestChunk != null && LevelChunkManager.Instance.TestMode)
+        {
+            objectPrefab = LevelChunkManager.Instance.TestChunk;
         }
 
         if (lastSpawnedObject == null)
