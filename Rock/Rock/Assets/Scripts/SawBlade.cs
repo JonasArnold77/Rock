@@ -13,6 +13,7 @@ public class SawBlade : MonoBehaviour
 
     public bool Respawn;
     public bool RandomSpeed;
+    public bool isStatic;
 
     public float speed = 1.0f; // Geschwindigkeit der Bewegung
 
@@ -64,6 +65,11 @@ public class SawBlade : MonoBehaviour
         }
 
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime, Space.Self);
+
+        if (isStatic) 
+        {
+            return;
+        }
 
        
         Vector2 flatEndPos = new Vector2();

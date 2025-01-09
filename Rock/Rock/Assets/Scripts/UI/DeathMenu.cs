@@ -10,6 +10,7 @@ public class DeathMenu : MonoBehaviour
 
     public Button ShopButton;
     public Button RestartButton;
+    public Button HardcoreModeButton;
 
     public Text ScoreText;
     public Text HighscoreText;
@@ -20,6 +21,7 @@ public class DeathMenu : MonoBehaviour
         RestartButton.onClick.AddListener(() => Respawn());
         ShopButton.onClick.AddListener(() => ShopMenu.Instance.gameObject.SetActive(true));
         ShopButton.onClick.AddListener(() => ShopMenu.Instance.SetCurrentSkin());
+        HardcoreModeButton.onClick.AddListener(() => InventoryManager.Instance.ToggleHardcoreMode());
     }
 
     private void Awake()

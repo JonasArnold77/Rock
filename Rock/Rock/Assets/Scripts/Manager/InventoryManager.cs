@@ -14,12 +14,19 @@ public class InventoryManager : MonoBehaviour
     public Color JumpingColor;
     public Color MagneticColor;
 
+    public bool IsHardcoreMode;
+
     private int counter = 0; // Der Zähler
     private float nextThreshold = 5f; // Nächster Schwellenwert auf der X-Achse
 
     public Text HighscoreTicker;
          
     public int Score;
+
+    public GameObject NormalPostProcessing;
+    public GameObject HellPostProcessing;
+
+    public Color hellColorBlue;
 
     private void Awake()
     {
@@ -62,17 +69,34 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void SetActualSkin()
+    public void ToggleHardcoreMode()
     {
-        if(SaveManager.Instance.ActualSkin != "None")
+        SaveManager.Instance.HardcoreModeOn = !SaveManager.Instance.HardcoreModeOn;
+
+        if (SaveManager.Instance.HardcoreModeOn)
         {
-            var x = FindObjectsOfType<Equipment>().ToList();
-            FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().Where(x => x.ToString() == SaveManager.Instance.ActualSkin).FirstOrDefault().SetActive(true);
-            FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().Where(x => x.ToString() != SaveManager.Instance.ActualSkin).ToList().ForEach(x=>x.SetActive(false));
+            HellPostProcessing.SetActive(true);
+            NormalPostProcessing.SetActive(false);
         }
         else
         {
+            HellPostProcessing.SetActive(false);
+            NormalPostProcessing.SetActive(true);
+        }
+
+        SaveManager.Instance.Save();
+    }
+    public void SetActualSkin()
+    {
+        if(SaveManager.Instance.ActualSkin == "None" || SaveManager.Instance.ActualSkin == "")
+        {
             FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().ForEach(s => s.SetActive(false));
+        }
+        else
+        {
+            var x = FindObjectsOfType<Equipment>().ToList();
+            FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().Where(x => x.ToString() == SaveManager.Instance.ActualSkin).FirstOrDefault().SetActive(true);
+            FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().Where(x => x.ToString() != SaveManager.Instance.ActualSkin).ToList().ForEach(x => x.SetActive(false));
         }
     }
 }

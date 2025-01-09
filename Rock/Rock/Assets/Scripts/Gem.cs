@@ -6,6 +6,9 @@ public class Gem : MonoBehaviour
 {
     public AudioSource _audioSource;
 
+    public Sprite redGem;
+    public Sprite blueGem;
+
     private void Start()
     {
         var random = Random.Range(0,2);
@@ -13,6 +16,15 @@ public class Gem : MonoBehaviour
         if(random == 0)
         {
             Destroy(gameObject);
+        }
+
+        if (SaveManager.Instance.HardcoreModeOn)
+        {
+            GetComponent<SpriteRenderer>().sprite = redGem;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = blueGem;
         }
     }
 
@@ -30,6 +42,8 @@ public class Gem : MonoBehaviour
                     Destroy(child);
                 }
             }
+
+            GetComponent<Collider2D>().enabled = false;
 
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
 
