@@ -33,6 +33,7 @@ public class LightMovement : MonoBehaviour
             if (SaveManager.Instance.HardcoreModeOn)
             {
                 SetColor(InventoryManager.Instance.hellColorBlue);
+                //SetColor(Color.red);
             }
             else
             {

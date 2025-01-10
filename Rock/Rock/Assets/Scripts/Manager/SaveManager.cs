@@ -32,11 +32,17 @@ public class SaveManager : MonoBehaviour
         {
             InventoryManager.Instance.HellPostProcessing.SetActive(true);
             InventoryManager.Instance.NormalPostProcessing.SetActive(false);
+
+            FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireHell.enabled = true);
+            FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireNormal.enabled = false);
         }
         else
         {
             InventoryManager.Instance.HellPostProcessing.SetActive(false);
             InventoryManager.Instance.NormalPostProcessing.SetActive(true);
+
+            FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireHell.enabled = false);
+            FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireNormal.enabled = true);
         }
     }
     
