@@ -98,6 +98,12 @@ public class LevelManager : MonoBehaviour
             var potentialChunks = LevelChunkManager.Instance.Chunks
                 .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                 .ToList();
+            if (SaveManager.Instance.HardcoreModeOn)
+            {
+                potentialChunks = LevelChunkManager.Instance.HardcoreChunks
+                .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
+                .ToList();
+            }
 
             if (actualChunkType == EChunkType.FloorIsLava)
             {
@@ -105,6 +111,12 @@ public class LevelManager : MonoBehaviour
                 potentialChunks = LevelChunkManager.Instance.Chunks
                     .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                     .ToList();
+                if (SaveManager.Instance.HardcoreModeOn)
+                {
+                    potentialChunks = LevelChunkManager.Instance.HardcoreChunks
+                    .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
+                    .ToList();
+                }
             }
 
             if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
@@ -127,6 +139,11 @@ public class LevelManager : MonoBehaviour
         else
         {
             objectPrefab = LevelChunkManager.Instance.Chunks[UnityEngine.Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
+            if (SaveManager.Instance.HardcoreModeOn) 
+            {
+                objectPrefab = LevelChunkManager.Instance.HardcoreChunks[UnityEngine.Random.Range(0, LevelChunkManager.Instance.HardcoreChunks.Count)];
+            }
+        
         }
 
 
@@ -144,15 +161,15 @@ public class LevelManager : MonoBehaviour
             }  
         }
 
-        if (FirstChunkSetted && LevelChunkManager.Instance.TestChunk != null && LevelChunkManager.Instance.TestMode)
-        {
-            objectPrefab = LevelChunkManager.Instance.TestChunk;
-        }
-
         if (!FirstChunkSetted)
         {
             objectPrefab = LevelChunkManager.Instance.StartChunk;
             FirstChunkSetted = true;
+        }
+
+        if (/*FirstChunkSetted && */LevelChunkManager.Instance.TestChunk != null && LevelChunkManager.Instance.TestMode)
+        {
+            objectPrefab = LevelChunkManager.Instance.TestChunk;
         }
 
         if (lastSpawnedObject == null)

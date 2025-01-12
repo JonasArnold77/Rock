@@ -43,6 +43,8 @@ public class Gem : MonoBehaviour
                 }
             }
 
+            FeedbackManager.Instance.CollectingFeedback.PlayFeedbacks();
+
             GetComponent<Collider2D>().enabled = false;
 
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));

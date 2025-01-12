@@ -6,6 +6,7 @@ public class LevelChunkManager : MonoBehaviour
 {
     public List<GameObject> Chunks = new List<GameObject>();
     public List<GameObject> BeginningChunks = new List<GameObject>();
+    public List<GameObject> HardcoreChunks = new List<GameObject>();
 
     public GameObject StartChunk;
     public GameObject TestChunk;
@@ -17,6 +18,7 @@ public class LevelChunkManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        HardcoreChunks = Chunks;
     }
 
     private void Start()
