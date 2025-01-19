@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     public bool FirstChunkSetted;
     public bool LastFirstObjectSetted;
+    public bool StairSetted;
 
     public GameObject objectPrefab;        // Das GameObject, das generiert werden soll
     public float spawnDistanceAhead = 15f; // Entfernung, in der die Objekte vor dem Spieler generiert werden
@@ -181,17 +182,31 @@ public class LevelManager : MonoBehaviour
 
         var y = LevelChunkManager.Instance.HardcoreChunks.FirstOrDefault().name;
 
-        if (!LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
-        { 
+
+        if (SaveManager.Instance.HardcoreModeOn && ((LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle && StairSetted) || LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType != EObstacleType.Middle) && !LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
+        {
             objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault();
             LastFirstObjectSetted = true;
         }
+
+        if (SaveManager.Instance.HardcoreModeOn && !LastFirstObjectSetted && FirstChunkSetted && !StairSetted)
+        {
+            if(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle)
+            {
+                objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault();
+            }
+
+            StairSetted = true;
+        }
+
 
         if (!FirstChunkSetted /*&& !SaveManager.Instance.HardcoreModeOn*/)
         {
             objectPrefab = LevelChunkManager.Instance.StartChunk;
             FirstChunkSetted = true;
         }
+
+        
 
         if (/*FirstChunkSetted && */LevelChunkManager.Instance.TestChunk != null && LevelChunkManager.Instance.TestMode)
         {
