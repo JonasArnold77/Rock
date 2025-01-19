@@ -17,6 +17,8 @@ public class Obstacle : MonoBehaviour
 
     public EChunkType ChunkType;
 
+    public string Title;
+
     public int RuntimeID;
 
     private void Start()
@@ -53,6 +55,12 @@ public class Obstacle : MonoBehaviour
         {
             if (col != AreaCollider && col.tag == "Player") // Ignoriere den Ziel-Collider selbst
             {
+                if (startType != EObstacleType.StairDown && startType != EObstacleType.StairUp && Title != LevelChunkManager.Instance.StartChunk.name && !LevelChunkManager.Instance.BeginningChunks.Select(s => s.name).ToList().Contains(Title))
+                {
+                    SaveManager.Instance.LastChunk = Title;
+                    SaveManager.Instance.LastChunkType = ChunkType.ToString();
+                }
+                
                 return true; // Ein anderes Objekt befindet sich innerhalb
             }
         }

@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int LifePoints;
 
+    public bool IsDead;
+
     private List<GameObject> passedObjects = new List<GameObject>();
 
     void Start()
@@ -173,7 +175,15 @@ public class PlayerMovement : MonoBehaviour
 
         //FindObjectsOfType<LightMovement>().ToList().ForEach(l => l.SetColor(MagneticColor));
 
-        rb.velocity = new Vector2(rb.velocity.x, -fallSpeedMultiplier);
+        if (IsDead)
+        {
+            rb.velocity = new Vector2(0,0);
+        }
+        else
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -fallSpeedMultiplier);
+        }
+
         isDoingMagneticFall = true;
     }
 
@@ -259,6 +269,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.simulated = true;
                 GetComponent<Collider2D>().enabled = false;
 
+                FindObjectOfType<FollowPlayer>().enabled = false;
+
+                IsDead = true;
+
                 StartCoroutine(WaitForReset());
                 //string currentSceneName = SceneManager.GetActiveScene().name;
                 //SceneManager.LoadScene(currentSceneName);
@@ -316,7 +330,7 @@ public class PlayerMovement : MonoBehaviour
                 BallEffect2.SetActive(false);
 
                 rb.simulated = true;
-                GetComponent<Collider2D>().enabled = false;
+
 
                 StartCoroutine(WaitForReset());
             }
@@ -332,6 +346,8 @@ public class PlayerMovement : MonoBehaviour
     {
         SaveManager.Instance.Save();
         DeathMenu.Instance.gameObject.SetActive(true);
+
+        FindObjectOfType<FollowPlayer>().enabled = false;
 
         DeathMenu.Instance.ScoreText.text = InventoryManager.Instance.Score.ToString();
         DeathMenu.Instance.HighscoreText.text = SaveManager.Instance.Highscore.ToString();

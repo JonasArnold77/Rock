@@ -1,4 +1,5 @@
 using CI.QuickSave;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,8 @@ public class SaveManager : MonoBehaviour
     public int Money;
     public string ActualSkin;
     public bool HardcoreModeOn;
+    public string LastChunkType;
+    public string LastChunk;
 
     private void Awake()
     {
@@ -35,6 +38,13 @@ public class SaveManager : MonoBehaviour
 
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireHell.enabled = true);
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireNormal.enabled = false);
+
+            if (Enum.TryParse(LastChunkType, out EChunkType result))
+            {
+                LevelManager.Instance.actualChunkType = result;
+            }
+
+            LevelManager.Instance.FirstObjectString = LastChunk;
         }
         else
         {
@@ -43,7 +53,11 @@ public class SaveManager : MonoBehaviour
 
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireHell.enabled = false);
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireNormal.enabled = true);
+
+            LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValueExcluding(EChunkType.FloorIsLava, EChunkType.FloorIsLava);
         }
+
+        LevelManager.Instance.GameIsInitialized = true;
     }
     
     private void Update()
@@ -60,11 +74,13 @@ public class SaveManager : MonoBehaviour
 
     public void Save()
     {   
-        QuickSaveWriter.Create("Inventory7")
+        QuickSaveWriter.Create("Inventory8")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
                        .Write("ActualSkin", ActualSkin)
+                       .Write("LastChunkType", LastChunkType)
+                       .Write("LastChunk", LastChunk)
                        .Write("HardcoreModeOn", HardcoreModeOn)
                        .Commit();
 
@@ -73,7 +89,7 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory7.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory8.json");
         if (!File.Exists(saveFilePath))
         {
             // Wenn das Save-File nicht existiert, Default-Werte setzen und speichern
@@ -82,11 +98,13 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory7")
+            QuickSaveReader.Create("Inventory8")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
                        .Read<string>("ActualSkin", (r) => { ActualSkin = r; })
+                       .Read<string>("LastChunkType", (r) => { LastChunkType = r; })
+                       .Read<string>("LastChunk", (r) => { LastChunk = r; })
                        .Read<bool>("HardcoreModeOn", (r) => { HardcoreModeOn = r; });
         }
     }

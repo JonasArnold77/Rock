@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public GameObject LevelBorderGameObject;
 
     public bool FirstChunkSetted;
+    public bool LastFirstObjectSetted;
 
     public GameObject objectPrefab;        // Das GameObject, das generiert werden soll
     public float spawnDistanceAhead = 15f; // Entfernung, in der die Objekte vor dem Spieler generiert werden
@@ -29,6 +30,11 @@ public class LevelManager : MonoBehaviour
 
     private GameObject lastObject;
 
+    public bool GameIsInitialized;
+
+    public string FirstObjectString;
+
+
     private void Awake()
     {
         Instance = this;
@@ -36,12 +42,22 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        actualChunkType = GetRandomEnumValueExcluding(EChunkType.FloorIsLava, EChunkType.FloorIsLava);
+        StartCoroutine(InitGame());
+    }
+
+    private IEnumerator InitGame()
+    {
+        yield return new WaitUntil(() => GameIsInitialized);
         SpawnObject();
     }
 
     private void Update()
     {
+        if (!GameIsInitialized)
+        {
+            return;
+        }
+
         GenerateNewLevelPart();
 
         if (lastSpawnedObject != null && PlayerTransform != null)
@@ -147,7 +163,7 @@ public class LevelManager : MonoBehaviour
         }
 
 
-        if (testLevelCount > 0)
+        if (testLevelCount > 0 && !SaveManager.Instance.HardcoreModeOn)
         {
             if(testLevelCount == 3)
             {
@@ -161,7 +177,17 @@ public class LevelManager : MonoBehaviour
             }  
         }
 
-        if (!FirstChunkSetted)
+        var x = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList();
+
+        var y = LevelChunkManager.Instance.HardcoreChunks.FirstOrDefault().name;
+
+        if (!LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
+        { 
+            objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault();
+            LastFirstObjectSetted = true;
+        }
+
+        if (!FirstChunkSetted /*&& !SaveManager.Instance.HardcoreModeOn*/)
         {
             objectPrefab = LevelChunkManager.Instance.StartChunk;
             FirstChunkSetted = true;
@@ -188,6 +214,8 @@ public class LevelManager : MonoBehaviour
         spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
 
         GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
+
+        newObject.GetComponent<Obstacle>().Title = objectPrefab.name;
 
         lastObject = newObject;
 
