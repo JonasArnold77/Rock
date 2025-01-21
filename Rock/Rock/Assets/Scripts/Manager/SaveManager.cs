@@ -17,6 +17,7 @@ public class SaveManager : MonoBehaviour
     public bool HardcoreModeOn;
     public string LastChunkType;
     public string LastChunk;
+    public int CountOfArea;
 
     private void Awake()
     {
@@ -43,6 +44,8 @@ public class SaveManager : MonoBehaviour
             {
                 LevelManager.Instance.actualChunkType = result;
             }
+
+            LevelManager.Instance.countOfArea = CountOfArea;
 
             LevelManager.Instance.FirstObjectString = LastChunk;
         }
@@ -74,7 +77,7 @@ public class SaveManager : MonoBehaviour
 
     public void Save()
     {   
-        QuickSaveWriter.Create("Inventory8")
+        QuickSaveWriter.Create("Inventory10")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -82,6 +85,7 @@ public class SaveManager : MonoBehaviour
                        .Write("LastChunkType", LastChunkType)
                        .Write("LastChunk", LastChunk)
                        .Write("HardcoreModeOn", HardcoreModeOn)
+                       .Write("CountOfArea", CountOfArea)
                        .Commit();
 
         //Content.text = QuickSaveRaw.LoadString("Inputs.json");
@@ -89,7 +93,7 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory8.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory10.json");
         if (!File.Exists(saveFilePath))
         {
             // Wenn das Save-File nicht existiert, Default-Werte setzen und speichern
@@ -98,14 +102,15 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory8")
+            QuickSaveReader.Create("Inventory10")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
                        .Read<string>("ActualSkin", (r) => { ActualSkin = r; })
                        .Read<string>("LastChunkType", (r) => { LastChunkType = r; })
                        .Read<string>("LastChunk", (r) => { LastChunk = r; })
-                       .Read<bool>("HardcoreModeOn", (r) => { HardcoreModeOn = r; });
+                       .Read<bool>("HardcoreModeOn", (r) => { HardcoreModeOn = r; })
+                       .Read<int>("CountOfArea", (r) => { CountOfArea = r; });
         }
     }
 
@@ -116,7 +121,7 @@ public class SaveManager : MonoBehaviour
         Money = 0; // Beispiel: Startkapital
         ActualSkin = "";
         HardcoreModeOn = false;
-
+        CountOfArea = 4;
         Debug.Log("Default-Werte gesetzt.");
     }
 }

@@ -102,6 +102,7 @@ public class LevelManager : MonoBehaviour
 
             var chunkType = ControlPanel.Instance.GetNextLevelChunk(obstacle.endType);
 
+
             if (countOfArea <= 0)
             {
                 actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType, EChunkType.FloorIsLava);
@@ -110,7 +111,16 @@ public class LevelManager : MonoBehaviour
             else if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
             {
                 countOfArea--;
+                SaveManager.Instance.CountOfArea = countOfArea;
+                SaveManager.Instance.Save();
             }
+
+            if(countOfArea == 1)
+            {
+                SaveManager.Instance.CountOfArea = countOfArea;
+                SaveManager.Instance.Save();
+            }
+
 
             var potentialChunks = LevelChunkManager.Instance.Chunks
                 .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
@@ -178,18 +188,25 @@ public class LevelManager : MonoBehaviour
             }  
         }
 
+        if(FirstObjectString == "")
+        {
+            objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).FirstOrDefault()/*.GetComponent<Obstacle>().Title*/;
+        }
+
+        var z = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList();
+
         var x = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList();
 
         var y = LevelChunkManager.Instance.HardcoreChunks.FirstOrDefault().name;
 
 
-        if (SaveManager.Instance.HardcoreModeOn && ((LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle && StairSetted) || LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType != EObstacleType.Middle) && !LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
+        if (FirstObjectString != "" && SaveManager.Instance.HardcoreModeOn && ((LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle && StairSetted) || LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType != EObstacleType.Middle) && !LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
         {
             objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault();
             LastFirstObjectSetted = true;
         }
 
-        if (SaveManager.Instance.HardcoreModeOn && !LastFirstObjectSetted && FirstChunkSetted && !StairSetted)
+        if (FirstObjectString != "" && SaveManager.Instance.HardcoreModeOn && !LastFirstObjectSetted && FirstChunkSetted && !StairSetted)
         {
             if(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle)
             {
