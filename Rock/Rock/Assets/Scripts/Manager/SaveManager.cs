@@ -32,6 +32,16 @@ public class SaveManager : MonoBehaviour
         FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().ForEach(s => s.SetActive(true));
         InventoryManager.Instance.SetActualSkin();
 
+        if(CountOfArea >= 5)
+        {
+            LevelManager.Instance.countOfArea = 7;
+        }
+        else
+        {
+            LevelManager.Instance.countOfArea = CountOfArea + 2;
+        }
+        
+
         if (HardcoreModeOn)
         {
             InventoryManager.Instance.HellPostProcessing.SetActive(true);
@@ -45,7 +55,7 @@ public class SaveManager : MonoBehaviour
                 LevelManager.Instance.actualChunkType = result;
             }
 
-            LevelManager.Instance.countOfArea = CountOfArea;
+            
 
             LevelManager.Instance.FirstObjectString = LastChunk;
         }

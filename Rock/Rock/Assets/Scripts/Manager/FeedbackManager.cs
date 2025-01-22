@@ -13,4 +13,12 @@ public class FeedbackManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            CollectingFeedback.PlayFeedbacks();
+        }
+    }
 }

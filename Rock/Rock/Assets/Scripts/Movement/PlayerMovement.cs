@@ -349,6 +349,8 @@ public class PlayerMovement : MonoBehaviour
 
         FindObjectOfType<FollowPlayer>().enabled = false;
 
+        IsDead = true;
+
         DeathMenu.Instance.ScoreText.text = InventoryManager.Instance.Score.ToString();
         DeathMenu.Instance.HighscoreText.text = SaveManager.Instance.Highscore.ToString();
 

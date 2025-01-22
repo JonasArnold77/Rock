@@ -102,24 +102,28 @@ public class LevelManager : MonoBehaviour
 
             var chunkType = ControlPanel.Instance.GetNextLevelChunk(obstacle.endType);
 
+            if (!FindObjectOfType<PlayerMovement>().IsDead)
+            {
+                if (countOfArea <= 0)
+                {
+                    actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType, EChunkType.FloorIsLava);
+                    countOfArea = UnityEngine.Random.Range(4, 6);
+                }
+                else if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
+                {
+                    countOfArea--;
+                }
+            }
+            
 
-            if (countOfArea <= 0)
-            {
-                actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType, EChunkType.FloorIsLava);
-                countOfArea = UnityEngine.Random.Range(4, 6);
-            }
-            else if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
-            {
-                countOfArea--;
-                SaveManager.Instance.CountOfArea = countOfArea;
-                SaveManager.Instance.Save();
-            }
+            SaveManager.Instance.CountOfArea = countOfArea;
+            SaveManager.Instance.Save();
 
-            if(countOfArea == 1)
-            {
-                SaveManager.Instance.CountOfArea = countOfArea;
-                SaveManager.Instance.Save();
-            }
+            //if(countOfArea == 1)
+            //{
+            //    SaveManager.Instance.CountOfArea = countOfArea;
+            //    SaveManager.Instance.Save();
+            //}
 
 
             var potentialChunks = LevelChunkManager.Instance.Chunks
@@ -188,7 +192,7 @@ public class LevelManager : MonoBehaviour
             }  
         }
 
-        if(FirstObjectString == "")
+        if(FirstObjectString == "" && SaveManager.Instance.HardcoreModeOn)
         {
             objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).FirstOrDefault()/*.GetComponent<Obstacle>().Title*/;
         }
