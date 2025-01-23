@@ -116,8 +116,7 @@ public class LevelManager : MonoBehaviour
             }
             
 
-            SaveManager.Instance.CountOfArea = countOfArea;
-            SaveManager.Instance.Save();
+            
 
             //if(countOfArea == 1)
             //{

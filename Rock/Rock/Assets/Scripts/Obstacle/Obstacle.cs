@@ -59,6 +59,10 @@ public class Obstacle : MonoBehaviour
                 {
                     SaveManager.Instance.LastChunk = Title;
                     SaveManager.Instance.LastChunkType = ChunkType.ToString();
+
+
+                    //SaveManager.Instance.CountOfArea = LevelManager.Instance.countOfArea;
+                    //SaveManager.Instance.Save();
                 }
                 
                 return true; // Ein anderes Objekt befindet sich innerhalb

@@ -32,18 +32,20 @@ public class SaveManager : MonoBehaviour
         FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().ForEach(s => s.SetActive(true));
         InventoryManager.Instance.SetActualSkin();
 
-        if(CountOfArea >= 5)
-        {
-            LevelManager.Instance.countOfArea = 7;
-        }
-        else
-        {
-            LevelManager.Instance.countOfArea = CountOfArea + 2;
-        }
+        //if(CountOfArea >= 5)
+        //{
+        //    LevelManager.Instance.countOfArea = 7;
+        //}
+        //else
+        //{
+        //    LevelManager.Instance.countOfArea = CountOfArea + 2;
+        //}
+
         
 
         if (HardcoreModeOn)
         {
+            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(1, 6);
             InventoryManager.Instance.HellPostProcessing.SetActive(true);
             InventoryManager.Instance.NormalPostProcessing.SetActive(false);
 
@@ -61,6 +63,8 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
+            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(4, 6);
+
             InventoryManager.Instance.HellPostProcessing.SetActive(false);
             InventoryManager.Instance.NormalPostProcessing.SetActive(true);
 
