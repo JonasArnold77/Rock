@@ -109,12 +109,24 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
+
+#if UNITY_ANDROID
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory10.json");
+#elif UNITY_STANDALONE_WIN
         string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory10.json");
+#elif UNITY_EDITOR
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory10.json");
+#endif
+
+
         if (!File.Exists(saveFilePath))
         {
             // Wenn das Save-File nicht existiert, Default-Werte setzen und speichern
             SetDefaultValues();
             Save();
+
+            //DeathMenu.Instance.gameObject.SetActive(true);
+            //DeathMenu.Instance.test.text = "Save File Existiert Nicht";
         }
         else
         {
@@ -127,6 +139,9 @@ public class SaveManager : MonoBehaviour
                        .Read<string>("LastChunk", (r) => { LastChunk = r; })
                        .Read<bool>("HardcoreModeOn", (r) => { HardcoreModeOn = r; })
                        .Read<int>("CountOfArea", (r) => { CountOfArea = r; });
+
+            //DeathMenu.Instance.gameObject.SetActive(true);
+            //DeathMenu.Instance.test.text = "Save File Existiert";
         }
     }
 

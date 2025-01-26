@@ -15,6 +15,8 @@ public class DeathMenu : MonoBehaviour
     public Text ScoreText;
     public Text HighscoreText;
 
+    public Text test;
+
     private void Start()
     {
         gameObject.SetActive(false);
@@ -22,6 +24,7 @@ public class DeathMenu : MonoBehaviour
         ShopButton.onClick.AddListener(() => ShopMenu.Instance.gameObject.SetActive(true));
         ShopButton.onClick.AddListener(() => ShopMenu.Instance.SetCurrentSkin());
         HardcoreModeButton.onClick.AddListener(() => InventoryManager.Instance.ToggleHardcoreMode());
+        //test.text = Application.persistentDataPath;
     }
 
     private void Awake()
