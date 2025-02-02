@@ -28,6 +28,9 @@ public class SaveManager : MonoBehaviour
     {
 
         var path = Application.persistentDataPath;
+
+
+
         Load();
         FindObjectsOfType<Equipment>().ToList().Select(x => x.gameObject).ToList().ForEach(s => s.SetActive(true));
         InventoryManager.Instance.SetActualSkin();
@@ -46,7 +49,7 @@ public class SaveManager : MonoBehaviour
         if (HardcoreModeOn)
         {
             LevelManager.Instance.countOfArea = UnityEngine.Random.Range(1, 6);
-            LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValueExcluding<EChunkType>(LevelManager.Instance.actualChunkType, EChunkType.FloorIsLava);
+            LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValueExcluding<EChunkType>(LevelManager.Instance.actualChunkType);
 
             InventoryManager.Instance.HellPostProcessing.SetActive(true);
             InventoryManager.Instance.NormalPostProcessing.SetActive(false);
@@ -73,7 +76,7 @@ public class SaveManager : MonoBehaviour
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireHell.enabled = false);
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireNormal.enabled = true);
 
-            LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValueExcluding(EChunkType.FloorIsLava, EChunkType.FloorIsLava);
+            LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValue<EChunkType>();
         }
 
         LevelManager.Instance.GameIsInitialized = true;
@@ -92,7 +95,12 @@ public class SaveManager : MonoBehaviour
     }
 
     public void Save()
-    {   
+    {
+        if (LevelChunkManager.Instance.TestMode)
+        {
+            LastChunk = "";
+        }
+
         QuickSaveWriter.Create("Inventory10")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)

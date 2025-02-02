@@ -376,6 +376,7 @@ Transform:
   m_LocalScale: {x: 16.52467, y: 5.05048, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5748050411261631435}
   - {fileID: 6661810261595312442}
   - {fileID: 5078454025577675546}
   - {fileID: 6964348186032011569}
@@ -520,6 +521,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 814075645281488298}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &257690244638322616
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +674,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &511082497405021034
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +826,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &946563020624533211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1200,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &1166470836387140409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,6 +1277,90 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1262134197401781077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5748050411261631435}
+  - component: {fileID: 3746701559550362422}
+  m_Layer: 0
+  m_Name: Outlines (25)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5748050411261631435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262134197401781077}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.00093, y: 0.29787004, z: 0}
+  m_LocalScale: {x: -0.9903822, y: 0.50072473, z: 1.16}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7427011410231182889}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &3746701559550362422
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262134197401781077}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -10
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.3056603, g: 0.3056603, b: 0.3056603, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1641,6 +1734,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &1364317990719100282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1792,6 +1887,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &1478027490416346889
 GameObject:
   m_ObjectHideFlags: 0
@@ -2027,6 +2124,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &1844313950507212150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,6 +2529,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &2250091430725715743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,6 +2849,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &2508381733349953331
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,6 +3613,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &3076751312914693138
 GameObject:
   m_ObjectHideFlags: 0
@@ -4928,6 +5033,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &5015150362818461794
 GameObject:
   m_ObjectHideFlags: 0
@@ -5208,6 +5315,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &5119436071453664591
 GameObject:
   m_ObjectHideFlags: 0
@@ -5359,6 +5468,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &5160012677323014493
 GameObject:
   m_ObjectHideFlags: 0
@@ -5594,6 +5705,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &5411315020038306899
 GameObject:
   m_ObjectHideFlags: 0
@@ -6577,6 +6690,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &6299297687896740028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7423,6 +7538,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &7504119675486369201
 GameObject:
   m_ObjectHideFlags: 0
@@ -7742,6 +7859,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &8001337456980273873
 GameObject:
   m_ObjectHideFlags: 0
@@ -7892,6 +8011,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &8097100604157763195
 GameObject:
   m_ObjectHideFlags: 0

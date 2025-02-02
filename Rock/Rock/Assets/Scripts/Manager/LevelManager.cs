@@ -58,6 +58,10 @@ public class LevelManager : MonoBehaviour
         {
             return;
         }
+        else
+        {
+
+        }
 
         GenerateNewLevelPart();
 
@@ -106,7 +110,7 @@ public class LevelManager : MonoBehaviour
             {
                 if (countOfArea <= 0)
                 {
-                    actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType, EChunkType.FloorIsLava);
+                    actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType);
                     countOfArea = UnityEngine.Random.Range(4, 6);
                 }
                 else if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
@@ -191,32 +195,37 @@ public class LevelManager : MonoBehaviour
             }  
         }
 
-        if(FirstObjectString == "" && SaveManager.Instance.HardcoreModeOn)
+ 
+
+        if (!LevelChunkManager.Instance.TestMode)
         {
-            objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).FirstOrDefault()/*.GetComponent<Obstacle>().Title*/;
-        }
-
-        var z = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList();
-
-        var x = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList();
-
-        var y = LevelChunkManager.Instance.HardcoreChunks.FirstOrDefault().name;
-
-
-        if (FirstObjectString != "" && SaveManager.Instance.HardcoreModeOn && ((LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle && StairSetted) || LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType != EObstacleType.Middle) && !LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
-        {
-            objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault();
-            LastFirstObjectSetted = true;
-        }
-
-        if (FirstObjectString != "" && SaveManager.Instance.HardcoreModeOn && !LastFirstObjectSetted && FirstChunkSetted && !StairSetted)
-        {
-            if(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle)
+            if (FirstObjectString == "" && SaveManager.Instance.HardcoreModeOn)
             {
-                objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault();
+                objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).FirstOrDefault()/*.GetComponent<Obstacle>().Title*/;
             }
 
-            StairSetted = true;
+            var z = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList();
+
+            var x = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList();
+
+            var y = LevelChunkManager.Instance.HardcoreChunks.FirstOrDefault().name;
+
+
+            if (FirstObjectString != "" && SaveManager.Instance.HardcoreModeOn && ((LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle && StairSetted) || LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType != EObstacleType.Middle) && !LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
+            {
+                objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault();
+                LastFirstObjectSetted = true;
+            }
+
+            if (FirstObjectString != "" && SaveManager.Instance.HardcoreModeOn && !LastFirstObjectSetted && FirstChunkSetted && !StairSetted)
+            {
+                if (LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle)
+                {
+                    objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault(); 
+                }
+
+                StairSetted = true;
+            }
         }
 
 
@@ -281,13 +290,25 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public T GetRandomEnumValueExcluding<T>(T excludedValue, T excludedValue2) where T : Enum
+    public T GetRandomEnumValueExcluding<T>(T excludedValue) where T : Enum
     {
         // Alle Werte der Enum laden
         T[] allValues = (T[])Enum.GetValues(typeof(T));
 
         // Werte filtern, um den ausgeschlossenen Wert zu entfernen
-        T[] filteredValues = allValues.Where(value => !value.Equals(excludedValue) && !value.Equals(excludedValue2)).ToArray();
+        T[] filteredValues = allValues.Where(value => !value.Equals(excludedValue)).ToArray();
+
+        // Zufälligen Wert aus den gefilterten Werten auswählen
+        return filteredValues[UnityEngine.Random.Range(0, filteredValues.Length)];
+    }
+
+    public T GetRandomEnumValue<T>() where T : Enum
+    {
+        // Alle Werte der Enum laden
+        T[] allValues = (T[])Enum.GetValues(typeof(T));
+
+        // Werte filtern, um den ausgeschlossenen Wert zu entfernen
+        T[] filteredValues = allValues.ToArray();
 
         // Zufälligen Wert aus den gefilterten Werten auswählen
         return filteredValues[UnityEngine.Random.Range(0, filteredValues.Length)];

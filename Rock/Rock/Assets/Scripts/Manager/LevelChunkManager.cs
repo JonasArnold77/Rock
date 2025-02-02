@@ -18,7 +18,7 @@ public class LevelChunkManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        HardcoreChunks = Chunks;
+        //HardcoreChunks = Chunks;
     }
 
     private void Start()

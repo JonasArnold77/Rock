@@ -32,6 +32,7 @@ Transform:
   m_LocalScale: {x: 35, y: 5.05048, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8360594397551862843}
   - {fileID: 8439767417064963897}
   - {fileID: 7464254813930352382}
   - {fileID: 3261392427384590533}
@@ -168,6 +169,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 9154053227152812359}
   ChunkType: 1
+  Title: 
+  RuntimeID: 0
 --- !u!1 &511082497405021034
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +321,92 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
+--- !u!1 &740842699935034179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8360594397551862843}
+  - component: {fileID: 2537045632135170329}
+  m_Layer: 0
+  m_Name: Outlines (25)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8360594397551862843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740842699935034179}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00215, y: 0.29787004, z: 0}
+  m_LocalScale: {x: -0.99347544, y: 0.50072473, z: 1.16}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7427011410231182889}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &2537045632135170329
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740842699935034179}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -10
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.3056603, g: 0.3056603, b: 0.3056603, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1122515280473853748
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +557,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &1312454586167422740
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,6 +709,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &2129957409213183328
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +892,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &2445991491084313861
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +1044,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &2909408164377816892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,6 +1196,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &5003529321039980581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,6 +1348,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &5057840555108329108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,6 +1500,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &5554153783161126156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,6 +1683,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &7426535951540889921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,6 +1835,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &8001337456980273873
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,6 +1987,8 @@ MonoBehaviour:
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
   ChunkType: 0
+  Title: 
+  RuntimeID: 0
 --- !u!1 &8953327653422764332
 GameObject:
   m_ObjectHideFlags: 0
