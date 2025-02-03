@@ -27,6 +27,25 @@ public class DeathMenu : MonoBehaviour
         //test.text = Application.persistentDataPath;
     }
 
+    private void Update()
+    {
+        HardcoreModeButton.onClick.RemoveAllListeners();
+
+        if (SaveManager.Instance.HardcoreModeOn)
+        {
+            HardcoreModeButton.GetComponentInChildren<Text>().text = "Normal Mode";
+            HardcoreModeButton.GetComponentInChildren<Text>().color = Color.white;
+            HardcoreModeButton.onClick.AddListener(() => InventoryManager.Instance.ToggleHardcoreMode());
+        }
+        else
+        {
+            HardcoreModeButton.GetComponentInChildren<Text>().text = "Hardcore Mode";
+            HardcoreModeButton.GetComponentInChildren<Text>().color = Color.red;
+
+            HardcoreModeButton.onClick.AddListener(() => InventoryManager.Instance.ToggleHardcoreMode());
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
