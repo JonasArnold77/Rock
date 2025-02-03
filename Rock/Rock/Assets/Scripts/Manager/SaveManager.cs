@@ -48,7 +48,7 @@ public class SaveManager : MonoBehaviour
 
         if (HardcoreModeOn)
         {
-            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(1, 6);
+            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(0, 0);
             LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValueExcluding<EChunkType>(LevelManager.Instance.actualChunkType);
 
             InventoryManager.Instance.HellPostProcessing.SetActive(true);
