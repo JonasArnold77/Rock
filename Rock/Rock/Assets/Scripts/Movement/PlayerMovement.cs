@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -45,6 +46,14 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         FireBallEffect.SetActive(false);
         MagneticBallEffect.SetActive(false);
+
+#if UNITY_ANDROID
+        FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
+#elif UNITY_STANDALONE_WIN
+        FindObjectOfType<JumpButton>().gameObject.SetActive(false);
+#elif UNITY_EDITOR
+        FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
+#endif
     }
 
     void Update()
@@ -82,6 +91,19 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("Velocity: " + rb.velocity);
 
+#if UNITY_STANDALONE_WIN
+         // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
+        if (isGrounded && Input.GetKeyDown(jumpKey))
+        {
+            Jump();
+            //StartCoroutine(ElectricSoundCoroutine());
+        }
+        // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+        else if (isJumping && Input.GetKeyDown(jumpKey))
+        {
+            MagneticFall();
+        }
+#elif UNITY_EDITOR
         // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
         if (isGrounded && Input.GetKeyDown(jumpKey))
         {
@@ -93,7 +115,22 @@ public class PlayerMovement : MonoBehaviour
         {
             MagneticFall();
         }
+#endif
+
+
         IsGrounded();
+    }
+    
+    public void JumpButtonClicked()
+    {
+        if (isGrounded)
+        {
+            Jump();
+        }
+        else if (isJumping)
+        {
+            MagneticFall();
+        }
     }
 
     public IEnumerator ElectricSoundCoroutine()
