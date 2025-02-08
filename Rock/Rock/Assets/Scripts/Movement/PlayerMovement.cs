@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0))
+        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0) && !TutorialMenu.Instance.gameObject.activeSelf)
         {
             GameIsStarted = true;
             rb.simulated = true;
