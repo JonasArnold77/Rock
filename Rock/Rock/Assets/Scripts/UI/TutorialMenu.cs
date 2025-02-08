@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialMenu : MonoBehaviour
 {
     public GameObject SpaceButtonText;
+    public Button TutorialDoneButton;
 
     public static TutorialMenu Instance;
 
@@ -18,6 +20,9 @@ public class TutorialMenu : MonoBehaviour
 #if UNITY_ANDROID
         SpaceButtonText.SetActive(false);
 #endif
+
+        TutorialDoneButton.onClick.AddListener(() => SaveManager.Instance.TutorialDone = true);
+        TutorialDoneButton.onClick.AddListener(() => SaveManager.Instance.Save());
     }
 
 

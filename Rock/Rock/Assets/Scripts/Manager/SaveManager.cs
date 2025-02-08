@@ -80,6 +80,15 @@ public class SaveManager : MonoBehaviour
             LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValue<EChunkType>();
         }
 
+        if (TutorialDone)
+        {
+            TutorialMenu.Instance.gameObject.SetActive(false);
+        }
+        else
+        {
+            TutorialMenu.Instance.gameObject.SetActive(true);
+        }
+
         LevelManager.Instance.GameIsInitialized = true;
     }
     
@@ -102,7 +111,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory11")
+        QuickSaveWriter.Create("Inventory12")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -111,7 +120,7 @@ public class SaveManager : MonoBehaviour
                        .Write("LastChunk", LastChunk)
                        .Write("HardcoreModeOn", HardcoreModeOn)
                        .Write("CountOfArea", CountOfArea)
-                       //.Write("TutorialDone", TutorialDone)
+                       .Write("TutorialDone", TutorialDone)
                        .Commit();
 
         //Content.text = QuickSaveRaw.LoadString("Inputs.json");
@@ -121,11 +130,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory11.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory12.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory11.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory12.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory11.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory12.json");
 #endif
 
 
@@ -140,7 +149,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory11")
+            QuickSaveReader.Create("Inventory12")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
@@ -148,8 +157,8 @@ public class SaveManager : MonoBehaviour
                        .Read<string>("LastChunkType", (r) => { LastChunkType = r; })
                        .Read<string>("LastChunk", (r) => { LastChunk = r; })
                        .Read<bool>("HardcoreModeOn", (r) => { HardcoreModeOn = r; })
-                       .Read<int>("CountOfArea", (r) => { CountOfArea = r; });
-                       //.Read<bool>("TutorialDone", (r) => { TutorialDone = r; });
+                       .Read<int>("CountOfArea", (r) => { CountOfArea = r; })
+                       .Read<bool>("TutorialDone", (r) => { TutorialDone = r; });
             //DeathMenu.Instance.gameObject.SetActive(true);
             //DeathMenu.Instance.test.text = "Save File Existiert";
         }
