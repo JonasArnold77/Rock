@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce = 10f;          // Die Stärke des Sprungs
     public float fallSpeedMultiplier = 10f; // Wie schnell der Spieler magnetisch zu Boden gezogen wird
-    private KeyCode jumpKey = KeyCode.Mouse0; // Taste für den Sprung
+    private KeyCode jumpKey = KeyCode.Space; // Taste für den Sprung
 
     private Rigidbody2D rb;
     private bool isGrounded = false;       // Überprüft, ob der Spieler den Boden berührt hat
@@ -47,12 +47,20 @@ public class PlayerMovement : MonoBehaviour
         FireBallEffect.SetActive(false);
         MagneticBallEffect.SetActive(false);
 
+        StartMenu.Instance.gameObject.SetActive(true);
+
 #if UNITY_ANDROID
         FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
+        FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => StartButtonClicked());
+
+        StartMenu.Instance.text.text = "Press Jump Button to start game.";
 #elif UNITY_STANDALONE_WIN
         FindObjectOfType<JumpButton>().gameObject.SetActive(false);
+        StartMenu.Instance.text.text = "Press Space Button to start game.";
 #elif UNITY_EDITOR
-        FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
+        FindObjectOfType<JumpButton>().gameObject.SetActive(false);
+        StartMenu.Instance.text.text = "Press Space Button to start game.";
+        //FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
 #endif
     }
 
@@ -75,12 +83,25 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(ResetSawBladeXP(target));
             }
         }
-
-        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0) && !TutorialMenu.Instance.gameObject.activeSelf)
+#if UNITY_ANDROID
+#elif UNITY_STANDALONE_WIN
+        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Space) && !TutorialMenu.Instance.gameObject.activeSelf)
         {
             GameIsStarted = true;
             rb.simulated = true;
+            StartMenu.Instance.gameObject.SetActive(false);
+            
+        } 
+#elif UNITY_EDITOR
+        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Space) && !TutorialMenu.Instance.gameObject.activeSelf)
+        {
+            GameIsStarted = true;
+            rb.simulated = true;
+            StartMenu.Instance.gameObject.SetActive(false);
         }
+#endif
+
+
         if (!GameIsStarted)
         {
             rb.simulated = false;
@@ -91,8 +112,9 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("Velocity: " + rb.velocity);
 
-#if UNITY_STANDALONE_WIN
-         // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
+#if UNITY_ANDROID
+#elif UNITY_STANDALONE_WIN
+        // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
         if (isGrounded && Input.GetKeyDown(jumpKey))
         {
             Jump();
@@ -130,6 +152,16 @@ public class PlayerMovement : MonoBehaviour
         else if (isJumping)
         {
             MagneticFall();
+        }
+    }
+
+    public void StartButtonClicked()
+    {
+        if (!GameIsStarted && !TutorialMenu.Instance.gameObject.activeSelf)
+        {
+            GameIsStarted = true;
+            rb.simulated = true;
+            StartMenu.Instance.gameObject.SetActive(false);
         }
     }
 
