@@ -201,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
 
         //FindObjectsOfType<LightMovement>().ToList().ForEach(l => l.SetColor(JumpingColor));
 
-        GetComponent<PlayerSound>().PlayMetal();
+        GetComponent<PlayerSound>().PlaySnare();
 
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -241,6 +241,8 @@ public class PlayerMovement : MonoBehaviour
 
         FireBallEffect.SetActive(false);
         MagneticBallEffect.SetActive(true);
+
+        GetComponent<PlayerSound>().PlayMetal();
 
         //FindObjectsOfType<LightMovement>().ToList().ForEach(l => l.SetColor(MagneticColor));
 

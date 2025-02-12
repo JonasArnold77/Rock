@@ -28,7 +28,7 @@ public class PlayerSound : MonoBehaviour
 
     public void PlayWhoosh()
     {
-        
+        return;
         _audioSource1.pitch = 0.91f;
         _audioSource1.clip = WooshSoundClip;
         _audioSource1.Play();
@@ -36,6 +36,7 @@ public class PlayerSound : MonoBehaviour
 
     public void PlayMetal()
     {
+        return;
         _audioSource2.pitch = 1f;
         _audioSource1.clip = MetalSoundClip;
         _audioSource1.Play();
@@ -43,6 +44,7 @@ public class PlayerSound : MonoBehaviour
 
     public void PlaySnare()
     {
+        return;
         _audioSource1.pitch = 1f;
         _audioSource2.clip = MetalSoundClip;
         _audioSource2.Play();
