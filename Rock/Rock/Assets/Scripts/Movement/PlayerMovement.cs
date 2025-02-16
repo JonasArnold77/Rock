@@ -50,10 +50,13 @@ public class PlayerMovement : MonoBehaviour
         StartMenu.Instance.gameObject.SetActive(true);
 
 #if UNITY_ANDROID
-        FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
-        FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => StartButtonClicked());
+        //FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
+        //FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => StartButtonClicked());
 
-        StartMenu.Instance.text.text = "Press Jump Button to start game.";
+        //StartMenu.Instance.text.text = "Press Jump Button to start game.";
+
+        FindObjectOfType<JumpButton>().gameObject.SetActive(true);
+        StartMenu.Instance.text.text = "Click on Button to start game.";
 #elif UNITY_STANDALONE_WIN
         FindObjectOfType<JumpButton>().gameObject.SetActive(false);
         StartMenu.Instance.text.text = "Press Space Button to start game.";
@@ -84,6 +87,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 #if UNITY_ANDROID
+        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0) && !TutorialMenu.Instance.gameObject.activeSelf)
+        {
+            GameIsStarted = true;
+            rb.simulated = true;
+            StartMenu.Instance.gameObject.SetActive(false);
+
+        }
 #elif UNITY_STANDALONE_WIN
         if (!GameIsStarted && Input.GetKeyDown(KeyCode.Space) && !TutorialMenu.Instance.gameObject.activeSelf)
         {
@@ -113,6 +123,17 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Velocity: " + rb.velocity);
 
 #if UNITY_ANDROID
+        // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
+        if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Jump();
+            //StartCoroutine(ElectricSoundCoroutine());
+        }
+        // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+        else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            MagneticFall();
+        }
 #elif UNITY_STANDALONE_WIN
         // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
         if (isGrounded && Input.GetKeyDown(jumpKey))

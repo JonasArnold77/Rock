@@ -201,7 +201,7 @@ public class LevelManager : MonoBehaviour
         {
             if (FirstObjectString == "" && SaveManager.Instance.HardcoreModeOn)
             {
-                objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).FirstOrDefault()/*.GetComponent<Obstacle>().Title*/;
+                objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList()[UnityEngine.Random.Range(0, LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList().Count)]/*.GetComponent<Obstacle>().Title*/;
             }
 
             var z = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList();
