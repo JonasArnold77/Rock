@@ -35,6 +35,8 @@ public class LevelManager : MonoBehaviour
 
     public string FirstObjectString;
 
+    public List<int> UsedChunks = new List<int>();
+
 
     private void Awake()
     {
@@ -201,7 +203,14 @@ public class LevelManager : MonoBehaviour
         {
             if (FirstObjectString == "" && SaveManager.Instance.HardcoreModeOn)
             {
-                objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList()[UnityEngine.Random.Range(0, LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList().Count)]/*.GetComponent<Obstacle>().Title*/;
+                if(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp && !UsedChunks.Contains(h.GetComponent<Obstacle>().RuntimeID)).ToList().Count > 0)
+                {
+                    objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp && !UsedChunks.Contains(h.GetComponent<Obstacle>().RuntimeID)).ToList()[UnityEngine.Random.Range(0, LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp && !UsedChunks.Contains(h.GetComponent<Obstacle>().RuntimeID)).ToList().Count)]/*.GetComponent<Obstacle>().Title*/;
+                }
+                else 
+                {
+                    objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList()[UnityEngine.Random.Range(0, LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList().Count)]/*.GetComponent<Obstacle>().Title*/;
+                }
             }
 
             var z = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairDown && h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList();
@@ -258,6 +267,8 @@ public class LevelManager : MonoBehaviour
         spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
 
         GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
+
+        UsedChunks.Add(objectPrefab.GetComponent<Obstacle>().RuntimeID);
 
         newObject.GetComponent<Obstacle>().Title = objectPrefab.name;
 

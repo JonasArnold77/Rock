@@ -29,7 +29,16 @@ public class LevelChunkManager : MonoBehaviour
     private void SetRuntimeIDs()
     {
         var count = 1;
+
+        //var allChunks = Chunks;
+        //allChunks.AddRange(HardcoreChunks);
+
         foreach(var c in Chunks)
+        {
+            c.GetComponent<Obstacle>().RuntimeID = count;
+            count++;
+        }
+        foreach (var c in HardcoreChunks)
         {
             c.GetComponent<Obstacle>().RuntimeID = count;
             count++;
