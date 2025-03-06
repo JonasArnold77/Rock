@@ -328,7 +328,7 @@ public class PlayerMovement : MonoBehaviour
     private void MoveToRight()
     {
         //transform.Translate(Vector2.right * speed * Time.deltaTime);
-        rb.velocity = new Vector2(4.5f, rb.velocity.y);
+        rb.velocity = new Vector2(speed, rb.velocity.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

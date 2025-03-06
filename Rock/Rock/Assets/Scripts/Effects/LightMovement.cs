@@ -26,7 +26,8 @@ public class LightMovement : MonoBehaviour
 
         if (FindObjectOfType<PlayerMovement>().FireBallEffect.activeSelf)
         {
-            SetColor(Color.red);
+            //SetColor(Color.red);
+            SetColor(InventoryManager.Instance.OrangeColor);
         }
         else
         {

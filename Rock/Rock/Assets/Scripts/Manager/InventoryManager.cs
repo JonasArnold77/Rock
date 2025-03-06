@@ -15,6 +15,8 @@ public class InventoryManager : MonoBehaviour
     public Color JumpingColor;
     public Color MagneticColor;
 
+    public Color OrangeColor;
+
     public bool IsHardcoreMode;
 
     private int counter = 0; // Der Zähler
