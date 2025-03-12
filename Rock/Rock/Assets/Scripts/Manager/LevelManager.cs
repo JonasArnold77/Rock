@@ -220,7 +220,7 @@ public class LevelManager : MonoBehaviour
             var y = LevelChunkManager.Instance.HardcoreChunks.FirstOrDefault().name;
 
 
-            if (FirstObjectString != "" && SaveManager.Instance.HardcoreModeOn && ((LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle && StairSetted) || LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType != EObstacleType.Middle) && !LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
+            if (!FindObjectOfType<PlayerMovement>().IsDead && FirstObjectString != "" && SaveManager.Instance.HardcoreModeOn && ((LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle && StairSetted) || LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType != EObstacleType.Middle) && !LastFirstObjectSetted && FirstChunkSetted && SaveManager.Instance.HardcoreModeOn && LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).ToList().Count != 0)
             {
                 objectPrefab = LevelChunkManager.Instance.HardcoreChunks.Where(h => h.name == FirstObjectString).FirstOrDefault();
                 LastFirstObjectSetted = true;
