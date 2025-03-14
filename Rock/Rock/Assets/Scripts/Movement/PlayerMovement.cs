@@ -352,6 +352,11 @@ public class PlayerMovement : MonoBehaviour
             
             if(LifePoints == 0)
             {
+                if (InventoryManager.Instance.GodMode)
+                {
+                    return;
+                }
+
                 speed = 0;
                 FireBallEffect.SetActive(false);
                 MagneticBallEffect.SetActive(false);
@@ -392,6 +397,11 @@ public class PlayerMovement : MonoBehaviour
 
             if (LifePoints == 0)
             {
+                if (InventoryManager.Instance.GodMode)
+                {
+                    return;
+                }
+
                 speed = 0;
                 FireBallEffect.SetActive(false);
                 MagneticBallEffect.SetActive(false);
@@ -415,6 +425,11 @@ public class PlayerMovement : MonoBehaviour
             
             if(LifePoints == 0)
             {
+                if (InventoryManager.Instance.GodMode)
+                {
+                    return;
+                }
+
                 speed = 0;
                 FireBallEffect.SetActive(false);
                 MagneticBallEffect.SetActive(false);
@@ -436,6 +451,11 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator WaitForReset()
     {
+        if (InventoryManager.Instance.GodMode)
+        {
+            yield break;
+        }
+
         SaveManager.Instance.Save();
         DeathMenu.Instance.gameObject.SetActive(true);
 

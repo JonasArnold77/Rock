@@ -31,6 +31,8 @@ public class InventoryManager : MonoBehaviour
 
     public Color hellColorBlue;
 
+    public bool GodMode;
+
     private void Awake()
     {
         Instance = this; 

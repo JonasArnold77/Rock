@@ -20,6 +20,8 @@ public class SaveManager : MonoBehaviour
     public int CountOfArea;
     public bool TutorialDone;
 
+    public List<string> HardcoreLevelList;
+
     private void Awake()
     {
         Instance = this;
@@ -49,23 +51,22 @@ public class SaveManager : MonoBehaviour
 
         if (HardcoreModeOn)
         {
-            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(0, 0);
-            LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValueExcluding<EChunkType>(LevelManager.Instance.actualChunkType);
-
             InventoryManager.Instance.HellPostProcessing.SetActive(true);
             InventoryManager.Instance.NormalPostProcessing.SetActive(false);
 
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireHell.enabled = true);
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireNormal.enabled = false);
 
-            if (Enum.TryParse(LastChunkType, out EChunkType result))
-            {
-                LevelManager.Instance.actualChunkType = result;
-            }
-
-            
-
             LevelManager.Instance.FirstObjectString = LastChunk;
+
+            if (LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().name == LevelManager.Instance.FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle)
+            {
+                LevelManager.Instance.StairSetted = false;
+            }
+            else
+            {
+                LevelManager.Instance.StairSetted = true;
+            }
         }
         else
         {
@@ -111,7 +112,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory19")
+        QuickSaveWriter.Create("Inventory20")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -130,11 +131,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory19.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory20.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory19.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory20.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory19.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory20.json");
 #endif
 
 
@@ -149,7 +150,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory19")
+            QuickSaveReader.Create("Inventory20")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
@@ -173,6 +174,7 @@ public class SaveManager : MonoBehaviour
         HardcoreModeOn = false;
         TutorialDone = false;
         CountOfArea = 4;
+        LastChunk = "";
         Debug.Log("Default-Werte gesetzt.");
     }
 }
