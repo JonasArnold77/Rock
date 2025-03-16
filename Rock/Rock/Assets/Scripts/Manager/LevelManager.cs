@@ -60,7 +60,15 @@ public class LevelManager : MonoBehaviour
     private IEnumerator InitGame()
     {
         yield return new WaitUntil(() => GameIsInitialized);
-        SpawnObject();
+
+        if (SaveManager.Instance.HardcoreModeOn)
+        {
+            SpawnHardcoreObject();
+        }
+        else
+        {
+            SpawnObject();
+        }
     }
 
     private void Update()
@@ -133,56 +141,43 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        
+        if (lastSpawnedObject == null)
+        {
+            lastSpawnedObject = HardcoreLevelList[UnityEngine.Random.Range(0, HardcoreLevelList.Count)];
+            objectPrefab = HardcoreLevelList[UnityEngine.Random.Range(0, HardcoreLevelList.Count)];
+        }
 
         Vector3 spawnPosition;
         if (lastSpawnedObject != null)
         {
-            //if (LevelListCounter < HardcoreLevelList.Count && objectPrefab.GetComponent<Obstacle>().endType == EObstacleType.Middle && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Bottom)
-            //{
-            //    objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairDown).FirstOrDefault();
-            //    StairIsNeeded = true;
-            //}
-            //else 
-            //{
-            //    StairIsNeeded = false;
-            //}
-
-            //if (LevelListCounter < HardcoreLevelList.Count && objectPrefab.GetComponent<Obstacle>().endType == EObstacleType.Bottom && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Middle)
-            //{
-            //    objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault();
-            //    StairIsNeeded = true;
-            //}
-            //else
-            //{
-            //    StairIsNeeded = false;
-            //}
-
-            if (LevelListCounter < HardcoreLevelList.Count /*&& !StairIsNeeded*/ && LastFirstObjectSetted)
+            if (!StairIsNeeded && LevelListCounter > 0 && LevelListCounter < HardcoreLevelList.Count && HardcoreLevelList[LevelListCounter-1].GetComponent<Obstacle>().endType == EObstacleType.Middle && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Bottom)
             {
-                var lastIsStair = objectPrefab.GetComponent<Obstacle>().startType == EObstacleType.StairUp || objectPrefab.GetComponent<Obstacle>().startType == EObstacleType.StairDown;
-
-                if (!lastIsStair && LevelListCounter > 0 && HardcoreLevelList[LevelListCounter - 1].GetComponent<Obstacle>().endType == EObstacleType.Middle && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Bottom)
-                {
-                    objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairDown).FirstOrDefault();
-                }
-                else if (!lastIsStair && LevelListCounter > 0 && HardcoreLevelList[LevelListCounter - 1].GetComponent<Obstacle>().endType == EObstacleType.Bottom && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Middle)
-                {
-                    objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault();
-                }
-                else
-                {
-                    objectPrefab = HardcoreLevelList[LevelListCounter];
-                    LevelListCounter++;
-                }
-
-                                  
+                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairDown).FirstOrDefault();
+                StairIsNeeded = true;
             }
-            else if (/*!StairIsNeeded &&*/ LastFirstObjectSetted)
+            else if (!StairIsNeeded && LevelListCounter > 0 && LevelListCounter < HardcoreLevelList.Count && HardcoreLevelList[LevelListCounter-1].GetComponent<Obstacle>().endType == EObstacleType.Bottom && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Middle)
             {
-                HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairUp).ToList());
-                LevelListCounter = 0;
+                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault();
+                StairIsNeeded = true;
             }
+            else
+            {
+                StairIsNeeded = false;
+            }
+
+            if (LevelListCounter < HardcoreLevelList.Count && !StairIsNeeded && LastFirstObjectSetted)
+            {
+                objectPrefab = HardcoreLevelList[LevelListCounter];
+                LevelListCounter++;
+
+            }
+            else if (!StairIsNeeded && LastFirstObjectSetted)
+            {
+                HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairUp && h.GetComponent<Obstacle>().startType != EObstacleType.StairDown).ToList());
+                LevelListCounter++;
+            }
+
+            
 
 
             if (!LastFirstObjectSetted && StairSetted && FirstObjectString == "")
