@@ -52,9 +52,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(InitGame());
-        HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks);
-
-        
+        HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairUp && h.GetComponent<Obstacle>().startType != EObstacleType.StairDown).ToList());
     }
 
     private IEnumerator InitGame()

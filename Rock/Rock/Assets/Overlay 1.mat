@@ -20,18 +20,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Overlay
+  m_Name: Overlay 1
   m_Shader: {fileID: 4800000, guid: da8efd605fdd20949a21be6242000625, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ENABLEBRIGHTNESS_ON
-  - _ENABLEGLITCH_ON
-  - _ENABLEHOLOGRAM_ON
-  - _ENABLEMETAL_ON
-  - _ENABLEOUTEROUTLINE_ON
-  - _ENABLEPIXELOUTLINE_ON
-  - _ENABLESATURATION_ON
+  - _ENABLEFROZEN_ON
   - _SHADERFADING_NONE
   - _SHADERSPACE_UV
   - _TEXTURELAYER1SHEETTOGGLE_ON
@@ -271,7 +265,7 @@ Material:
     - _EnableAddHue: 0
     - _EnableAlphaTint: 0
     - _EnableBlackTint: 0
-    - _EnableBrightness: 1
+    - _EnableBrightness: 0
     - _EnableBurn: 0
     - _EnableCamouflage: 0
     - _EnableCheckerboard: 0
@@ -284,28 +278,28 @@ Material:
     - _EnableEnchanted: 0
     - _EnableExternalAlpha: 0
     - _EnableFlame: 0
-    - _EnableFrozen: 0
+    - _EnableFrozen: 1
     - _EnableFullAlphaDissolve: 0
     - _EnableFullDistortion: 0
     - _EnableFullGlowDissolve: 0
     - _EnableGaussianBlur: 0
-    - _EnableGlitch: 1
+    - _EnableGlitch: 0
     - _EnableHalftone: 0
-    - _EnableHologram: 1
+    - _EnableHologram: 0
     - _EnableHue: 0
     - _EnableInkSpread: 0
     - _EnableInnerOutline: 0
-    - _EnableMetal: 1
+    - _EnableMetal: 0
     - _EnableNegative: 0
-    - _EnableOuterOutline: 1
+    - _EnableOuterOutline: 0
     - _EnablePingPongGlow: 0
-    - _EnablePixelOutline: 1
+    - _EnablePixelOutline: 0
     - _EnablePixelate: 0
     - _EnablePoison: 0
     - _EnableRainbow: 0
     - _EnableRecolorRGB: 0
     - _EnableRecolorRGBYCP: 0
-    - _EnableSaturation: 1
+    - _EnableSaturation: 0
     - _EnableScreenTiling: 0
     - _EnableShadow: 0
     - _EnableSharpen: 0
@@ -353,7 +347,7 @@ Material:
     - _FlameRadius: 0.2
     - _FlameSmooth: 2
     - _FrozenContrast: 2
-    - _FrozenFade: 0.01
+    - _FrozenFade: 0.13
     - _FrozenHighlightContrast: 2
     - _FrozenHighlightDensity: 1
     - _FrozenSnowContrast: 1
