@@ -11,7 +11,7 @@ public class InventoryManager : MonoBehaviour
     public List<GameObject> SkinList = new List<GameObject>();
 
     public int MoneyAmount;
-
+    
     public Color JumpingColor;
     public Color MagneticColor;
 
@@ -32,6 +32,12 @@ public class InventoryManager : MonoBehaviour
     public Color hellColorBlue;
 
     public bool GodMode;
+
+    public Color HardcoreRed;
+    public Color HardcoreYellow;
+
+    public Color NormalRed;
+    public Color NormalBlue;
 
     private void Awake()
     {

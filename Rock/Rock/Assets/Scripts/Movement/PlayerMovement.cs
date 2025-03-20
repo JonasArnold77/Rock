@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         FireBallEffect.SetActive(false);
-        MagneticBallEffect.SetActive(false);
+        //MagneticBallEffect.SetActive(true);
 
         StartMenu.Instance.gameObject.SetActive(true);
 
@@ -218,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         //isJumping = true;
         //isGrounded = false;
         //ActualFireEffect.Add(Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f)));
-        FireBallEffect.SetActive(true);
+        //FireBallEffect.SetActive(true);
 
         //FindObjectsOfType<LightMovement>().ToList().ForEach(l => l.SetColor(JumpingColor));
 
@@ -260,8 +260,8 @@ public class PlayerMovement : MonoBehaviour
         ActualFireEffect.ForEach(a => Destroy(a));
         ActualFireEffect.Clear();
 
-        FireBallEffect.SetActive(false);
-        MagneticBallEffect.SetActive(true);
+        //FireBallEffect.SetActive(false);
+        //MagneticBallEffect.SetActive(true);
 
         GetComponent<PlayerSound>().PlayMetal();
 
@@ -312,7 +312,7 @@ public class PlayerMovement : MonoBehaviour
             //    FireBallEffect.SetActive(false);
             //}
 
-            MagneticBallEffect.SetActive(false);
+            //MagneticBallEffect.SetActive(false);
 
             isGrounded = true;
             isJumping = false;
@@ -359,7 +359,7 @@ public class PlayerMovement : MonoBehaviour
 
                 speed = 0;
                 FireBallEffect.SetActive(false);
-                MagneticBallEffect.SetActive(false);
+                //MagneticBallEffect.SetActive(false);
                 BallEffect.SetActive(false);
                 BallEffect2.SetActive(false);
 
@@ -404,7 +404,7 @@ public class PlayerMovement : MonoBehaviour
 
                 speed = 0;
                 FireBallEffect.SetActive(false);
-                MagneticBallEffect.SetActive(false);
+                //MagneticBallEffect.SetActive(false);
                 BallEffect.SetActive(false);
                 BallEffect2.SetActive(false);
 
@@ -432,7 +432,7 @@ public class PlayerMovement : MonoBehaviour
 
                 speed = 0;
                 FireBallEffect.SetActive(false);
-                MagneticBallEffect.SetActive(false);
+                //MagneticBallEffect.SetActive(false);
                 BallEffect.SetActive(false);
                 BallEffect2.SetActive(false);
 
