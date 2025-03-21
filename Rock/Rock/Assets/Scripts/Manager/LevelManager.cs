@@ -148,12 +148,12 @@ public class LevelManager : MonoBehaviour
         Vector3 spawnPosition;
         if (lastSpawnedObject != null)
         {
-            if (!StairIsNeeded && LevelListCounter > 0 && LevelListCounter < HardcoreLevelList.Count && HardcoreLevelList[LevelListCounter-1].GetComponent<Obstacle>().endType == EObstacleType.Middle && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Bottom)
+            if (!StairIsNeeded /*&& LevelListCounter > 0*/ && LevelListCounter < HardcoreLevelList.Count && objectPrefab.GetComponent<Obstacle>().endType == EObstacleType.Middle && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Bottom)
             {
                 objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairDown).FirstOrDefault();
                 StairIsNeeded = true;
             }
-            else if (!StairIsNeeded && LevelListCounter > 0 && LevelListCounter < HardcoreLevelList.Count && HardcoreLevelList[LevelListCounter-1].GetComponent<Obstacle>().endType == EObstacleType.Bottom && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Middle)
+            else if (!StairIsNeeded /*&& LevelListCounter > 0*/ && LevelListCounter < HardcoreLevelList.Count && objectPrefab.GetComponent<Obstacle>().endType == EObstacleType.Bottom && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Middle)
             {
                 objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault();
                 StairIsNeeded = true;
