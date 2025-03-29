@@ -20,12 +20,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player
+  m_Name: Mat4All
   m_Shader: {fileID: 4800000, guid: da8efd605fdd20949a21be6242000625, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ENABLEBRIGHTNESS_ON
+  - _ENABLEHUE_ON
+  - _ENABLEOUTEROUTLINE_ON
+  - _ENABLEPIXELOUTLINE_ON
+  - _ENABLESATURATION_ON
+  - _ENABLESPLITTONING_ON
+  - _ENABLESTRONGTINT_ON
   - _SHADERFADING_NONE
   - _SHADERSPACE_UV
   - _TEXTURELAYER1SHEETTOGGLE_ON
@@ -195,12 +201,12 @@ Material:
     - _AddColorContrastToggle: 0
     - _AddColorFade: 1
     - _AddColorMaskToggle: 0
-    - _AddHueBrightness: 2
-    - _AddHueContrast: 0.5
+    - _AddHueBrightness: 0.37
+    - _AddHueContrast: 1.14
     - _AddHueFade: 1
     - _AddHueMaskToggle: 0
-    - _AddHueSaturation: 1
-    - _AddHueSpeed: 1
+    - _AddHueSaturation: 0.95
+    - _AddHueSpeed: 0.16
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _AlphaTintFade: 1
@@ -211,7 +217,7 @@ Material:
     - _BlackTintPower: 4
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Brightness: 8.1
+    - _Brightness: 0.3
     - _BumpScale: 1
     - _BurnEdgeNoiseFactor: 0.5
     - _BurnFade: 0.45
@@ -286,20 +292,20 @@ Material:
     - _EnableGlitch: 0
     - _EnableHalftone: 0
     - _EnableHologram: 0
-    - _EnableHue: 0
+    - _EnableHue: 1
     - _EnableInkSpread: 0
     - _EnableInnerOutline: 0
     - _EnableMetal: 0
     - _EnableNegative: 0
-    - _EnableOuterOutline: 0
+    - _EnableOuterOutline: 1
     - _EnablePingPongGlow: 0
-    - _EnablePixelOutline: 0
+    - _EnablePixelOutline: 1
     - _EnablePixelate: 0
     - _EnablePoison: 0
     - _EnableRainbow: 0
     - _EnableRecolorRGB: 0
     - _EnableRecolorRGBYCP: 0
-    - _EnableSaturation: 0
+    - _EnableSaturation: 1
     - _EnableScreenTiling: 0
     - _EnableShadow: 0
     - _EnableSharpen: 0
@@ -314,10 +320,10 @@ Material:
     - _EnableSmoothPixelArt: 0
     - _EnableSourceAlphaDissolve: 0
     - _EnableSourceGlowDissolve: 0
-    - _EnableSplitToning: 0
+    - _EnableSplitToning: 1
     - _EnableSqueeze: 0
     - _EnableSquish: 0
-    - _EnableStrongTint: 0
+    - _EnableStrongTint: 1
     - _EnableTextureLayer1: 0
     - _EnableTextureLayer2: 0
     - _EnableUVDistort: 0
@@ -380,10 +386,10 @@ Material:
     - _HologramLineGap: 3
     - _HologramLineSpeed: 0.01
     - _HologramMinAlpha: 0.2
-    - _Hue: 0
-    - _InkSpreadContrast: 2
-    - _InkSpreadDistance: 3
-    - _InkSpreadFade: 1
+    - _Hue: 0.58
+    - _InkSpreadContrast: 1.19
+    - _InkSpreadDistance: 2.86
+    - _InkSpreadFade: 0
     - _InkSpreadNoiseFactor: 0.5
     - _InkSpreadWidth: 0.2
     - _InnerOutlineDistortionToggle: 0
@@ -440,7 +446,7 @@ Material:
     - _RecolorRGBYCPTextureToggle: 0
     - _RectHeight: 100
     - _RectWidth: 100
-    - _Saturation: 15.5
+    - _Saturation: 16.08
     - _ScreenTilingPixelsPerUnit: 100
     - _ScreenWidthUnits: 10
     - _ShaderFading: 0
@@ -449,7 +455,7 @@ Material:
     - _SharpenFactor: 4
     - _SharpenFade: 1
     - _SharpenOffset: 2
-    - _ShiftHueSpeed: 0.5
+    - _ShiftHueSpeed: 27.51
     - _ShiftingBrightness: 1
     - _ShiftingContrast: 0.5
     - _ShiftingDensity: 1.5
@@ -466,8 +472,8 @@ Material:
     - _ShineSmooth: 1
     - _ShineSpeed: 5
     - _ShineWidth: 0.1
-    - _SineGlowContrast: 1
-    - _SineGlowFade: 1
+    - _SineGlowContrast: 0.07
+    - _SineGlowFade: 0.27
     - _SineGlowFrequency: 4
     - _SineGlowMaskToggle: 0
     - _SineGlowMax: 1
@@ -575,10 +581,10 @@ Material:
     - _WorldTilingPixelsPerUnit: 100
     - _ZWrite: 0
     m_Colors:
-    - _AddColorColor: {r: 2.996078, g: 0, b: 0, a: 0}
+    - _AddColorColor: {r: 0, g: 0, b: 0, a: 0}
     - _AlphaTintColor: {r: 95.87451, g: 5.019608, b: 95.87451, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BlackTintColor: {r: 0, g: 0, b: 1, a: 0}
+    - _BlackTintColor: {r: 0, g: 0, b: 0.7584905, a: 0}
     - _BurnEdgeColor: {r: 11.98431, g: 1.129412, b: 0.1254902, a: 0}
     - _BurnEdgeNoiseScale: {r: 0.3, g: 0.3, b: 0, a: 0}
     - _BurnInsideColor: {r: 0.75, g: 0.5625, b: 0.525, a: 0}
@@ -637,7 +643,7 @@ Material:
     - _GlitchNoiseSpeed: {r: 0, g: 1, b: 0, a: 0}
     - _HalftonePosition: {r: 0, g: 0, b: 0, a: 0}
     - _HologramTint: {r: 0.3137255, g: 1.662745, b: 2.996078, a: 1}
-    - _InkSpreadColor: {r: 8.47419, g: 5.013525, b: 0.08873497, a: 0}
+    - _InkSpreadColor: {r: 9.435205, g: 6.0212564, b: 5.3940887, a: 0}
     - _InkSpreadNoiseScale: {r: 0.4, g: 0.4, b: 0, a: 0}
     - _InkSpreadPosition: {r: 0.5, g: -1, b: 0, a: 0}
     - _InnerOutlineColor: {r: 11.98431, g: 1.254902, b: 1.254902, a: 1}
@@ -668,7 +674,7 @@ Material:
     - _RainbowNoiseScale: {r: 0.2, g: 0.2, b: 0, a: 0}
     - _RecolorRGBBlueTint: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _RecolorRGBGreenTint: {r: 1, g: 1, b: 1, a: 0.5019608}
-    - _RecolorRGBRedTint: {r: 1, g: 1, b: 1, a: 0.5019608}
+    - _RecolorRGBRedTint: {r: 0.7433963, g: 0.33522967, b: 0.33522967, a: 1}
     - _RecolorRGBYCPBlueTint: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _RecolorRGBYCPCyanTint: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _RecolorRGBYCPGreenTint: {r: 1, g: 1, b: 1, a: 0.5019608}
@@ -694,12 +700,12 @@ Material:
     - _SourceGlowDissolveNoiseScale: {r: 0.3, g: 0.3, b: 0, a: 0}
     - _SourceGlowDissolvePosition: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SplitToningHighlightsColor: {r: 1, g: 0.1, b: 0.1, a: 0}
-    - _SplitToningShadowsColor: {r: 0.1, g: 0.4000002, b: 1, a: 0}
+    - _SplitToningHighlightsColor: {r: 0.10196078, g: 1, b: 0.83521104, a: 0}
+    - _SplitToningShadowsColor: {r: 0, g: 0.3318777, b: 1, a: 0}
     - _SpriteSheetRect: {r: 0, g: 0, b: 1, a: 1}
     - _SqueezeCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _SqueezeScale: {r: 2, g: 0, b: 0, a: 0}
-    - _StrongTintTint: {r: 1, g: 1, b: 1, a: 1}
+    - _StrongTintTint: {r: 1.414114, g: 1.414114, b: 1.414114, a: 1}
     - _TextureLayer1Color: {r: 0.4494117, g: 1.298301, b: 2.996079, a: 1}
     - _TextureLayer1Offset: {r: 0, g: 0, b: 0, a: 0}
     - _TextureLayer1Scale: {r: 1, g: 1, b: 0, a: 0}

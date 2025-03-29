@@ -27,10 +27,10 @@ Material:
   m_ValidKeywords:
   - _ENABLEBRIGHTNESS_ON
   - _ENABLEGLITCH_ON
-  - _ENABLEHOLOGRAM_ON
   - _ENABLEOUTEROUTLINE_ON
   - _ENABLEPIXELOUTLINE_ON
   - _ENABLESATURATION_ON
+  - _ENABLESTRONGTINT_ON
   - _SHADERFADING_NONE
   - _SHADERSPACE_UV
   - _TEXTURELAYER1SHEETTOGGLE_ON
@@ -290,7 +290,7 @@ Material:
     - _EnableGaussianBlur: 0
     - _EnableGlitch: 1
     - _EnableHalftone: 0
-    - _EnableHologram: 1
+    - _EnableHologram: 0
     - _EnableHue: 0
     - _EnableInkSpread: 0
     - _EnableInnerOutline: 0
@@ -322,7 +322,7 @@ Material:
     - _EnableSplitToning: 0
     - _EnableSqueeze: 0
     - _EnableSquish: 0
-    - _EnableStrongTint: 0
+    - _EnableStrongTint: 1
     - _EnableTextureLayer1: 0
     - _EnableTextureLayer2: 0
     - _EnableUVDistort: 0
@@ -704,7 +704,7 @@ Material:
     - _SpriteSheetRect: {r: 0, g: 0, b: 1, a: 1}
     - _SqueezeCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _SqueezeScale: {r: 2, g: 0, b: 0, a: 0}
-    - _StrongTintTint: {r: 1, g: 1, b: 1, a: 1}
+    - _StrongTintTint: {r: 0, g: 0, b: 0, a: 1}
     - _TextureLayer1Color: {r: 0.4494117, g: 1.298301, b: 2.996079, a: 1}
     - _TextureLayer1Offset: {r: 0, g: 0, b: 0, a: 0}
     - _TextureLayer1Scale: {r: 1, g: 1, b: 0, a: 0}

@@ -25,7 +25,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ENABLEFROZEN_ON
   - _SHADERFADING_NONE
   - _SHADERSPACE_UV
   - _TEXTURELAYER1SHEETTOGGLE_ON
@@ -278,7 +277,7 @@ Material:
     - _EnableEnchanted: 0
     - _EnableExternalAlpha: 0
     - _EnableFlame: 0
-    - _EnableFrozen: 1
+    - _EnableFrozen: 0
     - _EnableFullAlphaDissolve: 0
     - _EnableFullDistortion: 0
     - _EnableFullGlowDissolve: 0
@@ -346,12 +345,12 @@ Material:
     - _FlameNoiseHeightFactor: 1.5
     - _FlameRadius: 0.2
     - _FlameSmooth: 2
-    - _FrozenContrast: 5.25
-    - _FrozenFade: 0.41
+    - _FrozenContrast: 2.92
+    - _FrozenFade: 0.49
     - _FrozenHighlightContrast: 2
     - _FrozenHighlightDensity: 1
     - _FrozenSnowContrast: 1
-    - _FrozenSnowDensity: 0.25
+    - _FrozenSnowDensity: 1
     - _FullAlphaDissolveFade: 0.5
     - _FullAlphaDissolveWidth: 0.5
     - _FullDistortionFade: 1
@@ -467,7 +466,7 @@ Material:
     - _ShineSpeed: 5
     - _ShineWidth: 0.1
     - _SineGlowContrast: 1
-    - _SineGlowFade: 1
+    - _SineGlowFade: 0.32
     - _SineGlowFrequency: 4
     - _SineGlowMaskToggle: 0
     - _SineGlowMax: 1
@@ -494,10 +493,10 @@ Material:
     - _SourceGlowDissolveNoiseFactor: 0.2
     - _SourceGlowDissolveWidth: 0.1
     - _SpecularHighlights: 1
-    - _SplitToningBalance: 1
-    - _SplitToningContrast: 1
+    - _SplitToningBalance: 3.17
+    - _SplitToningContrast: 9.43
     - _SplitToningFade: 1
-    - _SplitToningShift: 0
+    - _SplitToningShift: 0.16
     - _SpriteSheetFix: 0
     - _SqueezeFade: 1
     - _SqueezePower: 1
@@ -694,7 +693,7 @@ Material:
     - _SourceGlowDissolveNoiseScale: {r: 0.3, g: 0.3, b: 0, a: 0}
     - _SourceGlowDissolvePosition: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SplitToningHighlightsColor: {r: 1, g: 0.1, b: 0.1, a: 0}
+    - _SplitToningHighlightsColor: {r: 0.096226394, g: 1, b: 0.9921067, a: 0}
     - _SplitToningShadowsColor: {r: 0.1, g: 0.4000002, b: 1, a: 0}
     - _SpriteSheetRect: {r: 0, g: 0, b: 1, a: 1}
     - _SqueezeCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
