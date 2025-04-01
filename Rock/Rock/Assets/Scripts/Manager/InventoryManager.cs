@@ -66,16 +66,24 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Zähler: " + counter);
 
             Score++;
-            
+
 
             if (Score > SaveManager.Instance.Highscore)
             {
                 SaveManager.Instance.Highscore = Score;
             }
 
+            if (Score > SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())])
+            {
+                SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())] = Score;
+                SaveManager.Instance.Save();
+            }
+
             HighscoreTicker.text = Score.ToString();
 
-            // Nächsten Schwellenwert um 5 erhöhen
+
+
+            // Nächsten Schwellenwert um 5 erhöhe]
             nextThreshold += 5f;
         }
     }

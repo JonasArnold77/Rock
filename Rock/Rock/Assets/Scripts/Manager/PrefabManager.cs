@@ -10,6 +10,9 @@ public class PrefabManager : MonoBehaviour
     public GameObject JumpDashEffect;
     public GameObject DieEffect;
     public GameObject GemExplodeEffect;
+    public GameObject ChallengeButton;
+
+    public PhysicsMaterial2D BouncyMaterial;
 
     public GameObject XpText;
 

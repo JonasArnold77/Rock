@@ -20,6 +20,11 @@ public class SaveManager : MonoBehaviour
     public int CountOfArea;
     public bool TutorialDone;
 
+    public List<string> Challenges;
+    public List<int> ChallengesScore;
+
+    public string ActualChallenge;
+
     public List<string> HardcoreLevelList;
 
     private void Awake()
@@ -47,7 +52,10 @@ public class SaveManager : MonoBehaviour
         //    LevelManager.Instance.countOfArea = CountOfArea + 2;
         //}
 
-        
+
+        ChallengeManager.Instance.actualChallengeButton = DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>();
+        DeathMenu.Instance.SetUpChallengeButtons();
+        DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>().ChallengeFunction.Invoke();
 
         if (HardcoreModeOn)
         {
@@ -112,7 +120,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory20")
+        QuickSaveWriter.Create("Inventory24")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -122,6 +130,9 @@ public class SaveManager : MonoBehaviour
                        .Write("HardcoreModeOn", HardcoreModeOn)
                        .Write("CountOfArea", CountOfArea)
                        .Write("TutorialDone", TutorialDone)
+                       .Write("Challenges", Challenges)
+                       .Write("Highscores", ChallengesScore)
+                       .Write("ActualChallenge", ActualChallenge)
                        .Commit();
 
         //Content.text = QuickSaveRaw.LoadString("Inputs.json");
@@ -131,11 +142,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory20.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory24.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory20.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory24.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory20.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory24.json");
 #endif
 
 
@@ -150,7 +161,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory20")
+            QuickSaveReader.Create("Inventory24")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
@@ -159,7 +170,10 @@ public class SaveManager : MonoBehaviour
                        .Read<string>("LastChunk", (r) => { LastChunk = r; })
                        .Read<bool>("HardcoreModeOn", (r) => { HardcoreModeOn = r; })
                        .Read<int>("CountOfArea", (r) => { CountOfArea = r; })
-                       .Read<bool>("TutorialDone", (r) => { TutorialDone = r; });
+                       .Read<bool>("TutorialDone", (r) => { TutorialDone = r; })
+                       .Read<List<string>>("Challenges", (r) => { Challenges = r; })
+                       .Read<List<int>>("Highscores", (r) => { ChallengesScore = r; })
+                       .Read<string>("ActualChallenge", (r) => { ActualChallenge = r; });
             //DeathMenu.Instance.gameObject.SetActive(true);
             //DeathMenu.Instance.test.text = "Save File Existiert";
         }
@@ -175,6 +189,9 @@ public class SaveManager : MonoBehaviour
         TutorialDone = false;
         CountOfArea = 4;
         LastChunk = "";
+        Challenges = DeathMenu.Instance.ChallengeGameObjects.Select(c => c.GetComponent<ChallengeButton>().title).ToList();
+        ChallengesScore = DeathMenu.Instance.ChallengeGameObjects.Select(c => c.GetComponent<ChallengeButton>().Highscore).ToList();
+        ActualChallenge = "Normal";
         Debug.Log("Default-Werte gesetzt.");
     }
 }

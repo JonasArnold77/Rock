@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsDead;
 
+    private bool isVelocityPositive = true;
+
     private List<GameObject> passedObjects = new List<GameObject>();
 
     void Start()
@@ -48,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         //MagneticBallEffect.SetActive(true);
 
         StartMenu.Instance.gameObject.SetActive(true);
+
 
 #if UNITY_ANDROID
         //FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
@@ -86,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(ResetSawBladeXP(target));
             }
         }
+
 #if UNITY_ANDROID
         if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0) && !TutorialMenu.Instance.gameObject.activeSelf)
         {
@@ -123,40 +127,103 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Velocity: " + rb.velocity);
 
 #if UNITY_ANDROID
-        // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
-        if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
         {
-            Jump();
-            //StartCoroutine(ElectricSoundCoroutine());
-        }
-        // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
-        else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0))
+            // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
+            if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Jump();
+                //StartCoroutine(ElectricSoundCoroutine());
+            }
+            // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+            else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                MagneticFall();
+            }
+        }else if(ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
         {
-            MagneticFall();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (isVelocityPositive)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -7);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 7);
+                }
+
+                isVelocityPositive = !isVelocityPositive;
+            }
         }
+
 #elif UNITY_STANDALONE_WIN
-        // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
-        if (isGrounded && Input.GetKeyDown(jumpKey))
+
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
         {
-            Jump();
-            //StartCoroutine(ElectricSoundCoroutine());
-        }
-        // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
-        else if (isJumping && Input.GetKeyDown(jumpKey))
+            // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
+            if (isGrounded && Input.GetKeyDown(jumpKey))
+            {
+                Jump();
+                //StartCoroutine(ElectricSoundCoroutine());
+            }
+            // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+            else if (isJumping && Input.GetKeyDown(jumpKey))
+            {
+                MagneticFall();
+            }
+        }else if(ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
         {
-            MagneticFall();
+            if (Input.GetKeyDown(jumpKey))
+            {
+                //rb.simulated = true;
+                // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
+
+                if (isVelocityPositive)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -7);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 7);
+                }
+
+                isVelocityPositive = !isVelocityPositive;
+
+            }
         }
+
+
+
 #elif UNITY_EDITOR
-        // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
-        if (isGrounded && Input.GetKeyDown(jumpKey))
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal"|| ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
         {
-            Jump();
-            //StartCoroutine(ElectricSoundCoroutine());
-        }
-        // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
-        else if (isJumping && Input.GetKeyDown(jumpKey))
+            // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
+            if (isGrounded && Input.GetKeyDown(jumpKey))
+            {
+                Jump();
+                //StartCoroutine(ElectricSoundCoroutine());
+            }
+            // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+            else if (isJumping && Input.GetKeyDown(jumpKey))
+            {
+                MagneticFall();
+            }
+        }else if(ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
         {
-            MagneticFall();
+            if (Input.GetKeyDown(jumpKey))
+            {
+                if (isVelocityPositive)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -7);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 7);
+                }
+
+                isVelocityPositive = !isVelocityPositive;
+            }
         }
 #endif
 

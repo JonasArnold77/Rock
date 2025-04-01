@@ -15,7 +15,13 @@ public class DeathMenu : MonoBehaviour
     public Text ScoreText;
     public Text HighscoreText;
 
+    public List<GameObject> ChallengeGameObjects;
+    public Transform Content;
+
     public Text test;
+
+    public Color ActiveColor;
+    public Color InactiveColor;
 
     private void Start()
     {
@@ -57,5 +63,20 @@ public class DeathMenu : MonoBehaviour
 
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void SetUpChallengeButtons()
+    {
+        foreach(var c in ChallengeGameObjects)
+        {
+            if(c.GetComponent<ChallengeButton>().title == ChallengeManager.Instance.actualChallengeButton.title)
+            {
+                c.GetComponent<Image>().color = ActiveColor;
+            }
+            else
+            {
+                c.GetComponent<Image>().color = InactiveColor;
+            }
+        }
     }
 }
