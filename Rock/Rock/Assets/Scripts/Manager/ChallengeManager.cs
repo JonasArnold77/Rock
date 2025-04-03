@@ -16,16 +16,36 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateBouncyBallEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = PrefabManager.Instance.BouncyMaterial;
+        SaveManager.Instance.HardcoreModeOn = false;
     }
 
     public void ActivateNormalEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        SaveManager.Instance.HardcoreModeOn = false;
     }
 
     public void ActivateGravityChangeEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
+        SaveManager.Instance.HardcoreModeOn = false;
+    }
+    public void ActivateStrongGravityChangeEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
+        SaveManager.Instance.HardcoreModeOn = false;
+    }
+    public void ActivateHardcoreModeEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        SaveManager.Instance.HardcoreModeOn = true;
+    }
+    public void ActivateHighspeedEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        FindObjectOfType<PlayerMovement>().speed = 7;
+        SaveManager.Instance.HardcoreModeOn = false;
     }
 }

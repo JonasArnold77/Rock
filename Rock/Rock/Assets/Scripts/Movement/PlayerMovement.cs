@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Velocity: " + rb.velocity);
 
 #if UNITY_ANDROID
-        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed")
         {
             // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
             if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 MagneticFall();
             }
-        }else if(ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
+        }else if(ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -155,11 +155,30 @@ public class PlayerMovement : MonoBehaviour
 
                 isVelocityPositive = !isVelocityPositive;
             }
+        }else if(ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                //rb.simulated = true;
+                // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
+
+                if (isVelocityPositive)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -20);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 20);
+                }
+
+                isVelocityPositive = !isVelocityPositive;
+
+            }
         }
 
 #elif UNITY_STANDALONE_WIN
 
-        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed") 
         {
             // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
             if (isGrounded && Input.GetKeyDown(jumpKey))
@@ -191,12 +210,30 @@ public class PlayerMovement : MonoBehaviour
                 isVelocityPositive = !isVelocityPositive;
 
             }
+        }else if(ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
+        {
+            if (Input.GetKeyDown(jumpKey))
+            {
+                //rb.simulated = true;
+                // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
+
+                if (isVelocityPositive)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -20);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 20);
+                }
+
+                isVelocityPositive = !isVelocityPositive;
+
+            }
         }
 
 
-
 #elif UNITY_EDITOR
-        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal"|| ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal"|| ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed")
         {
             // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
             if (isGrounded && Input.GetKeyDown(jumpKey))
@@ -223,6 +260,25 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 isVelocityPositive = !isVelocityPositive;
+            }
+        }else if(ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
+        {
+            if (Input.GetKeyDown(jumpKey))
+            {
+                //rb.simulated = true;
+                // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
+
+                if (isVelocityPositive)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -20);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 20);
+                }
+
+                isVelocityPositive = !isVelocityPositive;
+
             }
         }
 #endif
