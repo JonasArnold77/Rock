@@ -56,6 +56,18 @@ public class SaveManager : MonoBehaviour
         ChallengeManager.Instance.actualChallengeButton = DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>();
         DeathMenu.Instance.SetUpChallengeButtons();
         DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>().ChallengeFunction.Invoke();
+        
+        if(DeathMenu.Instance.ChallengeGameObjects.Count > Challenges.Count)
+        {
+            for(int i = 0; i < DeathMenu.Instance.ChallengeGameObjects.Count; i++)
+            {
+                if(i >= Challenges.Count)
+                {
+                    Challenges.Add(DeathMenu.Instance.ChallengeGameObjects[i].GetComponent<ChallengeButton>().title);
+                    ChallengesScore.Add(DeathMenu.Instance.ChallengeGameObjects[i].GetComponent<ChallengeButton>().Highscore);
+                }
+            }
+        }
 
         if (HardcoreModeOn)
         {
