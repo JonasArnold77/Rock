@@ -8,6 +8,11 @@ public class LevelChunkManager : MonoBehaviour
     public List<GameObject> BeginningChunks = new List<GameObject>();
     public List<GameObject> HardcoreChunks = new List<GameObject>();
 
+    public List<GameObject> BouncyBallChunks = new List<GameObject>();
+    public List<GameObject> GravityChunks = new List<GameObject>();
+    public List<GameObject> StrongGravityChunks = new List<GameObject>();
+    public List<GameObject> HighspeedChunks = new List<GameObject>();
+
     public GameObject StartChunk;
     public GameObject TestChunk;
 
@@ -23,6 +28,23 @@ public class LevelChunkManager : MonoBehaviour
 
     private void Start()
     {
+        if (ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
+        {
+            Chunks = BouncyBallChunks;
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
+        {
+            Chunks = GravityChunks;
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
+        {
+            Chunks = StrongGravityChunks;
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Highspeed")
+        {
+            Chunks = HighspeedChunks;
+        }
+
         SetRuntimeIDs();
     }
 
