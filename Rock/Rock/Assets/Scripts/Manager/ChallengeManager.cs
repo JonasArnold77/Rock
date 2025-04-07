@@ -48,4 +48,11 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().speed = 7;
         SaveManager.Instance.HardcoreModeOn = false;
     }
+
+    public void ActivateMoveWIthBallEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        FindObjectOfType<PlayerMovement>().speed = 7;
+        SaveManager.Instance.HardcoreModeOn = false;
+    }
 }

@@ -10,6 +10,13 @@ public class FollowPlayer : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(PlayerTransform.position.x+ distance, transform.position.y, transform.position.z);
+        if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
+        {
+            transform.position = new Vector3(PlayerTransform.position.x + distance, PlayerTransform.position.y + 3, transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(PlayerTransform.position.x + distance, transform.position.y, transform.position.z);
+        }
     }
 }

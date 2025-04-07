@@ -42,9 +42,12 @@ public class LevelChunkManager : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Highspeed")
         {
-            Chunks = HighspeedChunks;
+            Chunks = Chunks;
         }
-
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
+        {
+            Chunks = Chunks;
+        }
         SetRuntimeIDs();
     }
 
