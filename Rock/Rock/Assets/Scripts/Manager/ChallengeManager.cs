@@ -55,4 +55,10 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().speed = 7;
         SaveManager.Instance.HardcoreModeOn = false;
     }
+    public void ActivateMoveCameraEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        FindObjectOfType<PlayerMovement>().speed = 7;
+        SaveManager.Instance.HardcoreModeOn = false;
+    }
 }

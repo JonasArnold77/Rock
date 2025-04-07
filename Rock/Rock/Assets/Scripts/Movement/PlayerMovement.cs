@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
 
 #elif UNITY_STANDALONE_WIN
 
-        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall") 
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall" || ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera") 
         {
             // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
             if (isGrounded && Input.GetKeyDown(jumpKey))

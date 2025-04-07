@@ -56,8 +56,14 @@ public class SaveManager : MonoBehaviour
         ChallengeManager.Instance.actualChallengeButton = DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>();
         DeathMenu.Instance.SetUpChallengeButtons();
         DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>().ChallengeFunction.Invoke();
-        
-        if(DeathMenu.Instance.ChallengeGameObjects.Count > Challenges.Count)
+
+        if (ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
+        {
+            FindObjectOfType<FollowPlayer>().transform.SetParent(FindObjectOfType<FollowPlayer>().PlayerTransform);
+            FindObjectOfType<FollowPlayer>().ChooseNewTarget();
+        }
+
+        if (DeathMenu.Instance.ChallengeGameObjects.Count > Challenges.Count)
         {
             for(int i = 0; i < DeathMenu.Instance.ChallengeGameObjects.Count; i++)
             {
