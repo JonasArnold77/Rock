@@ -28,26 +28,26 @@ public class LevelChunkManager : MonoBehaviour
 
     private void Start()
     {
-        if (ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
-        {
-            Chunks = BouncyBallChunks;
-        }
-        else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
-        {
-            Chunks = GravityChunks;
-        }
-        else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
-        {
-            Chunks = StrongGravityChunks;
-        }
-        else if (ChallengeManager.Instance.actualChallengeButton.title == "Highspeed")
-        {
-            Chunks = Chunks;
-        }
-        else if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
-        {
-            Chunks = Chunks;
-        }
+        //if (ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
+        //{
+        //    Chunks = BouncyBallChunks;
+        //}
+        //else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
+        //{
+        //    Chunks = GravityChunks;
+        //}
+        //else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
+        //{
+        //    Chunks = StrongGravityChunks;
+        //}
+        //else if (ChallengeManager.Instance.actualChallengeButton.title == "Highspeed")
+        //{
+        //    Chunks = Chunks;
+        //}
+        //else if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
+        //{
+        //    Chunks = Chunks;
+        //}
         SetRuntimeIDs();
     }
 
