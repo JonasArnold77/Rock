@@ -52,13 +52,18 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateMoveWIthBallEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
-        FindObjectOfType<PlayerMovement>().speed = 7;
         SaveManager.Instance.HardcoreModeOn = false;
     }
     public void ActivateMoveCameraEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
-        FindObjectOfType<PlayerMovement>().speed = 7;
+        SaveManager.Instance.HardcoreModeOn = false;
+    }
+    public void ActivateFlappyEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        FindObjectOfType<PlayerMovement>().speed = 3;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -12);
         SaveManager.Instance.HardcoreModeOn = false;
     }
 }

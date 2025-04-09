@@ -232,6 +232,35 @@ public class PlayerMovement : MonoBehaviour
                 isVelocityPositive = !isVelocityPositive;
 
             }
+
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
+        {
+            if (Input.GetKeyDown(jumpKey))
+            {
+                rb.AddForce(Vector2.up * 4, ForceMode2D.Impulse);
+            }
+            if (isGrounded)
+            {
+                if (LifePoints == 0)
+                {
+                    if (InventoryManager.Instance.GodMode)
+                    {
+                        return;
+                    }
+
+                    speed = 0;
+                    FireBallEffect.SetActive(false);
+                    //MagneticBallEffect.SetActive(false);
+                    BallEffect.SetActive(false);
+                    BallEffect2.SetActive(false);
+
+                    rb.simulated = true;
+
+
+                    StartCoroutine(WaitForReset());
+                }
+            }
         }
 
 
