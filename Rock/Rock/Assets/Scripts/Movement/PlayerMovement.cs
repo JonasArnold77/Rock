@@ -218,6 +218,8 @@ public class PlayerMovement : MonoBehaviour
                 //rb.simulated = true;
                 // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
 
+                
+
                 if (isVelocityPositive)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, -20);
@@ -515,7 +517,7 @@ public class PlayerMovement : MonoBehaviour
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, raycastDistance, groundLayer);
 
 
-        if ((hit.collider != null || hit2.collider != null) && !hit.collider.gameObject.GetComponent<SawBlade>() && !hit2.collider.gameObject.GetComponent<SawBlade>())
+        if ((hit.collider != null || hit2.collider != null) && hit.collider.GetComponent<PushDown>() == null && !hit.collider.gameObject.GetComponent<SawBlade>() && !hit2.collider.gameObject.GetComponent<SawBlade>())
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
 
