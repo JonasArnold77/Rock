@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -67,15 +68,20 @@ public class DeathMenu : MonoBehaviour
 
     public void SetUpChallengeButtons()
     {
-        foreach(var c in ChallengeGameObjects)
+
+        ChallengeGameObjects.ForEach(b => b.GetComponentsInChildren<Button>(true).ToList().ForEach(b1 => b1.gameObject.SetActive(true)));
+
+        foreach (var c in ChallengeGameObjects)
         {
             if(c.GetComponent<ChallengeButton>().title == ChallengeManager.Instance.actualChallengeButton.title)
             {
                 c.GetComponent<Image>().color = ActiveColor;
+                c.GetComponentsInChildren<Button>()[1].gameObject.SetActive(true);
             }
             else
             {
                 c.GetComponent<Image>().color = InactiveColor;
+                c.GetComponentsInChildren<Button>()[1].gameObject.SetActive(false);
             }
         }
     }

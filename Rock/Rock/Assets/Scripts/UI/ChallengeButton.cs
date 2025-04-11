@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChallengeButton : MonoBehaviour
@@ -10,6 +12,7 @@ public class ChallengeButton : MonoBehaviour
     public string title;
     public int Level;
     public int Highscore;
+    public Button RestartButton;
 
     private void Start()
     {
@@ -23,5 +26,15 @@ public class ChallengeButton : MonoBehaviour
         ChallengeManager.Instance.actualChallengeButton = this;
         SaveManager.Instance.ActualChallenge = title;
         DeathMenu.Instance.SetUpChallengeButtons();
+        //GetComponentsInChildren<Button>().Where(b => !b.Equals(GetComponent<Button>())).FirstOrDefault().gameObject.SetActive(true);
+        GetComponentsInChildren<Button>()[1].onClick.AddListener(() => Respawn());
+    }
+
+    private void Respawn()
+    {
+        SaveManager.Instance.Save();
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }
