@@ -21,7 +21,7 @@ public class ChallengeButton : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() => SaveManager.Instance.Save());
     }
 
-    private void SetActualChallenge()
+    public void SetActualChallenge()
     {
         ChallengeManager.Instance.actualChallengeButton = this;
         SaveManager.Instance.ActualChallenge = title;

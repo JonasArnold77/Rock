@@ -66,6 +66,11 @@ public class DeathMenu : MonoBehaviour
         SceneManager.LoadScene(currentSceneName);
     }
 
+    private void OnEnable()
+    {
+        ChallengeManager.Instance.actualChallengeButton.SetActualChallenge();
+    }
+
     public void SetUpChallengeButtons()
     {
 
