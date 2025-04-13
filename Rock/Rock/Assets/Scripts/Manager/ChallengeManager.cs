@@ -17,12 +17,14 @@ public class ChallengeManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = PrefabManager.Instance.BouncyMaterial;
         SaveManager.Instance.HardcoreModeOn = false;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
 
     public void ActivateNormalEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = false;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
 
     public void ActivateGravityChangeEffect()
@@ -41,29 +43,33 @@ public class ChallengeManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = true;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
     public void ActivateHighspeedEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         FindObjectOfType<PlayerMovement>().speed = 7;
         SaveManager.Instance.HardcoreModeOn = false;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
 
     public void ActivateMoveWIthBallEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = false;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
     public void ActivateMoveCameraEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = false;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
     public void ActivateFlappyEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         FindObjectOfType<PlayerMovement>().speed = 3;
-        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -12);
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
         SaveManager.Instance.HardcoreModeOn = false;
     }
 }
