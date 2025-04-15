@@ -434,6 +434,11 @@ public class PlayerMovement : MonoBehaviour
         isDoingMagneticFall = true;
     }
 
+    private void IsOnTop()
+    {
+
+    }
+
     public void IsGrounded()
     {
         // Startpunkt des Raycasts ist die Position des Charakters

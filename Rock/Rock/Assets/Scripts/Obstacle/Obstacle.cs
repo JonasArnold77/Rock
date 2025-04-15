@@ -6,8 +6,8 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     public float height;
-    public EObstacleType startType;
-    public EObstacleType endType;
+    [SerializeField] public EObstacleType startType;
+    [SerializeField] public EObstacleType endType;
 
     public int DifficultyLevel;
 
