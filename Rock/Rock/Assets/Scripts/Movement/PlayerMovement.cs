@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private KeyCode jumpKey = KeyCode.Space; // Taste für den Sprung
 
     private Rigidbody2D rb;
-    private bool isGrounded = false;       // Überprüft, ob der Spieler den Boden berührt hat
+    private bool isGrounded = false;
+    private bool isOnTop = false; // Überprüft, ob der Spieler den Boden berührt hat
     public bool isJumping = false;
     private bool isDoingMagneticFall = false;
 
@@ -39,8 +40,10 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsDead;
 
-    private bool isVelocityPositive = true;
+    public bool isVelocityPositive = true;
     private bool IsOnPointA = true;
+
+    private bool IsOnWayDown;
 
     private List<GameObject> passedObjects = new List<GameObject>();
 
@@ -223,14 +226,26 @@ public class PlayerMovement : MonoBehaviour
                 if (isVelocityPositive)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, -20);
+                    IsOnWayDown = true;
                 }
                 else
                 {
                     rb.velocity = new Vector2(rb.velocity.x, 20);
+                    IsOnWayDown = false;
                 }
 
                 isVelocityPositive = !isVelocityPositive;
 
+            }
+
+            Vector2 direction = Vector2.up;
+
+            Vector2 position2 = new Vector2(transform.position.x + 0.5f, transform.position.y);
+            RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
+
+            if (!isOnTop && !IsOnWayDown && hit2.collider == null)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 20);
             }
 
         }
@@ -317,6 +332,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         IsGrounded();
+        IsOnTop();
     }
     
     public void JumpButtonClicked()
@@ -436,9 +452,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void IsOnTop()
     {
+        Vector2 position = new Vector2(transform.position.x-0.5f, transform.position.y);
+        // Der Raycast geht nach unten, also ist die Richtung Vector2.down
+        Vector2 direction = Vector2.up;
 
+        Vector2 position2 = new Vector2(transform.position.x + 0.5f, transform.position.y);
+        RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
+
+        // Führe den Raycast durch und überprüfe, ob er auf den Boden trifft
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, raycastDistance, groundLayer);
+        
+
+        // Wenn der Raycast ein Objekt trifft, das auf dem Ground-Layer liegt, ist der Charakter grounded
+        if (hit.collider != null)
+        {
+            isOnTop = true;
+        }
+        else 
+        {
+            isOnTop = false;
+        }
     }
-
     public void IsGrounded()
     {
         // Startpunkt des Raycasts ist die Position des Charakters
