@@ -13,8 +13,10 @@ public class ChallengeButton : MonoBehaviour
     public string title;
     public int Level;
     public int Highscore;
+    public int Distance;
     public Button RestartButton;
     public TMP_Text HighscoreText;
+    public TMP_Text DistanceText;
 
     private void Start()
     {

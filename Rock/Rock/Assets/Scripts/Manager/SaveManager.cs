@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -22,6 +23,7 @@ public class SaveManager : MonoBehaviour
 
     public List<string> Challenges;
     public List<int> ChallengesScore;
+    public List<int> ChallengeDistance; 
 
     public string ActualChallenge;
 
@@ -62,6 +64,7 @@ public class SaveManager : MonoBehaviour
             var posIndex = Challenges.IndexOf(c);
             DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().Highscore = ChallengesScore[posIndex];
             DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().HighscoreText.text = "" + ChallengesScore[posIndex];
+            DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().DistanceText.text = "" + ChallengeDistance[posIndex];
         }
 
         if (ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
@@ -78,6 +81,7 @@ public class SaveManager : MonoBehaviour
                 {
                     Challenges.Add(DeathMenu.Instance.ChallengeGameObjects[i].GetComponent<ChallengeButton>().title);
                     ChallengesScore.Add(DeathMenu.Instance.ChallengeGameObjects[i].GetComponent<ChallengeButton>().Highscore);
+                    ChallengeDistance.Add(DeathMenu.Instance.ChallengeGameObjects[i].GetComponent<ChallengeButton>().Distance);
                 }
             }
         }
@@ -148,7 +152,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory26")
+        QuickSaveWriter.Create("Inventory28")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -160,6 +164,7 @@ public class SaveManager : MonoBehaviour
                        .Write("TutorialDone", TutorialDone)
                        .Write("Challenges", Challenges)
                        .Write("Highscores", ChallengesScore)
+                       .Write("ChallengeDistance", ChallengeDistance)
                        .Write("ActualChallenge", ActualChallenge)
                        .Commit();
 
@@ -170,11 +175,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory26.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory28.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory26.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory28.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory26.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory28.json");
 #endif
 
 
@@ -189,7 +194,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory26")
+            QuickSaveReader.Create("Inventory28")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
@@ -201,6 +206,7 @@ public class SaveManager : MonoBehaviour
                        .Read<bool>("TutorialDone", (r) => { TutorialDone = r; })
                        .Read<List<string>>("Challenges", (r) => { Challenges = r; })
                        .Read<List<int>>("Highscores", (r) => { ChallengesScore = r; })
+                       .Read<List<int>>("ChallengeDistance", (r) => { ChallengeDistance = r; })
                        .Read<string>("ActualChallenge", (r) => { ActualChallenge = r; });
             //DeathMenu.Instance.gameObject.SetActive(true);
             //DeathMenu.Instance.test.text = "Save File Existiert";
@@ -219,6 +225,7 @@ public class SaveManager : MonoBehaviour
         LastChunk = "";
         Challenges = DeathMenu.Instance.ChallengeGameObjects.Select(c => c.GetComponent<ChallengeButton>().title).ToList();
         ChallengesScore = DeathMenu.Instance.ChallengeGameObjects.Select(c => c.GetComponent<ChallengeButton>().Highscore).ToList();
+        ChallengeDistance = DeathMenu.Instance.ChallengeGameObjects.Select(c => c.GetComponent<ChallengeButton>().Distance).ToList();
         ActualChallenge = "Normal";
         Debug.Log("Default-Werte gesetzt.");
     }

@@ -70,13 +70,16 @@ public class InventoryManager : MonoBehaviour
 
             Score++;
 
+            SaveManager.Instance.ChallengeDistance[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())]++;
+            SaveManager.Instance.Save();
+
 
             if (Score > SaveManager.Instance.Highscore)
             {
                 SaveManager.Instance.Highscore = Score;
             }
 
-            var x = SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())];
+            var x = SaveManager.Instance.ChallengeDistance[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())];
 
             if (Score > SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())])
             {
