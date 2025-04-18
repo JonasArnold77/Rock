@@ -57,6 +57,13 @@ public class SaveManager : MonoBehaviour
         DeathMenu.Instance.SetUpChallengeButtons();
         DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>().ChallengeFunction.Invoke();
 
+        foreach (var c in Challenges)
+        {
+            var posIndex = Challenges.IndexOf(c);
+            DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().Highscore = ChallengesScore[posIndex];
+            DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().HighscoreText.text = "" + ChallengesScore[posIndex];
+        }
+
         if (ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
         {
             FindObjectOfType<FollowPlayer>().transform.SetParent(FindObjectOfType<FollowPlayer>().PlayerTransform);
@@ -141,7 +148,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory24")
+        QuickSaveWriter.Create("Inventory26")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -163,11 +170,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory24.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory26.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory24.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory26.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory24.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory26.json");
 #endif
 
 
@@ -182,7 +189,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory24")
+            QuickSaveReader.Create("Inventory26")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })

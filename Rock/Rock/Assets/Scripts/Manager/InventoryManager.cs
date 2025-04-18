@@ -10,6 +10,8 @@ public class InventoryManager : MonoBehaviour
 
     public List<GameObject> SkinList = new List<GameObject>();
 
+    public PlayerMovement _PlayerMovement;
+
     public int MoneyAmount;
     
     public Color JumpingColor;
@@ -47,6 +49,7 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         nextThreshold = FindObjectOfType<PlayerMovement>().transform.position.x + nextThreshold;
+        _PlayerMovement = FindObjectOfType<PlayerMovement>();
     }
 
     private void Update()
@@ -60,7 +63,7 @@ public class InventoryManager : MonoBehaviour
         float currentX = FindObjectOfType<PlayerMovement>().transform.position.x;
 
         // Prüfen, ob der aktuelle Schwellenwert überschritten wurde
-        if (currentX >= nextThreshold)
+        if (currentX >= nextThreshold && !_PlayerMovement.IsDead)
         {
             counter++; // Zähler um 1 erhöhen
             Debug.Log("Zähler: " + counter);
@@ -72,6 +75,8 @@ public class InventoryManager : MonoBehaviour
             {
                 SaveManager.Instance.Highscore = Score;
             }
+
+            var x = SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())];
 
             if (Score > SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())])
             {
