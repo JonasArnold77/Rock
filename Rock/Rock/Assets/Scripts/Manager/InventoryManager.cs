@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -23,8 +23,8 @@ public class InventoryManager : MonoBehaviour
 
     public bool IsHardcoreMode;
 
-    private int counter = 0; // Der Zähler
-    private float nextThreshold = 5f; // Nächster Schwellenwert auf der X-Achse
+    private int counter = 0; // Der ZÃ¤hler
+    private float nextThreshold = 5f; // NÃ¤chster Schwellenwert auf der X-Achse
 
     public Text HighscoreTicker;
          
@@ -70,11 +70,11 @@ public class InventoryManager : MonoBehaviour
         // Aktuelle Position des Objekts auf der X-Achse
         float currentX = FindObjectOfType<PlayerMovement>().transform.position.x;
 
-        // Prüfen, ob der aktuelle Schwellenwert überschritten wurde
+        // PrÃ¼fen, ob der aktuelle Schwellenwert Ã¼berschritten wurde
         if (currentX >= nextThreshold && !_PlayerMovement.IsDead)
         {
-            counter++; // Zähler um 1 erhöhen
-            Debug.Log("Zähler: " + counter);
+            counter++; // ZÃ¤hler um 1 erhÃ¶hen
+            Debug.Log("ZÃ¤hler: " + counter);
 
             Score++;
 
@@ -99,29 +99,49 @@ public class InventoryManager : MonoBehaviour
 
 
 
-            // Nächsten Schwellenwert um 5 erhöhe]
+            // NÃ¤chsten Schwellenwert um 5 erhÃ¶he]
             nextThreshold += 5f;
         }
     }
 
+    public int GetLevelFromDistance(float finalDistance, List<int> levelDistances)
+    {
+        for (int i = 0; i < levelDistances.Count; i++)
+        {
+            if (finalDistance < levelDistances[i])
+            {
+                return i + 1; // Level beginnt bei 1
+            }
+        }
+
+        // Falls Spieler weiter ist als alle Distanzen in der Liste â†’ Max-Level erreicht
+        return levelDistances.Count + 1;
+    }
+
     public IEnumerator AnimateLevelBar(int initLevel, int finalLevel, int initDistance, int finalDistance, float animationDurationPerLevel = 1f)
     {
-        var levelBarImage = DeathMenu.Instance.LevelBarImage;
+     initLevel = GetLevelFromDistance(initDistance, LevelDistance);
+     finalLevel = GetLevelFromDistance(finalDistance, LevelDistance);
 
-        for (int level = initLevel; level <= finalLevel; level++)
-        {
+    for (int level = initLevel; level <= finalLevel; level++)
+    {
+        // Start- und Endgrenzen dieses Levels (z.â€¯B. 100â€“250 fÃ¼r Level 2)
+        int startIndex = level - 2;
+        float levelStart = (startIndex >= 0) ? LevelDistance[startIndex] : 0f;
 
-        DeathMenu.Instance.LevelBarImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (level);
+        DeathMenu.Instance.LevelBarImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (level - 1);
 
-            float levelStart = (level - 2 >= 0) ? LevelDistance[level - 2] : 0f;
-            float levelEnd = (level - 1 < LevelDistance.Count)
-    ? LevelDistance[level - 1]
-    : LevelDistance[LevelDistance.Count - 1] + 1000f; // oder Mathf.Infinity
+            int endIndex = level - 1;
+        float levelEnd = (endIndex < LevelDistance.Count) ? LevelDistance[endIndex] : finalDistance;
 
-            float from = Mathf.Clamp01((initDistance - levelStart) / (levelEnd - levelStart));
-        float to = Mathf.Clamp01((finalDistance - levelStart) / (levelEnd - levelStart));
+        // Nur innerhalb dieser Grenzen rechnen:
+        float from = Mathf.Clamp01((initDistance - levelStart) / (levelEnd - levelStart));
+        float to   = Mathf.Clamp01((finalDistance - levelStart) / (levelEnd - levelStart));
 
+        // Nur beim ersten Level Ã¼bernehmen wir den echten Startwert
         if (level > initLevel) from = 0f;
+
+        // Nur beim letzten Level Ã¼bernehmen wir den echten Endwert
         if (level < finalLevel) to = 1f;
 
         float t = 0f;
@@ -129,16 +149,18 @@ public class InventoryManager : MonoBehaviour
         {
             t += Time.deltaTime / 1;
             float fill = Mathf.Lerp(from, to, t);
-            levelBarImage.fillAmount = fill;
+            DeathMenu.Instance.LevelBarImage.fillAmount = fill;
             yield return null;
         }
 
-        levelBarImage.fillAmount = to;
+            // Sicherstellen, dass der Endwert wirklich erreicht ist
+            DeathMenu.Instance.LevelBarImage.fillAmount = to;
 
+        // Wenn nÃ¤chstes Level kommt, reset auf 0
         if (level < finalLevel)
         {
-            yield return new WaitForSeconds(0.2f);
-            levelBarImage.fillAmount = 0f;
+            yield return new WaitForSeconds(0.2f); // optional kleine Pause
+            DeathMenu.Instance.LevelBarImage.fillAmount = 0f;
         }
     }
     }
