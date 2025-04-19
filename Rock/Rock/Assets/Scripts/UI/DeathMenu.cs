@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,6 +24,9 @@ public class DeathMenu : MonoBehaviour
 
     public Color ActiveColor;
     public Color InactiveColor;
+
+    public Image LevelBarImage;
+
 
     private void Start()
     {
@@ -58,6 +62,27 @@ public class DeathMenu : MonoBehaviour
         Instance = this;
     }
 
+    //public IEnumerator FillLevelBarCoroutine(float amount)
+    //{
+    //    var difLast = InventoryManager.Instance.InitDistance / 20;
+
+    //    if (InventoryManager.Instance.FinalLevel > InventoryManager.Instance.InitLevel)
+    //    {
+    //        for (int i = 0; i < 20; i++)
+    //        {
+    //            //yield return new WaitForSeconds();
+    //        }
+    //    }
+
+    //    var difActual = amount / 20;
+
+    //    for (int i = 0; i < 20; i++)
+    //    {
+    //        //yield return new WaitForSeconds();
+    //    }
+    //}
+
+
     private void Respawn()
     {
         SaveManager.Instance.Save();
@@ -69,6 +94,36 @@ public class DeathMenu : MonoBehaviour
     private void OnEnable()
     {
         ChallengeManager.Instance.actualChallengeButton.SetActualChallenge();
+
+        SaveManager.Instance.CompleteDistance = 0;
+
+        foreach (var c in SaveManager.Instance.Challenges)
+        {
+            var posIndex = SaveManager.Instance.Challenges.IndexOf(c);
+            DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().Highscore = SaveManager.Instance.ChallengesScore[posIndex];
+            DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().HighscoreText.text = "" + SaveManager.Instance.ChallengesScore[posIndex];
+            DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().Distance = SaveManager.Instance.ChallengeDistance[posIndex];
+            DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().DistanceText.text = "" + SaveManager.Instance.ChallengeDistance[posIndex];
+            SaveManager.Instance.CompleteDistance = SaveManager.Instance.CompleteDistance + SaveManager.Instance.ChallengeDistance[posIndex];
+        }
+
+        InventoryManager.Instance.FinalLevel = GetLevelFromDistance(SaveManager.Instance.CompleteDistance, InventoryManager.Instance.LevelDistance);
+
+        StartCoroutine(InventoryManager.Instance.AnimateLevelBar(InventoryManager.Instance.InitLevel, InventoryManager.Instance.FinalLevel, InventoryManager.Instance.InitDistance, SaveManager.Instance.CompleteDistance));
+    }
+
+    public int GetLevelFromDistance(float finalDistance, List<int> levelDistances)
+    {
+        for (int i = 0; i < levelDistances.Count; i++)
+        {
+            if (finalDistance < levelDistances[i])
+            {
+                return i + 1; // Level beginnt bei 1
+            }
+        }
+
+        // Falls Spieler weiter ist als alle Distanzen in der Liste → Max-Level erreicht
+        return levelDistances.Count + 1;
     }
 
     public void SetUpChallengeButtons()

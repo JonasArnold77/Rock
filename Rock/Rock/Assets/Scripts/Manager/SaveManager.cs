@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ public class SaveManager : MonoBehaviour
     public string LastChunk;
     public int CountOfArea;
     public bool TutorialDone;
+    public int CompleteDistance;
 
     public List<string> Challenges;
     public List<int> ChallengesScore;
@@ -64,8 +66,29 @@ public class SaveManager : MonoBehaviour
             var posIndex = Challenges.IndexOf(c);
             DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().Highscore = ChallengesScore[posIndex];
             DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().HighscoreText.text = "" + ChallengesScore[posIndex];
+            DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().Distance = ChallengeDistance[posIndex];
             DeathMenu.Instance.ChallengeGameObjects.Where(b => b.GetComponent<ChallengeButton>().title == c).FirstOrDefault().GetComponent<ChallengeButton>().DistanceText.text = "" + ChallengeDistance[posIndex];
+            CompleteDistance = CompleteDistance + ChallengeDistance[posIndex];
         }
+
+        InventoryManager.Instance.InitDistance = CompleteDistance;
+
+        foreach (var d in InventoryManager.Instance.LevelDistance) 
+        {
+            if(CompleteDistance >= d)
+            {
+                var level = InventoryManager.Instance.LevelDistance.IndexOf(d);
+
+                DeathMenu.Instance.LevelBarImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (level + 1);
+                InventoryManager.Instance.InitLevel = level + 1;
+
+                if ((level + 1) < InventoryManager.Instance.LevelDistance.Count)
+                {
+                    DeathMenu.Instance.LevelBarImage.fillAmount = (float)((float)CompleteDistance / (float)InventoryManager.Instance.LevelDistance[level + 1]);
+                }
+            }
+        } 
+
 
         if (ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
         {
@@ -152,7 +175,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory28")
+        QuickSaveWriter.Create("Inventory29")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -175,11 +198,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory28.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory29.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory28.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory29.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory28.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory29.json");
 #endif
 
 
@@ -194,7 +217,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory28")
+            QuickSaveReader.Create("Inventory29")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
