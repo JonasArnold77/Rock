@@ -240,12 +240,12 @@ public class PlayerMovement : MonoBehaviour
 
             Vector2 direction = Vector2.up;
 
-            Vector2 position2 = new Vector2(transform.position.x + 0.5f, transform.position.y);
+            Vector2 position2 = new Vector2(transform.position.x - 0.5f, transform.position.y);
             RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
 
-            if (!isOnTop && !IsOnWayDown && hit2.collider == null)
+            if (isOnTop && !IsOnWayDown && hit2.collider == null)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 20);
+                rb.velocity = new Vector2(speed, 20);
             }
 
         }
@@ -464,7 +464,7 @@ public class PlayerMovement : MonoBehaviour
         
 
         // Wenn der Raycast ein Objekt trifft, das auf dem Ground-Layer liegt, ist der Charakter grounded
-        if (hit.collider != null)
+        if (hit.collider != null /*&& hit2.collider == null*/)
         {
             isOnTop = true;
         }
