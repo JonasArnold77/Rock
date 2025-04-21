@@ -122,17 +122,17 @@ public class InventoryManager : MonoBehaviour
     {
      initLevel = GetLevelFromDistance(initDistance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
      finalLevel = GetLevelFromDistance(finalDistance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
-
+        
     for (int level = initLevel; level <= finalLevel; level++)
     {
         // Start- und Endgrenzen dieses Levels (z. B. 100–250 für Level 2)
         int startIndex = level - 2;
-        float levelStart = (startIndex >= 0) ? LevelDistance[startIndex] : 0f;
+        float levelStart = (startIndex >= 0) ? ChallengeManager.Instance.actualChallengeButton.LevelDistances[startIndex] : 0f;
 
         ChallengeDetailMenu.Instance.AmountImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (level - 1);
 
             int endIndex = level - 1;
-        float levelEnd = (endIndex < LevelDistance.Count) ? LevelDistance[endIndex] : finalDistance;
+        float levelEnd = (endIndex < ChallengeManager.Instance.actualChallengeButton.LevelDistances.Count) ? ChallengeManager.Instance.actualChallengeButton.LevelDistances[endIndex] : finalDistance;
 
         // Nur innerhalb dieser Grenzen rechnen:
         float from = Mathf.Clamp01((initDistance - levelStart) / (levelEnd - levelStart));
