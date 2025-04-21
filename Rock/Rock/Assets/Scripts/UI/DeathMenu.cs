@@ -107,9 +107,8 @@ public class DeathMenu : MonoBehaviour
             SaveManager.Instance.CompleteDistance = SaveManager.Instance.CompleteDistance + SaveManager.Instance.ChallengeDistance[posIndex];
         }
 
-        InventoryManager.Instance.FinalLevel = GetLevelFromDistance(SaveManager.Instance.CompleteDistance, InventoryManager.Instance.LevelDistance);
-
-        StartCoroutine(InventoryManager.Instance.AnimateLevelBar(InventoryManager.Instance.InitLevel, InventoryManager.Instance.FinalLevel, InventoryManager.Instance.InitDistance, SaveManager.Instance.CompleteDistance));
+        InventoryManager.Instance.FinalLevel = GetLevelFromDistance(ChallengeManager.Instance.actualChallengeButton.Distance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
+        StartCoroutine(InventoryManager.Instance.AnimateLevelBar(InventoryManager.Instance.InitLevel, InventoryManager.Instance.FinalLevel, InventoryManager.Instance.InitDistance, ChallengeManager.Instance.actualChallengeButton.Distance));
     }
 
     public int GetLevelFromDistance(float finalDistance, List<int> levelDistances)

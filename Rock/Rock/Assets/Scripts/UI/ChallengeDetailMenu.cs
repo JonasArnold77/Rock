@@ -13,6 +13,8 @@ public class ChallengeDetailMenu : MonoBehaviour
     public TMP_Text HeadlineText;
     public TMP_Text DiscriptionText;
 
+    public Image AmountImage;
+
     public static ChallengeDetailMenu Instance;
 
     private void Awake()

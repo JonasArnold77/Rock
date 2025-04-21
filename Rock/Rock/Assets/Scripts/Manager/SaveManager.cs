@@ -1,4 +1,4 @@
-using CI.QuickSave;
+﻿using CI.QuickSave;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -71,23 +71,26 @@ public class SaveManager : MonoBehaviour
             CompleteDistance = CompleteDistance + ChallengeDistance[posIndex];
         }
 
-        InventoryManager.Instance.InitDistance = CompleteDistance;
+        //InventoryManager.Instance.InitDistance = CompleteDistance;
 
-        foreach (var d in InventoryManager.Instance.LevelDistance) 
-        {
-            if(CompleteDistance >= d)
-            {
-                var level = InventoryManager.Instance.LevelDistance.IndexOf(d);
+        InventoryManager.Instance.InitDistance = ChallengeManager.Instance.actualChallengeButton.Distance;
+        InventoryManager.Instance.InitLevel = GetLevelFromDistance(InventoryManager.Instance.InitDistance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
 
-                DeathMenu.Instance.LevelBarImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (level + 1);
-                InventoryManager.Instance.InitLevel = level + 1;
+        //foreach (var d in ChallengeManager.Instance.actualChallengeButton.LevelDistances) 
+        //{
+        //    if(CompleteDistance >= d)
+        //    {
+        //        var level = ChallengeManager.Instance.actualChallengeButton.LevelDistances.IndexOf(d);
 
-                if ((level + 1) < InventoryManager.Instance.LevelDistance.Count)
-                {
-                    DeathMenu.Instance.LevelBarImage.fillAmount = (float)((float)CompleteDistance / (float)InventoryManager.Instance.LevelDistance[level + 1]);
-                }
-            }
-        } 
+        //        ChallengeDetailMenu.Instance.AmountImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (level + 1);
+        //        InventoryManager.Instance.InitLevel = level + 1;
+
+        //        if ((level + 1) < ChallengeManager.Instance.actualChallengeButton.LevelDistances.Count)
+        //        {
+        //            ChallengeDetailMenu.Instance.AmountImage.fillAmount = (float)((float)CompleteDistance / (float)ChallengeManager.Instance.actualChallengeButton.LevelDistances[level + 1]);
+        //        }
+        //    }
+        //} 
 
 
         if (ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
@@ -155,7 +158,21 @@ public class SaveManager : MonoBehaviour
 
         LevelManager.Instance.GameIsInitialized = true;
     }
-    
+
+    public int GetLevelFromDistance(float finalDistance, List<int> levelDistances)
+    {
+        for (int i = 0; i < levelDistances.Count; i++)
+        {
+            if (finalDistance < levelDistances[i])
+            {
+                return i + 1; // Level beginnt bei 1
+            }
+        }
+
+        // Falls Spieler weiter ist als alle Distanzen in der Liste → Max-Level erreicht
+        return levelDistances.Count + 1;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))

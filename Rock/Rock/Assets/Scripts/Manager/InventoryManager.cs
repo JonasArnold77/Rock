@@ -120,8 +120,8 @@ public class InventoryManager : MonoBehaviour
 
     public IEnumerator AnimateLevelBar(int initLevel, int finalLevel, int initDistance, int finalDistance, float animationDurationPerLevel = 1f)
     {
-     initLevel = GetLevelFromDistance(initDistance, LevelDistance);
-     finalLevel = GetLevelFromDistance(finalDistance, LevelDistance);
+     initLevel = GetLevelFromDistance(initDistance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
+     finalLevel = GetLevelFromDistance(finalDistance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
 
     for (int level = initLevel; level <= finalLevel; level++)
     {
@@ -129,7 +129,7 @@ public class InventoryManager : MonoBehaviour
         int startIndex = level - 2;
         float levelStart = (startIndex >= 0) ? LevelDistance[startIndex] : 0f;
 
-        DeathMenu.Instance.LevelBarImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (level - 1);
+        ChallengeDetailMenu.Instance.AmountImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (level - 1);
 
             int endIndex = level - 1;
         float levelEnd = (endIndex < LevelDistance.Count) ? LevelDistance[endIndex] : finalDistance;
@@ -149,18 +149,18 @@ public class InventoryManager : MonoBehaviour
         {
             t += Time.deltaTime / 1;
             float fill = Mathf.Lerp(from, to, t);
-            DeathMenu.Instance.LevelBarImage.fillAmount = fill;
+                ChallengeDetailMenu.Instance.AmountImage.fillAmount = fill;
             yield return null;
         }
 
             // Sicherstellen, dass der Endwert wirklich erreicht ist
-            DeathMenu.Instance.LevelBarImage.fillAmount = to;
+            ChallengeDetailMenu.Instance.AmountImage.fillAmount = to;
 
         // Wenn nächstes Level kommt, reset auf 0
         if (level < finalLevel)
         {
             yield return new WaitForSeconds(0.2f); // optional kleine Pause
-            DeathMenu.Instance.LevelBarImage.fillAmount = 0f;
+             ChallengeDetailMenu.Instance.AmountImage.fillAmount = 0f;
         }
     }
     }
