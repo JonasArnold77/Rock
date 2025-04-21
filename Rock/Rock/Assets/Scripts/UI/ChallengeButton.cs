@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class ChallengeButton : MonoBehaviour
 {
@@ -18,11 +20,17 @@ public class ChallengeButton : MonoBehaviour
     public TMP_Text HighscoreText;
     public TMP_Text DistanceText;
 
+    public string showingTitle;
+    public string description;
+
+    public VideoClip Video;
+
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => ChallengeFunction.Invoke());
         GetComponent<Button>().onClick.AddListener(() => SetActualChallenge());
         GetComponent<Button>().onClick.AddListener(() => SaveManager.Instance.Save());
+
     }
 
     private void OnEnable()
@@ -35,9 +43,19 @@ public class ChallengeButton : MonoBehaviour
         ChallengeManager.Instance.actualChallengeButton = this;
         SaveManager.Instance.ActualChallenge = title;
         DeathMenu.Instance.SetUpChallengeButtons();
+
+        SetUpChallengeDetailMenu();
         //GetComponentsInChildren<Button>().Where(b => !b.Equals(GetComponent<Button>())).FirstOrDefault().gameObject.SetActive(true);
-        GetComponentsInChildren<Button>()[1].onClick.AddListener(() => Respawn());
+        //GetComponentsInChildren<Button>()[1].onClick.AddListener(() => Respawn());
         HighscoreText.text = "" + Highscore;
+    }
+
+    public void SetUpChallengeDetailMenu()
+    {
+        ChallengeDetailMenu.Instance.gameObject.SetActive(true);
+        ChallengeDetailMenu.Instance.HeadlineText.text = showingTitle;
+        ChallengeDetailMenu.Instance.DiscriptionText.text = description;
+        ChallengeDetailMenu.Instance.GetComponentInChildren<VideoPlayer>().clip = Video;
     }
 
     private void Respawn()

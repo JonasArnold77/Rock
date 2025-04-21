@@ -7,7 +7,7 @@ public class PushDown : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.tag == "Player" && ChallengeManager.Instance.actualChallengeButton.title != "BouncyMode")
         {
             collision.GetComponent<Rigidbody2D>().AddForce(Vector2.down, ForceMode2D.Impulse);
         }
@@ -15,7 +15,7 @@ public class PushDown : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && ChallengeManager.Instance.actualChallengeButton.title != "BouncyMode")
         {
             collision.GetComponent<Rigidbody2D>().velocity = new Vector2(collision.GetComponent<Rigidbody2D>().velocity.x,0);
         }
