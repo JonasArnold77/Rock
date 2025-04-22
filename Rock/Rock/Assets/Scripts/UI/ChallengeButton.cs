@@ -61,7 +61,7 @@ public class ChallengeButton : MonoBehaviour
 
         var Level = InventoryManager.Instance.GetLevelFromDistance(Distance,LevelDistances);
         ChallengeDetailMenu.Instance.AmountImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (Level - 1);
-        ChallengeDetailMenu.Instance.AmountImage.fillAmount = (float)((float)Distance / (float)LevelDistances[Level]);
+        ChallengeDetailMenu.Instance.AmountImage.fillAmount = (float)((float)Distance / (float)LevelDistances[Level - 1]);
     }
 
     private void Respawn()
