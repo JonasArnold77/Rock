@@ -21,6 +21,8 @@ public class Obstacle : MonoBehaviour
 
     public int RuntimeID;
 
+    public ChallengeType type;
+
     private void Start()
     {
         PlayerTransform = FindObjectOfType<PlayerMovement>().transform;
