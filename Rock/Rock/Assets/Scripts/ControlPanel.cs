@@ -13,9 +13,9 @@ public class ControlPanel : MonoBehaviour
         Instance = this;
     }
 
-    public EObstacleType GetNextLevelChunk(EObstacleType CurrentObstacleType)
+    public HeightType GetNextLevelChunk(HeightType CurrentObstacleType)
     {
-        var chunkTypeList = new List<EObstacleType>();
+        var chunkTypeList = new List<HeightType>();
 
         if(CountTillStair > 0)
         {
@@ -26,31 +26,31 @@ public class ControlPanel : MonoBehaviour
             CountTillStair = Random.Range(3,5);
         }
 
-        if(CurrentObstacleType == EObstacleType.Bottom)
+        if(CurrentObstacleType == LevelManager.Instance.HeigtTypeDb.Bottom)
         {
-            chunkTypeList.Add(EObstacleType.Bottom);
-            if(CountTillStair == 0)return EObstacleType.StairUp;
+            chunkTypeList.Add(LevelManager.Instance.HeigtTypeDb.Bottom);
+            if(CountTillStair == 0)return LevelManager.Instance.HeigtTypeDb.StairUp;
             return chunkTypeList[Random.Range(0, chunkTypeList.Count)];
         }
-        else if(CurrentObstacleType == EObstacleType.Middle)
+        else if(CurrentObstacleType == LevelManager.Instance.HeigtTypeDb.Middle)
         {
-            chunkTypeList.Add(EObstacleType.Middle);
-            if (CountTillStair == 0)return EObstacleType.StairDown;
+            chunkTypeList.Add(LevelManager.Instance.HeigtTypeDb.Middle);
+            if (CountTillStair == 0)return LevelManager.Instance.HeigtTypeDb.StairDown;
             return chunkTypeList[Random.Range(0, chunkTypeList.Count)];
         }
-        else if (CurrentObstacleType == EObstacleType.StairDown)
-        {
-            //chunkTypeList.Add(EObstacleType.Free);
-            chunkTypeList.Add(EObstacleType.Bottom);
-            return chunkTypeList[Random.Range(0, chunkTypeList.Count)];
-        }
-        else if (CurrentObstacleType == EObstacleType.StairUp)
+        else if (CurrentObstacleType == LevelManager.Instance.HeigtTypeDb.StairDown)
         {
             //chunkTypeList.Add(EObstacleType.Free);
-            chunkTypeList.Add(EObstacleType.Middle);
+            chunkTypeList.Add(LevelManager.Instance.HeigtTypeDb.Bottom);
             return chunkTypeList[Random.Range(0, chunkTypeList.Count)];
         }
-        return EObstacleType.All;
+        else if (CurrentObstacleType == LevelManager.Instance.HeigtTypeDb.StairUp)
+        {
+            //chunkTypeList.Add(EObstacleType.Free);
+            chunkTypeList.Add(LevelManager.Instance.HeigtTypeDb.Middle);
+            return chunkTypeList[Random.Range(0, chunkTypeList.Count)];
+        }
+        return LevelManager.Instance.HeigtTypeDb.Top;
     }
 
     //public int GetDistanceToNextLevelChunk(EObstacleType CurrentObstacleType)

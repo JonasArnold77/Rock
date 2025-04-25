@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236d3d5ab88522b44a1b6c47a167ac91, type: 3}
+  m_Name: HeightTypeDB
+  m_EditorClassIdentifier: 
+  Bottom: {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+  StairUp: {fileID: 11400000, guid: dc094acd88f7dec459036046d8f56aff, type: 2}
+  StairDown: {fileID: 11400000, guid: f8e140608c85166499f89d43f98c5466, type: 2}
+  Middle: {fileID: 11400000, guid: 98111d751ec779c4a99760b9d8f41507, type: 2}
+  Top: {fileID: 11400000, guid: 88db1e578e02f424ebb96abbd050c496, type: 2}
+  AllTypes:
+  - {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+  - {fileID: 11400000, guid: dc094acd88f7dec459036046d8f56aff, type: 2}
+  - {fileID: 11400000, guid: f8e140608c85166499f89d43f98c5466, type: 2}
+  - {fileID: 11400000, guid: 98111d751ec779c4a99760b9d8f41507, type: 2}
+  - {fileID: 11400000, guid: 88db1e578e02f424ebb96abbd050c496, type: 2}

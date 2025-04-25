@@ -44,6 +44,8 @@ public class LevelManager : MonoBehaviour
 
     public EObstacleType NextStairType;
 
+    public HeightTypeDatabase HeigtTypeDb;
+
     private void Awake()
     {
         Instance = this;
@@ -52,7 +54,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(InitGame());
-        HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairUp && h.GetComponent<Obstacle>().startType != EObstacleType.StairDown).ToList());
+        HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != HeigtTypeDb.StairUp && h.GetComponent<Obstacle>().startType != HeigtTypeDb.StairDown).ToList());
     }
 
     private IEnumerator InitGame()
@@ -148,14 +150,14 @@ public class LevelManager : MonoBehaviour
         Vector3 spawnPosition;
         if (lastSpawnedObject != null)
         {
-            if (!StairIsNeeded /*&& LevelListCounter > 0*/ && LevelListCounter < HardcoreLevelList.Count && objectPrefab.GetComponent<Obstacle>().endType == EObstacleType.Middle && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Bottom)
+            if (!StairIsNeeded /*&& LevelListCounter > 0*/ && LevelListCounter < HardcoreLevelList.Count && objectPrefab.GetComponent<Obstacle>().endType == HeigtTypeDb.Middle && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == HeigtTypeDb.Bottom)
             {
-                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairDown).FirstOrDefault();
+                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == HeigtTypeDb.StairDown).FirstOrDefault();
                 StairIsNeeded = true;
             }
-            else if (!StairIsNeeded /*&& LevelListCounter > 0*/ && LevelListCounter < HardcoreLevelList.Count && objectPrefab.GetComponent<Obstacle>().endType == EObstacleType.Bottom && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == EObstacleType.Middle)
+            else if (!StairIsNeeded /*&& LevelListCounter > 0*/ && LevelListCounter < HardcoreLevelList.Count && objectPrefab.GetComponent<Obstacle>().endType == HeigtTypeDb.Bottom && HardcoreLevelList[LevelListCounter].GetComponent<Obstacle>().startType == HeigtTypeDb.Middle)
             {
-                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault();
+                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == HeigtTypeDb.StairUp).FirstOrDefault();
                 StairIsNeeded = true;
             }
             else
@@ -171,7 +173,7 @@ public class LevelManager : MonoBehaviour
             }
             else if (!StairIsNeeded && LastFirstObjectSetted)
             {
-                HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != EObstacleType.StairUp && h.GetComponent<Obstacle>().startType != EObstacleType.StairDown).ToList());
+                HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().startType != HeigtTypeDb.StairUp && h.GetComponent<Obstacle>().startType != HeigtTypeDb.StairDown).ToList());
                 LevelListCounter++;
             }
 
@@ -196,7 +198,7 @@ public class LevelManager : MonoBehaviour
 
             if (!StairSetted && FirstChunkSetted)
             {
-                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == EObstacleType.StairUp).FirstOrDefault();
+                objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => c.GetComponent<Obstacle>().startType == HeigtTypeDb.StairUp).FirstOrDefault();
                 StairSetted = true;
             }
 
@@ -272,7 +274,7 @@ public class LevelManager : MonoBehaviour
                     actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType);
                     countOfArea = UnityEngine.Random.Range(4, 6);
                 }
-                else if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
+                else if (chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
                 {
                     countOfArea--;
                 }
@@ -294,13 +296,13 @@ public class LevelManager : MonoBehaviour
 
             if (actualChunkType == EChunkType.FloorIsLava)
             {
-                chunkType = EObstacleType.Bottom;
+                chunkType = HeigtTypeDb.Bottom;
                 potentialChunks = LevelChunkManager.Instance.Chunks
                     .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                     .ToList();
             }
 
-            if (chunkType != EObstacleType.StairDown && chunkType != EObstacleType.StairUp)
+            if (chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
             {
                 potentialChunks = potentialChunks
                     .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType && lastObject.GetComponent<Obstacle>().RuntimeID != c.GetComponent<Obstacle>().RuntimeID)

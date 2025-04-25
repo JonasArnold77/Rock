@@ -124,7 +124,7 @@ public class SaveManager : MonoBehaviour
 
             if(LevelManager.Instance.FirstObjectString != "")
             {
-                if (LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().name == LevelManager.Instance.FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == EObstacleType.Middle)
+                if (LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().name == LevelManager.Instance.FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == LevelManager.Instance.HeigtTypeDb.Middle)
                 {
                     LevelManager.Instance.StairSetted = false;
                 }
