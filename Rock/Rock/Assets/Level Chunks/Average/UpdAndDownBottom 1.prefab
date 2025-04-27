@@ -149,10 +149,11 @@ MonoBehaviour:
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
   type: {fileID: 0}
+  _ChallengeType: []
 --- !u!1 &1442520376734243179
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,10 +433,11 @@ MonoBehaviour:
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
   type: {fileID: 0}
+  _ChallengeType: []
 --- !u!1 &1776072715593310491
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,10 +587,11 @@ MonoBehaviour:
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
   type: {fileID: 0}
+  _ChallengeType: []
 --- !u!1 &2723700351399611661
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,10 +741,11 @@ MonoBehaviour:
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
   type: {fileID: 0}
+  _ChallengeType: []
 --- !u!1 &4258855991527250101
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,10 +895,11 @@ MonoBehaviour:
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
   type: {fileID: 0}
+  _ChallengeType: []
 --- !u!1 &4300312025639790908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,10 +1257,11 @@ MonoBehaviour:
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
   type: {fileID: 0}
+  _ChallengeType: []
 --- !u!1 &7448289511988692428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,10 +1411,11 @@ MonoBehaviour:
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
   type: {fileID: 0}
+  _ChallengeType: []
 --- !u!1 &7592041882578985813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,10 +1588,15 @@ MonoBehaviour:
   DifficultyLevel: 1
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 4416203717153154003}
-  ChunkType: 1
+  ChunkType: {fileID: 11400000, guid: ca586bddc48ad2a4fb9b7e0876728632, type: 2}
   Title: 
   RuntimeID: 11
   type: {fileID: 0}
+  _ChallengeType:
+  - {fileID: 11400000, guid: beac4881581f9ad4e8b682a8178fa8b3, type: 2}
+  - {fileID: 11400000, guid: b1fe1ef3ca971c34abb1bc3cc8a5130c, type: 2}
+  - {fileID: 11400000, guid: 730265880f2c6204cb16f4ec113de985, type: 2}
+  - {fileID: 11400000, guid: 7893dccc3fb449547ab2179b43b9850c, type: 2}
 --- !u!1001 &2405860032061958
 PrefabInstance:
   m_ObjectHideFlags: 0

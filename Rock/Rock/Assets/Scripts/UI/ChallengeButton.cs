@@ -25,6 +25,8 @@ public class ChallengeButton : MonoBehaviour
 
     public VideoClip Video;
 
+    public ChallengeType ActualChallengeType;
+
     public List<int> LevelDistances = new List<int>();
 
     private void Start()

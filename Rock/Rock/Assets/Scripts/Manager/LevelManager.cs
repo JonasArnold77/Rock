@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
     public float spawnDistanceThreshold;
 
     public int countOfArea;
-    public EChunkType actualChunkType;
+    public ChunkType actualChunkType;
 
     public int testLevelCount;
 
@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour
     public EObstacleType NextStairType;
 
     public HeightTypeDatabase HeigtTypeDb;
+    public ChunkTypeDatabase ChunkTypeDb;
 
     private void Awake()
     {
@@ -271,7 +272,7 @@ public class LevelManager : MonoBehaviour
             {
                 if (countOfArea <= 0)
                 {
-                    actualChunkType = GetRandomEnumValueExcluding<EChunkType>(actualChunkType);
+                    actualChunkType = ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList()[UnityEngine.Random.Range(0, ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList().Count)];
                     countOfArea = UnityEngine.Random.Range(4, 6);
                 }
                 else if (chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
@@ -294,7 +295,7 @@ public class LevelManager : MonoBehaviour
                 .Where(c => c.GetComponent<Obstacle>().startType == chunkType)
                 .ToList();
 
-            if (actualChunkType == EChunkType.FloorIsLava)
+            if (actualChunkType == ChunkTypeDb.FloorIsLava)
             {
                 chunkType = HeigtTypeDb.Bottom;
                 potentialChunks = LevelChunkManager.Instance.Chunks

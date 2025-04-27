@@ -15,13 +15,15 @@ public class Obstacle : MonoBehaviour
 
     public Collider2D AreaCollider;
 
-    public EChunkType ChunkType;
+    public ChunkType ChunkType;
 
     public string Title;
 
     public int RuntimeID;
 
     public ChallengeType type;
+
+    public List<ChallengeType> _ChallengeType;
 
     private void Start()
     {

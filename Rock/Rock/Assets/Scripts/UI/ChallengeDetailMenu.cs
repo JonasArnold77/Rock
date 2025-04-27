@@ -15,6 +15,8 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     public Image AmountImage;
 
+    public ChallengeTypeDatabase ChallengeTypeDB;
+
     public static ChallengeDetailMenu Instance;
 
     private void Awake()

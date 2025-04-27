@@ -144,7 +144,7 @@ public class SaveManager : MonoBehaviour
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireHell.enabled = false);
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireNormal.enabled = true);
 
-            LevelManager.Instance.actualChunkType = LevelManager.Instance.GetRandomEnumValue<EChunkType>();
+            LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.Count)];
         }
 
         if (TutorialDone)

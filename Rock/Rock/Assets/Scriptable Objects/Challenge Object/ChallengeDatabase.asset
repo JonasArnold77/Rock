@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89e37737cdd8ce459e2f8b34c791f61, type: 3}
+  m_Name: ChallengeDatabase
+  m_EditorClassIdentifier: 
+  Normal: {fileID: 11400000, guid: beac4881581f9ad4e8b682a8178fa8b3, type: 2}
+  BouncyMode: {fileID: 11400000, guid: 328af9dbb17225f43b19e34ffc6ef8b4, type: 2}
+  Gravity: {fileID: 11400000, guid: b0a3796f861a61c47be36268cf4c03f4, type: 2}
+  StrongGravity: {fileID: 11400000, guid: 57a27f6eb94fa014c94b6663ac386d69, type: 2}
+  Highspeed: {fileID: 11400000, guid: b1fe1ef3ca971c34abb1bc3cc8a5130c, type: 2}
+  FixedCamera: {fileID: 11400000, guid: 730265880f2c6204cb16f4ec113de985, type: 2}
+  StrangeCamera: {fileID: 11400000, guid: 7893dccc3fb449547ab2179b43b9850c, type: 2}
+  FlappyLight: {fileID: 11400000, guid: eb2256fa750d2144083d92735b4a958f, type: 2}
+  HardCore: {fileID: 11400000, guid: c5e30368af7495f4ca073bddfec36fc1, type: 2}
+  ChallengeTypes:
+  - {fileID: 11400000, guid: 328af9dbb17225f43b19e34ffc6ef8b4, type: 2}
+  - {fileID: 11400000, guid: eb2256fa750d2144083d92735b4a958f, type: 2}
+  - {fileID: 11400000, guid: b0a3796f861a61c47be36268cf4c03f4, type: 2}
+  - {fileID: 11400000, guid: c5e30368af7495f4ca073bddfec36fc1, type: 2}
+  - {fileID: 11400000, guid: b1fe1ef3ca971c34abb1bc3cc8a5130c, type: 2}
+  - {fileID: 11400000, guid: 7893dccc3fb449547ab2179b43b9850c, type: 2}
+  - {fileID: 11400000, guid: 730265880f2c6204cb16f4ec113de985, type: 2}
+  - {fileID: 11400000, guid: beac4881581f9ad4e8b682a8178fa8b3, type: 2}
+  - {fileID: 11400000, guid: 57a27f6eb94fa014c94b6663ac386d69, type: 2}
