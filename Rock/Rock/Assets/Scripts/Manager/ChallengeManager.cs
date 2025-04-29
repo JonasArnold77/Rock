@@ -6,6 +6,8 @@ public class ChallengeManager : MonoBehaviour
 {
     public static ChallengeManager Instance;
 
+    public ChallengeTypeDatabase ChallengeTypeDB;
+
     public ChallengeButton actualChallengeButton;
 
     private void Awake()
