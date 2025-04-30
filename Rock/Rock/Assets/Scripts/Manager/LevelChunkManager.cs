@@ -61,6 +61,10 @@ public class LevelChunkManager : MonoBehaviour
         {
             Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.FlappyLight)).ToList();
         }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Normal")
+        {
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Normal)).ToList();
+        }
         SetRuntimeIDs();
     }
 

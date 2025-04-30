@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LevelManager : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> HardcoreLevelList = new List<GameObject>();
     public int LevelListCounter;
     public bool StairIsNeeded;
+
+    private bool hasSpawnedAtCurrentThreshold = false;
 
     public EObstacleType NextStairType;
 
@@ -87,11 +90,9 @@ public class LevelManager : MonoBehaviour
 
         if (lastSpawnedObject != null && PlayerTransform != null)
         {
-            // Berechne die Distanz zwischen dem Spieler und dem letzten Objekt
             float distanceToLastObject = Mathf.Abs(PlayerTransform.position.x - lastSpawnedObject.transform.position.x);
 
-            // Wenn die Distanz kleiner als der Schwellenwert ist, spawne das nächste Objekt
-            if (distanceToLastObject <= spawnDistanceThreshold)
+            if (distanceToLastObject <= spawnDistanceThreshold && !hasSpawnedAtCurrentThreshold)
             {
                 if (SaveManager.Instance.HardcoreModeOn)
                 {
@@ -101,8 +102,19 @@ public class LevelManager : MonoBehaviour
                 {
                     SpawnObject();
                 }
+
+                hasSpawnedAtCurrentThreshold = true;
+            }
+            else if (distanceToLastObject > spawnDistanceThreshold)
+            {
+                hasSpawnedAtCurrentThreshold = false; // Reset, wenn Spieler wieder weiter weg ist
             }
         }
+    }
+
+    bool AreFloatsClose(float a, float b, float tolerance)
+    {
+        return Mathf.Abs(a - b) <= tolerance;
     }
 
     public List<GameObject> ShuffleList(List<GameObject> originalList)
@@ -216,7 +228,7 @@ public class LevelManager : MonoBehaviour
 
             if (lastSpawnedObject == null)
             {
-                spawnPosition = PlayerTransform.position + new Vector3(spawnDistanceAhead, 0, 0);
+                spawnPosition = PlayerTransform.position + new Vector3(spawnDistanceThreshold, 0, 0);
             }
             else
             {
@@ -354,6 +366,8 @@ public class LevelManager : MonoBehaviour
         spawnPosition = new Vector3(spawnPosition.x, objectPrefab.GetComponent<Obstacle>().height, spawnPosition.z);
 
         GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
+
+        
 
         UsedChunks.Add(objectPrefab.GetComponent<Obstacle>().RuntimeID);
 
