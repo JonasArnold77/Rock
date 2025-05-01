@@ -32,6 +32,8 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     private void Respawn()
     {
+
+        var x = SaveManager.Instance.ActualChallenge;
         SaveManager.Instance.Save();
 
         string currentSceneName = SceneManager.GetActiveScene().name;

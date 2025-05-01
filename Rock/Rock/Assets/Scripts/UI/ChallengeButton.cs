@@ -48,6 +48,8 @@ public class ChallengeButton : MonoBehaviour
         SaveManager.Instance.ActualChallenge = title;
         DeathMenu.Instance.SetUpChallengeButtons();
 
+        
+
         SetUpChallengeDetailMenu();
         //GetComponentsInChildren<Button>().Where(b => !b.Equals(GetComponent<Button>())).FirstOrDefault().gameObject.SetActive(true);
         //GetComponentsInChildren<Button>()[1].onClick.AddListener(() => Respawn());

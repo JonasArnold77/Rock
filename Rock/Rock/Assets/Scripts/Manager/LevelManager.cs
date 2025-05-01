@@ -50,6 +50,8 @@ public class LevelManager : MonoBehaviour
     public HeightTypeDatabase HeigtTypeDb;
     public ChunkTypeDatabase ChunkTypeDb;
 
+    public bool InitIsDone;
+
     private void Awake()
     {
         Instance = this;
@@ -71,8 +73,13 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            SpawnObject();
+            for(int i = 0; i<3; i++)
+            {
+                SpawnObject();
+            }
         }
+
+        InitIsDone = true;
     }
 
     private void Update()
@@ -92,7 +99,7 @@ public class LevelManager : MonoBehaviour
         {
             float distanceToLastObject = Mathf.Abs(PlayerTransform.position.x - lastSpawnedObject.transform.position.x);
 
-            if (distanceToLastObject <= spawnDistanceThreshold && !hasSpawnedAtCurrentThreshold)
+            if (distanceToLastObject <= spawnDistanceThreshold)
             {
                 if (SaveManager.Instance.HardcoreModeOn)
                 {
@@ -102,19 +109,8 @@ public class LevelManager : MonoBehaviour
                 {
                     SpawnObject();
                 }
-
-                hasSpawnedAtCurrentThreshold = true;
-            }
-            else if (distanceToLastObject > spawnDistanceThreshold)
-            {
-                hasSpawnedAtCurrentThreshold = false; // Reset, wenn Spieler wieder weiter weg ist
             }
         }
-    }
-
-    bool AreFloatsClose(float a, float b, float tolerance)
-    {
-        return Mathf.Abs(a - b) <= tolerance;
     }
 
     public List<GameObject> ShuffleList(List<GameObject> originalList)
@@ -287,7 +283,7 @@ public class LevelManager : MonoBehaviour
                     actualChunkType = ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList()[UnityEngine.Random.Range(0, ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList().Count)];
                     countOfArea = UnityEngine.Random.Range(4, 6);
                 }
-                else if (chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
+                else if (InitIsDone && chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
                 {
                     countOfArea--;
                 }

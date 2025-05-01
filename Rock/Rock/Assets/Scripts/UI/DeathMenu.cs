@@ -93,7 +93,10 @@ public class DeathMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        ChallengeManager.Instance.actualChallengeButton.SetActualChallenge();
+        if(ChallengeManager.Instance.actualChallengeButton != null)
+        {
+            ChallengeManager.Instance.actualChallengeButton.SetActualChallenge();
+        }
 
         SaveManager.Instance.CompleteDistance = 0;
 
@@ -107,8 +110,13 @@ public class DeathMenu : MonoBehaviour
             SaveManager.Instance.CompleteDistance = SaveManager.Instance.CompleteDistance + SaveManager.Instance.ChallengeDistance[posIndex];
         }
 
-        InventoryManager.Instance.FinalLevel = GetLevelFromDistance(ChallengeManager.Instance.actualChallengeButton.Distance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
-        StartCoroutine(InventoryManager.Instance.AnimateLevelBar(InventoryManager.Instance.InitLevel, InventoryManager.Instance.FinalLevel, InventoryManager.Instance.InitDistance, ChallengeManager.Instance.actualChallengeButton.Distance));
+        if(ChallengeManager.Instance.actualChallengeButton != null)
+        {
+            InventoryManager.Instance.FinalLevel = GetLevelFromDistance(ChallengeManager.Instance.actualChallengeButton.Distance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
+            StartCoroutine(InventoryManager.Instance.AnimateLevelBar(InventoryManager.Instance.InitLevel, InventoryManager.Instance.FinalLevel, InventoryManager.Instance.InitDistance, ChallengeManager.Instance.actualChallengeButton.Distance));
+        }
+        
+        
     }
 
     public int GetLevelFromDistance(float finalDistance, List<int> levelDistances)

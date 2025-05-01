@@ -17,7 +17,7 @@ public class ControlPanel : MonoBehaviour
     {
         var chunkTypeList = new List<HeightType>();
 
-        if(CountTillStair > 0)
+        if(CountTillStair > 0 && LevelManager.Instance.InitIsDone)
         {
             CountTillStair--;
         }

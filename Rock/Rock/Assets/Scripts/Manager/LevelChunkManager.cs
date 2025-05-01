@@ -33,6 +33,13 @@ public class LevelChunkManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(InitGame());
+    }
+
+    private IEnumerator InitGame()
+    {
+        yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
+
         if (ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
         {
             Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.BouncyMode)).ToList();
