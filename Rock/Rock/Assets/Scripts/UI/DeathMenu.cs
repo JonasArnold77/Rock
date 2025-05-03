@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class DeathMenu : MonoBehaviour
@@ -110,10 +111,16 @@ public class DeathMenu : MonoBehaviour
             SaveManager.Instance.CompleteDistance = SaveManager.Instance.CompleteDistance + SaveManager.Instance.ChallengeDistance[posIndex];
         }
 
-        if(ChallengeManager.Instance.actualChallengeButton != null)
+        if (InventoryManager.Instance.Score > SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())])
+        {
+            ChallengeManager.Instance.actualChallengeButton.GetComponent<ChallengeButton>().HighscoreText.text = "" + InventoryManager.Instance.Score;
+        }
+
+        if (ChallengeManager.Instance.actualChallengeButton != null)
         {
             InventoryManager.Instance.FinalLevel = GetLevelFromDistance(ChallengeManager.Instance.actualChallengeButton.Distance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
             StartCoroutine(InventoryManager.Instance.AnimateLevelBar(InventoryManager.Instance.InitLevel, InventoryManager.Instance.FinalLevel, InventoryManager.Instance.InitDistance, ChallengeManager.Instance.actualChallengeButton.Distance));
+
         }
         
         
