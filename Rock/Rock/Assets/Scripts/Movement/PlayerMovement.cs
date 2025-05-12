@@ -131,7 +131,8 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Velocity: " + rb.velocity);
 
 #if UNITY_ANDROID
-        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed")
+
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall" || ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
         {
             // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
             if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
@@ -144,10 +145,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 MagneticFall();
             }
-        }else if(ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                //rb.simulated = true;
+                // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
+
                 if (isVelocityPositive)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, -7);
@@ -158,25 +163,70 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 isVelocityPositive = !isVelocityPositive;
+
             }
-        }else if(ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 //rb.simulated = true;
                 // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
 
+
+
                 if (isVelocityPositive)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, -20);
+                    IsOnWayDown = true;
                 }
                 else
                 {
                     rb.velocity = new Vector2(rb.velocity.x, 20);
+                    IsOnWayDown = false;
                 }
 
                 isVelocityPositive = !isVelocityPositive;
 
+            }
+
+            Vector2 direction = Vector2.up;
+
+            Vector2 position2 = new Vector2(transform.position.x - 0.5f, transform.position.y);
+            RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
+
+            if (isOnTop && !IsOnWayDown && hit2.collider == null)
+            {
+                rb.velocity = new Vector2(speed, 20);
+            }
+
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                rb.AddForce(Vector2.up * 4, ForceMode2D.Impulse);
+            }
+            if (isGrounded)
+            {
+                if (LifePoints == 0)
+                {
+                    if (InventoryManager.Instance.GodMode)
+                    {
+                        return;
+                    }
+
+                    speed = 0;
+                    FireBallEffect.SetActive(false);
+                    //MagneticBallEffect.SetActive(false);
+                    BallEffect.SetActive(false);
+                    BallEffect2.SetActive(false);
+
+                    rb.simulated = true;
+
+
+                    StartCoroutine(WaitForReset());
+                }
             }
         }
 

@@ -20,6 +20,7 @@ public class ObjectsByChallengeType
 public class RandomChunk : MonoBehaviour
 {
     public List<ObjectsByChallengeType> ObjectByChallengeType = new List<ObjectsByChallengeType>();
+    public List<ObjectsByChallengeType> ObjectByChallengeTypeDisable = new List<ObjectsByChallengeType>();
 
     private void Start()
     {
@@ -39,6 +40,18 @@ public class RandomChunk : MonoBehaviour
             else
             {
                 o.Objects.ForEach(o => o.SetActive(false));
+            }
+        }
+
+        foreach (var o in ObjectByChallengeTypeDisable)
+        {
+            if (o.challengeType == ChallengeManager.Instance.actualChallengeButton.ActualChallengeType)
+            {
+                o.Objects.ForEach(o => o.SetActive(false));
+            }
+            else
+            {
+                o.Objects.ForEach(o => o.SetActive(true));
             }
         }
     }

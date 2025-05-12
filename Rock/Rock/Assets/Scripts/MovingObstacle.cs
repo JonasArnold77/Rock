@@ -11,10 +11,19 @@ public class MovingObstacle : MonoBehaviour
 
     private Vector3 startPosition;
 
+    public bool RandomSpeed;
+    public float RandomSpeedAmountMin;
+    public float RandomSpeedAmountMax;
+
     private void Start()
     {
         startPosition = transform.position;
         StartCoroutine(InitStart());
+
+        if (RandomSpeed)
+        {
+            moveSpeed = Random.Range(RandomSpeedAmountMin, RandomSpeedAmountMax);
+        }
     }
 
     private IEnumerator InitStart()
