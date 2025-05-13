@@ -52,6 +52,8 @@ public class LevelManager : MonoBehaviour
 
     public bool InitIsDone;
 
+    public List<int> RuntimeIDsUsed = new List<int>();
+
     private void Awake()
     {
         Instance = this;
@@ -313,9 +315,21 @@ public class LevelManager : MonoBehaviour
 
             if (chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
             {
-                potentialChunks = potentialChunks
-                    .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType && lastObject.GetComponent<Obstacle>().RuntimeID != c.GetComponent<Obstacle>().RuntimeID)
+                if(potentialChunks
+                    .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType && !RuntimeIDsUsed.Contains(c.GetComponent<Obstacle>().RuntimeID))
+                    .ToList().Count > 0)
+                {
+                    potentialChunks = potentialChunks
+                    .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType && !RuntimeIDsUsed.Contains(c.GetComponent<Obstacle>().RuntimeID))
                     .ToList();
+                }
+                else
+                {
+                    potentialChunks = potentialChunks
+                                            .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType && lastObject.GetComponent<Obstacle>().RuntimeID != c.GetComponent<Obstacle>().RuntimeID)
+                                            .ToList();
+                    RuntimeIDsUsed.Clear();
+                }    
             }
 
             if (potentialChunks.Count > 0)
@@ -363,7 +377,7 @@ public class LevelManager : MonoBehaviour
 
         GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
 
-        
+        RuntimeIDsUsed.Add(newObject.GetComponent<Obstacle>().RuntimeID);
 
         UsedChunks.Add(objectPrefab.GetComponent<Obstacle>().RuntimeID);
 

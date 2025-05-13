@@ -32,11 +32,10 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     private void Respawn()
     {
+        //SaveManager.Instance.Save();
 
-        var x = SaveManager.Instance.ActualChallenge;
-        SaveManager.Instance.Save();
-
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        //string currentSceneName = SceneManager.GetActiveScene().name;
+        Resources.UnloadUnusedAssets();
+        SceneManager.LoadScene("Gravity Run");
     }
 }

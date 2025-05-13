@@ -446,7 +446,15 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<PlayerSound>().PlaySnare();
 
         rb.velocity = new Vector2(rb.velocity.x, 0); // Nullt die vertikale Geschwindigkeit
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if (ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
+        {
+            rb.AddForce(Vector2.up * 9, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+        
     }
 
     private void DetectSpeedChange()

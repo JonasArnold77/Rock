@@ -1449,6 +1449,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.5
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &589456416896104667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,6 +1633,9 @@ MonoBehaviour:
   moveDistance: -2
   moveSpeed: 2
   timeOffset: 0
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &878352336863611491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,6 +2437,9 @@ MonoBehaviour:
   moveDistance: -2
   moveSpeed: 2
   timeOffset: 0
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &1231926884011334229
 GameObject:
   m_ObjectHideFlags: 0
@@ -3162,6 +3171,9 @@ MonoBehaviour:
   moveDistance: -2
   moveSpeed: 2
   timeOffset: 1
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &1491445758933997117
 GameObject:
   m_ObjectHideFlags: 0
@@ -4797,6 +4809,9 @@ MonoBehaviour:
   moveDistance: -2
   moveSpeed: 2
   timeOffset: 0
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &2062045944950686291
 GameObject:
   m_ObjectHideFlags: 0
@@ -5062,6 +5077,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.5
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &2141713462513542889
 GameObject:
   m_ObjectHideFlags: 0
@@ -6589,6 +6607,9 @@ MonoBehaviour:
   moveDistance: -2
   moveSpeed: 2
   timeOffset: 0
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &3067572535747747889
 GameObject:
   m_ObjectHideFlags: 0
@@ -9552,6 +9573,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.5
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &4764505896429219145
 GameObject:
   m_ObjectHideFlags: 0
@@ -10619,6 +10643,9 @@ MonoBehaviour:
   moveDistance: -2
   moveSpeed: 2
   timeOffset: 1
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &5657089367649071187
 GameObject:
   m_ObjectHideFlags: 0
@@ -13108,6 +13135,9 @@ MonoBehaviour:
   moveDistance: -2
   moveSpeed: 2
   timeOffset: 1
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &7435970891575104214
 GameObject:
   m_ObjectHideFlags: 0
@@ -13602,13 +13632,14 @@ MonoBehaviour:
   AreaCollider: {fileID: 4416203717153154003}
   ChunkType: {fileID: 11400000, guid: ca586bddc48ad2a4fb9b7e0876728632, type: 2}
   Title: 
-  RuntimeID: 11
-  type: {fileID: 0}
+  RuntimeID: 20
+  type: {fileID: 11400000, guid: 328af9dbb17225f43b19e34ffc6ef8b4, type: 2}
   _ChallengeType:
   - {fileID: 11400000, guid: beac4881581f9ad4e8b682a8178fa8b3, type: 2}
   - {fileID: 11400000, guid: b1fe1ef3ca971c34abb1bc3cc8a5130c, type: 2}
   - {fileID: 11400000, guid: 730265880f2c6204cb16f4ec113de985, type: 2}
   - {fileID: 11400000, guid: 7893dccc3fb449547ab2179b43b9850c, type: 2}
+  - {fileID: 11400000, guid: 328af9dbb17225f43b19e34ffc6ef8b4, type: 2}
 --- !u!1 &7702359239768563436
 GameObject:
   m_ObjectHideFlags: 0
@@ -13790,6 +13821,9 @@ MonoBehaviour:
   moveDistance: -2
   moveSpeed: 2
   timeOffset: 1
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &7726396825692429722
 GameObject:
   m_ObjectHideFlags: 0
@@ -14139,6 +14173,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.5
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &7832168504724460112
 GameObject:
   m_ObjectHideFlags: 0
