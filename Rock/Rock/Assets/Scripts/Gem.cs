@@ -47,6 +47,8 @@ public class Gem : MonoBehaviour
 
             GetComponent<Collider2D>().enabled = false;
 
+            //FindObjectOfType<FollowPlayer>().Shake(0.12f,0.5f);
+
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
 
             StartCoroutine(WaitForDestroy());
