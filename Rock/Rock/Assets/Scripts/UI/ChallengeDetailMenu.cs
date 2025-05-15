@@ -32,7 +32,7 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     private void Respawn()
     {
-        //SaveManager.Instance.Save();
+        SaveManager.Instance.Save();
 
         //string currentSceneName = SceneManager.GetActiveScene().name;
         Resources.UnloadUnusedAssets();
