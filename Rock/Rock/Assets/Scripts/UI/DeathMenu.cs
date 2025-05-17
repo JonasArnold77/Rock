@@ -143,19 +143,19 @@ public class DeathMenu : MonoBehaviour
     public void SetUpChallengeButtons()
     {
 
-        ChallengeGameObjects.ForEach(b => b.GetComponentsInChildren<Button>(true).ToList().ForEach(b1 => b1.gameObject.SetActive(true)));
+        //ChallengeGameObjects.ForEach(b => b.GetComponentsInChildren<Button>(true).ToList().ForEach(b1 => b1.gameObject.SetActive(true)));
 
         foreach (var c in ChallengeGameObjects)
         {
             if(c.GetComponent<ChallengeButton>().title == ChallengeManager.Instance.actualChallengeButton.title)
             {
                 c.GetComponent<Image>().color = ActiveColor;
-                c.GetComponentsInChildren<Button>()[1].gameObject.SetActive(true);
+                //c.GetComponentsInChildren<Button>()[1].gameObject.SetActive(true);
             }
             else
             {
                 c.GetComponent<Image>().color = InactiveColor;
-                c.GetComponentsInChildren<Button>()[1].gameObject.SetActive(false);
+                //c.GetComponentsInChildren<Button>()[1].gameObject.SetActive(false);
             }
         }
     }
