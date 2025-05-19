@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CloseButton : MonoBehaviour
 {
     public GameObject Window;
+    public List<GameObject> WindowList = new List<GameObject>();
 
     private void Start()
     {
@@ -14,6 +15,12 @@ public class CloseButton : MonoBehaviour
 
     private void CloseWindow()
     {
+        if (WindowList.Count > 0)
+        {
+            WindowList.ForEach(w => w.SetActive(false));
+            return;
+        }
+
         Window.SetActive(false);
     }
 }

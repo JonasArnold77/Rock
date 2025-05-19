@@ -703,7 +703,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator WaitForReset()
     {
-        if (InventoryManager.Instance.GodMode)
+        if (InventoryManager.Instance.GodMode || IsDead)
         {
             yield break;
         }

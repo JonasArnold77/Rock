@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class OpenButton : MonoBehaviour
 {
     public GameObject Window;
+    public List<GameObject> WindowList = new List<GameObject>();
+
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => OpenWindow());
@@ -13,6 +15,12 @@ public class OpenButton : MonoBehaviour
 
     private void OpenWindow()
     {
+        if(WindowList.Count > 0)
+        {
+            WindowList.ForEach(w => w.SetActive(true));
+            return;
+        }
+
         Window.SetActive(true);
     }
 }
