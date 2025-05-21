@@ -620,8 +620,6 @@ public class PlayerMovement : MonoBehaviour
 
                 FindObjectOfType<FollowPlayer>().enabled = false;
 
-                IsDead = true;
-
                 StartCoroutine(WaitForReset());
                 //string currentSceneName = SceneManager.GetActiveScene().name;
                 //SceneManager.LoadScene(currentSceneName);
@@ -707,6 +705,8 @@ public class PlayerMovement : MonoBehaviour
         {
             yield break;
         }
+
+        IsDead = true;
 
         SaveManager.Instance.Save();
         DeathMenu.Instance.gameObject.SetActive(true);
