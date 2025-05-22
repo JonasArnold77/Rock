@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class DeathMenu : MonoBehaviour
 {
