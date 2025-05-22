@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class DeathMenu : MonoBehaviour
 {
@@ -99,6 +101,7 @@ public class DeathMenu : MonoBehaviour
             ChallengeManager.Instance.actualChallengeButton.SetActualChallenge();
         }
 
+
         SaveManager.Instance.CompleteDistance = 0;
 
         foreach (var c in SaveManager.Instance.Challenges)
@@ -120,7 +123,7 @@ public class DeathMenu : MonoBehaviour
         {
             InventoryManager.Instance.FinalLevel = GetLevelFromDistance(ChallengeManager.Instance.actualChallengeButton.Distance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
             StartCoroutine(InventoryManager.Instance.AnimateLevelBar(InventoryManager.Instance.InitLevel, InventoryManager.Instance.FinalLevel, InventoryManager.Instance.InitDistance, ChallengeManager.Instance.actualChallengeButton.Distance));
-
+            ChallengeDetailMenu.Instance.HighscoreText.text = "Highscore: " + ChallengeManager.Instance.actualChallengeButton.Highscore + "\nDistance: " + ChallengeManager.Instance.actualChallengeButton.Distance;
         }
         
         

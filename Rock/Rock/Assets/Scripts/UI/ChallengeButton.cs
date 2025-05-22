@@ -40,6 +40,7 @@ public class ChallengeButton : MonoBehaviour
     private void OnEnable()
     {
         HighscoreText.text = "" + Highscore;
+        
     }
 
     public void SetActualChallenge()
@@ -62,6 +63,8 @@ public class ChallengeButton : MonoBehaviour
         ChallengeDetailMenu.Instance.HeadlineText.text = showingTitle;
         ChallengeDetailMenu.Instance.DiscriptionText.text = description;
         ChallengeDetailMenu.Instance.GetComponentInChildren<VideoPlayer>().clip = Video;
+
+        ChallengeDetailMenu.Instance.HighscoreText.text = "Highscore: " + Highscore + "\nDistance: " + Distance;
 
         var Level = InventoryManager.Instance.GetLevelFromDistance(Distance,LevelDistances);
         ChallengeDetailMenu.Instance.AmountImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (Level - 1);

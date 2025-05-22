@@ -12,6 +12,7 @@ public class ChallengeDetailMenu : MonoBehaviour
     public Button RestartButton;
     public TMP_Text HeadlineText;
     public TMP_Text DiscriptionText;
+    public TMP_Text HighscoreText;
 
     public Image AmountImage;
 
