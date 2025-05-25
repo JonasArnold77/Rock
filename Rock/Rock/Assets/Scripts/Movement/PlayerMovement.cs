@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private bool isOnTop = false; // Überprüft, ob der Spieler den Boden berührt hat
+    private bool isOnBotton = false;
     public bool isJumping = false;
     private bool isDoingMagneticFall = false;
 
@@ -159,14 +160,35 @@ public class PlayerMovement : MonoBehaviour
                 if (isVelocityPositive)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, -7);
+                    IsOnWayDown = true;
                 }
                 else
                 {
                     rb.velocity = new Vector2(rb.velocity.x, 7);
+                    IsOnWayDown = false;
                 }
 
                 isVelocityPositive = !isVelocityPositive;
+            }
 
+            Vector2 directionUp = Vector2.up;
+
+            Vector2 position2 = new Vector2(transform.position.x - 0.5f, transform.position.y);
+            RaycastHit2D hit2 = Physics2D.Raycast(position2, directionUp, raycastDistance, groundLayer);
+
+            if (isOnTop && !IsOnWayDown && hit2.collider == null)
+            {
+                rb.velocity = new Vector2(speed, 20);
+            }
+
+            Vector2 directionDown = Vector2.down;
+
+            Vector2 position3 = new Vector2(transform.position.x - 0.5f, transform.position.y);
+            RaycastHit2D hit3 = Physics2D.Raycast(position3, directionDown, raycastDistance, groundLayer);
+
+            if (isOnBotton && IsOnWayDown && hit3.collider == null)
+            {
+                rb.velocity = new Vector2(speed, -20);
             }
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
@@ -387,6 +409,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         IsGrounded();
+        IsOnBottom();
         IsOnTop();
     }
     
@@ -523,7 +546,29 @@ public class PlayerMovement : MonoBehaviour
 
         isDoingMagneticFall = true;
     }
+    private void IsOnBottom()
+    {
+        Vector2 position = new Vector2(transform.position.x - 0.5f, transform.position.y);
+        // Der Raycast geht nach unten, also ist die Richtung Vector2.down
+        Vector2 direction = Vector2.down;
 
+        Vector2 position2 = new Vector2(transform.position.x + 0.5f, transform.position.y);
+        RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
+
+        // Führe den Raycast durch und überprüfe, ob er auf den Boden trifft
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, raycastDistance, groundLayer);
+
+
+        // Wenn der Raycast ein Objekt trifft, das auf dem Ground-Layer liegt, ist der Charakter grounded
+        if (hit.collider != null /*&& hit2.collider == null*/)
+        {
+            isOnBotton = true;
+        }
+        else
+        {
+            isOnBotton = false;
+        }
+    }
     private void IsOnTop()
     {
         Vector2 position = new Vector2(transform.position.x-0.5f, transform.position.y);
