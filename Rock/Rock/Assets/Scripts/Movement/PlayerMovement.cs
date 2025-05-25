@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     private bool IsOnWayDown;
 
     private List<GameObject> passedObjects = new List<GameObject>();
+
+    public Volume motionBlurVolume;
 
     void Start()
     {
@@ -234,6 +237,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall" || ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera") 
         {
+            //Debug.Log("VelocityY: " + rb.velocity.y);
+            //ActivateMotionBlur(5f,0f,1f,20);
             // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
             if (isGrounded && Input.GetKeyDown(jumpKey))
             {
@@ -385,6 +390,17 @@ public class PlayerMovement : MonoBehaviour
         IsOnTop();
     }
     
+
+    public void ActivateMotionBlur(float smoothSpeed, float baseWeight, float maxWeight, float maxAbsVelocityY)
+    {
+        float absYVelocity = Mathf.Abs(rb.velocity.y); // Geschwindigkeit unabhängig vom Vorzeichen
+        float t = Mathf.Clamp01(absYVelocity / maxAbsVelocityY); // Normalisiere auf 0–1
+        float targetWeight = Mathf.Lerp(baseWeight, maxWeight, t);
+
+        // Sanftes Interpolieren zum Zielwert
+        motionBlurVolume.weight = Mathf.Lerp(motionBlurVolume.weight, targetWeight, Time.deltaTime * smoothSpeed);
+    }
+
     public void JumpButtonClicked()
     {
         if (isGrounded)
