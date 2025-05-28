@@ -95,7 +95,7 @@ public class InventoryManager : MonoBehaviour
                 SaveManager.Instance.Save();
             }
 
-            HighscoreTicker.text = Score.ToString();
+            HighscoreTicker.text = Score.ToString() + " Meter";
 
 
 

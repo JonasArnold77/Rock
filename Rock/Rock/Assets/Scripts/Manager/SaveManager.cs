@@ -61,6 +61,7 @@ public class SaveManager : MonoBehaviour
         DeathMenu.Instance.SetUpChallengeButtons();
         DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>().ChallengeFunction.Invoke();
 
+        
         foreach (var c in Challenges)
         {
             var posIndex = Challenges.IndexOf(c);
@@ -75,6 +76,11 @@ public class SaveManager : MonoBehaviour
 
         InventoryManager.Instance.InitDistance = ChallengeManager.Instance.actualChallengeButton.Distance;
         InventoryManager.Instance.InitLevel = GetLevelFromDistance(InventoryManager.Instance.InitDistance, ChallengeManager.Instance.actualChallengeButton.LevelDistances);
+
+
+        var xPositionOfHighscoreMarker = (DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>().Highscore * 5f) + (int)FindObjectOfType<PlayerMovement>().transform.position.x;
+        var visualHighscoreMarker = Instantiate(PrefabManager.Instance.VisualHighscoreMarker, new Vector2(xPositionOfHighscoreMarker, 7.49f), Quaternion.identity);
+        visualHighscoreMarker.GetComponent<VisualHighscoreMarker>().HighscoreText.text = "Highscore: " + DeathMenu.Instance.ChallengeGameObjects.Where(c => c.GetComponent<ChallengeButton>().title == ActualChallenge).FirstOrDefault().GetComponent<ChallengeButton>().Highscore;
 
         //foreach (var d in ChallengeManager.Instance.actualChallengeButton.LevelDistances) 
         //{
@@ -192,7 +198,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory33")
+        QuickSaveWriter.Create("Inventory34")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -215,11 +221,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory33.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory34.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory33.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory34.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory33.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory34.json");
 #endif
 
 
@@ -234,7 +240,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory33")
+            QuickSaveReader.Create("Inventory34")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })

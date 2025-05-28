@@ -14,6 +14,10 @@ public class ChallengeDetailMenu : MonoBehaviour
     public TMP_Text DiscriptionText;
     public TMP_Text HighscoreText;
 
+    public GameObject BronceMedalGO;
+    public GameObject SilverMedalGO;
+    public GameObject GoldMedalGO;
+
     public Image AmountImage;
 
     public ChallengeTypeDatabase ChallengeTypeDB;
@@ -29,6 +33,12 @@ public class ChallengeDetailMenu : MonoBehaviour
     {
         RestartButton.onClick.AddListener(() => Respawn());
         gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        Instantiate(PrefabManager.Instance.MedalRevealUIEffect,SilverMedalGO.transform.position, Quaternion.identity);
+        Instantiate(PrefabManager.Instance.MedalRevealUIEffect, GoldMedalGO.transform.position, Quaternion.identity);
     }
 
     private void Respawn()

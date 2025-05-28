@@ -11,6 +11,9 @@ public class PrefabManager : MonoBehaviour
     public GameObject DieEffect;
     public GameObject GemExplodeEffect;
     public GameObject ChallengeButton;
+    public GameObject VisualHighscoreMarker;
+
+    public GameObject MedalRevealUIEffect;
 
     public PhysicsMaterial2D BouncyMaterial;
 
