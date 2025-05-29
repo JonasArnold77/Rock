@@ -66,7 +66,36 @@ public class ChallengeButton : MonoBehaviour
 
         ChallengeDetailMenu.Instance.HighscoreText.text = "Highscore: " + Highscore + "\nDistance: " + Distance;
 
-        var Level = InventoryManager.Instance.GetLevelFromDistance(Distance,LevelDistances);
+        if(Distance >= LevelDistances[0])
+        {
+            ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Medal>().ActiveColor;
+        }
+        else
+        {
+            ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Medal>().InActiveColor;
+        }
+
+        if (Distance >= LevelDistances[1])
+        {
+            ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Medal>().ActiveColor;
+        }
+        else
+        {
+            ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Medal>().InActiveColor;
+        }
+
+        if (Distance >= LevelDistances[2])
+        {
+            ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Medal>().ActiveColor;
+        }
+        else
+        {
+            ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Medal>().InActiveColor;
+        }
+
+
+
+        var Level = InventoryManager.Instance.GetLevelFromDistance(Distance, LevelDistances);
         ChallengeDetailMenu.Instance.AmountImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (Level - 1);
         ChallengeDetailMenu.Instance.AmountImage.fillAmount = (float)((float)Distance / (float)LevelDistances[Level - 1]);
     }
