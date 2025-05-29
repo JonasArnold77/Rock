@@ -66,7 +66,7 @@ public class ChallengeButton : MonoBehaviour
 
         ChallengeDetailMenu.Instance.HighscoreText.text = "Highscore: " + Highscore + "\nDistance: " + Distance;
 
-        if(Distance >= LevelDistances[0])
+        if(Highscore >= LevelDistances[0])
         {
             ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Medal>().ActiveColor;
         }
@@ -75,7 +75,7 @@ public class ChallengeButton : MonoBehaviour
             ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Medal>().InActiveColor;
         }
 
-        if (Distance >= LevelDistances[1])
+        if (Highscore >= LevelDistances[1])
         {
             ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Medal>().ActiveColor;
         }
@@ -84,7 +84,7 @@ public class ChallengeButton : MonoBehaviour
             ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Medal>().InActiveColor;
         }
 
-        if (Distance >= LevelDistances[2])
+        if (Highscore >= LevelDistances[2])
         {
             ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Medal>().ActiveColor;
         }
