@@ -37,8 +37,8 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        Instantiate(PrefabManager.Instance.MedalRevealUIEffect,SilverMedalGO.transform.position, Quaternion.identity);
-        Instantiate(PrefabManager.Instance.MedalRevealUIEffect, GoldMedalGO.transform.position, Quaternion.identity);
+        //Instantiate(PrefabManager.Instance.MedalRevealUIEffect,SilverMedalGO.transform.position, Quaternion.identity);
+        //Instantiate(PrefabManager.Instance.MedalRevealUIEffect, GoldMedalGO.transform.position, Quaternion.identity);
     }
 
     private void Respawn()

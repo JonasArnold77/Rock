@@ -74,4 +74,10 @@ public class ChallengeManager : MonoBehaviour
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
         SaveManager.Instance.HardcoreModeOn = false;
     }
+    public void ActivateFollowEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        SaveManager.Instance.HardcoreModeOn = false;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+    }
 }

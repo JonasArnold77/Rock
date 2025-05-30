@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,13 +10,13 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
 
-    public float jumpForce = 5f;          // Die St‰rke des Sprungs
+    public float jumpForce = 5f;          // Die St√§rke des Sprungs
     public float fallSpeedMultiplier = 10f; // Wie schnell der Spieler magnetisch zu Boden gezogen wird
-    private KeyCode jumpKey = KeyCode.Space; // Taste f¸r den Sprung
+    private KeyCode jumpKey = KeyCode.Space; // Taste f√ºr den Sprung
 
     private Rigidbody2D rb;
     private bool isGrounded = false;
-    private bool isOnTop = false; // ‹berpr¸ft, ob der Spieler den Boden ber¸hrt hat
+    private bool isOnTop = false; // √úberpr√ºft, ob der Spieler den Boden ber√ºhrt hat
     private bool isOnBotton = false;
     public bool isJumping = false;
     private bool isDoingMagneticFall = false;
@@ -51,11 +51,21 @@ public class PlayerMovement : MonoBehaviour
 
     public Volume motionBlurVolume;
 
+    public float verticalSensitivity = 0.05f; // Feintuning f√ºr Drag
+    public Camera mainCamera;
+    private Vector2 lastInputPos;
+    private bool isDragging = false;
+
+    public float horizontalSpeed = 10f; // ‚Üê das ist NEU
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         FireBallEffect.SetActive(false);
         //MagneticBallEffect.SetActive(true);
+
+        if (mainCamera == null)
+            mainCamera = Camera.main;
 
         StartMenu.Instance.gameObject.SetActive(true);
 
@@ -138,13 +148,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall" || ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
         {
-            // ‹berpr¸fen, ob der Spieler auf dem Boden steht und die Sprungtaste dr¸ckt
+            // √úberpr√ºfen, ob der Spieler auf dem Boden steht und die Sprungtaste dr√ºckt
             if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Jump();
                 //StartCoroutine(ElectricSoundCoroutine());
             }
-            // ‹berpr¸fen, ob der Spieler im Sprung ist und die Sprungtaste erneut dr¸ckt
+            // √úberpr√ºfen, ob der Spieler im Sprung ist und die Sprungtaste erneut dr√ºckt
             else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0))
             {
                 MagneticFall();
@@ -261,13 +271,13 @@ public class PlayerMovement : MonoBehaviour
         {
             //Debug.Log("VelocityY: " + rb.velocity.y);
             //ActivateMotionBlur(5f,0f,1f,20);
-            // ‹berpr¸fen, ob der Spieler auf dem Boden steht und die Sprungtaste dr¸ckt
+            // √úberpr√ºfen, ob der Spieler auf dem Boden steht und die Sprungtaste dr√ºckt
             if (isGrounded && Input.GetKeyDown(jumpKey))
             {
                 Jump();
                 //StartCoroutine(ElectricSoundCoroutine());
             }
-            // ‹berpr¸fen, ob der Spieler im Sprung ist und die Sprungtaste erneut dr¸ckt
+            // √úberpr√ºfen, ob der Spieler im Sprung ist und die Sprungtaste erneut dr√ºckt
             else if (isJumping && Input.GetKeyDown(jumpKey))
             {
                 MagneticFall();
@@ -353,19 +363,22 @@ public class PlayerMovement : MonoBehaviour
                     StartCoroutine(WaitForReset());
                 }
             }
+        }else if (ChallengeManager.Instance.actualChallengeButton.title == "Follow")
+        {
+            HandleInput();
         }
 
 
 #elif UNITY_EDITOR
         if (ChallengeManager.Instance.actualChallengeButton.title == "Normal"|| ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed")
         {
-            // ‹berpr¸fen, ob der Spieler auf dem Boden steht und die Sprungtaste dr¸ckt
+            // √úberpr√ºfen, ob der Spieler auf dem Boden steht und die Sprungtaste dr√ºckt
             if (isGrounded && Input.GetKeyDown(jumpKey))
             {
                 Jump();
                 //StartCoroutine(ElectricSoundCoroutine());
             }
-            // ‹berpr¸fen, ob der Spieler im Sprung ist und die Sprungtaste erneut dr¸ckt
+            // √úberpr√ºfen, ob der Spieler im Sprung ist und die Sprungtaste erneut dr√ºckt
             else if (isJumping && Input.GetKeyDown(jumpKey))
             {
                 MagneticFall();
@@ -408,16 +421,87 @@ public class PlayerMovement : MonoBehaviour
 #endif
 
 
-        IsGrounded();
+            IsGrounded();
         IsOnBottom();
         IsOnTop();
     }
-    
+
+    private void FixedUpdate()
+    {
+        Vector2 move = new Vector2(horizontalSpeed * Time.fixedDeltaTime, 0f);
+
+        if (isDragging)
+        {
+            Vector2 currentInputPos = GetInputPosition();
+            float deltaY = currentInputPos.y - lastInputPos.y;
+            float worldDeltaY = deltaY * verticalSensitivity;
+
+            move += new Vector2(0, worldDeltaY);
+            lastInputPos = currentInputPos;
+        }
+
+        rb.MovePosition(rb.position + move);
+    }
+
+    void LateUpdate()
+    {
+        if (mainCamera != null)
+        {
+            Vector3 camPos = mainCamera.transform.position;
+            camPos.x = transform.position.x;
+            camPos.y = transform.position.y;
+            mainCamera.transform.position = camPos;
+        }
+    }
+
+    void HandleInput()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        if (Input.GetMouseButtonDown(0))
+        {
+            isDragging = true;
+            lastInputPos = Input.mousePosition;
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+        }
+#elif UNITY_ANDROID || UNITY_IOS
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                isDragging = true;
+                lastInputPos = touch.position;
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                isDragging = false;
+            }
+        }
+#endif
+    }
+
+    Vector2 GetInputPosition()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        return Input.mousePosition;
+#else
+        return Input.GetTouch(0).position;
+#endif
+    }
+
+    void TryMoveVertically(float deltaY)
+    {
+        Vector2 newPos = rb.position + new Vector2(0, deltaY);
+        rb.MovePosition(newPos);
+    }
 
     public void ActivateMotionBlur(float smoothSpeed, float baseWeight, float maxWeight, float maxAbsVelocityY)
     {
-        float absYVelocity = Mathf.Abs(rb.velocity.y); // Geschwindigkeit unabh‰ngig vom Vorzeichen
-        float t = Mathf.Clamp01(absYVelocity / maxAbsVelocityY); // Normalisiere auf 0ñ1
+        float absYVelocity = Mathf.Abs(rb.velocity.y); // Geschwindigkeit unabh√§ngig vom Vorzeichen
+        float t = Mathf.Clamp01(absYVelocity / maxAbsVelocityY); // Normalisiere auf 0‚Äì1
         float targetWeight = Mathf.Lerp(baseWeight, maxWeight, t);
 
         // Sanftes Interpolieren zum Zielwert
@@ -474,7 +558,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        // Setze den Spieler in den Sprungzustand und f¸ge eine Aufw‰rtskraft hinzu
+        // Setze den Spieler in den Sprungzustand und f√ºge eine Aufw√§rtskraft hinzu
         //isJumping = true;
         //isGrounded = false;
         //ActualFireEffect.Add(Instantiate(PrefabManager.Instance.JumpDashEffect, position: transform.position - new Vector3(0, 5.19f, 0), new Quaternion(0.497374982f, 0.502611339f, -0.502611339f, -0.497374982f)));
@@ -500,12 +584,12 @@ public class PlayerMovement : MonoBehaviour
     {
         float currentSpeedX = rb.velocity.x;
 
-        // ‹berpr¸fen, ob sich die Geschwindigkeit ver‰ndert hat
+        // √úberpr√ºfen, ob sich die Geschwindigkeit ver√§ndert hat
         if (currentSpeedX != previousSpeedX)
         {
-            Debug.Log("Die Geschwindigkeit auf der X-Achse hat sich ver‰ndert!");
+            Debug.Log("Die Geschwindigkeit auf der X-Achse hat sich ver√§ndert!");
 
-            // ‹berpr¸fen, ob die Geschwindigkeit verringert wurde
+            // √úberpr√ºfen, ob die Geschwindigkeit verringert wurde
             if (currentSpeedX < previousSpeedX)
             {
                 Debug.Log("Die Geschwindigkeit auf der X-Achse hat sich verringert!");
@@ -518,7 +602,7 @@ public class PlayerMovement : MonoBehaviour
 
     void MagneticFall()
     {
-        // Erhˆht die Fallgeschwindigkeit, um den Spieler schnell zu Boden zu ziehen
+        // Erh√∂ht die Fallgeschwindigkeit, um den Spieler schnell zu Boden zu ziehen
         //Destroy(ActualFireEffect);
 
         
@@ -555,7 +639,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 position2 = new Vector2(transform.position.x + 0.5f, transform.position.y);
         RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
 
-        // F¸hre den Raycast durch und ¸berpr¸fe, ob er auf den Boden trifft
+        // F√ºhre den Raycast durch und √ºberpr√ºfe, ob er auf den Boden trifft
         RaycastHit2D hit = Physics2D.Raycast(position, direction, raycastDistance, groundLayer);
 
 
@@ -578,7 +662,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 position2 = new Vector2(transform.position.x + 0.5f, transform.position.y);
         RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
 
-        // F¸hre den Raycast durch und ¸berpr¸fe, ob er auf den Boden trifft
+        // F√ºhre den Raycast durch und √ºberpr√ºfe, ob er auf den Boden trifft
         RaycastHit2D hit = Physics2D.Raycast(position, direction, raycastDistance, groundLayer);
         
 
@@ -599,7 +683,7 @@ public class PlayerMovement : MonoBehaviour
         // Der Raycast geht nach unten, also ist die Richtung Vector2.down
         Vector2 direction = Vector2.down;
 
-        // F¸hre den Raycast durch und ¸berpr¸fe, ob er auf den Boden trifft
+        // F√ºhre den Raycast durch und √ºberpr√ºfe, ob er auf den Boden trifft
         RaycastHit2D hit = Physics2D.Raycast(position, direction, raycastDistance, groundLayer);
 
         // Wenn der Raycast ein Objekt trifft, das auf dem Ground-Layer liegt, ist der Charakter grounded
@@ -653,7 +737,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
             //return;
-            // ‹berpr¸fen, ob der Spieler den Boden ber¸hrt hat
+            // √úberpr√ºfen, ob der Spieler den Boden ber√ºhrt hat
         if (collision.gameObject.CompareTag("Spikes"))
         {
             if (collision.gameObject.GetComponent<SawBlade>() != null && !collision.gameObject.GetComponent<SawBlade>().IsMoving)
