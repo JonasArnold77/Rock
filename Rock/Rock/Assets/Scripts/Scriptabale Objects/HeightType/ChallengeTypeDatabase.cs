@@ -15,6 +15,7 @@ public class ChallengeTypeDatabase : ScriptableObject
     public ChallengeType FlappyLight;
     public ChallengeType HardCore;
     public ChallengeType Follow;
+    public ChallengeType Clicking;
 
     public List<ChallengeType> ChallengeTypes = new List<ChallengeType>();
 }

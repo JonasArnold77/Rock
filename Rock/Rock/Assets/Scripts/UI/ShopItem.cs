@@ -39,7 +39,23 @@ public class ShopItem : MonoBehaviour
         {
             if (!Equipped)
             {
+                if (Equipment == null)
+                {
+                    foreach (Transform child in ShopMenu.Instance.Content)
+                    {
+                        if(child.GetComponent<ShopItem>().Equipment != null)
+                        {
+                            child.GetComponent<ShopItem>().Equipment.SetActive(false);
+                        }
+                    }
+
+                    SaveManager.Instance.ActualSkin = "None";
+                    SaveManager.Instance.Save();
+                    return;
+                }
+
                 FindObjectsOfType<Equipment>().ToList().Select(e => e.gameObject).ToList().ForEach(e => e.SetActive(false));
+
                 Equipment.SetActive(true);
 
                 foreach (Transform child in ShopMenu.Instance.Content)

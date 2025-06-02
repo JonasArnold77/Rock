@@ -78,6 +78,12 @@ public class ChallengeManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = false;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
+    }
+    public void ActivateClickingEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
 }

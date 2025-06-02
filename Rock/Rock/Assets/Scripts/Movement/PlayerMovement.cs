@@ -51,12 +51,11 @@ public class PlayerMovement : MonoBehaviour
 
     public Volume motionBlurVolume;
 
-    public float verticalSensitivity = 0.05f; // Feintuning für Drag
+    public float horizontalSpeed = 2f;
     public Camera mainCamera;
-    private Vector2 lastInputPos;
-    private bool isDragging = false;
 
-    public float horizontalSpeed = 10f; // ← das ist NEU
+    public Collider2D ClickingSphereCollider;
+
 
     void Start()
     {
@@ -68,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
             mainCamera = Camera.main;
 
         StartMenu.Instance.gameObject.SetActive(true);
+
+        ClickingSphereCollider = FindObjectOfType<ClickingSphere>().GetComponent<Collider2D>();
 
 
 #if UNITY_ANDROID
@@ -264,6 +265,36 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Clicking")
+        {
+            if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (ClickingSphereCollider.OverlapPoint(mousePos))
+                {
+                    Debug.Log("Circle clicked!");
+
+                    Jump();
+                    // Hier kannst du weitere Aktionen ausführen
+                }
+
+               
+                //StartCoroutine(ElectricSoundCoroutine());
+            }
+            // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+            else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (ClickingSphereCollider.OverlapPoint(mousePos))
+                {
+                    Debug.Log("Circle clicked!");
+
+                    MagneticFall();
+                    // Hier kannst du weitere Aktionen ausführen
+                }
+            }
+        }
 
 #elif UNITY_STANDALONE_WIN
 
@@ -365,7 +396,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }else if (ChallengeManager.Instance.actualChallengeButton.title == "Follow")
         {
-            HandleInput();
+            //HandleInput();
         }
 
 
@@ -428,60 +459,74 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 move = new Vector2(horizontalSpeed * Time.fixedDeltaTime, 0f);
-
-        if (isDragging)
+        if (ChallengeManager.Instance.actualChallengeButton.title != "Follow")
         {
-            Vector2 currentInputPos = GetInputPosition();
-            float deltaY = currentInputPos.y - lastInputPos.y;
-            float worldDeltaY = deltaY * verticalSensitivity;
-
-            move += new Vector2(0, worldDeltaY);
-            lastInputPos = currentInputPos;
+            return;
         }
 
-        rb.MovePosition(rb.position + move);
+        float targetY = GetWorldInputY();
+
+        // Neue Position berechnen
+        Vector2 targetPos = new Vector2(rb.position.x + horizontalSpeed * Time.fixedDeltaTime, targetY);
+        rb.MovePosition(targetPos);
     }
 
     void LateUpdate()
     {
-        if (mainCamera != null)
-        {
-            Vector3 camPos = mainCamera.transform.position;
-            camPos.x = transform.position.x;
-            camPos.y = transform.position.y;
-            mainCamera.transform.position = camPos;
-        }
+        //if (mainCamera != null)
+        //{
+        //    Vector3 camPos = mainCamera.transform.position;
+        //    camPos.x = transform.position.x;
+        //    camPos.y = transform.position.y;
+        //    mainCamera.transform.position = camPos;
+        //}
     }
 
-    void HandleInput()
+    float GetWorldInputY()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE
-        if (Input.GetMouseButtonDown(0))
-        {
-            isDragging = true;
-            lastInputPos = Input.mousePosition;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            isDragging = false;
-        }
+        Vector3 screenPos = Input.mousePosition;
 #elif UNITY_ANDROID || UNITY_IOS
         if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                isDragging = true;
-                lastInputPos = touch.position;
-            }
-            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
-            {
-                isDragging = false;
-            }
-        }
+            screenPos = Input.GetTouch(0).position;
+        else
+            return transform.position.y;
+#else
+        return transform.position.y;
 #endif
+
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(screenPos);
+        return worldPos.y;
     }
+
+    //    void HandleInput()
+    //    {
+    //#if UNITY_EDITOR || UNITY_STANDALONE
+    //        if (Input.GetMouseButtonDown(0))
+    //        {
+    //            isDragging = true;
+    //            lastInputPos = Input.mousePosition;
+    //        }
+    //        else if (Input.GetMouseButtonUp(0))
+    //        {
+    //            isDragging = false;
+    //        }
+    //#elif UNITY_ANDROID || UNITY_IOS
+    //        if (Input.touchCount > 0)
+    //        {
+    //            Touch touch = Input.GetTouch(0);
+    //            if (touch.phase == TouchPhase.Began)
+    //            {
+    //                isDragging = true;
+    //                lastInputPos = touch.position;
+    //            }
+    //            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+    //            {
+    //                isDragging = false;
+    //            }
+    //        }
+    //#endif
+    //    }
 
     Vector2 GetInputPosition()
     {
