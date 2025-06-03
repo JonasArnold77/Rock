@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Collider2D ClickingSphereCollider;
 
+    public Transform arrow;
+
 
     void Start()
     {
@@ -141,7 +143,25 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        MoveToRight();
+        if (ChallengeManager.Instance.actualChallengeButton.title != "Dash")
+        {
+            MoveToRight();
+
+            if (rb.velocity.x<1)
+            {
+                speed = 0;
+                FireBallEffect.SetActive(false);
+                //MagneticBallEffect.SetActive(false);
+                BallEffect.SetActive(false);
+                BallEffect2.SetActive(false);
+
+                rb.simulated = true;
+
+
+                StartCoroutine(WaitForReset());
+            }
+        }
+        
 
         Debug.Log("Velocity: " + rb.velocity);
 
@@ -293,6 +313,37 @@ public class PlayerMovement : MonoBehaviour
                     MagneticFall();
                     // Hier kannst du weitere Aktionen ausführen
                 }
+            }
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                arrow.gameObject.SetActive(true);
+            }
+            else
+            {
+                arrow.gameObject.SetActive(false);
+            }
+
+                // Mausposition in Weltkoordinaten
+                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = 0f;
+
+            // Richtung von Zentrum zur Maus
+            Vector3 direction = (mouseWorldPos - transform.position).normalized;
+
+            // Neue Position des Pfeils (auf dem Kreis)
+            arrow.transform.position = transform.position + direction * 2;
+
+            // Rotation des Pfeils zur Maus
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            arrow.rotation = Quaternion.Euler(0, 0, angle);
+
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                rb.velocity = Vector3.zero;
+                rb.AddForce(direction.normalized*280f,ForceMode2D.Force);
             }
         }
 
@@ -452,7 +503,7 @@ public class PlayerMovement : MonoBehaviour
 #endif
 
 
-            IsGrounded();
+        IsGrounded();
         IsOnBottom();
         IsOnTop();
     }

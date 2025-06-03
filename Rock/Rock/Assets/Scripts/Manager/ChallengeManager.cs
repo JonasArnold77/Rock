@@ -86,4 +86,10 @@ public class ChallengeManager : MonoBehaviour
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
+    public void ActivateDashEffect()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        SaveManager.Instance.HardcoreModeOn = false;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0f);
+    }
 }
