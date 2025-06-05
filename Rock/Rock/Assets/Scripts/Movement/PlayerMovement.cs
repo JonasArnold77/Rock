@@ -326,6 +326,11 @@ public class PlayerMovement : MonoBehaviour
                 arrow.gameObject.SetActive(false);
             }
 
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Time.timeScale = 0.5f;
+            }
+
                 // Mausposition in Weltkoordinaten
                 Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPos.z = 0f;
@@ -342,6 +347,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
+                Time.timeScale = 1f;
                 rb.velocity = Vector3.zero;
                 rb.AddForce(direction.normalized*280f,ForceMode2D.Force);
             }
@@ -834,7 +840,7 @@ public class PlayerMovement : MonoBehaviour
 
             //return;
             // Überprüfen, ob der Spieler den Boden berührt hat
-        if (collision.gameObject.CompareTag("Spikes"))
+        if (collision.gameObject.CompareTag("Spikes") || collision.gameObject.CompareTag("DeathWall"))
         {
             if (collision.gameObject.GetComponent<SawBlade>() != null && !collision.gameObject.GetComponent<SawBlade>().IsMoving)
             {
@@ -946,11 +952,17 @@ public class PlayerMovement : MonoBehaviour
         {
             yield break;
         }
+        GetComponentsInChildren<Renderer>().ToList().ForEach(r => r.enabled = false);
+        FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
 
         IsDead = true;
 
         SaveManager.Instance.Save();
         DeathMenu.Instance.gameObject.SetActive(true);
+
+        
 
         FindObjectOfType<FollowPlayer>().enabled = false;
 
