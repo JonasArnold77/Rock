@@ -143,6 +143,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (IsDead)
+        {
+            return;
+        }
+
         if (ChallengeManager.Instance.actualChallengeButton.title != "Dash")
         {
             MoveToRight();
@@ -541,8 +546,9 @@ public class PlayerMovement : MonoBehaviour
 
     float GetWorldInputY()
     {
+        Vector3 screenPos = new Vector3();
 #if UNITY_EDITOR || UNITY_STANDALONE
-        Vector3 screenPos = Input.mousePosition;
+         screenPos = Input.mousePosition;
 #elif UNITY_ANDROID || UNITY_IOS
         if (Input.touchCount > 0)
             screenPos = Input.GetTouch(0).position;
@@ -954,6 +960,8 @@ public class PlayerMovement : MonoBehaviour
         }
         GetComponentsInChildren<Renderer>().ToList().ForEach(r => r.enabled = false);
         FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
+
+        Time.timeScale = 1f;
 
         yield return new WaitForSeconds(0.5f);
 
