@@ -162,6 +162,12 @@ public class SaveManager : MonoBehaviour
             TutorialMenu.Instance.gameObject.SetActive(true);
         }
 
+        if(ChallengeManager.Instance.actualChallengeButton.title != "Clicking")
+        {
+            FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
+        }
+        
+
         LevelManager.Instance.GameIsInitialized = true;
     }
 

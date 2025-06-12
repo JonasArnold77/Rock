@@ -266,6 +266,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                rb.velocity = new Vector2(rb.velocity.x,0);
                 rb.AddForce(Vector2.up * 4, ForceMode2D.Impulse);
             }
             if (isGrounded)
@@ -873,7 +874,7 @@ public class PlayerMovement : MonoBehaviour
 
                 FindObjectOfType<FollowPlayer>().enabled = false;
 
-                StartCoroutine(WaitForReset());
+                StartCoroutine(WaitForReset()); 
                 //string currentSceneName = SceneManager.GetActiveScene().name;
                 //SceneManager.LoadScene(currentSceneName);
             }
@@ -959,7 +960,12 @@ public class PlayerMovement : MonoBehaviour
             yield break;
         }
         GetComponentsInChildren<Renderer>().ToList().ForEach(r => r.enabled = false);
-        FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
+
+        if (FindObjectOfType<ClickingSphere>())
+        {
+            FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
+        }
+        
 
         Time.timeScale = 1f;
 
