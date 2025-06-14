@@ -17,6 +17,19 @@ public class ObjectsByChallengeType
     public List<GameObject> Objects;
 }
 
+[Serializable]
+public class ActivateWhenHeightType
+{
+    public HeightType heightType;
+    public List<GameObject> Objects;
+}
+
+public class DeactivateWhenHeightType
+{
+    public HeightType heightType;
+    public List<GameObject> Objects;
+}
+
 public class RandomChunk : MonoBehaviour
 {
     public List<ObjectsByChallengeType> ObjectByChallengeType = new List<ObjectsByChallengeType>();
