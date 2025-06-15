@@ -130,7 +130,7 @@ public class SaveManager : MonoBehaviour
 
             if(LevelManager.Instance.FirstObjectString != "")
             {
-                if (LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().name == LevelManager.Instance.FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType == LevelManager.Instance.HeigtTypeDb.Middle)
+                if (LevelChunkManager.Instance.HardcoreChunks.Where(h => h.GetComponent<Obstacle>().name == LevelManager.Instance.FirstObjectString).FirstOrDefault().GetComponent<Obstacle>().startType.Contains(LevelManager.Instance.HeigtTypeDb.Middle))
                 {
                     LevelManager.Instance.StairSetted = false;
                 }
@@ -150,7 +150,8 @@ public class SaveManager : MonoBehaviour
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireHell.enabled = false);
             FindObjectsOfType<FireBall>().ToList().ForEach(f => f.FireNormal.enabled = true);
 
-            LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.Count)];
+            //LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.Count)];
+            //LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.UpAndDown;
         }
 
         if (TutorialDone)

@@ -1873,8 +1873,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -4.97
-  startType: {fileID: 11400000, guid: f8e140608c85166499f89d43f98c5466, type: 2}
-  endType: {fileID: 11400000, guid: f8e140608c85166499f89d43f98c5466, type: 2}
+  startType:
+  - {fileID: 11400000, guid: f8e140608c85166499f89d43f98c5466, type: 2}
+  endType:
+  - {fileID: 11400000, guid: f8e140608c85166499f89d43f98c5466, type: 2}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 6198327137510291034}

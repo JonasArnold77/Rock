@@ -7,7 +7,6 @@ public class ChunkTypeDatabase : ScriptableObject
 {
     public ChunkType UpAndDown;
     public ChunkType Saw;
-    public ChunkType FloorIsLava;
 
     public List<ChunkType> ChunkTypes = new List<ChunkType>();
 }

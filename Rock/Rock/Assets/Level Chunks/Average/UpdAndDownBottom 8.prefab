@@ -228,8 +228,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -1054,8 +1057,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -1293,8 +1299,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -1615,8 +1624,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -2021,8 +2033,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -2688,8 +2703,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -3262,8 +3280,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -3428,6 +3449,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.3
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &2870504789206778261
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,6 +3692,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.6
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &3173210665809016752
 GameObject:
   m_ObjectHideFlags: 0
@@ -4530,8 +4557,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -4685,8 +4715,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -4935,6 +4968,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &5035119435572376396
 GameObject:
   m_ObjectHideFlags: 0
@@ -5091,6 +5127,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.4
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &5066450004551858737
 GameObject:
   m_ObjectHideFlags: 0
@@ -5247,6 +5286,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.1
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &5146699434940500685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5571,6 +5613,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.2
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &5552603314177676998
 GameObject:
   m_ObjectHideFlags: 0
@@ -5800,8 +5845,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -6039,8 +6087,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -6446,8 +6497,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -7234,8 +7288,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -7938,8 +7995,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -8104,6 +8164,9 @@ MonoBehaviour:
   moveDistance: 2
   moveSpeed: 2
   timeOffset: 0.5
+  RandomSpeed: 0
+  RandomSpeedAmountMin: 0
+  RandomSpeedAmountMax: 0
 --- !u!1 &7553691389288349474
 GameObject:
   m_ObjectHideFlags: 0
@@ -8433,14 +8496,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
-  endType: {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+  startType:
+  - {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+  endType:
+  - {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 2
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 5220233219784718356}
   ChunkType: {fileID: 11400000, guid: ddaa04d2d3b87154badb0aaeb91f5e25, type: 2}
   Title: 
-  RuntimeID: 12
+  RuntimeID: 44
   type: {fileID: 0}
   _ChallengeType:
   - {fileID: 11400000, guid: c5e30368af7495f4ca073bddfec36fc1, type: 2}
@@ -9139,8 +9205,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}

@@ -18,13 +18,7 @@ public class ObjectsByChallengeType
 }
 
 [Serializable]
-public class ActivateWhenHeightType
-{
-    public HeightType heightType;
-    public List<GameObject> Objects;
-}
-
-public class DeactivateWhenHeightType
+public class ObjectsByHeightType
 {
     public HeightType heightType;
     public List<GameObject> Objects;
@@ -35,6 +29,10 @@ public class RandomChunk : MonoBehaviour
     public List<ObjectsByChallengeType> ObjectByChallengeType = new List<ObjectsByChallengeType>();
     public List<ObjectsByChallengeType> ObjectByChallengeTypeDisable = new List<ObjectsByChallengeType>();
 
+    public List<ObjectsByHeightType> ActivateObjectsByHeightTyoe = new List<ObjectsByHeightType>();
+    public List<ObjectsByHeightType> DeactivateObjectsByHeightTyoe = new List<ObjectsByHeightType>();
+
+
     private void Start()
     {
         StartCoroutine(Init());
@@ -44,7 +42,31 @@ public class RandomChunk : MonoBehaviour
     {
         yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
 
-        foreach(var o in ObjectByChallengeType)
+        foreach (var o in ActivateObjectsByHeightTyoe)
+        {
+            if (o.heightType == GetComponent<Obstacle>().FinalEndType)
+            {
+                o.Objects.ForEach(o => o.SetActive(true));
+            }
+            else
+            {
+                o.Objects.ForEach(o => o.SetActive(false));
+            }
+        }
+
+        foreach (var o in DeactivateObjectsByHeightTyoe)
+        {
+            if (o.heightType == GetComponent<Obstacle>().FinalEndType)
+            {
+                o.Objects.ForEach(o => o.SetActive(false));
+            }
+            else
+            {
+                o.Objects.ForEach(o => o.SetActive(true));
+            }
+        }
+
+        foreach (var o in ObjectByChallengeType)
         {
             if (o.challengeType == ChallengeManager.Instance.actualChallengeButton.ActualChallengeType)
             {

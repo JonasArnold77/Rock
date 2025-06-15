@@ -6,8 +6,10 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     public float height;
-    [SerializeField] public HeightType startType;
-    [SerializeField] public HeightType endType;
+    [SerializeField] public List<HeightType> startType = new List<HeightType>();
+    [SerializeField] public List<HeightType> endType = new List<HeightType>();
+
+    public HeightType FinalEndType;
 
     public int DifficultyLevel;
 
@@ -59,7 +61,7 @@ public class Obstacle : MonoBehaviour
         {
             if (col != AreaCollider && col.tag == "Player") // Ignoriere den Ziel-Collider selbst
             {
-                if (SaveManager.Instance.HardcoreModeOn && startType != LevelManager.Instance.HeigtTypeDb.StairUp && LevelManager.Instance.HeigtTypeDb.StairDown && Title != LevelChunkManager.Instance.StartChunk.name && !LevelChunkManager.Instance.BeginningChunks.Select(s => s.name).ToList().Contains(Title))
+                if (SaveManager.Instance.HardcoreModeOn && !startType.Contains(LevelManager.Instance.HeigtTypeDb.StairUp) && LevelManager.Instance.HeigtTypeDb.StairDown && Title != LevelChunkManager.Instance.StartChunk.name && !LevelChunkManager.Instance.BeginningChunks.Select(s => s.name).ToList().Contains(Title))
                 {
                     SaveManager.Instance.LastChunk = Title;
                     SaveManager.Instance.LastChunkType = ChunkType.ToString();
