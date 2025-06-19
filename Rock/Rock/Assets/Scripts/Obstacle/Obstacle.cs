@@ -27,6 +27,8 @@ public class Obstacle : MonoBehaviour
 
     public List<ChallengeType> _ChallengeType;
 
+    public bool IsBigChunk;
+
     private void Start()
     {
         PlayerTransform = FindObjectOfType<PlayerMovement>().transform;

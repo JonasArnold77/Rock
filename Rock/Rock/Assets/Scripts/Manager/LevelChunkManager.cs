@@ -80,6 +80,10 @@ public class LevelChunkManager : MonoBehaviour
         {
             Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.StrongGravity)).ToList();
         }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
+        {
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Dash)).ToList();
+        }
         SetRuntimeIDs();
     }
 
