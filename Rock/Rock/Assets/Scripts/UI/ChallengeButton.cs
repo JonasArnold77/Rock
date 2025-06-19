@@ -69,28 +69,34 @@ public class ChallengeButton : MonoBehaviour
         if(Highscore >= LevelDistances[0])
         {
             ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Medal>().ActiveColor;
+            ChallengeDetailMenu.Instance.BronceMedalGO.transform.GetChild(0).GetComponent<Image>().color = ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Medal>().ActiveTextBoxColor;
         }
         else
         {
             ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Medal>().InActiveColor;
+            ChallengeDetailMenu.Instance.BronceMedalGO.transform.GetChild(0).GetComponent<Image>().color = ChallengeDetailMenu.Instance.BronceMedalGO.GetComponent<Medal>().InActiveTextBoxColor;
         }
 
         if (Highscore >= LevelDistances[1])
         {
             ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Medal>().ActiveColor;
+            ChallengeDetailMenu.Instance.SilverMedalGO.transform.GetChild(0).GetComponent<Image>().color = ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Medal>().ActiveTextBoxColor;
         }
         else
         {
             ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Medal>().InActiveColor;
+            ChallengeDetailMenu.Instance.SilverMedalGO.transform.GetChild(0).GetComponent<Image>().color = ChallengeDetailMenu.Instance.SilverMedalGO.GetComponent<Medal>().InActiveTextBoxColor;
         }
 
         if (Highscore >= LevelDistances[2])
         {
             ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Medal>().ActiveColor;
+            ChallengeDetailMenu.Instance.GoldMedalGO.transform.GetChild(0).GetComponent<Image>().color = ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Medal>().ActiveTextBoxColor;
         }
         else
         {
             ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Image>().color = ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Medal>().InActiveColor;
+            ChallengeDetailMenu.Instance.GoldMedalGO.transform.GetChild(0).GetComponent<Image>().color = ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Medal>().InActiveTextBoxColor;
         }
 
 

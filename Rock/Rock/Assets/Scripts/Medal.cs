@@ -6,4 +6,6 @@ public class Medal : MonoBehaviour
 {
     public Color ActiveColor;
     public Color InActiveColor;
+    public Color ActiveTextBoxColor;
+    public Color InActiveTextBoxColor;
 }
