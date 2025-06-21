@@ -11,18 +11,26 @@ public class FollowPlayer : MonoBehaviour
     public float moveSpeed = 1.5f; // Bewegungsgeschwindigkeit
     public float arriveThreshold = 0.05f; // Abstand, bei dem Ziel als erreicht gilt
 
+    public float rotationSpeed = 30f; // Grad pro Sekunde
+
     private Vector3 targetLocalPos;
 
     void Update()
     {
-        if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
-        {
-            transform.position = new Vector3(PlayerTransform.position.x + distance, PlayerTransform.position.y + 3, transform.position.z);
-        }
-        else if(ChallengeManager.Instance.actualChallengeButton.title != "MoveCamera")
-        {
-            transform.position = new Vector3(PlayerTransform.position.x + distance, transform.position.y, transform.position.z);
-        }
+        //if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
+        //{
+        //    transform.position = new Vector3(PlayerTransform.position.x + distance, PlayerTransform.position.y + 3, transform.position.z);
+        //}
+        //else if(ChallengeManager.Instance.actualChallengeButton.title != "MoveCamera" && ChallengeManager.Instance.actualChallengeButton.title != "RotateCamera")
+        //{
+        //    transform.position = new Vector3(PlayerTransform.position.x + distance, transform.position.y, transform.position.z);
+        //}
+        //else if (ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
+        //{
+        //    transform.position = new Vector3(PlayerTransform.position.x + distance, transform.position.y, transform.position.z);
+        //}
+        transform.position = new Vector3(PlayerTransform.position.x, transform.position.y, transform.position.z);
+        transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
     }
 
     void Start()
@@ -32,16 +40,15 @@ public class FollowPlayer : MonoBehaviour
 
     void LateUpdate()
     {
-        if (ChallengeManager.Instance.actualChallengeButton.title != "MoveCamera")
+        if (ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
         {
-            return;
-        }
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetLocalPos, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.localPosition, targetLocalPos) < arriveThreshold)
-        {
-            ChooseNewTarget();
-        }
+            if (Vector3.Distance(transform.localPosition, targetLocalPos) < arriveThreshold)
+            {
+                ChooseNewTarget();
+            }
+        }  
     }
 
     public void ChooseNewTarget()
