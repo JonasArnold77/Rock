@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
@@ -15,27 +16,37 @@ public class FollowPlayer : MonoBehaviour
 
     private Vector3 targetLocalPos;
 
-    void Update()
-    {
-        //if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
-        //{
-        //    transform.position = new Vector3(PlayerTransform.position.x + distance, PlayerTransform.position.y + 3, transform.position.z);
-        //}
-        //else if(ChallengeManager.Instance.actualChallengeButton.title != "MoveCamera" && ChallengeManager.Instance.actualChallengeButton.title != "RotateCamera")
-        //{
-        //    transform.position = new Vector3(PlayerTransform.position.x + distance, transform.position.y, transform.position.z);
-        //}
-        //else if (ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
-        //{
-        //    transform.position = new Vector3(PlayerTransform.position.x + distance, transform.position.y, transform.position.z);
-        //}
-        transform.position = new Vector3(PlayerTransform.position.x, transform.position.y, transform.position.z);
-        transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
-    }
 
     void Start()
     {
-        
+        StartCoroutine(InitGame());
+    }
+
+    private IEnumerator InitGame()
+    {
+        yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
+        if (ChallengeManager.Instance.actualChallengeButton.title == "UpsideDown")
+        {
+            transform.rotation = new Quaternion(0, 0, 180f, 0);
+        }
+    }
+
+    void Update()
+    {
+        if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
+        {
+            transform.position = new Vector3(PlayerTransform.position.x + distance, PlayerTransform.position.y + 3, transform.position.z);
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
+        {
+            transform.position = new Vector3(PlayerTransform.position.x, transform.position.y, transform.position.z);
+            transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title != "MoveCamera" && ChallengeManager.Instance.actualChallengeButton.title != "RotateCamera")
+        {
+            transform.position = new Vector3(PlayerTransform.position.x + distance, transform.position.y, transform.position.z);
+        }
+
     }
 
     void LateUpdate()

@@ -17,6 +17,8 @@ public class ChallengeTypeDatabase : ScriptableObject
     public ChallengeType Follow;
     public ChallengeType Clicking;
     public ChallengeType Dash;
+    public ChallengeType UpsideDown;
+    public ChallengeType RotatingCamera;
 
     public List<ChallengeType> ChallengeTypes = new List<ChallengeType>();
 }
