@@ -59,6 +59,7 @@ public class LevelManager : MonoBehaviour
 
     public int CountTillStair = 2;
 
+
     public List<int> RuntimeIDsUsed = new List<int>();
 
     private void Awake()
@@ -311,12 +312,12 @@ public class LevelManager : MonoBehaviour
 
             
 
-            if (!FindObjectOfType<PlayerMovement>().IsDead && InitIsDone)
+            if (/*!FindObjectOfType<PlayerMovement>().IsDead && InitIsDone*/true)
             {
                 if (countOfArea <= 0)
                 {
                     actualChunkType = ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList()[UnityEngine.Random.Range(0, ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList().Count)];
-                    countOfArea = UnityEngine.Random.Range(4, 6);
+                    countOfArea = UnityEngine.Random.Range(1, 1);
                 }
                 else if (InitIsDone && chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
                 {

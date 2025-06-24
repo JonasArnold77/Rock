@@ -166,13 +166,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: -2.36
   startType:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+  - {fileID: 11400000, guid: 98111d751ec779c4a99760b9d8f41507, type: 2}
   endType:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+  - {fileID: 11400000, guid: 98111d751ec779c4a99760b9d8f41507, type: 2}
   FinalEndType: {fileID: 0}
   DifficultyLevel: 1
   PlayerTransform: {fileID: 0}
@@ -201,8 +199,16 @@ MonoBehaviour:
     Objects:
     - {fileID: 9192162948861344111}
   ObjectByChallengeTypeDisable: []
-  ActivateObjectsByHeightTyoe: []
-  DeactivateObjectsByHeightTyoe: []
+  ActivateObjectsByHeightTyoe:
+  - heightType: {fileID: 11400000, guid: 98111d751ec779c4a99760b9d8f41507, type: 2}
+    Objects:
+    - {fileID: 4113253311618418870}
+    - {fileID: 1369860368414154717}
+  DeactivateObjectsByHeightTyoe:
+  - heightType: {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+    Objects:
+    - {fileID: 4113253311618418870}
+    - {fileID: 1369860368414154717}
 --- !u!1 &270440581432375538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2931,7 +2937,7 @@ GameObject:
   - component: {fileID: 3803207185224366138}
   - component: {fileID: 4474211397400017146}
   m_Layer: 0
-  m_Name: Obstacle 1 1 (5)
+  m_Name: Middle Wall 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6993,7 +6999,7 @@ GameObject:
   - component: {fileID: 18080570676479927}
   - component: {fileID: 4226750572976293593}
   m_Layer: 0
-  m_Name: Obstacle 1 1 (4)
+  m_Name: MiddleWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9484,8 +9490,8 @@ Transform:
   m_GameObject: {fileID: 5105660529411391905}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.025704, y: -0.33419, z: 0}
-  m_LocalScale: {x: 0.86855584, y: 0.3192238, z: 1}
+  m_LocalPosition: {x: 0.001725, y: -0.33419, z: 0}
+  m_LocalScale: {x: 0.9994282, y: 0.3192238, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7427011410231182889}

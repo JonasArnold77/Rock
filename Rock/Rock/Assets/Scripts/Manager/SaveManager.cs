@@ -142,7 +142,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(4, 6);
+            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(1, 1);
 
             InventoryManager.Instance.HellPostProcessing.SetActive(false);
             InventoryManager.Instance.NormalPostProcessing.SetActive(true);
