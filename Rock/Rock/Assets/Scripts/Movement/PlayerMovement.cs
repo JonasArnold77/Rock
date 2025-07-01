@@ -975,7 +975,7 @@ public class PlayerMovement : MonoBehaviour
 
         SaveManager.Instance.Save();
         DeathMenu.Instance.gameObject.SetActive(true);
-
+        Sidebar.Instance.gameObject.SetActive(true);
         
 
         FindObjectOfType<FollowPlayer>().enabled = false;
