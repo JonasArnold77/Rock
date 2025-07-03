@@ -32,6 +32,7 @@ public class DeathMenu : MonoBehaviour
 
     private void Start()
     {
+        InitMedals();
         gameObject.SetActive(false);
         RestartButton.onClick.AddListener(() => Respawn());
         ShopButton.onClick.AddListener(() => ShopMenu.Instance.gameObject.SetActive(true));
@@ -84,6 +85,38 @@ public class DeathMenu : MonoBehaviour
     //    }
     //}
 
+    private void InitMedals()
+    {
+        int amount = 0;
+        foreach (var n in ChallengeGameObjects)
+        {
+            foreach(var c in n.GetComponent<ChallengeButton>().LevelDistances)
+            {
+                if (n.GetComponent<ChallengeButton>().Highscore >= c)
+                {
+                    amount++;
+                }
+            }
+        }
+
+        InventoryManager.Instance.ActualAmountOfMedals = amount;
+        Sidebar.Instance.MoonAmountText.text = amount.ToString();
+
+        foreach (var n in ChallengeGameObjects)
+        { 
+            if(amount >= n.GetComponent<ChallengeButton>().AmountOfMedals)
+            {
+                n.GetComponent<Button>().interactable = true;
+                n.GetComponent<ChallengeButton>().LockObject.SetActive(false);
+            }
+            else
+            {
+                n.GetComponent<Button>().interactable = false;
+                n.GetComponent<ChallengeButton>().LockObject.SetActive(true);
+                n.GetComponent<ChallengeButton>().LockObject.GetComponentInChildren<TMP_Text>().text = n.GetComponent<ChallengeButton>().AmountOfMedals.ToString();
+            }
+        }
+    }
 
     private void Respawn()
     {
@@ -95,11 +128,8 @@ public class DeathMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        if(ChallengeManager.Instance.actualChallengeButton != null)
-        {
-            ChallengeManager.Instance.actualChallengeButton.SetActualChallenge();
-        }
 
+       
 
         SaveManager.Instance.CompleteDistance = 0;
 
@@ -124,8 +154,14 @@ public class DeathMenu : MonoBehaviour
             StartCoroutine(InventoryManager.Instance.AnimateLevelBar(InventoryManager.Instance.InitLevel, InventoryManager.Instance.FinalLevel, InventoryManager.Instance.InitDistance, ChallengeManager.Instance.actualChallengeButton.Distance));
             ChallengeDetailMenu.Instance.HighscoreText.text = "Highscore: " + ChallengeManager.Instance.actualChallengeButton.Highscore + "\nDistance: " + ChallengeManager.Instance.actualChallengeButton.Distance;
         }
-        
-        
+
+
+        if (ChallengeManager.Instance.actualChallengeButton != null)
+        {
+            ChallengeManager.Instance.actualChallengeButton.SetActualChallenge();
+            ChallengeManager.Instance.actualChallengeButton.SetUpChallengeDetailMenu();
+        }
+        InitMedals();
     }
 
     public int GetLevelFromDistance(float finalDistance, List<int> levelDistances)

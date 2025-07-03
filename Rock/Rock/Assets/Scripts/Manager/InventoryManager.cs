@@ -47,7 +47,9 @@ public class InventoryManager : MonoBehaviour
 
     public int InitDistance;
     public int InitLevel;
-    public int FinalLevel;  
+    public int FinalLevel;
+
+    public int ActualAmountOfMedals;
 
     private void Awake()
     {

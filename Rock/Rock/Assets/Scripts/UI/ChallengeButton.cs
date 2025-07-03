@@ -20,6 +20,8 @@ public class ChallengeButton : MonoBehaviour
     public TMP_Text HighscoreText;
     public TMP_Text DistanceText;
 
+    public int AmountOfMedals;
+
     public string showingTitle;
     public string description;
 
@@ -29,6 +31,9 @@ public class ChallengeButton : MonoBehaviour
 
     public List<int> LevelDistances = new List<int>();
 
+    public GameObject LockObject;
+
+
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => ChallengeFunction.Invoke());
@@ -36,11 +41,13 @@ public class ChallengeButton : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() => SaveManager.Instance.Save());
 
     }
-
+    private void Awake()
+    {
+        
+    }
     private void OnEnable()
     {
         HighscoreText.text = "" + Highscore;
-        
     }
 
     public void SetActualChallenge()
