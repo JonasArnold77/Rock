@@ -36,7 +36,7 @@ public class DeathMenu : MonoBehaviour
         gameObject.SetActive(false);
         RestartButton.onClick.AddListener(() => Respawn());
         ShopButton.onClick.AddListener(() => ShopMenu.Instance.gameObject.SetActive(true));
-        ShopButton.onClick.AddListener(() => ShopMenu.Instance.SetCurrentSkin());
+        //ShopButton.onClick.AddListener(() => ShopMenu.Instance.SetCurrentSkin());
         HardcoreModeButton.onClick.AddListener(() => InventoryManager.Instance.ToggleHardcoreMode());
         //test.text = Application.persistentDataPath;
     }

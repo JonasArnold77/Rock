@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ShopMenu : MonoBehaviour
 {
@@ -22,6 +24,11 @@ public class ShopMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        SetCurrentSkin();
+    }
+
     public void SetCurrentSkin()
     {
         foreach (Transform child in Content)
@@ -32,10 +39,19 @@ public class ShopMenu : MonoBehaviour
 
                 child.GetComponent<ShopItem>().Equipped = true;
 
+
+                child.GetComponent<Image>().color = SelectedColor;
+
+                //EventSystem.current.SetSelectedGameObject(child.GetComponent<Button>().gameObject);
+
                 SaveManager.Instance.ActualSkin = child.GetComponent<ShopItem>().Equipment.ToString();
                 SaveManager.Instance.Save();
 
-                child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(true));
+                //child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(true));
+            }
+            else
+            {
+                    child.GetComponent<Image>().color = UnselectedColor;
             }
         }
     }

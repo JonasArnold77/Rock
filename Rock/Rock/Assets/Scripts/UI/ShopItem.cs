@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,7 @@ public class ShopItem : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() => ClickOnButton());
 
         Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
+        //GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
         //Equipment.SetActive(false);
     }
 
@@ -43,13 +45,12 @@ public class ShopItem : MonoBehaviour
                 {
                     foreach (Transform child in ShopMenu.Instance.Content)
                     {
-                        if(child.GetComponent<ShopItem>().Equipment != null)
+                        if (child.GetComponent<ShopItem>().Equipment != null)
                         {
                             child.GetComponent<ShopItem>().Equipment.SetActive(false);
                         }
                     }
 
-                    SaveManager.Instance.ActualSkin = "None";
                     SaveManager.Instance.Save();
                     return;
                 }
@@ -61,6 +62,7 @@ public class ShopItem : MonoBehaviour
                 foreach (Transform child in ShopMenu.Instance.Content)
                 {
                     child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
+                    child.GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
                     child.GetComponent<ShopItem>().Equipped = false;
                 }
 
@@ -69,19 +71,20 @@ public class ShopItem : MonoBehaviour
                 SaveManager.Instance.ActualSkin = Equipment.ToString();
                 SaveManager.Instance.Save();
 
-                Outlines.Select(o=> o.gameObject).ToList().ForEach(o => o.SetActive(true));
+                Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(true));
+                GetComponent<Image>().color = ShopMenu.Instance.SelectedColor;
             }
             else
             {
-                FindObjectsOfType<Equipment>().ToList().Select(e => e.gameObject).ToList().ForEach(e => e.SetActive(false));
-                foreach (Transform child in ShopMenu.Instance.Content)
-                {
-                    child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
-                    child.GetComponent<ShopItem>().Equipped = false;
-                }
+                //FindObjectsOfType<Equipment>().ToList().Select(e => e.gameObject).ToList().ForEach(e => e.SetActive(false));
+                //foreach (Transform child in ShopMenu.Instance.Content)
+                //{
+                //    child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
+                //    GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
+                //    child.GetComponent<ShopItem>().Equipped = false;
+                //}
 
-                SaveManager.Instance.ActualSkin = "None";
-                SaveManager.Instance.Save();
+                //SaveManager.Instance.Save();
             }
         }
         else
