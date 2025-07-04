@@ -71,7 +71,7 @@ public class ShopItem : MonoBehaviour
                 SaveManager.Instance.ActualSkin = Equipment.ToString();
                 SaveManager.Instance.Save();
 
-                Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(true));
+                //Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(true));
                 GetComponent<Image>().color = ShopMenu.Instance.SelectedColor;
             }
             else
