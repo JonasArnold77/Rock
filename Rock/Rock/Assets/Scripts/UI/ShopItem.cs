@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,25 +15,67 @@ public class ShopItem : MonoBehaviour
     public bool Equipped;
     public string EquipmentName;
 
+    public Button BuyButton;
+
+    public TMP_Text PriceText;
+
     public List<Image> Outlines = new List<Image>();
 
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => ClickOnButton());
-
+            
         Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
+
+        StartCoroutine(InitGame());
+
+        if (BuyButton != null)
+        {
+            BuyButton.onClick.AddListener(() => Buy());
+        }
+        
         //GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
         //Equipment.SetActive(false);
     }
 
-    public void SetOutlinesHighlighted()
+    private void Buy()
     {
+        if(InventoryManager.Instance.MoneyAmount >= Price)
+        {
+            SaveManager.Instance.SkinsUnlocked.Add(Equipment.name);
+            SaveManager.Instance.Save();
+            BuyButton.gameObject.SetActive(false);
+            GetComponent<Button>().interactable = true;
+            GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
+        }
 
+        StartCoroutine(InitGame());
     }
 
-    public void SetOutlinesNotHighlighted()
+    private IEnumerator InitGame()
     {
+        yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
 
+        if(PriceText != null)
+        {
+            PriceText.text = Price.ToString();
+        }
+
+        if (BuyButton != null)
+        {
+            if (SaveManager.Instance.SkinsUnlocked.Contains(Equipment.name))
+            {
+                BuyButton.gameObject.SetActive(false);
+                GetComponent<Button>().interactable = true;
+                GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
+            }
+            else
+            {
+                BuyButton.gameObject.SetActive(true);
+                GetComponent<Button>().interactable = false;
+                GetComponent<Image>().color = ShopMenu.Instance.LockedColor;
+            }
+        }
     }
 
     private void ClickOnButton()

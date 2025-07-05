@@ -11,6 +11,7 @@ public class ShopMenu : MonoBehaviour
 
     public Color SelectedColor;
     public Color UnselectedColor;
+    public Color LockedColor;
 
     public static ShopMenu Instance;
 
@@ -53,6 +54,11 @@ public class ShopMenu : MonoBehaviour
             {
                     child.GetComponent<Image>().color = UnselectedColor;
             }
+        }
+
+        foreach (Transform child in Content)
+        { 
+
         }
     }
 }
