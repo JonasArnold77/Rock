@@ -27,7 +27,7 @@ public class ShopItem : MonoBehaviour
             
         Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
 
-        StartCoroutine(InitGame());
+        //StartCoroutine(InitGame());
 
         if (BuyButton != null)
         {
@@ -47,6 +47,7 @@ public class ShopItem : MonoBehaviour
             BuyButton.gameObject.SetActive(false);
             GetComponent<Button>().interactable = true;
             GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
+            Unlocked = true;
         }
 
         StartCoroutine(InitGame());
@@ -104,9 +105,12 @@ public class ShopItem : MonoBehaviour
 
                 foreach (Transform child in ShopMenu.Instance.Content)
                 {
-                    child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
-                    child.GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
-                    child.GetComponent<ShopItem>().Equipped = false;
+                    if (child.GetComponent<ShopItem>().Unlocked)
+                    {
+                        child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
+                        child.GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
+                        child.GetComponent<ShopItem>().Equipped = false;
+                    } 
                 }
 
                 Equipped = true;

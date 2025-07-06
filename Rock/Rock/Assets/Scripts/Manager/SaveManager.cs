@@ -207,7 +207,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory40")
+        QuickSaveWriter.Create("Inventory43")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -231,11 +231,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory40.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory43.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory40.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory43.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory40.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory43.json");
 #endif
 
 
@@ -250,7 +250,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory40")
+            QuickSaveReader.Create("Inventory43")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
@@ -275,7 +275,7 @@ public class SaveManager : MonoBehaviour
         Highscore = 0;
         XpPoints = 0;
         Money = 0; // Beispiel: Startkapital
-        ActualSkin = "";
+        ActualSkin = "Feather (UnityEngine.GameObject)";
         HardcoreModeOn = false;
         TutorialDone = false;
         CountOfArea = 4;

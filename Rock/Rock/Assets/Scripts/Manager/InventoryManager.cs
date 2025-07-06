@@ -14,6 +14,8 @@ public class InventoryManager : MonoBehaviour
 
     public PlayerMovement _PlayerMovement;
 
+    public List<Equipment> _EquipmentList = new List<Equipment>();
+
     public int MoneyAmount;
     
     public Color JumpingColor;
