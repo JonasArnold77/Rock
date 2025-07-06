@@ -275,7 +275,7 @@ public class SaveManager : MonoBehaviour
         Highscore = 0;
         XpPoints = 0;
         Money = 0; // Beispiel: Startkapital
-        ActualSkin = "Feather (UnityEngine.GameObject)";
+        ActualSkin = "";
         HardcoreModeOn = false;
         TutorialDone = false;
         CountOfArea = 4;
