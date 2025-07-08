@@ -98,7 +98,34 @@ public class ShopMenu : MonoBehaviour
                     child.GetComponent<ShopItem>().GetComponent<Image>().color = ShopMenu.Instance.LockedColor;
                     child.GetComponent<ShopItem>().Unlocked = false;
                 }
-            }
+
+                if (child != null)
+                {
+                    ShopItem shopItem = child.GetComponent<ShopItem>();
+                    if (shopItem != null)
+                    {
+                        if (shopItem.Equipment != null)
+                        {
+                            if (shopItem.Equipment != null && shopItem.Equipment.ToString() == SaveManager.Instance.ActualSkin)
+                            {
+                                InventoryManager.Instance._EquipmentList.ToList().Select(e => e.gameObject).ToList().ForEach(e => e.SetActive(false));
+
+                                child.GetComponent<ShopItem>().Equipped = true;
+
+
+                                child.GetComponent<Image>().color = SelectedColor;
+
+                                //EventSystem.current.SetSelectedGameObject(child.GetComponent<Button>().gameObject);
+
+                                SaveManager.Instance.ActualSkin = child.GetComponent<ShopItem>().Equipment.ToString();
+                                SaveManager.Instance.Save();
+
+                                //child.GetComponent<ShopItem>().Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(true));
+                            }
+                        }
+                    }
+                }
+                        }
         }
     }
 }

@@ -10,6 +10,15 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
 
+
+    private Vector2 lastPosition;
+    private float speedX;
+    private bool hasReachedFullSpeed = false;
+
+    [SerializeField] private float expectedSpeedX = 6f;
+    [SerializeField] private float tolerance = 0.1f;
+    [SerializeField] private float activationThreshold = 2.5f;
+
     public float jumpForce = 5f;          // Die Stärke des Sprungs
     public float fallSpeedMultiplier = 10f; // Wie schnell der Spieler magnetisch zu Boden gezogen wird
     private KeyCode jumpKey = KeyCode.Space; // Taste für den Sprung
@@ -518,6 +527,11 @@ public class PlayerMovement : MonoBehaviour
         IsGrounded();
         IsOnBottom();
         IsOnTop();
+
+        if (rb.velocity.x == speed && ChallengeManager.Instance.actualChallengeButton.title != "Dash" && ChallengeManager.Instance.actualChallengeButton.title != "Flappy")
+        {
+            CheckForStucking();
+        }
     }
 
     private void FixedUpdate()
@@ -561,6 +575,47 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(screenPos);
         return worldPos.y;
+    }
+
+    public void CheckForStucking()
+    {
+        Vector2 currentPosition = transform.position;
+        float deltaX = currentPosition.x - lastPosition.x;
+        float deltaTime = Time.deltaTime;
+        speedX = deltaX / deltaTime;
+
+        // Sobald wir einmal nahe an der vollen Geschwindigkeit waren, aktivieren wir die Überwachung
+        if (!hasReachedFullSpeed && speedX >= activationThreshold)
+        {
+            hasReachedFullSpeed = true;
+            Debug.Log("Charakter hat volle Geschwindigkeit erreicht. Überwachung aktiviert.");
+        }
+
+        if (hasReachedFullSpeed)
+        {
+            if (Mathf.Abs(speedX - expectedSpeedX) > tolerance)
+            {
+                if (InventoryManager.Instance.GodMode)
+                {
+                    return;
+                }
+
+                speed = 0;
+                FireBallEffect.SetActive(false);
+                //MagneticBallEffect.SetActive(false);
+                BallEffect.SetActive(false);
+                BallEffect2.SetActive(false);
+
+                rb.simulated = true;
+                GetComponent<Collider2D>().enabled = false;
+
+                FindObjectOfType<FollowPlayer>().enabled = false;
+
+                StartCoroutine(WaitForReset());
+            }
+        }
+
+        lastPosition = currentPosition;
     }
 
     //    void HandleInput()
