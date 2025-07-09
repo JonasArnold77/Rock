@@ -952,13 +952,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - new Vector2(0, 0.35f), Vector2.right, 1, groundLayer);
-        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.35f), Vector2.right, 1, groundLayer);
+        //Offset was 0.35f before
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - new Vector2(0, 0.25f), Vector2.right, 1, groundLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.25f), Vector2.right, 1, groundLayer);
 
         RaycastHit2D hitAll = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0), Vector2.right, 1, groundLayer);
 
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, raycastDistance, groundLayer);
-
 
         if (hit.collider != null)
         {
