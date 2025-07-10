@@ -533,10 +533,8 @@ public class PlayerMovement : MonoBehaviour
         }
 #endif
 
+        
 
-        IsGrounded();
-        IsOnBottom();
-        IsOnTop();
 
         //if (rb.velocity.x == speed && ChallengeManager.Instance.actualChallengeButton.title != "Dash" && ChallengeManager.Instance.actualChallengeButton.title != "Flappy")
         //{
@@ -546,6 +544,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        IsGrounded();
+        IsOnBottom();
+        IsOnTop();
+
         if (ChallengeManager.Instance.actualChallengeButton.title != "Follow")
         {
             return;
@@ -556,6 +558,8 @@ public class PlayerMovement : MonoBehaviour
         // Neue Position berechnen
         Vector2 targetPos = new Vector2(rb.position.x + horizontalSpeed * Time.fixedDeltaTime, targetY);
         rb.MovePosition(targetPos);
+
+
     }
 
     void LateUpdate()
@@ -952,67 +956,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Offset was 0.35f before
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - new Vector2(0, 0.25f), Vector2.right, 1, groundLayer);
-        RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0.25f), Vector2.right, 1, groundLayer);
-
         RaycastHit2D hitAll = Physics2D.Raycast((Vector2)transform.position + new Vector2(0, 0), Vector2.right, 1, groundLayer);
 
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, raycastDistance, groundLayer);
 
-        if (hit.collider != null)
-        {
-            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
-            if (LifePoints == 0)
-            {
-                if (InventoryManager.Instance.GodMode)
-                {
-                    return;
-                }
-
-                speed = 0;
-                FireBallEffect.SetActive(false);
-                //MagneticBallEffect.SetActive(false);
-                BallEffect.SetActive(false);
-                BallEffect2.SetActive(false);
-
-                rb.simulated = true;
-                GetComponent<Collider2D>().enabled = false;
-
-                StartCoroutine(WaitForReset());
-            }
-            else
-            {
-                LifePoints--;
-            }
-        }
-        else if (hit2.collider != null)
-        {
-            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
-            if (LifePoints == 0)
-            {
-                if (InventoryManager.Instance.GodMode)
-                {
-                    return;
-                }
-
-                speed = 0;
-                FireBallEffect.SetActive(false);
-                //MagneticBallEffect.SetActive(false);
-                BallEffect.SetActive(false);
-                BallEffect2.SetActive(false);
-
-                rb.simulated = true;
-                GetComponent<Collider2D>().enabled = false;
-
-                StartCoroutine(WaitForReset());
-            }
-            else
-            {
-                LifePoints--;
-            }
-        }
-        else if (hitAll.collider != null)
+        if (hitAll.collider != null || (!isOnTop && !isOnBotton))
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
             if (LifePoints == 0)
@@ -1039,36 +987,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
   
-        
-
-        //if ((hit.collider != null || hit2.collider != null) && hit.collider.GetComponent<PushDown>() == null && !hit.collider.gameObject.GetComponent<SawBlade>() && !hit2.collider.gameObject.GetComponent<SawBlade>())
-        //{
-        //    Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
-
-        //    if (LifePoints == 0)
-        //    {
-        //        if (InventoryManager.Instance.GodMode)
-        //        {
-        //            return;
-        //        }
-
-        //        speed = 0;
-        //        FireBallEffect.SetActive(false);
-        //        //MagneticBallEffect.SetActive(false);
-        //        BallEffect.SetActive(false);
-        //        BallEffect2.SetActive(false);
-
-        //        rb.simulated = true;
-        //        GetComponent<Collider2D>().enabled = false;
-
-        //        StartCoroutine(WaitForReset());
-        //    }
-        //    else
-        //    {
-        //        LifePoints--;
-        //    }
-        //}
-
         if (collision.gameObject.CompareTag("Spikes"))
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
