@@ -32,6 +32,7 @@ public class RandomChunk : MonoBehaviour
     public List<ObjectsByHeightType> ActivateObjectsByHeightTyoe = new List<ObjectsByHeightType>();
     public List<ObjectsByHeightType> DeactivateObjectsByHeightTyoe = new List<ObjectsByHeightType>();
 
+    public bool InitIsDone;
 
     private void Start()
     {
@@ -89,5 +90,6 @@ public class RandomChunk : MonoBehaviour
                 o.Objects.ForEach(o => o.SetActive(true));
             }
         }
+        InitIsDone = true;
     }
 }

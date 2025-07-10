@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SawBlade : MonoBehaviour
@@ -38,6 +39,16 @@ public class SawBlade : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(WaitForRandomChunk());
+    }
+
+    public IEnumerator WaitForRandomChunk()
+    {
+        if (LastParent.GetComponent<RandomChunk>())
+        {
+            yield return new WaitUntil(() => LastParent.GetComponent<RandomChunk>().InitIsDone);
+        }
+        
         transform.parent = null;
 
         Player = FindObjectOfType<PlayerMovement>().transform;
@@ -57,10 +68,23 @@ public class SawBlade : MonoBehaviour
 
     private void Update()
     {
+        if (LastParent.GetComponent<RandomChunk>())
+        {
+            if (!LastParent.GetComponent<RandomChunk>().InitIsDone)
+            {
+                return;
+            }
+        }
+        
         if (EndPos == null && Vector2.Distance(transform.position, Player.position) > 13)
         {
             return;
         }
+
+        //if (EndPos != null && StartPos != null && Vector2.Distance(EndPos.position, Player.position) > 13 && Vector2.Distance(StartPos.position, Player.position) > 13)
+        //{
+        //    return;
+        //}
 
         if(LastParent.position.x - FindObjectOfType<PlayerMovement>().gameObject.transform.position.x >= 100)
         {
