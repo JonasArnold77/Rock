@@ -34,10 +34,13 @@ public class SawBlade : MonoBehaviour
     public bool StartFromSetPosition;
     public bool Teleport;
     public int StartOffset = 4;
+    public Transform Player;
 
     private void Start()
     {
         transform.parent = null;
+
+        Player = FindObjectOfType<PlayerMovement>().transform;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -54,6 +57,11 @@ public class SawBlade : MonoBehaviour
 
     private void Update()
     {
+        if (EndPos == null && Vector2.Distance(transform.position, Player.position) > 13)
+        {
+            return;
+        }
+
         if(LastParent.position.x - FindObjectOfType<PlayerMovement>().gameObject.transform.position.x >= 100)
         {
             return;
