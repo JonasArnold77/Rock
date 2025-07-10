@@ -960,7 +960,7 @@ public class PlayerMovement : MonoBehaviour
 
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, raycastDistance, groundLayer);
 
-        if ((hitAll.collider != null && !hitAll.collider.GetComponent<SawBlade>()) || (!isOnTop && !isOnBotton))
+        if ((hitAll.collider != null && !hitAll.collider.GetComponent<SawBlade>()) || (!isOnTop && !isOnBotton && hitAll.collider))
         {
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
             if (LifePoints == 0)
