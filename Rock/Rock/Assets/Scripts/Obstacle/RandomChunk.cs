@@ -15,6 +15,7 @@ public class ObjectsByChallengeType
 {
     public ChallengeType challengeType;
     public List<GameObject> Objects;
+    public bool AlreadyUsed;
 }
 
 [Serializable]
@@ -72,8 +73,9 @@ public class RandomChunk : MonoBehaviour
             if (o.challengeType == ChallengeManager.Instance.actualChallengeButton.ActualChallengeType)
             {
                 o.Objects.ForEach(o => o.SetActive(true));
+                o.AlreadyUsed = true;
             }
-            else
+            else if(!o.AlreadyUsed)
             {
                 o.Objects.ForEach(o => o.SetActive(false));
             }

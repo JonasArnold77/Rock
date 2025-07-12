@@ -340,6 +340,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType:
   - {fileID: 11400000, guid: cdb697f3202e2d841848b59bea6513c9, type: 2}
+  - {fileID: 11400000, guid: beac4881581f9ad4e8b682a8178fa8b3, type: 2}
   IsBigChunk: 1
 --- !u!114 &8623407294978508135
 MonoBehaviour:
@@ -357,9 +358,11 @@ MonoBehaviour:
   - challengeType: {fileID: 11400000, guid: cdb697f3202e2d841848b59bea6513c9, type: 2}
     Objects:
     - {fileID: 9192162948861344111}
+    AlreadyUsed: 0
   - challengeType: {fileID: 11400000, guid: beac4881581f9ad4e8b682a8178fa8b3, type: 2}
     Objects:
     - {fileID: 2858359250468798098}
+    AlreadyUsed: 0
   ObjectByChallengeTypeDisable: []
   ActivateObjectsByHeightTyoe:
   - heightType: {fileID: 11400000, guid: 98111d751ec779c4a99760b9d8f41507, type: 2}
@@ -371,6 +374,7 @@ MonoBehaviour:
     Objects:
     - {fileID: 4113253311618418870}
     - {fileID: 1369860368414154717}
+  InitIsDone: 0
 --- !u!1 &270440581432375538
 GameObject:
   m_ObjectHideFlags: 0
