@@ -286,7 +286,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 rb.velocity = new Vector2(rb.velocity.x,0);
-                rb.AddForce(Vector2.up * 4, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 4.5f, ForceMode2D.Impulse);
             }
             if (isGrounded)
             {
@@ -822,7 +822,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         // Wenn der Raycast ein Objekt trifft, das auf dem Ground-Layer liegt, ist der Charakter grounded
-        if (hit.collider != null /*&& hit2.collider == null*/)
+        if (hit.collider != null && !hit.collider.GetComponent<SawBlade>() /*&& hit2.collider == null*/)
         {
             isOnBotton = true;
         }
@@ -845,7 +845,7 @@ public class PlayerMovement : MonoBehaviour
         
 
         // Wenn der Raycast ein Objekt trifft, das auf dem Ground-Layer liegt, ist der Charakter grounded
-        if (hit.collider != null /*&& hit2.collider == null*/)
+        if (hit.collider != null && !hit.collider.GetComponent<SawBlade>()/*&& hit2.collider == null*/)
         {
             isOnTop = true;
         }

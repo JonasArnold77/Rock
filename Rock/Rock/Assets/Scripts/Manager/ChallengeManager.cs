@@ -70,7 +70,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateFlappyEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
-        FindObjectOfType<PlayerMovement>().speed = 3;
+        FindObjectOfType<PlayerMovement>().speed = 5f;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
         SaveManager.Instance.HardcoreModeOn = false;
     }
