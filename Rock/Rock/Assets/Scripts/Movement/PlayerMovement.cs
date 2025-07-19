@@ -243,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (isOnBotton && IsOnWayDown && hit3.collider == null)
             {
-                rb.velocity = new Vector2(speed, -20);
+                //rb.velocity = new Vector2(speed, -20);
             }
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
@@ -274,10 +274,16 @@ public class PlayerMovement : MonoBehaviour
 
             Vector2 position2 = new Vector2(transform.position.x - 0.5f, transform.position.y);
             RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
+            RaycastHit2D hit3 = Physics2D.Raycast(position2, -direction, raycastDistance, groundLayer);
 
             if (isOnTop && !IsOnWayDown && hit2.collider == null)
             {
                 rb.velocity = new Vector2(speed, 20);
+            }
+
+            if (isOnBotton && IsOnWayDown && hit3.collider == null)
+            {
+                rb.velocity = new Vector2(speed, -20);
             }
 
         }
@@ -810,11 +816,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void IsOnBottom()
     {
-        Vector2 position = new Vector2(transform.position.x - 0.5f, transform.position.y);
+        Vector2 position = new Vector2(transform.position.x - 0.7f, transform.position.y);
         // Der Raycast geht nach unten, also ist die Richtung Vector2.down
         Vector2 direction = Vector2.down;
 
-        Vector2 position2 = new Vector2(transform.position.x + 0.5f, transform.position.y);
+        Vector2 position2 = new Vector2(transform.position.x + 0.7f, transform.position.y);
         RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
 
         // Führe den Raycast durch und überprüfe, ob er auf den Boden trifft
@@ -833,11 +839,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void IsOnTop()
     {
-        Vector2 position = new Vector2(transform.position.x-0.5f, transform.position.y);
+        Vector2 position = new Vector2(transform.position.x-0.7f, transform.position.y);
         // Der Raycast geht nach unten, also ist die Richtung Vector2.down
         Vector2 direction = Vector2.up;
 
-        Vector2 position2 = new Vector2(transform.position.x + 0.5f, transform.position.y);
+        Vector2 position2 = new Vector2(transform.position.x + 0.7f, transform.position.y);
         RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
 
         // Führe den Raycast durch und überprüfe, ob er auf den Boden trifft
