@@ -72,7 +72,8 @@ public class PlayerMovement : MonoBehaviour
     public float rayDistance = 1f;
 
     private LineRenderer lineRenderer;
-
+    public ParticleSystem particleSystem;
+    public ParticleSystem particleSystem2;
 
 
     void Start()
@@ -769,6 +770,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            particleSystem.Play();
         }
         
     }
@@ -819,6 +821,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(rb.velocity.x, -fallSpeedMultiplier);
+            particleSystem2.Play();
         }
 
         isDoingMagneticFall = true;
