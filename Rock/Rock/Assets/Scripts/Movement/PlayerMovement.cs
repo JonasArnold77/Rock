@@ -276,6 +276,15 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
             RaycastHit2D hit3 = Physics2D.Raycast(position2, -direction, raycastDistance, groundLayer);
 
+            if (isOnBotton && IsOnWayDown)
+            {
+                rb.velocity = new Vector2(speed, 0);
+            }
+            else if(isOnTop && !IsOnWayDown)
+            {
+                rb.velocity = new Vector2(speed, 0);
+            }
+
             if (isOnTop && !IsOnWayDown && hit2.collider == null)
             {
                 rb.velocity = new Vector2(speed, 20);
