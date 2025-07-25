@@ -81,12 +81,18 @@ public class SawBlade : MonoBehaviour
             return;
         }
 
+
+        if (Vector2.Distance(Player.position, transform.position) > 50 && Player.position.x > transform.position.x)
+        {
+            Destroy(gameObject);
+        }
+
         //if (EndPos != null && StartPos != null && Vector2.Distance(EndPos.position, Player.position) > 13 && Vector2.Distance(StartPos.position, Player.position) > 13)
         //{
         //    return;
         //}
 
-        if(LastParent.position.x - FindObjectOfType<PlayerMovement>().gameObject.transform.position.x >= 100)
+        if (LastParent.position.x - FindObjectOfType<PlayerMovement>().gameObject.transform.position.x >= 100)
         {
             return;
         }

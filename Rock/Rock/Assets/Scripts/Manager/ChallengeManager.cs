@@ -77,6 +77,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateFollowEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        FindObjectOfType<PlayerMovement>().horizontalSpeed = 10f;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
     }

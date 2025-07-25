@@ -36,9 +36,9 @@ public class Obstacle : MonoBehaviour
 
     private void Update()
     {
-        if (!IsPlayerInsideCollider() && Vector2.Distance(PlayerTransform.position,transform.position)>200 && PlayerTransform.position.x > transform.position.x)
+        if (!IsPlayerInsideCollider() && Vector2.Distance(PlayerTransform.position, transform.position) > 65 && PlayerTransform.position.x > transform.position.x)
         {
-             Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
