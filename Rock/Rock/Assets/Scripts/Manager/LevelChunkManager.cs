@@ -74,11 +74,15 @@ public class LevelChunkManager : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Follow")
         {
-            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.StrongGravity)).ToList();
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Follow)).ToList();
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Clicking")
         {
-            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.StrongGravity)).ToList();
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Clicking)).ToList();
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
+        {
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Dash)).ToList();
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
         {

@@ -44,6 +44,9 @@ public class RandomChunk : MonoBehaviour
     {
         yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
 
+        var challengeType = ChallengeManager.Instance.actualChallengeButton.ActualChallengeType;
+        var actualChallenges = GetComponent<Obstacle>()._ChallengeType;
+
         foreach (var o in ActivateObjectsByHeightTyoe)
         {
             if (o.heightType == GetComponent<Obstacle>().FinalEndType)
