@@ -569,7 +569,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        float targetY = GetWorldInputY();
+        float targetY = Mathf.Lerp(rb.position.y, GetWorldInputY(),0.5f);
 
         // Neue Position berechnen
         Vector2 targetPos = new Vector2(rb.position.x + horizontalSpeed * Time.fixedDeltaTime, targetY);

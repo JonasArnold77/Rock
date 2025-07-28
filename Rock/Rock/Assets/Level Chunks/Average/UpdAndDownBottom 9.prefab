@@ -325,6 +325,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &230292553512052996
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,6 +568,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &317263109905400483
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,6 +1314,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &968401712402678289
 GameObject:
   m_ObjectHideFlags: 0
@@ -2919,6 +2922,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &1604547210857278658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3244,6 +3248,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &1799610155598761636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,6 +4024,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &2137522703352706099
 GameObject:
   m_ObjectHideFlags: 0
@@ -4933,6 +4939,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &2391774082209255571
 GameObject:
   m_ObjectHideFlags: 0
@@ -5175,6 +5182,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &2590871148109584534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5417,6 +5425,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &2613997151717243192
 GameObject:
   m_ObjectHideFlags: 0
@@ -5826,6 +5835,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &2919931457897167428
 GameObject:
   m_ObjectHideFlags: 0
@@ -7281,6 +7291,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &3425266318850471860
 GameObject:
   m_ObjectHideFlags: 0
@@ -7523,6 +7534,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &3551002166898496306
 GameObject:
   m_ObjectHideFlags: 0
@@ -8679,6 +8691,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &4267354210509491025
 GameObject:
   m_ObjectHideFlags: 0
@@ -8837,6 +8850,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &4320023653314729278
 GameObject:
   m_ObjectHideFlags: 0
@@ -10049,6 +10063,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &4883046244246592630
 GameObject:
   m_ObjectHideFlags: 0
@@ -10702,6 +10717,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &5209095768657395178
 GameObject:
   m_ObjectHideFlags: 0
@@ -12623,6 +12639,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &6613721984034094844
 GameObject:
   m_ObjectHideFlags: 0
@@ -12780,6 +12797,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &6638926409187358437
 GameObject:
   m_ObjectHideFlags: 0
@@ -13999,6 +14017,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &7463297521309066390
 GameObject:
   m_ObjectHideFlags: 0
@@ -14638,7 +14657,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -14718,10 +14737,11 @@ MonoBehaviour:
   AreaCollider: {fileID: 5220233219784718356}
   ChunkType: {fileID: 11400000, guid: ddaa04d2d3b87154badb0aaeb91f5e25, type: 2}
   Title: 
-  RuntimeID: 25
+  RuntimeID: 14
   type: {fileID: 0}
   _ChallengeType:
   - {fileID: 11400000, guid: c5e30368af7495f4ca073bddfec36fc1, type: 2}
+  IsBigChunk: 0
 --- !u!1 &7628300653592134005
 GameObject:
   m_ObjectHideFlags: 0
@@ -15766,6 +15786,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &7952709628046391748
 GameObject:
   m_ObjectHideFlags: 0
@@ -17289,6 +17310,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &8484581761964767410
 GameObject:
   m_ObjectHideFlags: 0
@@ -18379,6 +18401,7 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
 --- !u!1 &8848649664206292338
 GameObject:
   m_ObjectHideFlags: 0

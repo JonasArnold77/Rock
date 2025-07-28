@@ -18,6 +18,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateBouncyBallEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = PrefabManager.Instance.BouncyMaterial;
+        FindObjectOfType<PlayerMovement>().speed = 7;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
