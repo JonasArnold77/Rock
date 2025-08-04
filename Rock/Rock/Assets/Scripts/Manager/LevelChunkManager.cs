@@ -84,9 +84,9 @@ public class LevelChunkManager : MonoBehaviour
         {
             Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Dash)).ToList();
         }
-        else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
         {
-            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Dash)).ToList();
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Normal)).ToList();
         }
         SetRuntimeIDs();
     }

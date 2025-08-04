@@ -13,7 +13,7 @@ public class RandomDictionary
 [Serializable]
 public class ObjectsByChallengeType
 {
-    public ChallengeType challengeType;
+    public List<ChallengeType> challengeType;
     public List<GameObject> Objects;
     public bool AlreadyUsed;
 }
@@ -73,7 +73,7 @@ public class RandomChunk : MonoBehaviour
 
         foreach (var o in ObjectByChallengeType)
         {
-            if (o.challengeType == ChallengeManager.Instance.actualChallengeButton.ActualChallengeType)
+            if (o.challengeType.Contains(ChallengeManager.Instance.actualChallengeButton.ActualChallengeType))
             {
                 o.Objects.ForEach(o => o.SetActive(true));
                 o.AlreadyUsed = true;
@@ -86,7 +86,7 @@ public class RandomChunk : MonoBehaviour
 
         foreach (var o in ObjectByChallengeTypeDisable)
         {
-            if (o.challengeType == ChallengeManager.Instance.actualChallengeButton.ActualChallengeType)
+            if (o.challengeType.Contains(ChallengeManager.Instance.actualChallengeButton.ActualChallengeType))
             {
                 o.Objects.ForEach(o => o.SetActive(false));
             }
