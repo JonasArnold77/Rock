@@ -258,12 +258,12 @@ public class PlayerMovement : MonoBehaviour
 
                 if (isVelocityPositive)
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, -20);
+                    rb.velocity = new Vector2(rb.velocity.x, -17);
                     IsOnWayDown = true;
                 }
                 else
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, 20);
+                    rb.velocity = new Vector2(rb.velocity.x, 17);
                     IsOnWayDown = false;
                 }
 

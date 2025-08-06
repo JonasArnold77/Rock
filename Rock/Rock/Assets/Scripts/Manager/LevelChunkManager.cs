@@ -58,11 +58,11 @@ public class LevelChunkManager : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
         {
-            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.FixedCamera)).ToList();
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Normal)).ToList();
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
         {
-            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.StrangeCamera)).ToList();
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Normal)).ToList();
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
         {
@@ -85,6 +85,10 @@ public class LevelChunkManager : MonoBehaviour
             Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Dash)).ToList();
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
+        {
+            Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Normal)).ToList();
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "UpsideDown")
         {
             Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.Normal)).ToList();
         }

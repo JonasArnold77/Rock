@@ -315,7 +315,7 @@ public class LevelManager : MonoBehaviour
                 if (countOfArea <= 0)
                 {
                     actualChunkType = ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList()[UnityEngine.Random.Range(0, ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList().Count)];
-                    countOfArea = UnityEngine.Random.Range(1, 1);
+                    countOfArea = UnityEngine.Random.Range(2, 3);
                 }
                 else if (/*InitIsDone &&*/ chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
                 {
@@ -379,7 +379,7 @@ public class LevelManager : MonoBehaviour
             objectPrefab = LevelChunkManager.Instance.Chunks[UnityEngine.Random.Range(0, LevelChunkManager.Instance.Chunks.Count)];
         }
 
-        if (!LevelChunkManager.Instance.TestChunk &&     lastSpawnedObject != null && lastSpawnedObject.GetComponent<Obstacle>().IsBigChunk && LevelChunkManager.Instance.TestMode)
+        if (!LevelChunkManager.Instance.TestChunk && lastSpawnedObject != null && lastSpawnedObject.GetComponent<Obstacle>().IsBigChunk && LevelChunkManager.Instance.TestMode)
         {
             objectPrefab = LevelChunkManager.Instance.Chunks.Where(c => !c.GetComponent<Obstacle>().IsBigChunk  && c.GetComponent<Obstacle>().endType.Contains(chunkType) && c.GetComponent<Obstacle>().ChunkType == actualChunkType).ToList()[UnityEngine.Random.Range(0, LevelChunkManager.Instance.Chunks.Where(c => !c.GetComponent<Obstacle>().IsBigChunk && c.GetComponent<Obstacle>().endType.Contains(chunkType) && c.GetComponent<Obstacle>().ChunkType == actualChunkType).ToList().Count)];
         }
