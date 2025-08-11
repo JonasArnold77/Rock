@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -169,9 +170,9 @@ public class SaveManager : MonoBehaviour
         {
             FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
         }
-        
 
-        LevelManager.Instance.GameIsInitialized = true;
+        LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList()[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList().Count)];
+        LevelManager.Instance.GameIsInitialized = true;  
     }
 
     public int GetLevelFromDistance(float finalDistance, List<int> levelDistances)
