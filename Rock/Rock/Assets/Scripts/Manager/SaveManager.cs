@@ -25,7 +25,9 @@ public class SaveManager : MonoBehaviour
 
     public List<string> Challenges;
     public List<int> ChallengesScore;
-    public List<int> ChallengeDistance; 
+    public List<int> ChallengeDistance;
+
+    public List<string> CameraChallengesStrings;
 
     public List<string> SkinsUnlocked;
 
@@ -207,7 +209,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory44")
+        QuickSaveWriter.Create("Inventory47")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -222,6 +224,7 @@ public class SaveManager : MonoBehaviour
                        .Write("ChallengeDistance", ChallengeDistance)
                        .Write("ActualChallenge", ActualChallenge)
                        .Write("SkinsUnlocked", SkinsUnlocked)
+                       .Write("CameraChallengesStrings", CameraChallengesStrings)
                        .Commit();
 
         //Content.text = QuickSaveRaw.LoadString("Inputs.json");
@@ -231,11 +234,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory44.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory47.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory44.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory47.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory44.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory47.json");
 #endif
 
 
@@ -250,7 +253,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory44")
+            QuickSaveReader.Create("Inventory47")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
@@ -264,7 +267,8 @@ public class SaveManager : MonoBehaviour
                        .Read<List<int>>("Highscores", (r) => { ChallengesScore = r; })
                        .Read<List<int>>("ChallengeDistance", (r) => { ChallengeDistance = r; })
                        .Read<string>("ActualChallenge", (r) => { ActualChallenge = r; })
-                       .Read<List<string>>("SkinsUnlocked", (r) => { SkinsUnlocked = r; });
+                       .Read<List<string>>("SkinsUnlocked", (r) => { SkinsUnlocked = r; })
+                       .Read<List<string>>("CameraChallengesStrings", (r) => { CameraChallengesStrings = r; });
             //DeathMenu.Instance.gameObject.SetActive(true);
             //DeathMenu.Instance.test.text = "Save File Existiert";
         }
@@ -284,6 +288,13 @@ public class SaveManager : MonoBehaviour
         ChallengesScore = DeathMenu.Instance.ChallengeGameObjects.Select(c => c.GetComponent<ChallengeButton>().Highscore).ToList();
         ChallengeDistance = DeathMenu.Instance.ChallengeGameObjects.Select(c => c.GetComponent<ChallengeButton>().Distance).ToList();
         ActualChallenge = "Normal";
+
+        foreach (var c in Challenges)
+        {
+            CameraChallengesStrings.Add(ChallengeManager.Instance.CreateWholeSaveString(c,"Normal", new int[] { 0, 0, 0, 0 }));
+        }
+
+
         Debug.Log("Default-Werte gesetzt.");
     }
 }

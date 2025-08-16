@@ -24,6 +24,8 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     public static ChallengeDetailMenu Instance;
 
+    public List<CameraChallengeButton> CameraChallengeButtons;
+
     private void Awake()
     {
         Instance = this;
@@ -33,6 +35,22 @@ public class ChallengeDetailMenu : MonoBehaviour
     {
         RestartButton.onClick.AddListener(() => Respawn());
         gameObject.SetActive(false);
+
+        foreach (var c in CameraChallengeButtons)
+        {
+            c.GetComponent<Button>().onClick.AddListener(() => ActualCameraChallenge(c));
+        }
+    }
+
+    public void ActualCameraChallenge(CameraChallengeButton ca)
+    {
+        var challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
+        int index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
+
+        SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateChallengeName(challengeString, ca.challengeName);
+        SaveManager.Instance.Save();
+
+
     }
 
     private void OnEnable()

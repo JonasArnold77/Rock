@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ChallengeManager : MonoBehaviour
@@ -107,5 +109,65 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+    }
+
+    public string CreateWholeSaveString(string dimensionName, string selectedChallenge, int[] completedChallenges)
+    {
+        if (completedChallenges.Length != 4)
+            throw new ArgumentException("completedChallenges muss genau 4 Einträge enthalten.");
+
+        return $"{dimensionName}|{selectedChallenge}|{string.Join(",", completedChallenges)}";
+    }
+
+    public string UpdateChallengeName(string saveString, string newChallengeName)
+    {
+        string[] parts = saveString.Split('|');
+
+        if (parts.Length != 3)
+            throw new ArgumentException("Ungültiger Save-String.");
+
+        return $"{parts[0]}|{newChallengeName}|{parts[2]}";
+    }
+
+    public string UpdateCompletedChallenges(string saveString, int[] newCompleted)
+    {
+        if (newCompleted.Length != 4)
+            throw new ArgumentException("newCompleted muss genau 4 Einträge enthalten.");
+
+        string[] parts = saveString.Split('|');
+
+        if (parts.Length != 3)
+            throw new ArgumentException("Ungültiger Save-String.");
+
+        return $"{parts[0]}|{parts[1]}|{string.Join(",", newCompleted)}";
+    }
+
+    public object GetSaveParameter(string saveString, string parameterName)
+    {
+        string[] parts = saveString.Split('|');
+
+        if (parts.Length != 3)
+            throw new ArgumentException("Ungültiger Save-String.");
+
+        switch (parameterName.ToLower())
+        {
+            case "dimension":
+                return parts[0];
+            case "challenge":
+                return parts[1];
+            case "completed":
+                return parts[2].Split(',').Select(int.Parse).ToArray(); // int[]
+            default:
+                throw new ArgumentException($"Unbekannter Parametername: {parameterName}");
+        }
+    }
+
+    public string FindSaveByChallengeName(List<string> saveList, string challengeName)
+    {
+        return saveList.FirstOrDefault(s =>
+        {
+            string[] parts = s.Split('|');
+            return parts.Length >= 2 && parts[0] == challengeName;
+        });
     }
 }

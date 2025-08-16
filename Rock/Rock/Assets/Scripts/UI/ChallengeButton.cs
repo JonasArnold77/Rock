@@ -33,6 +33,8 @@ public class ChallengeButton : MonoBehaviour
 
     public GameObject LockObject;
 
+    public string CameraChallengeString;
+
 
     private void Start()
     {
@@ -40,14 +42,21 @@ public class ChallengeButton : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(() => SetActualChallenge());
         GetComponent<Button>().onClick.AddListener(() => SaveManager.Instance.Save());
 
+
     }
+
     private void Awake()
     {
-        
+        SetCameraChallengeString();
     }
     private void OnEnable()
     {
         HighscoreText.text = "" + Highscore;
+    }
+
+    public void SetCameraChallengeString()
+    {
+        CameraChallengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings,title);
     }
 
     public void SetActualChallenge()
