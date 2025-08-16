@@ -18,7 +18,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateBouncyBallEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = PrefabManager.Instance.BouncyMaterial;
-        FindObjectOfType<PlayerMovement>().speed = 7;
+        FindObjectOfType<PlayerMovement>().speed = 6;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
@@ -26,6 +26,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateNormalEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
+        FindObjectOfType<PlayerMovement>().speed = 6;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }
@@ -40,7 +41,7 @@ public class ChallengeManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
-        FindObjectOfType<PlayerMovement>().speed = 7;
+        FindObjectOfType<PlayerMovement>().speed = 6;
         SaveManager.Instance.HardcoreModeOn = false;
     }
     public void ActivateHardcoreModeEffect()
@@ -79,7 +80,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateFollowEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
-        FindObjectOfType<PlayerMovement>().horizontalSpeed = 10f;
+        FindObjectOfType<PlayerMovement>().horizontalSpeed = 9f;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
     }

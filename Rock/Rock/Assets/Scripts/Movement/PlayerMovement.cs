@@ -1035,6 +1035,25 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void Die()
+    {
+        if (InventoryManager.Instance.GodMode)
+        {
+            return;
+        }
+
+        speed = 0;
+        FireBallEffect.SetActive(false);
+        //MagneticBallEffect.SetActive(false);
+        BallEffect.SetActive(false);
+        BallEffect2.SetActive(false);
+
+        rb.simulated = true;
+
+
+        StartCoroutine(WaitForReset());
+    }
+
     private IEnumerator WaitForReset()
     {
         if (InventoryManager.Instance.GodMode || IsDead)
