@@ -2,6 +2,7 @@ using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,8 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     public List<CameraChallengeButton> CameraChallengeButtons;
 
+
+
     private void Awake()
     {
         Instance = this;
@@ -38,6 +41,7 @@ public class ChallengeDetailMenu : MonoBehaviour
 
         foreach (var c in CameraChallengeButtons)
         {
+            c.Outlines.SetActive(false);
             c.GetComponent<Button>().onClick.AddListener(() => ActualCameraChallenge(c));
         }
     }
@@ -46,6 +50,10 @@ public class ChallengeDetailMenu : MonoBehaviour
     {
         var challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
         int index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
+
+        ca.Outlines.SetActive(true);
+
+        CameraChallengeButtons.Where(c => c.challengeName != ca.challengeName).ToList().ForEach(x => x.Outlines.SetActive(false));
 
         SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateChallengeName(challengeString, ca.challengeName);
         SaveManager.Instance.Save();
