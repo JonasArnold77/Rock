@@ -27,7 +27,10 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     public List<CameraChallengeButton> CameraChallengeButtons;
 
+    public CameraChallengeButton ActualChallengeButton;
 
+    public Image SkinAmountImage;
+    public Image Symbol;
 
     private void Awake()
     {
@@ -54,6 +57,8 @@ public class ChallengeDetailMenu : MonoBehaviour
         ca.Outlines.SetActive(true);
 
         CameraChallengeButtons.Where(c => c.challengeName != ca.challengeName).ToList().ForEach(x => x.Outlines.SetActive(false));
+
+        ActualChallengeButton = ca;
 
         SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateChallengeName(challengeString, ca.challengeName);
         SaveManager.Instance.Save();

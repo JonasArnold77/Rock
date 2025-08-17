@@ -35,6 +35,8 @@ public class ChallengeButton : MonoBehaviour
 
     public string CameraChallengeString;
 
+    public ShopItem _shopItem;
+
 
     private void Start()
     {
@@ -115,7 +117,12 @@ public class ChallengeButton : MonoBehaviour
             ChallengeDetailMenu.Instance.GoldMedalGO.transform.GetChild(0).GetComponent<Image>().color = ChallengeDetailMenu.Instance.GoldMedalGO.GetComponent<Medal>().InActiveTextBoxColor;
         }
 
+        string actualCameraChallengeName = (string)ChallengeManager.Instance.GetSaveParameter(ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title), "challenge");
+        var button = ChallengeDetailMenu.Instance.CameraChallengeButtons.Where(c => c.challengeName == actualCameraChallengeName).FirstOrDefault();
+        ChallengeDetailMenu.Instance.ActualCameraChallenge(button);
 
+        ChallengeDetailMenu.Instance.Symbol.sprite = _shopItem.Symbol.sprite;
+        
 
         var Level = InventoryManager.Instance.GetLevelFromDistance(Distance, LevelDistances);
         ChallengeDetailMenu.Instance.AmountImage.transform.parent.GetComponentInChildren<TMP_Text>().text = "Level " + (Level - 1);

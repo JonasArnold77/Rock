@@ -15,6 +15,8 @@ public class ShopItem : MonoBehaviour
     public bool Equipped;
     public string EquipmentName;
 
+    public Image Symbol;
+
     public Button BuyButton;
 
     public TMP_Text PriceText;
