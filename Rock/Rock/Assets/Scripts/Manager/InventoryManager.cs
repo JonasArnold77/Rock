@@ -82,6 +82,25 @@ public class InventoryManager : MonoBehaviour
 
             Score++;
 
+            var challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
+            int index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
+
+
+            if ((string)ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "challenge") != "Normal")
+            {
+                var actualChallenge = (string)ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "challenge");
+                var actualChallengeButton = ChallengeDetailMenu.Instance.CameraChallengeButtons.Where(c => c.challengeName == actualChallenge).FirstOrDefault();
+
+                if (Score >= ChallengeManager.Instance.actualChallengeButton.CameraChallengeHighscores[actualChallengeButton.Index-1])
+                {
+                    //Do things after Camera Challenge done
+                    var actualList = (int[])ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "completed");
+                    actualList[actualChallengeButton.Index-1] = 1;
+                    SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateCompletedChallenges(SaveManager.Instance.CameraChallengesStrings[index], actualList.ToArray());
+                    SaveManager.Instance.Save();
+                }
+            }
+
             SaveManager.Instance.ChallengeDistance[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())]++;
             SaveManager.Instance.Save();
 

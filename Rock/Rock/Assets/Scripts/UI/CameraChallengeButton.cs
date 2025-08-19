@@ -8,4 +8,5 @@ public class CameraChallengeButton : MonoBehaviour
 
     public GameObject Outlines;
 
+    public int Index;
 }

@@ -37,6 +37,8 @@ public class ChallengeButton : MonoBehaviour
 
     public ShopItem _shopItem;
 
+    public List<int> CameraChallengeHighscores;
+
 
     private void Start()
     {
