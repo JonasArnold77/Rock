@@ -60,6 +60,17 @@ public class ChallengeDetailMenu : MonoBehaviour
 
         ActualChallengeButton = ca;
 
+        var list = (int[])ChallengeManager.Instance.GetSaveParameter(challengeString, "completed");
+
+        SkinAmountImage.fillAmount = 0f;
+        foreach (var c in list.ToList())
+        {
+            if(c == 1)
+            {
+                SkinAmountImage.fillAmount = SkinAmountImage.fillAmount + 0.25f;
+            }
+        }
+
         SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateChallengeName(challengeString, ca.challengeName);
         SaveManager.Instance.Save();
 

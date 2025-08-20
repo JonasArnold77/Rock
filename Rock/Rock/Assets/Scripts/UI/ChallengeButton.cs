@@ -58,8 +58,9 @@ public class ChallengeButton : MonoBehaviour
         HighscoreText.text = "" + Highscore;
     }
 
-    public void SetCameraChallengeString()
+    public IEnumerator SetCameraChallengeString()
     {
+        yield return new WaitUntil(() => LevelManager.Instance.InitIsDone);
         CameraChallengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings,title);
     }
 
