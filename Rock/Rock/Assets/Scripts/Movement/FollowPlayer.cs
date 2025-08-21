@@ -16,6 +16,7 @@ public class FollowPlayer : MonoBehaviour
 
     private Vector3 targetLocalPos;
 
+    private string CameraChallenge;
 
     void Start()
     {
@@ -25,33 +26,43 @@ public class FollowPlayer : MonoBehaviour
     private IEnumerator InitGame()
     {
         yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
-        if (ChallengeManager.Instance.actualChallengeButton.title == "UpsideDown")
+
+        targetLocalPos = transform.position;
+
+        var challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
+        int index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
+        CameraChallenge = (string)ChallengeManager.Instance.GetSaveParameter(challengeString, "challenge");
+
+        if (CameraChallenge == "Upside Down")
         {
             transform.rotation = new Quaternion(0, 0, 180f, 0);
+        }
+        else if (CameraChallenge == "Weird Camera")
+        {
+            transform.parent = PlayerTransform;
         }
     }
 
     void Update()
     {
-        if (ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall")
+        if (CameraChallenge == "Fixed Camera")
         {
-            transform.position = new Vector3(PlayerTransform.position.x + distance, PlayerTransform.position.y + 3, transform.position.z);
+            transform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y, transform.position.z);
         }
-        else if (ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
+        else if (CameraChallenge == "Rotating Camera")
         {
             transform.position = new Vector3(PlayerTransform.position.x, transform.position.y, transform.position.z);
             transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
         }
-        else if (ChallengeManager.Instance.actualChallengeButton.title != "MoveCamera" && ChallengeManager.Instance.actualChallengeButton.title != "RotateCamera")
+        else if (CameraChallenge != "Weird Camera" && CameraChallenge != "Rotating Camera" /*&& CameraChallenge != "Weird Camera"*/)
         {
             transform.position = new Vector3(PlayerTransform.position.x + distance, transform.position.y, transform.position.z);
         }
-
     }
 
     void LateUpdate()
     {
-        if (ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera")
+        if (CameraChallenge == "Weird Camera")
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetLocalPos, moveSpeed * Time.deltaTime);
 
