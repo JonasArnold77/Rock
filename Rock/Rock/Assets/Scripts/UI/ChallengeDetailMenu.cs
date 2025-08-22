@@ -34,6 +34,8 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     public Color NotDoneColor;
 
+    public GameObject Mark;
+
     private void Awake()
     {
         Instance = this;
@@ -87,7 +89,16 @@ public class ChallengeDetailMenu : MonoBehaviour
             }
         }
 
-        SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateChallengeName(challengeString, ca.challengeName);
+        if(SkinAmountImage.fillAmount >= 1)
+        {
+            Mark.SetActive(true);
+        }
+        else
+        {
+            Mark.SetActive(false);
+        }
+
+            SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateChallengeName(challengeString, ca.challengeName);
         SaveManager.Instance.Save();
 
 
