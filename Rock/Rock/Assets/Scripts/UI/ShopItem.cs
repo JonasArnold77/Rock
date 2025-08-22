@@ -23,11 +23,22 @@ public class ShopItem : MonoBehaviour
 
     public List<Image> Outlines = new List<Image>();
 
+    public GameObject UndiscoveredObject;
+
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(() => ClickOnButton());
             
         Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
+
+        if (SaveManager.Instance.SkinsDiscovered.Contains(Equipment.name))
+        {
+            UndiscoveredObject.SetActive(false);
+        }
+        else
+        {
+            UndiscoveredObject.SetActive(true);
+        }
 
         //StartCoroutine(InitGame());
 
