@@ -32,6 +32,8 @@ public class ChallengeDetailMenu : MonoBehaviour
     public Image SkinAmountImage;
     public Image Symbol;
 
+    public Color NotDoneColor;
+
     private void Awake()
     {
         Instance = this;
@@ -61,6 +63,20 @@ public class ChallengeDetailMenu : MonoBehaviour
         ActualChallengeButton = ca;
 
         var list = (int[])ChallengeManager.Instance.GetSaveParameter(challengeString, "completed");
+
+        for(int i = 0; i< list.Length; i++)
+        {
+            if(list[i] == 1)
+            {
+                CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScoreText.text = "Done";
+                CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScorePanel.color = CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().GetComponent<Image>().color;
+            }
+            else
+            {
+                CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScoreText.text = "" + ChallengeManager.Instance.actualChallengeButton.CameraChallengeHighscores[i];
+                CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScorePanel.color = NotDoneColor;
+            }
+        }
 
         SkinAmountImage.fillAmount = 0f;
         foreach (var c in list.ToList())
