@@ -64,6 +64,11 @@ public class ChallengeDetailMenu : MonoBehaviour
 
         ActualChallengeButton = ca;
 
+        //Medals
+        BronceMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[0];
+        SilverMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[1];
+        GoldMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[2];
+
         var list = (int[])ChallengeManager.Instance.GetSaveParameter(challengeString, "completed");
 
         for(int i = 0; i< list.Length; i++)
