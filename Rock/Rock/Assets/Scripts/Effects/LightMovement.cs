@@ -12,9 +12,18 @@ public class LightMovement : MonoBehaviour
     private int currentPointIndex = 0; // Aktueller Zielpunkt
     private bool isMoving = true;      // Bewegung aktiv
 
+    private PlayerMovement _PlayerMovement;
+
+    private Color Color1;
+    public Color Color2;
+
     private void Start()
     {
         transform.position = points.FirstOrDefault().position;
+        _PlayerMovement = FindObjectOfType<PlayerMovement>();
+
+        Color1 = InventoryManager.Instance.NormalRed;
+        Color2 = InventoryManager.Instance.NormalBlue;
     }
 
     void Update()
@@ -24,30 +33,13 @@ public class LightMovement : MonoBehaviour
 
         MoveTowardsCurrentPoint();
 
-        if (FindObjectOfType<PlayerMovement>().FireBallEffect.activeSelf)
+        if (_PlayerMovement.FireBallEffect.activeSelf)
         {
-            //SetColor(Color.red);
-            if (SaveManager.Instance.HardcoreModeOn)
-            {
-                //SetColor(Color.red);
-                SetColor(InventoryManager.Instance.HardcoreRed);
-            }
-            else
-            {
-                SetColor(InventoryManager.Instance.NormalRed);
-
-            }
+             SetColor(Color1);
         }
         else
         {
-            if (SaveManager.Instance.HardcoreModeOn)
-            {
-                SetColor(InventoryManager.Instance.HardcoreYellow);
-            }
-            else
-            {
-                SetColor(InventoryManager.Instance.NormalBlue);
-            }
+             SetColor(Color2);
         }
     }
 
