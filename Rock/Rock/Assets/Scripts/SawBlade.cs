@@ -92,11 +92,11 @@ public class SawBlade : MonoBehaviour
         //    return;
         //}
 
-        if (LastParent.position.x - FindObjectOfType<PlayerMovement>().gameObject.transform.position.x >= 100)
+        if (LastParent.position.x - Player.gameObject.transform.position.x >= 100)
         {
             return;
         }
-        else if(!Started && LastParent.position.x - FindObjectOfType<PlayerMovement>().gameObject.transform.position.x <= 100)
+        else if(!Started && LastParent.position.x - Player.gameObject.transform.position.x <= 100)
         {
             IsMoving = true;
             Started = true;
