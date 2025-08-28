@@ -68,17 +68,17 @@ public class SawBlade : MonoBehaviour
 
     private void Update()
     {
+        if (EndPos == null && Vector2.Distance(transform.position, Player.position) > 13)
+        {
+            return;
+        }
+
         if (LastParent.GetComponent<RandomChunk>())
         {
             if (!LastParent.GetComponent<RandomChunk>().InitIsDone)
             {
                 return;
             }
-        }
-        
-        if (EndPos == null && Vector2.Distance(transform.position, Player.position) > 13)
-        {
-            return;
         }
 
 
