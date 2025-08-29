@@ -31,9 +31,12 @@ public class Obstacle : MonoBehaviour
 
     private void Start()
     {
-        PlayerTransform = FindObjectOfType<PlayerMovement>().transform;
+        if (AreaCollider == null)
+        {
+            Destroy(this);
+        }
 
-        //if(area)
+        PlayerTransform = FindObjectOfType<PlayerMovement>().transform;
     }
 
     private void Update()
