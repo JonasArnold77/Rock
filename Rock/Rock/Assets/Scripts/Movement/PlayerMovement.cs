@@ -941,6 +941,33 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
+            Vector2 position = new Vector2(transform.position.x, transform.position.y + 0.25f);
+            Vector2 direction = Vector2.down;
+
+            RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
+
+            // Liste für die Treffer vor den Spikes
+            List<RaycastHit2D> hitsBeforeSpikes = new List<RaycastHit2D>();
+
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.collider == null) continue;
+
+                // Falls "Spikes" getroffen wurde: Schleife abbrechen
+                if (hit.collider.CompareTag("Spikes"))
+                {
+                    break;
+                }
+
+                // Ansonsten zur Liste hinzufügen
+                hitsBeforeSpikes.Add(hit);
+            }
+
+            if (hitsBeforeSpikes.Count > 0)
+            {
+                return;
+            }
+
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
             
             if(LifePoints == 0)
@@ -1007,9 +1034,36 @@ public class PlayerMovement : MonoBehaviour
   
         if (collision.gameObject.CompareTag("Spikes"))
         {
+            Vector2 position = new Vector2(transform.position.x, transform.position.y + 0.25f);
+            Vector2 direction = Vector2.down;
+
+            RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
+
+            // Liste für die Treffer vor den Spikes
+            List<RaycastHit2D> hitsBeforeSpikes = new List<RaycastHit2D>();
+
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.collider == null) continue;
+
+                // Falls "Spikes" getroffen wurde: Schleife abbrechen
+                if (hit.collider.CompareTag("Spikes"))
+                {
+                    break;
+                }
+
+                // Ansonsten zur Liste hinzufügen
+                hitsBeforeSpikes.Add(hit);
+            }
+
+            if(hitsBeforeSpikes.Count > 0)
+            {
+                return;
+            }
+
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
-            
-            if(LifePoints == 0)
+
+            if (LifePoints == 0)
             {
                 if (InventoryManager.Instance.GodMode)
                 {
@@ -1031,6 +1085,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 LifePoints--;
             }
+            
         }
 
     }
