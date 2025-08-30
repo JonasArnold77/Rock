@@ -55,7 +55,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateHighspeedEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
-        FindObjectOfType<PlayerMovement>().speed = 7;
+        FindObjectOfType<PlayerMovement>().speed = 8;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
     }

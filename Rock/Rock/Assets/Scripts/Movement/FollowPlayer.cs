@@ -41,6 +41,17 @@ public class FollowPlayer : MonoBehaviour
         {
             transform.parent = PlayerTransform;
         }
+        else if (CameraChallenge == "Highspeed")
+        {
+            if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
+            {
+                FindObjectOfType<PlayerMovement>().speed = 6.5f;
+            }
+            else
+            {
+                FindObjectOfType<PlayerMovement>().speed = 8;
+            }    
+        }
     }
 
     void Update()

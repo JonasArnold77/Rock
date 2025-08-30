@@ -85,7 +85,7 @@ public class ChallengeButton : MonoBehaviour
         ChallengeDetailMenu.Instance.DiscriptionText.text = description;
         ChallengeDetailMenu.Instance.GetComponentInChildren<VideoPlayer>().clip = Video;
 
-        ChallengeDetailMenu.Instance.HighscoreText.text = "" + Highscore + " m"/* + "\nDistance: " + Distance*/;
+        ChallengeDetailMenu.Instance.HighscoreText.text = "" + Highscore + " Meter"/* + "\nDistance: " + Distance*/;
 
         if(Highscore >= LevelDistances[0])
         {
