@@ -315,7 +315,15 @@ public class LevelManager : MonoBehaviour
                 if (countOfArea <= 0)
                 {
                     actualChunkType = ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList()[UnityEngine.Random.Range(0, ChunkTypeDb.ChunkTypes.Where(c => c != actualChunkType).ToList().Count)];
-                    countOfArea = UnityEngine.Random.Range(3, 5);
+                    
+                    if(actualChunkType == ChunkTypeDb.UpAndDown)
+                    {
+                        countOfArea = UnityEngine.Random.Range(4, 6);
+                    }
+                    else
+                    {
+                        countOfArea = UnityEngine.Random.Range(3, 5);
+                    } 
                 }
                 else if (/*InitIsDone &&*/ chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
                 {

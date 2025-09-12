@@ -313,6 +313,8 @@ public class PlayerMovement : MonoBehaviour
                         return;
                     }
 
+                    Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
+
                     speed = 0;
                     FireBallEffect.SetActive(false);
                     //MagneticBallEffect.SetActive(false);
