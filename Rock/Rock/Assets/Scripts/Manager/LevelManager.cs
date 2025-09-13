@@ -75,6 +75,8 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitUntil(() => GameIsInitialized);
 
+        StartMenu.Instance.text.text = ChallengeManager.Instance.actualChallengeButton.description;
+
         if (SaveManager.Instance.HardcoreModeOn)
         {
             SpawnHardcoreObject();

@@ -31,15 +31,6 @@ public class ShopItem : MonoBehaviour
             
         Outlines.Select(o => o.gameObject).ToList().ForEach(o => o.SetActive(false));
 
-        if (SaveManager.Instance.SkinsDiscovered.Contains(Equipment.name))
-        {
-            UndiscoveredObject.SetActive(false);
-        }
-        else
-        {
-            UndiscoveredObject.SetActive(true);
-        }
-
         //StartCoroutine(InitGame());
 
         if (BuyButton != null)
@@ -49,6 +40,25 @@ public class ShopItem : MonoBehaviour
         
         //GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
         //Equipment.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(Init());
+    }
+
+    private IEnumerator Init()
+    {
+        yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
+
+        if (UndiscoveredObject != null && SaveManager.Instance.SkinsDiscovered.Contains(Equipment.name))
+        {
+            UndiscoveredObject.SetActive(false);
+        }
+        else if (UndiscoveredObject != null)
+        {
+            UndiscoveredObject.SetActive(true);
+        }
     }
 
     private void Buy()
@@ -70,7 +80,16 @@ public class ShopItem : MonoBehaviour
     {
         yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
 
-        if(PriceText != null)
+        if (UndiscoveredObject != null && SaveManager.Instance.SkinsDiscovered.Contains(Equipment.name))
+        {
+            UndiscoveredObject.SetActive(false);
+        }
+        else if (UndiscoveredObject != null)
+        {
+            UndiscoveredObject.SetActive(true);
+        }
+
+        if (PriceText != null)
         {
             PriceText.text = Price.ToString();
         }

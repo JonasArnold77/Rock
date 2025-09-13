@@ -48,7 +48,8 @@ public class ChallengeDetailMenu : MonoBehaviour
 
         foreach (var c in CameraChallengeButtons)
         {
-            c.Outlines.SetActive(false);
+            //c.Outlines.SetActive(false);
+            c.GetComponent<Image>().color = DeathMenu.Instance.InactiveColor;
             c.GetComponent<Button>().onClick.AddListener(() => ActualCameraChallenge(c));
         }
     }
@@ -58,16 +59,16 @@ public class ChallengeDetailMenu : MonoBehaviour
         var challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
         int index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
 
-        ca.Outlines.SetActive(true);
+        ca.GetComponent<Image>().color = DeathMenu.Instance.ActiveColor;
 
-        CameraChallengeButtons.Where(c => c.challengeName != ca.challengeName).ToList().ForEach(x => x.Outlines.SetActive(false));
+        CameraChallengeButtons.Where(c => c.challengeName != ca.challengeName).ToList().ForEach(x => x.GetComponent<Image>().color = DeathMenu.Instance.InactiveColor);
 
         ActualChallengeButton = ca;
 
         //Medals
-        BronceMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[0];
-        SilverMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[1];
-        GoldMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[2];
+        BronceMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[0] + " Meter";
+        SilverMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[1] + " Meter";
+        GoldMedalGO.GetComponentInChildren<TMP_Text>().text = "" + ChallengeManager.Instance.actualChallengeButton.LevelDistances[2] + " Meter";
 
         var list = (int[])ChallengeManager.Instance.GetSaveParameter(challengeString, "completed");
 
@@ -76,12 +77,12 @@ public class ChallengeDetailMenu : MonoBehaviour
             if(list[i] == 1)
             {
                 CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScoreText.text = "Done";
-                CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScorePanel.color = CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().GetComponent<Image>().color;
+                //CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScorePanel.color = CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().GetComponent<Image>().color;
             }
             else
             {
-                CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScoreText.text = "" + ChallengeManager.Instance.actualChallengeButton.CameraChallengeHighscores[i];
-                CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScorePanel.color = NotDoneColor;
+                CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScoreText.text = "" + ChallengeManager.Instance.actualChallengeButton.CameraChallengeHighscores[i] + " Meter";
+                //CameraChallengeButtons.Where(c => c.Index == i + 1).FirstOrDefault().ScorePanel.color = NotDoneColor;
             }
         }
 

@@ -100,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
         //StartMenu.Instance.text.text = "Press Jump Button to start game.";
 
         FindObjectOfType<JumpButton>().gameObject.SetActive(true);
-        StartMenu.Instance.text.text = "Click on Button to start game.";
 #elif UNITY_STANDALONE_WIN
         FindObjectOfType<JumpButton>().gameObject.SetActive(false);
         StartMenu.Instance.text.text = "Press Space Button to start game.";
