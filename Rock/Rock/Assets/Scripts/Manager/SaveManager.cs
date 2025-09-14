@@ -159,15 +159,6 @@ public class SaveManager : MonoBehaviour
             //LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.UpAndDown;
         }
 
-        if (TutorialDone)
-        {
-            TutorialMenu.Instance.gameObject.SetActive(false);
-        }
-        else
-        {
-            TutorialMenu.Instance.gameObject.SetActive(true);
-        }
-
         if(ChallengeManager.Instance.actualChallengeButton.title != "Clicking")
         {
             FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
@@ -210,7 +201,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory54")
+        QuickSaveWriter.Create("Inventory55")
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -236,11 +227,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory54.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory55.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory54.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory55.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory54.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory55.json");
 #endif
 
 
@@ -255,7 +246,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory54")
+            QuickSaveReader.Create("Inventory55")
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
@@ -284,7 +275,7 @@ public class SaveManager : MonoBehaviour
         Money = 0; // Beispiel: Startkapital
         ActualSkin = "";
         HardcoreModeOn = false;
-        TutorialDone = false;
+        TutorialDone = true;
         CountOfArea = 4;
         LastChunk = "";
         Challenges = DeathMenu.Instance.ChallengeGameObjects.Select(c => c.GetComponent<ChallengeButton>().title).ToList();

@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 #if UNITY_ANDROID
-        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0) && !TutorialMenu.Instance.gameObject.activeSelf)
+        if (!GameIsStarted && Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameIsStarted = true;
             rb.simulated = true;
@@ -712,7 +712,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartButtonClicked()
     {
-        if (!GameIsStarted && !TutorialMenu.Instance.gameObject.activeSelf)
+        if (!GameIsStarted)
         {
             GameIsStarted = true;
             rb.simulated = true;
