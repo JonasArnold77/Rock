@@ -112,10 +112,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Instantiate(PrefabManager.Instance.XpText);
-        }
 
         var targets = GameObject.FindObjectsOfType<SawBlade>().ToList().Select(s => s.gameObject);
 
@@ -125,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
             if (!passedObjects.Contains(target) && IsApproximatelyEqual(transform.position.x , target.transform.position.x, 0.5f) && target.GetComponent<SawBlade>().IsMoving)
             {
                 passedObjects.Add(target);
-                Instantiate(PrefabManager.Instance.XpText);
                 StartCoroutine(ResetSawBladeXP(target));
             }
         }
@@ -927,11 +922,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.gameObject.CompareTag("XP"))
-        {
-            Instantiate(PrefabManager.Instance.XpText);
-        }
 
             //return;
             // Überprüfen, ob der Spieler den Boden berührt hat
