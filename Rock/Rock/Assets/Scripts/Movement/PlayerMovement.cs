@@ -1112,7 +1112,10 @@ public class PlayerMovement : MonoBehaviour
         {
             FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
         }
-        
+
+        InventoryManager.Instance.SetScores();
+
+
 
         Time.timeScale = 1f;
 

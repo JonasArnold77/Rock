@@ -53,6 +53,13 @@ public class InventoryManager : MonoBehaviour
 
     public int ActualAmountOfMedals;
 
+    public string challengeString;
+    public int index;
+    public string actualChallenge;
+    public CameraChallengeButton actualChallengeButton;
+    public int actualScore;
+    public PlayerMovement player;
+
     private void Awake()
     {
         Instance = this; 
@@ -62,6 +69,25 @@ public class InventoryManager : MonoBehaviour
     {
         nextThreshold = FindObjectOfType<PlayerMovement>().transform.position.x + nextThreshold;
         _PlayerMovement = FindObjectOfType<PlayerMovement>();
+
+        StartCoroutine(InitGame());
+    }
+
+    private IEnumerator InitGame()
+    {
+        yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
+
+        challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
+        index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
+        actualChallenge = (string)ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "challenge");
+        actualChallengeButton = ChallengeDetailMenu.Instance.CameraChallengeButtons.Where(c => c.challengeName == actualChallenge).FirstOrDefault();
+
+        if (actualChallenge != "Normal")
+        {
+            actualScore = ChallengeManager.Instance.actualChallengeButton.CameraChallengeHighscores[actualChallengeButton.Index - 1];
+        }
+        
+        player = FindObjectOfType<PlayerMovement>();
     }
 
     private void Update()
@@ -72,7 +98,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         // Aktuelle Position des Objekts auf der X-Achse
-        float currentX = FindObjectOfType<PlayerMovement>().transform.position.x;
+        float currentX = player.transform.position.x;
 
         // Prüfen, ob der aktuelle Schwellenwert überschritten wurde
         if (currentX >= nextThreshold && !_PlayerMovement.IsDead)
@@ -82,54 +108,51 @@ public class InventoryManager : MonoBehaviour
 
             Score++;
 
-            var challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
-            int index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
-
-
-            if ((string)ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "challenge") != "Normal")
-            {
-                var actualChallenge = (string)ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "challenge");
-                var actualChallengeButton = ChallengeDetailMenu.Instance.CameraChallengeButtons.Where(c => c.challengeName == actualChallenge).FirstOrDefault();
-
-                if (Score >= ChallengeManager.Instance.actualChallengeButton.CameraChallengeHighscores[actualChallengeButton.Index-1])
-                {
-                    //Do things after Camera Challenge done
-                    var actualList = (int[])ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "completed");
-                    actualList[actualChallengeButton.Index-1] = 1;
-                    SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateCompletedChallenges(SaveManager.Instance.CameraChallengesStrings[index], actualList.ToArray());
-
-                    if (!SaveManager.Instance.SkinsDiscovered.Contains(ChallengeManager.Instance.actualChallengeButton._shopItem.Equipment.name))
-                    {
-                        SaveManager.Instance.SkinsDiscovered.Add(ChallengeManager.Instance.actualChallengeButton._shopItem.Equipment.name);
-                    }
-
-                    SaveManager.Instance.Save();
-                }
-            }
-
-            SaveManager.Instance.ChallengeDistance[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())]++;
-            SaveManager.Instance.Save();
-
-
-            if (Score > SaveManager.Instance.Highscore)
-            {
-                SaveManager.Instance.Highscore = Score;
-            }
-
-            var x = SaveManager.Instance.ChallengeDistance[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())];
-
-            if (Score > SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())])
-            {
-                SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())] = Score;
-                SaveManager.Instance.Save();
-            }
-
             HighscoreTicker.text = Score.ToString() + " Meter";
-
-
 
             // Nächsten Schwellenwert um 5 erhöhe]
             nextThreshold += 5f;
+
+            if (!player.IsDead)
+            {
+                return;
+            }
+        }
+    }
+
+    public void SetScores()
+    {
+        if ((string)ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "challenge") != "Normal")
+        {
+            if (Score >= actualScore)
+            {
+                //Do things after Camera Challenge done
+                var actualList = (int[])ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "completed");
+                actualList[actualChallengeButton.Index - 1] = 1;
+                SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateCompletedChallenges(SaveManager.Instance.CameraChallengesStrings[index], actualList.ToArray());
+
+                if (!SaveManager.Instance.SkinsDiscovered.Contains(ChallengeManager.Instance.actualChallengeButton._shopItem.Equipment.name))
+                {
+                    SaveManager.Instance.SkinsDiscovered.Add(ChallengeManager.Instance.actualChallengeButton._shopItem.Equipment.name);
+                }
+
+                SaveManager.Instance.Save();
+            }
+        }
+
+        SaveManager.Instance.ChallengeDistance[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())]++;
+        SaveManager.Instance.Save();
+
+
+        if (Score > SaveManager.Instance.Highscore)
+        {
+            SaveManager.Instance.Highscore = Score;
+        }
+
+        if (Score > SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())])
+        {
+            SaveManager.Instance.ChallengesScore[SaveManager.Instance.Challenges.IndexOf(SaveManager.Instance.Challenges.Where(c => c == ChallengeManager.Instance.actualChallengeButton.title).FirstOrDefault())] = Score;
+            SaveManager.Instance.Save();
         }
     }
 
