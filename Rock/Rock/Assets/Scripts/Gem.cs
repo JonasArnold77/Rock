@@ -43,6 +43,11 @@ public class Gem : MonoBehaviour
                 }
             }
 
+            InventoryManager.Instance.MoneyAmount++;
+            SaveManager.Instance.Money++;
+            Sidebar.Instance.MoneyAmountText.text = "" + InventoryManager.Instance.MoneyAmount;
+            SaveManager.Instance.Save();
+
             FeedbackManager.Instance.CollectingFeedback.PlayFeedbacks();
 
             GetComponent<Collider2D>().enabled = false;

@@ -37,6 +37,8 @@ public class ShopItem : MonoBehaviour
         {
             BuyButton.onClick.AddListener(() => Buy());
         }
+
+
         
         //GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
         //Equipment.SetActive(false);
@@ -59,6 +61,12 @@ public class ShopItem : MonoBehaviour
         {
             UndiscoveredObject.SetActive(true);
         }
+
+        if (BuyButton != null && Price >= SaveManager.Instance.Money)
+        {
+            BuyButton.interactable = false;
+            BuyButton.GetComponent<Image>().color = Color.grey;
+        }
     }
 
     private void Buy()
@@ -71,6 +79,11 @@ public class ShopItem : MonoBehaviour
             GetComponent<Button>().interactable = true;
             GetComponent<Image>().color = ShopMenu.Instance.UnselectedColor;
             Unlocked = true;
+
+            InventoryManager.Instance.MoneyAmount = InventoryManager.Instance.MoneyAmount - Price;
+            SaveManager.Instance.Money = SaveManager.Instance.Money - Price;
+            SaveManager.Instance.Save();
+            Sidebar.Instance.MoneyAmountText.text = "" + InventoryManager.Instance.MoneyAmount;
         }
 
         StartCoroutine(InitGame());
@@ -172,6 +185,11 @@ public class ShopItem : MonoBehaviour
             {
                 Unlocked = true;
                 Equipped = true;
+
+                InventoryManager.Instance.MoneyAmount = InventoryManager.Instance.MoneyAmount - Price;
+                SaveManager.Instance.Money = SaveManager.Instance.Money - Price;
+                SaveManager.Instance.Save();
+                Sidebar.Instance.MoneyAmountText.text = "" + InventoryManager.Instance.MoneyAmount;
 
                 SaveManager.Instance.ActualSkin = Equipment.ToString();
                 SaveManager.Instance.Save();

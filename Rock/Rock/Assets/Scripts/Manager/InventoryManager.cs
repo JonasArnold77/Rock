@@ -88,6 +88,9 @@ public class InventoryManager : MonoBehaviour
         }
         
         player = FindObjectOfType<PlayerMovement>();
+
+        MoneyAmount = SaveManager.Instance.Money;
+        Sidebar.Instance.MoneyAmountText.text = "" + MoneyAmount;
     }
 
     private void Update()
@@ -95,6 +98,11 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             ShopMenu.Instance.gameObject.SetActive(true);
+        }
+
+        if(player == null)
+        {
+            return;
         }
 
         // Aktuelle Position des Objekts auf der X-Achse
