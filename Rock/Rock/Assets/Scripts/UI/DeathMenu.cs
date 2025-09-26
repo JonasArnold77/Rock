@@ -128,8 +128,7 @@ public class DeathMenu : MonoBehaviour
 
     private void OnEnable()
     {
-
-       
+        StartCoroutine(AdManager.Instance.StartInterstitial());
 
         SaveManager.Instance.CompleteDistance = 0;
 

@@ -28,6 +28,8 @@ public class ShopMenu : MonoBehaviour
     private void OnEnable()
     {
         SetCurrentSkin();
+
+        StartCoroutine(AdManager.Instance.StartBanner());
     }
 
     public void SetCurrentSkin()
