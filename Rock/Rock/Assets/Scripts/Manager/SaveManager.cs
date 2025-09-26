@@ -36,6 +36,13 @@ public class SaveManager : MonoBehaviour
 
     public List<string> HardcoreLevelList;
 
+    QuickSaveSettings settings = new QuickSaveSettings()
+    {
+        SecurityMode = SecurityMode.Aes,
+        Password = "Xasdjowdawad!!3",
+        CompressionMode = CompressionMode.Gzip
+    };
+
     private void Awake()
     {
         Instance = this;
@@ -165,7 +172,10 @@ public class SaveManager : MonoBehaviour
         }
 
         LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList()[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList().Count)];
-        LevelManager.Instance.GameIsInitialized = true;  
+        LevelManager.Instance.GameIsInitialized = true;
+
+
+        var x = Application.persistentDataPath;
     }
 
     public int GetLevelFromDistance(float finalDistance, List<int> levelDistances)
@@ -201,7 +211,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory62")
+        QuickSaveWriter.Create("Inventory63", settings)
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -227,11 +237,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory62.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory63.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory62.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory63.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory62.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory63.json");
 #endif
 
 
@@ -246,7 +256,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory62")
+            QuickSaveReader.Create("Inventory63", settings)
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
