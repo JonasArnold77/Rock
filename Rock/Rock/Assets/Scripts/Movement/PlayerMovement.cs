@@ -189,20 +189,20 @@ public class PlayerMovement : MonoBehaviour
         if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall" || ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera" || ChallengeManager.Instance.actualChallengeButton.title == "UpsideDown" || ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
         {
             // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
-            if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
+            if (isGrounded && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 Jump();
                 //StartCoroutine(ElectricSoundCoroutine());
             }
             // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
-            else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0))
+            else if (isJumping && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 MagneticFall();
             }
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 //rb.simulated = true;
                 // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
@@ -243,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 //rb.simulated = true;
                 // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
@@ -293,7 +293,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 rb.velocity = new Vector2(rb.velocity.x,0);
                 rb.AddForce(Vector2.up * 4.5f, ForceMode2D.Impulse);
@@ -324,7 +324,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Clicking")
         {
-            if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
+            if (isGrounded && Input.GetTouch(0).phase == TouchPhase.Began)
             {
 
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -340,7 +340,7 @@ public class PlayerMovement : MonoBehaviour
                 //StartCoroutine(ElectricSoundCoroutine());
             }
             // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
-            else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0))
+            else if (isJumping && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (ClickingSphereCollider.OverlapPoint(mousePos))
@@ -354,7 +354,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 arrow.gameObject.SetActive(true);
             }
@@ -382,7 +382,7 @@ public class PlayerMovement : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             arrow.rotation = Quaternion.Euler(0, 0, angle);
 
-            if (Input.GetKeyUp(KeyCode.Mouse0))
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 Time.timeScale = 1f;
                 rb.velocity = Vector3.zero;

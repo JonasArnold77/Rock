@@ -84,6 +84,7 @@ public class AdManager : MonoBehaviour
 
     public IEnumerator StartInterstitial()
     {
+        yield break;
         GetComponent<LevelPlaySample>().interstitialAd.LoadAd();
 
         yield return new WaitUntil(() => GetComponent<LevelPlaySample>().interstitialAd.IsAdReady());
