@@ -13,10 +13,73 @@ public class AdManager : MonoBehaviour
     [SerializeField] private string adUnitId = "7miijpcrt6pknyss";
     [SerializeField] private float displayDuration = 10f;
 
+    public int AmountOfLevelsTillAd;
+
+    public PlayerMovement player;
+
     public static AdManager Instance;
     private void Awake()
     {
         Instance = this;   
+    }
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerMovement>();
+        StartCoroutine(Init());
+    }
+
+    public IEnumerator Init()
+    {
+        yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
+
+        if(SaveManager.Instance.FirstSecondsWithoutAd > 0)
+        {
+            StartCoroutine(WaitForTimeIsDone());
+        }
+
+        if (SaveManager.Instance.FirstSecondsWithoutAd == 0)
+        {
+            StartCoroutine(WaitForLevelCounterDone());
+        }
+    }
+
+    public IEnumerator WaitForTimeIsDone()
+    {
+        if (!player.IsDead)
+        {
+            if(SaveManager.Instance.FirstSecondsWithoutAd > 0)
+            {
+                yield return new WaitForSeconds(1);
+                SaveManager.Instance.FirstSecondsWithoutAd--;
+                StartCoroutine(WaitForTimeIsDone());
+            }
+            else
+            {
+                SaveManager.Instance.Save();
+            }  
+        }
+        else
+        {
+            SaveManager.Instance.Save();
+        }
+    }
+
+    public IEnumerator WaitForLevelCounterDone()
+    {
+        yield return new WaitUntil(() => player.IsDead);
+
+        if (SaveManager.Instance.LevelsTillAdClip > 1)
+        {
+            SaveManager.Instance.LevelsTillAdClip--;
+        }
+        else
+        {
+            SaveManager.Instance.LevelsTillAdClip = AmountOfLevelsTillAd;
+            StartCoroutine(StartInterstitial());
+        }
+
+        SaveManager.Instance.Save();
     }
 
     public IEnumerator StartInterstitial()
