@@ -354,7 +354,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0))
             {
                 arrow.gameObject.SetActive(true);
             }
@@ -560,7 +560,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            if (Input.GetKey(KeyCode.Mouse0))
             {
                 arrow.gameObject.SetActive(true);
             }
