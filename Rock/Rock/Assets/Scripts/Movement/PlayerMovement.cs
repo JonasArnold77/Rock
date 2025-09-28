@@ -75,6 +75,12 @@ public class PlayerMovement : MonoBehaviour
     public ParticleSystem particleSystem;
     public ParticleSystem particleSystem2;
 
+    public float radius = 2f;        // Abstand vom Spieler
+    public float rotationSpeed = 180f; // Grad pro Sekunde
+
+    private float currentAngle = 0f;
+    private bool isCharging = false;
+
 
     void Start()
     {
@@ -354,39 +360,38 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                isCharging = true;
                 arrow.gameObject.SetActive(true);
-            }
-            else
-            {
-                arrow.gameObject.SetActive(false);
-            }
-
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
                 Time.timeScale = 0.5f;
             }
 
-            // Mausposition in Weltkoordinaten
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = 0f;
+            if (isCharging)
+            {
+                // Kreisförmige Bewegung des Pfeils
+                currentAngle += rotationSpeed * Time.unscaledDeltaTime; // Time.unscaledDeltaTime wegen Zeitlupe
+                float rad = currentAngle * Mathf.Deg2Rad;
+                Vector3 offset = new Vector3(Mathf.Cos(rad), Mathf.Sin(rad), 0) * radius;
+                arrow.position = transform.position + offset;
 
-            // Richtung von Zentrum zur Maus
-            Vector3 direction = (mouseWorldPos - transform.position).normalized;
-
-            // Neue Position des Pfeils (auf dem Kreis)
-            arrow.transform.position = transform.position + direction * 2;
-
-            // Rotation des Pfeils zur Maus
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            arrow.rotation = Quaternion.Euler(0, 0, angle);
+                // Pfeil zeigt vom Spieler zur Pfeilposition
+                Vector3 dir = offset.normalized;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                arrow.rotation = Quaternion.Euler(0, 0, angle);
+            }
 
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
+                isCharging = false;
+                arrow.gameObject.SetActive(false);
                 Time.timeScale = 1f;
-                rb.velocity = Vector3.zero;
-                rb.AddForce(direction.normalized * 280f, ForceMode2D.Force);
+
+                // Richtung des Schusses = Richtung vom Spieler zum Pfeil
+                Vector2 shootDirection = (arrow.position - transform.position).normalized;
+
+                rb.velocity = Vector2.zero;
+                rb.AddForce(shootDirection * 280f, ForceMode2D.Force);
             }
         }
 
