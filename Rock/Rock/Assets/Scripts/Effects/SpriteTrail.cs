@@ -20,7 +20,7 @@ public class SpriteTrail : MonoBehaviour
     private void Start()
     {
         lastSpawnPosition = transform.position;
-        SpawnGhost(); // ersten sofort spawnen
+        /*SpawnGhost();*/ // ersten sofort spawnen
     }
 
     private void Update()
