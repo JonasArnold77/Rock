@@ -62,7 +62,7 @@ public class ShopItem : MonoBehaviour
             UndiscoveredObject.SetActive(true);
         }
 
-        if (BuyButton != null && Price >= SaveManager.Instance.Money)
+        if (BuyButton != null && Price > SaveManager.Instance.Money)
         {
             BuyButton.interactable = false;
             BuyButton.GetComponent<Image>().color = Color.grey;
