@@ -184,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("Velocity: " + rb.velocity);
 
-#if UNITY_ANDROID
+#if UNITY_EDITOR && UNITY_ANDROID
 
         if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall" || ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera" || ChallengeManager.Instance.actualChallengeButton.title == "UpsideDown" || ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
         {
@@ -243,7 +243,213 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
         {
+            if (/*(isOnBotton || isOnTop) && */Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+                //rb.simulated = true;
+                // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
+
+
+
+                if (isVelocityPositive)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -17);
+                    IsOnWayDown = true;
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 17);
+                    IsOnWayDown = false;
+                }
+
+                isVelocityPositive = !isVelocityPositive;
+
+            }
+
+            Vector2 direction = Vector2.up;
+
+            Vector2 position2 = new Vector2(transform.position.x - 0.5f, transform.position.y);
+            RaycastHit2D hit2 = Physics2D.Raycast(position2, direction, raycastDistance, groundLayer);
+            RaycastHit2D hit3 = Physics2D.Raycast(position2, -direction, raycastDistance, groundLayer);
+
+            if (isOnBotton && IsOnWayDown)
+            {
+                rb.velocity = new Vector2(speed, 0);
+            }
+            else if (isOnTop && !IsOnWayDown)
+            {
+                rb.velocity = new Vector2(speed, 0);
+            }
+
+            if (isOnTop && !IsOnWayDown && hit2.collider == null)
+            {
+                rb.velocity = new Vector2(speed, 20);
+            }
+
+            if (isOnBotton && IsOnWayDown && hit3.collider == null)
+            {
+                rb.velocity = new Vector2(speed, -20);
+            }
+
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
+        {
             if (Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                rb.AddForce(Vector2.up * 4.5f, ForceMode2D.Impulse);
+            }
+            if (isGrounded)
+            {
+                if (LifePoints == 0)
+                {
+                    if (InventoryManager.Instance.GodMode)
+                    {
+                        return;
+                    }
+
+                    Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
+
+                    speed = 0;
+                    FireBallEffect.SetActive(false);
+                    //MagneticBallEffect.SetActive(false);
+                    BallEffect.SetActive(false);
+                    BallEffect2.SetActive(false);
+
+                    rb.simulated = true;
+
+
+                    StartCoroutine(WaitForReset());
+                }
+            }
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Clicking")
+        {
+            if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (ClickingSphereCollider.OverlapPoint(mousePos))
+                {
+                    Debug.Log("Circle clicked!");
+
+                    Jump();
+                    // Hier kannst du weitere Aktionen ausführen
+                }
+
+
+                //StartCoroutine(ElectricSoundCoroutine());
+            }
+            // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+            else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (ClickingSphereCollider.OverlapPoint(mousePos))
+                {
+                    Debug.Log("Circle clicked!");
+
+                    MagneticFall();
+                    // Hier kannst du weitere Aktionen ausführen
+                }
+            }
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Dash")
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                arrow.gameObject.SetActive(true);
+            }
+            else
+            {
+                arrow.gameObject.SetActive(false);
+            }
+
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                Time.timeScale = 0.5f;
+            }
+
+            // Mausposition in Weltkoordinaten
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = 0f;
+
+            // Richtung von Zentrum zur Maus
+            Vector3 direction = (mouseWorldPos - transform.position).normalized;
+
+            // Neue Position des Pfeils (auf dem Kreis)
+            arrow.transform.position = transform.position + direction * 2;
+
+            // Rotation des Pfeils zur Maus
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            arrow.rotation = Quaternion.Euler(0, 0, angle);
+
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                Time.timeScale = 1f;
+                rb.velocity = Vector3.zero;
+                rb.AddForce(direction.normalized * 280f, ForceMode2D.Force);
+            }
+        }
+
+#elif !UNITY_EDITOR && UNITY_ANDROID
+
+        if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall" || ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera" || ChallengeManager.Instance.actualChallengeButton.title == "UpsideDown" || ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
+        {
+            // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
+            if (isGrounded && Input.GetTouch(0).phase == TouchPhase.Began/* Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+                Jump();
+                //StartCoroutine(ElectricSoundCoroutine());
+            }
+            // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+            else if (isJumping && Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+                MagneticFall();
+            }
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+                //rb.simulated = true;
+                // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
+
+                if (isVelocityPositive)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, -7);
+                    IsOnWayDown = true;
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 7);
+                    IsOnWayDown = false;
+                }
+
+                isVelocityPositive = !isVelocityPositive;
+            }
+
+            Vector2 directionUp = Vector2.up;
+
+            Vector2 position2 = new Vector2(transform.position.x - 0.5f, transform.position.y);
+            RaycastHit2D hit2 = Physics2D.Raycast(position2, directionUp, raycastDistance, groundLayer);
+
+            if (isOnTop && !IsOnWayDown && hit2.collider == null)
+            {
+                rb.velocity = new Vector2(speed, 20);
+            }
+
+            Vector2 directionDown = Vector2.down;
+
+            Vector2 position3 = new Vector2(transform.position.x - 0.5f, transform.position.y);
+            RaycastHit2D hit3 = Physics2D.Raycast(position3, directionDown, raycastDistance, groundLayer);
+
+            if (isOnBotton && IsOnWayDown && hit3.collider == null)
+            {
+                //rb.velocity = new Vector2(speed, -20);
+            }
+        }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
+        {
+            if (/*(isOnBotton || isOnTop) && */Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
                 //rb.simulated = true;
                 // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
@@ -293,7 +499,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            if (Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
                 rb.velocity = new Vector2(rb.velocity.x,0);
                 rb.AddForce(Vector2.up * 4.5f, ForceMode2D.Impulse);
@@ -324,7 +530,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Clicking")
         {
-            if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            if (isGrounded && Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
 
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -340,7 +546,7 @@ public class PlayerMovement : MonoBehaviour
                 //StartCoroutine(ElectricSoundCoroutine());
             }
             // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
-            else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            else if (isJumping && Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (ClickingSphereCollider.OverlapPoint(mousePos))
@@ -363,7 +569,7 @@ public class PlayerMovement : MonoBehaviour
                 arrow.gameObject.SetActive(false);
             }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0))
             {
                 Time.timeScale = 0.5f;
             }
@@ -545,7 +751,7 @@ public class PlayerMovement : MonoBehaviour
         }
 #endif
 
-        
+
 
 
         //if (rb.velocity.x == speed && ChallengeManager.Instance.actualChallengeButton.title != "Dash" && ChallengeManager.Instance.actualChallengeButton.title != "Flappy")
