@@ -364,7 +364,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 isCharging = true;
                 arrow.gameObject.SetActive(true);
-                Time.timeScale = 0.5f;
+                Time.timeScale = 0.7f;
+            }
+
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                rb.velocity = Vector3.zero;
             }
 
             if (isCharging)
@@ -413,7 +418,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            if (Input.GetTouch(0).phase == TouchPhase.Began)/*Input.GetTouch(0).phase == TouchPhase.Began*/
             {
                 //rb.simulated = true;
                 // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
@@ -775,6 +780,8 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+
+
 
         float targetY = Mathf.Lerp(rb.position.y, GetWorldInputY(),0.5f);
 

@@ -47,6 +47,10 @@ public class FollowPlayer : MonoBehaviour
             {
                 FindObjectOfType<PlayerMovement>().speed = 6.5f;
             }
+            else if(ChallengeManager.Instance.actualChallengeButton.title == "Follow")
+            {
+                FindObjectOfType<PlayerMovement>().horizontalSpeed = 9.5f;
+            }
             else
             {
                 FindObjectOfType<PlayerMovement>().speed = 8;
