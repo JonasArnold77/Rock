@@ -141,4 +141,23 @@ public class AdManager : MonoBehaviour
         GetComponent<LevelPlaySample>().bannerAd.HideAd();
         Debug.Log("Banner wurde versteckt.");
     }
+
+    private void OnDisable()
+    {
+        // Alle MonoBehaviour-Objekte finden
+        MonoBehaviour[] allBehaviours = FindObjectsOfType<MonoBehaviour>();
+
+        foreach (var mb in allBehaviours)
+        {
+            // Prüfen, ob der Script-Name "RewardedPrefab" ist
+            if (mb.GetType().Name.Contains("RewardedPrefab") || mb.GetType().Name.Contains("BannerPrefab") || mb.GetType().Name.Contains("InterstitialPrefab"))
+            {
+                // Prüfen, ob es ein DontDestroyOnLoad Objekt ist
+                if (mb.gameObject.scene.name == null || mb.gameObject.scene.name == "")
+                {
+                    Destroy(mb.gameObject);
+                }
+            }
+        }
+    }
 }

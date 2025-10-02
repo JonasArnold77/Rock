@@ -299,5 +299,7 @@ public class LevelPlaySample : MonoBehaviour
     {
         bannerAd?.DestroyAd();
         interstitialAd?.DestroyAd();
+
+
     }
 }
