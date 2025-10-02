@@ -81,12 +81,24 @@ public class PlayerMovement : MonoBehaviour
     private float currentAngle = 0f;
     private bool isCharging = false;
 
+    public float verticalSensitivity = 5f; // Stell dir das wie ein "Maximaler Weltbewegungsbereich" vor
+
+    private float screenHeight;
+    private float startMouseY;
+    private float startPlayerY;
+
+    private string CameraChallenge;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         FireBallEffect.SetActive(false);
         //MagneticBallEffect.SetActive(true);
+
+        screenHeight = Screen.height;
+        startPlayerY = rb.position.y;
+        startMouseY = Input.mousePosition.y;
 
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
@@ -96,7 +108,11 @@ public class PlayerMovement : MonoBehaviour
 
         StartMenu.Instance.gameObject.SetActive(true);
 
+        StartCoroutine(InitGame());
+
         ClickingSphereCollider = FindObjectOfType<ClickingSphere>().GetComponent<Collider2D>();
+
+        
 
 
 #if UNITY_ANDROID
@@ -116,7 +132,15 @@ public class PlayerMovement : MonoBehaviour
 #endif
     }
 
-    void Update()
+    private IEnumerator InitGame()
+    {
+        yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
+        var challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
+        int index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
+        CameraChallenge = (string)ChallengeManager.Instance.GetSaveParameter(challengeString, "challenge");
+    }
+
+        void Update()
     {
 
         var targets = GameObject.FindObjectsOfType<SawBlade>().ToList().Select(s => s.gameObject);
@@ -776,20 +800,35 @@ public class PlayerMovement : MonoBehaviour
         IsOnBottom();
         IsOnTop();
 
-        if (ChallengeManager.Instance.actualChallengeButton.title != "Follow")
+        if (ChallengeManager.Instance.actualChallengeButton.title != "Follow" || CameraChallenge == null)
         {
             return;
         }
 
+        if (CameraChallenge == "Weird Camera" || CameraChallenge == "Rotating Camera")
+        {
+            float currentMouseY = Input.mousePosition.y;
 
+            // Berechne, wie weit sich die Maus relativ zum Start bewegt hat (zwischen -1 und 1)
+            float normalizedMouseDelta = (currentMouseY - startMouseY) / screenHeight;
 
-        float targetY = Mathf.Lerp(rb.position.y, GetWorldInputY(),0.5f);
+            // Multipliziere das mit der gewünschten Empfindlichkeit (= wie viel der Spieler sich maximal bewegen darf)
+            float targetY1 = startPlayerY + normalizedMouseDelta * verticalSensitivity;
 
-        // Neue Position berechnen
-        Vector2 targetPos = new Vector2(rb.position.x + horizontalSpeed * Time.fixedDeltaTime, targetY);
-        rb.MovePosition(targetPos);
+            // Sanftes Folgen
+            float smoothedY = Mathf.Lerp(rb.position.y, targetY1, 0.1f);
 
+            Vector2 targetPos1 = new Vector2(rb.position.x + horizontalSpeed * Time.fixedDeltaTime, smoothedY);
+            rb.MovePosition(targetPos1);
+        }
+        else
+        {
+            float targetY2 = Mathf.Lerp(rb.position.y, GetWorldInputY(), 0.5f);
 
+            // Neue Position berechnen
+            Vector2 targetPos2 = new Vector2(rb.position.x + horizontalSpeed * Time.fixedDeltaTime, targetY2);
+            rb.MovePosition(targetPos2);
+        }
     }
 
     void LateUpdate()

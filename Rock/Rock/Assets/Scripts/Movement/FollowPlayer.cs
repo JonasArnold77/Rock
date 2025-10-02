@@ -40,6 +40,11 @@ public class FollowPlayer : MonoBehaviour
         else if (CameraChallenge == "Weird Camera")
         {
             transform.parent = PlayerTransform;
+
+            if (ChallengeManager.Instance.actualChallengeButton.title == "Follow")
+            {
+                FindObjectOfType<PlayerMovement>().horizontalSpeed = 6f;
+            }
         }
         else if (CameraChallenge == "Highspeed")
         {
@@ -55,6 +60,12 @@ public class FollowPlayer : MonoBehaviour
             {
                 FindObjectOfType<PlayerMovement>().speed = 8;
             }    
+        }else if (CameraChallenge == "Rotating Camera")
+        {
+            if (ChallengeManager.Instance.actualChallengeButton.title == "Follow")
+            {
+                FindObjectOfType<PlayerMovement>().horizontalSpeed = 6f;
+            }
         }
     }
 
