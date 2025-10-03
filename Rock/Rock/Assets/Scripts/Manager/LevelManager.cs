@@ -324,7 +324,7 @@ public class LevelManager : MonoBehaviour
                     }
                     else
                     {
-                        countOfArea = UnityEngine.Random.Range(3, 5);
+                        countOfArea = UnityEngine.Random.Range(3, 4);
                     } 
                 }
                 else if (/*InitIsDone &&*/ chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
