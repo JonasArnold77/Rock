@@ -24,6 +24,7 @@ public class ChallengeButton : MonoBehaviour
 
     public string showingTitle;
     public string description;
+    public string buttonText;
 
     public VideoClip Video;
 

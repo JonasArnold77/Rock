@@ -107,10 +107,10 @@ public class LevelChunkManager : MonoBehaviour
             c.GetComponent<Obstacle>().RuntimeID = count;
             count++;
         }
-        foreach (var c in HardcoreChunks)
-        {
-            c.GetComponent<Obstacle>().RuntimeID = count;
-            count++;
-        }
+        //foreach (var c in HardcoreChunks)
+        //{
+        //    c.GetComponent<Obstacle>().RuntimeID = count;
+        //    count++;
+        //}
     }
 }

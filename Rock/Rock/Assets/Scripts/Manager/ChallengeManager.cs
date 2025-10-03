@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChallengeManager : MonoBehaviour
 {
@@ -17,12 +19,38 @@ public class ChallengeManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        StartCoroutine(InitText());
+        StartCoroutine(InitHide());
+    }
+
+    private IEnumerator InitText()
+    {
+        yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
+
+        if(actualChallengeButton.buttonText != "")
+        {
+            JumpButton.Instance.JumpButtonGO.GetComponentInChildren<Text>().text = actualChallengeButton.buttonText;
+        }
+    }
+
+    public IEnumerator InitHide()
+    {
+        yield return new WaitUntil(() => FindObjectOfType<PlayerMovement>().GameIsStarted);
+        JumpButton.Instance.JumpButtonGO.SetActive(false);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
+    }
+
     public void ActivateBouncyBallEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = PrefabManager.Instance.BouncyMaterial;
         FindObjectOfType<PlayerMovement>().speed = 6;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
+
     }
 
     public void ActivateNormalEffect()
@@ -31,6 +59,8 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().speed = 6;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
 
     public void ActivateGravityChangeEffect()
@@ -38,6 +68,8 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
         SaveManager.Instance.HardcoreModeOn = false;
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
     public void ActivateStrongGravityChangeEffect()
     {
@@ -45,12 +77,16 @@ public class ChallengeManager : MonoBehaviour
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
         FindObjectOfType<PlayerMovement>().speed = 6;
         SaveManager.Instance.HardcoreModeOn = false;
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
     public void ActivateHardcoreModeEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = true;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
     public void ActivateHighspeedEffect()
     {
@@ -58,6 +94,8 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().speed = 8;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
 
     public void ActivateMoveWIthBallEffect()
@@ -65,12 +103,16 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
     public void ActivateMoveCameraEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
     public void ActivateFlappyEffect()
     {
@@ -78,6 +120,8 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().speed = 5f;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
         SaveManager.Instance.HardcoreModeOn = false;
+        JumpButton.Instance.JumpButtonGO.SetActive(true);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
     public void ActivateFollowEffect()
     {
@@ -85,12 +129,16 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().horizontalSpeed = 8f;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
+        JumpButton.Instance.JumpButtonGO.SetActive(false);
+        JumpButton.Instance.FollowScaleGO.SetActive(true);
     }
     public void ActivateClickingEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         SaveManager.Instance.HardcoreModeOn = false;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        JumpButton.Instance.JumpButtonGO.SetActive(false);
+        JumpButton.Instance.FollowScaleGO.SetActive(false);
     }
     public void ActivateDashEffect()
     {

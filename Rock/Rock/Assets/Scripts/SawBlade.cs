@@ -40,11 +40,12 @@ public class SawBlade : MonoBehaviour
     private void Start()
     {
         StartCoroutine(WaitForRandomChunk());
+        Player = FindObjectOfType<PlayerMovement>().transform;
     }
 
     public IEnumerator WaitForRandomChunk()
     {
-        if (LastParent.GetComponent<RandomChunk>())
+        if (LastParent?.GetComponent<RandomChunk>())
         {
             yield return new WaitUntil(() => LastParent.GetComponent<RandomChunk>().InitIsDone);
         }
