@@ -158,7 +158,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(2, 3);
+            LevelManager.Instance.countOfArea = UnityEngine.Random.Range(4, 5);
 
             InventoryManager.Instance.HellPostProcessing.SetActive(false);
             InventoryManager.Instance.NormalPostProcessing.SetActive(true);
@@ -175,7 +175,9 @@ public class SaveManager : MonoBehaviour
             FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
         }
 
-        LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList()[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList().Count)];
+        //LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList()[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList().Count)];
+        LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.UpAndDown;
+
         LevelManager.Instance.GameIsInitialized = true;
 
 
