@@ -138,8 +138,19 @@ public class InventoryManager : MonoBehaviour
                 var actualList = (int[])ChallengeManager.Instance.GetSaveParameter(SaveManager.Instance.CameraChallengesStrings[index], "completed");
                 actualList[actualChallengeButton.Index - 1] = 1;
                 SaveManager.Instance.CameraChallengesStrings[index] = ChallengeManager.Instance.UpdateCompletedChallenges(SaveManager.Instance.CameraChallengesStrings[index], actualList.ToArray());
+                
+                bool allDone = true;
 
-                if (!SaveManager.Instance.SkinsDiscovered.Contains(ChallengeManager.Instance.actualChallengeButton._shopItem.Equipment.name))
+                foreach (var a in actualList.ToList())
+                {
+                    if(a == 0)
+                    {
+                        allDone = false;
+                    }
+                }
+
+
+                if (!SaveManager.Instance.SkinsDiscovered.Contains(ChallengeManager.Instance.actualChallengeButton._shopItem.Equipment.name) && allDone)
                 {
                     SaveManager.Instance.SkinsDiscovered.Add(ChallengeManager.Instance.actualChallengeButton._shopItem.Equipment.name);
                 }
