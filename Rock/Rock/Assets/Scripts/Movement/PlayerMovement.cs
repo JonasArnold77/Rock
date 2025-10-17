@@ -110,7 +110,11 @@ public class PlayerMovement : MonoBehaviour
 
         StartCoroutine(InitGame());
 
-        ClickingSphereCollider = FindObjectOfType<ClickingSphere>().GetComponent<Collider2D>();
+        if(FindObjectOfType<ClickingSphere>() != null)
+        {
+            ClickingSphereCollider = FindObjectOfType<ClickingSphere>().GetComponent<Collider2D>();
+        }
+        
 
         
 
@@ -1166,6 +1170,43 @@ public class PlayerMovement : MonoBehaviour
 
 
         StartCoroutine(WaitForReset());
+    }
+
+    public void DirectReset()
+    {
+        GetComponentsInChildren<Renderer>().ToList().ForEach(r => r.enabled = false);
+
+        if (FindObjectOfType<ClickingSphere>())
+        {
+            FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
+        }
+
+        //InventoryManager.Instance.SetScores();
+
+
+
+        Time.timeScale = 1f;
+
+        IsDead = true;
+        DeathMenu.Instance.gameObject.SetActive(true);
+        Sidebar.Instance.gameObject.SetActive(true);
+        ChallengeDetailMenu.Instance.gameObject.SetActive(false);
+        JumpButton.Instance.gameObject.SetActive(false);
+        StartMenu.Instance.gameObject.SetActive(false);
+
+
+        FindObjectOfType<FollowPlayer>().enabled = false;
+
+        IsDead = true;
+
+        DeathMenu.Instance.ScoreText.text = InventoryManager.Instance.Score.ToString();
+        //DeathMenu.Instance.HighscoreText.text = SaveManager.Instance.Highscore.ToString();
+
+        InventoryManager.Instance.HighscoreTicker.enabled = false;
+
+
+        //string currentSceneName = SceneManager.GetActiveScene().name;
+        //SceneManager.LoadScene(currentSceneName);
     }
 
     private IEnumerator WaitForReset()
