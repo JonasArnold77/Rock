@@ -184,7 +184,7 @@ public class DeathMenu : MonoBehaviour
         {
             if(c.GetComponent<ChallengeButton>().title == ChallengeManager.Instance.actualChallengeButton.title)
             {
-                c.GetComponent<Image>().color = ActiveColor;
+                c.GetComponent<Image>().color = InactiveColor;
                 //c.GetComponentsInChildren<Button>()[1].gameObject.SetActive(true);
             }
             else

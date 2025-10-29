@@ -116,7 +116,11 @@ public class ChallengeDetailMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        Title.text = ChallengeManager.Instance.actualChallengeButton.title;
+        if(ChallengeManager.Instance.actualChallengeButton != null)
+        {
+            Title.text = ChallengeManager.Instance.actualChallengeButton.title;
+        }
+        
         //Instantiate(PrefabManager.Instance.MedalRevealUIEffect,SilverMedalGO.transform.position, Quaternion.identity);
         //Instantiate(PrefabManager.Instance.MedalRevealUIEffect, GoldMedalGO.transform.position, Quaternion.identity);
     }

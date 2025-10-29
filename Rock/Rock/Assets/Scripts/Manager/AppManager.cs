@@ -26,7 +26,7 @@ public class AppManager : MonoBehaviour
     private IEnumerator OnAppStart()
     {
         yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
-        ChallengeDetailMenu.Instance.HidePanelImage.color = new Color(ChallengeDetailMenu.Instance.HidePanelImage.color.r, ChallengeDetailMenu.Instance.HidePanelImage.color.g, ChallengeDetailMenu.Instance.HidePanelImage.color.b,1);
+        //ChallengeDetailMenu.Instance.HidePanelImage.color = new Color(ChallengeDetailMenu.Instance.HidePanelImage.color.r, ChallengeDetailMenu.Instance.HidePanelImage.color.g, ChallengeDetailMenu.Instance.HidePanelImage.color.b,1);
         FindObjectOfType<PlayerMovement>().DirectReset();
     }
 }

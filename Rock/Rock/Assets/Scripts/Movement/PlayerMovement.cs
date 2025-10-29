@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
 #endif
 
 
-        if (!GameIsStarted)
+        if (!GameIsStarted || DeathMenu.Instance.gameObject.activeSelf)
         {
             rb.simulated = false;
             return;
