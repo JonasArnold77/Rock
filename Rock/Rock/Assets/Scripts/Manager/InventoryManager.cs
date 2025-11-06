@@ -71,6 +71,10 @@ public class InventoryManager : MonoBehaviour
         _PlayerMovement = FindObjectOfType<PlayerMovement>();
 
         StartCoroutine(InitGame());
+
+
+        Application.targetFrameRate = 60; // oder 120 auf High-End-Geräten
+
     }
 
     private IEnumerator InitGame()
