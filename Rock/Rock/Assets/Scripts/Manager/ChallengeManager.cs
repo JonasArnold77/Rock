@@ -45,7 +45,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateBouncyBallEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = PrefabManager.Instance.BouncyMaterial;
-        FindObjectOfType<PlayerMovement>().speed = 6f;
+        FindObjectOfType<PlayerMovement>().speed = 6.5f;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
         SaveManager.Instance.HardcoreModeOn = false;
         JumpButton.Instance.JumpButtonGO.SetActive(true);
@@ -56,7 +56,7 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateNormalEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
-        FindObjectOfType<PlayerMovement>().speed = 6f;
+        FindObjectOfType<PlayerMovement>().speed = 6.5f;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
 
         SaveManager.Instance.HardcoreModeOn = false;
@@ -69,6 +69,7 @@ public class ChallengeManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
+        FindObjectOfType<PlayerMovement>().speed = 6.5f;
         SaveManager.Instance.HardcoreModeOn = false;
         JumpButton.Instance.JumpButtonGO.SetActive(true);
         JumpButton.Instance.FollowScaleGO.SetActive(false);
@@ -77,7 +78,9 @@ public class ChallengeManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, 0);
-        FindObjectOfType<PlayerMovement>().speed = 6;
+        FindObjectOfType<PlayerMovement>().speed = 7;
+        FindObjectOfType<PlayerMovement>().StrongGravityYVelocity = 17;
+
         SaveManager.Instance.HardcoreModeOn = false;
         JumpButton.Instance.JumpButtonGO.SetActive(true);
         JumpButton.Instance.FollowScaleGO.SetActive(false);

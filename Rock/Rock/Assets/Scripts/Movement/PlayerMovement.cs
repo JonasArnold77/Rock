@@ -89,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
 
     private string CameraChallenge;
 
+    public int StrongGravityYVelocity = 17;
+
 
     void Start()
     {
@@ -257,12 +259,12 @@ public class PlayerMovement : MonoBehaviour
 
                 if (isVelocityPositive)
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, -17);
+                    rb.velocity = new Vector2(rb.velocity.x, -StrongGravityYVelocity);
                     IsOnWayDown = true;
                 }
                 else
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, 17);
+                    rb.velocity = new Vector2(rb.velocity.x, StrongGravityYVelocity);
                     IsOnWayDown = false;
                 }
 
@@ -1009,26 +1011,31 @@ public class PlayerMovement : MonoBehaviour
 
             RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
 
-            // Liste für die Treffer vor den Spikes
-            List<RaycastHit2D> hitsBeforeSpikes = new List<RaycastHit2D>();
+            bool hitSpikes = hits.Any(hit => hit.collider != null && hit.collider.CompareTag("Spikes"));
 
-            foreach (RaycastHit2D hit in hits)
+            if (hitSpikes)
             {
-                if (hit.collider == null) continue;
+                // Liste für die Treffer vor den Spikes
+                List<RaycastHit2D> hitsBeforeSpikes = new List<RaycastHit2D>();
 
-                // Falls "Spikes" getroffen wurde: Schleife abbrechen
-                if (hit.collider.CompareTag("Spikes"))
+                foreach (RaycastHit2D hit in hits)
                 {
-                    break;
+                    if (hit.collider == null) continue;
+
+                    // Falls "Spikes" getroffen wurde: Schleife abbrechen
+                    if (hit.collider.CompareTag("Spikes"))
+                    {
+                        break;
+                    }
+
+                    // Ansonsten zur Liste hinzufügen
+                    hitsBeforeSpikes.Add(hit);
                 }
 
-                // Ansonsten zur Liste hinzufügen
-                hitsBeforeSpikes.Add(hit);
-            }
-
-            if (hitsBeforeSpikes.Count > 0)
-            {
-                return;
+                if (hitsBeforeSpikes.Count > 0)
+                {
+                    return;
+                }
             }
 
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));

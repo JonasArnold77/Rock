@@ -13,7 +13,9 @@ public class Gem : MonoBehaviour
     {
         var random = Random.Range(0,2);
 
-        if(random == 0)
+        _audioSource = GetComponent<AudioSource>();
+
+        if (random == 0)
         {
             Destroy(gameObject);
         }
