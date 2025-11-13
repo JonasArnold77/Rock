@@ -449,9 +449,23 @@ public class LevelManager : MonoBehaviour
 
         GameObject newObject = Instantiate(objectPrefab, spawnPosition, Quaternion.identity);
 
-        RuntimeIDsUsed.Add(newObject.GetComponent<Obstacle>().RuntimeID);
+        if(newObject.GetComponent<Obstacle>().SurviveRate == 0)
+        {
+            RuntimeIDsUsed.Add(newObject.GetComponent<Obstacle>().RuntimeID);
+        }
+        else
+        {
+            newObject.GetComponent<Obstacle>().SurviveRate--;
+        }
 
-        UsedChunks.Add(objectPrefab.GetComponent<Obstacle>().RuntimeID);
+        if (objectPrefab.GetComponent<Obstacle>().SurviveRate == 0)
+        {
+            UsedChunks.Add(objectPrefab.GetComponent<Obstacle>().RuntimeID);
+        }
+        else
+        {
+            objectPrefab.GetComponent<Obstacle>().SurviveRate--;
+        }
 
         newObject.GetComponent<Obstacle>().Title = objectPrefab.name;
 

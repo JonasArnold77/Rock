@@ -29,6 +29,8 @@ public class Obstacle : MonoBehaviour
 
     public bool IsBigChunk;
 
+    public int SurviveRate;
+
     private void Start()
     {
         if (AreaCollider == null)

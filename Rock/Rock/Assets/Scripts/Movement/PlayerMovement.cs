@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -1009,12 +1010,17 @@ public class PlayerMovement : MonoBehaviour
             Vector2 position = new Vector2(transform.position.x, transform.position.y + 0.25f);
             Vector2 direction = Vector2.down;
 
-            RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
+            if (isOnTop)
+            {
+                direction = -direction;
+            }
 
+            RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
             bool hitSpikes = hits.Any(hit => hit.collider != null && hit.collider.CompareTag("Spikes"));
 
             if (hitSpikes)
             {
+                
                 // Liste für die Treffer vor den Spikes
                 List<RaycastHit2D> hitsBeforeSpikes = new List<RaycastHit2D>();
 

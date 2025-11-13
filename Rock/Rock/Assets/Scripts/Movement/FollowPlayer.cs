@@ -56,9 +56,15 @@ public class FollowPlayer : MonoBehaviour
             {
                 FindObjectOfType<PlayerMovement>().horizontalSpeed = 9.5f;
             }
+            else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
+            {
+                FindObjectOfType<PlayerMovement>().speed = 8;
+                FindObjectOfType<PlayerMovement>().StrongGravityYVelocity = 20;
+            } 
             else
             {
                 FindObjectOfType<PlayerMovement>().speed = 8;
+
             }    
         }else if (CameraChallenge == "Rotating Camera")
         {
