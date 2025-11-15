@@ -52,7 +52,7 @@ public class FollowPlayer : MonoBehaviour
             {
                 FindObjectOfType<PlayerMovement>().speed = 6.5f;
             }
-            else if(ChallengeManager.Instance.actualChallengeButton.title == "Follow")
+            else if (ChallengeManager.Instance.actualChallengeButton.title == "Follow")
             {
                 FindObjectOfType<PlayerMovement>().horizontalSpeed = 9.5f;
             }
@@ -60,11 +60,25 @@ public class FollowPlayer : MonoBehaviour
             {
                 FindObjectOfType<PlayerMovement>().speed = 8;
                 FindObjectOfType<PlayerMovement>().StrongGravityYVelocity = 20;
-            } 
+            }
+            else if (ChallengeManager.Instance.actualChallengeButton.title == "Normal") 
+            {
+                FindObjectOfType<PlayerMovement>().speed = 7f;
+                Physics2D.gravity = new Vector2(Physics2D.gravity.x, -12.91f);
+
+                FindObjectOfType<PlayerMovement>().jumpForce = 12.25f;
+            }
+            else if(ChallengeManager.Instance.actualChallengeButton.title == "Bouncy")
+            {
+                PrefabManager.Instance.BouncyMaterial.bounciness = 0.54f;
+                FindObjectOfType<PlayerMovement>().jumpForce = 12.7f;
+                FindObjectOfType<PlayerMovement>().speed = 7f;
+                FindObjectOfType<PlayerMovement>().fallSpeedMultiplier = 17.5f;
+                Physics2D.gravity = new Vector2(Physics2D.gravity.x, -12.91f);
+            }
             else
             {
                 FindObjectOfType<PlayerMovement>().speed = 8;
-
             }    
         }else if (CameraChallenge == "Rotating Camera")
         {

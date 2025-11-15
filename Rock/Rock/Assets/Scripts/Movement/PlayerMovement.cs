@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -797,7 +798,7 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator ElectricSoundCoroutine()
     {
-        yield return new WaitForSeconds(Random.Range(2,5));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(2,5));
 
         if (isJumping)
         {
@@ -1010,39 +1011,33 @@ public class PlayerMovement : MonoBehaviour
             Vector2 position = new Vector2(transform.position.x, transform.position.y + 0.25f);
             Vector2 direction = Vector2.down;
 
-            if (isOnTop)
-            {
-                direction = -direction;
-            }
-
             RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
-            bool hitSpikes = hits.Any(hit => hit.collider != null && hit.collider.CompareTag("Spikes"));
 
-            if (hitSpikes)
+            // Nach Distanz sortieren
+            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            bool somethingBeforeSpikes = false;
+
+            foreach (RaycastHit2D hit in hits)
             {
-                
-                // Liste für die Treffer vor den Spikes
-                List<RaycastHit2D> hitsBeforeSpikes = new List<RaycastHit2D>();
+                if (hit.collider == null) continue;
 
-                foreach (RaycastHit2D hit in hits)
+                // Wenn wir "Spikes" erreichen → abbrechen
+                if (hit.collider.CompareTag("Spikes"))
                 {
-                    if (hit.collider == null) continue;
-
-                    // Falls "Spikes" getroffen wurde: Schleife abbrechen
-                    if (hit.collider.CompareTag("Spikes"))
-                    {
-                        break;
-                    }
-
-                    // Ansonsten zur Liste hinzufügen
-                    hitsBeforeSpikes.Add(hit);
+                    break;
                 }
 
-                if (hitsBeforeSpikes.Count > 0)
-                {
-                    return;
-                }
+                // Wenn wir hier sind, haben wir einen Collider VOR den Spikes gefunden
+                somethingBeforeSpikes = true;
+                break; // reicht; wir brauchen keinen weiteren
             }
+
+            if (somethingBeforeSpikes)
+            {
+                return; // oder mach was auch immer du willst
+            }
+        
 
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
             
@@ -1115,26 +1110,29 @@ public class PlayerMovement : MonoBehaviour
 
             RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
 
-            // Liste für die Treffer vor den Spikes
-            List<RaycastHit2D> hitsBeforeSpikes = new List<RaycastHit2D>();
+            // Nach Distanz sortieren
+            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            bool somethingBeforeSpikes = false;
 
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider == null) continue;
 
-                // Falls "Spikes" getroffen wurde: Schleife abbrechen
+                // Wenn wir "Spikes" erreichen → abbrechen
                 if (hit.collider.CompareTag("Spikes"))
                 {
                     break;
                 }
 
-                // Ansonsten zur Liste hinzufügen
-                hitsBeforeSpikes.Add(hit);
+                // Wenn wir hier sind, haben wir einen Collider VOR den Spikes gefunden
+                somethingBeforeSpikes = true;
+                break; // reicht; wir brauchen keinen weiteren
             }
 
-            if(hitsBeforeSpikes.Count > 0)
+            if (somethingBeforeSpikes)
             {
-                return;
+                return; // oder mach was auch immer du willst
             }
 
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));

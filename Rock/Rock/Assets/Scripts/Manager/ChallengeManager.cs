@@ -45,8 +45,11 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateBouncyBallEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = PrefabManager.Instance.BouncyMaterial;
-        FindObjectOfType<PlayerMovement>().speed = 6.5f;
-        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        PrefabManager.Instance.BouncyMaterial.bounciness = 0.5f;
+        FindObjectOfType<PlayerMovement>().jumpForce = 11f;
+
+        FindObjectOfType<PlayerMovement>().speed = 6.25f;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -10.91f);
         SaveManager.Instance.HardcoreModeOn = false;
         JumpButton.Instance.JumpButtonGO.SetActive(true);
         JumpButton.Instance.FollowScaleGO.SetActive(false);
@@ -56,8 +59,10 @@ public class ChallengeManager : MonoBehaviour
     public void ActivateNormalEffect()
     {
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
-        FindObjectOfType<PlayerMovement>().speed = 6.5f;
-        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        FindObjectOfType<PlayerMovement>().speed = 6.25f;
+        Physics2D.gravity = new Vector2(Physics2D.gravity.x, -12f);
+
+        FindObjectOfType<PlayerMovement>().jumpForce = 12.5f;
 
         SaveManager.Instance.HardcoreModeOn = false;
         
