@@ -209,6 +209,20 @@ public class PlayerMovement : MonoBehaviour
                 MagneticFall();
             }
         }
+        else if (ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
+        {
+            // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
+            if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0)/* Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+                Jump();
+                //StartCoroutine(ElectricSoundCoroutine());
+            }
+            // Überprüfen, ob der Spieler im Sprung ist und die Sprungtaste erneut drückt
+            else if (isJumping && Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            {
+                MagneticFall();
+            }
+        }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
         {
             if (Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
@@ -1101,68 +1115,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 LifePoints--;
             }
-        }
-  
-        if (collision.gameObject.CompareTag("Spikes"))
-        {
-            Vector2 position = new Vector2(transform.position.x, transform.position.y + 0.25f);
-            Vector2 direction = Vector2.down;
-
-            RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
-
-            // Nach Distanz sortieren
-            Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-
-            bool somethingBeforeSpikes = false;
-
-            foreach (RaycastHit2D hit in hits)
-            {
-                if (hit.collider == null) continue;
-
-                // Wenn wir "Spikes" erreichen → abbrechen
-                if (hit.collider.CompareTag("Spikes"))
-                {
-                    break;
-                }
-
-                // Wenn wir hier sind, haben wir einen Collider VOR den Spikes gefunden
-                somethingBeforeSpikes = true;
-                break; // reicht; wir brauchen keinen weiteren
-            }
-
-            if (somethingBeforeSpikes)
-            {
-                return; // oder mach was auch immer du willst
-            }
-
-            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
-
-            if (LifePoints == 0)
-            {
-                if (InventoryManager.Instance.GodMode)
-                {
-                    return;
-                }
-
-                speed = 0;
-                FireBallEffect.SetActive(false);
-                //MagneticBallEffect.SetActive(false);
-                BallEffect.SetActive(false);
-                BallEffect2.SetActive(false);
-
-                rb.simulated = true;
-
-
-                StartCoroutine(WaitForReset());
-            }
-            else
-            {
-                LifePoints--;
-            }
-            
-        }
-
-    }
+        }  
+     }
 
     public void Die()
     {
