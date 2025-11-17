@@ -424,7 +424,7 @@ public class PlayerMovement : MonoBehaviour
         if (ChallengeManager.Instance.actualChallengeButton.title == "Normal" || ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode" || ChallengeManager.Instance.actualChallengeButton.title == "HardcoreMode" || ChallengeManager.Instance.actualChallengeButton.title == "Highspeed" || ChallengeManager.Instance.actualChallengeButton.title == "MoveWithBall" || ChallengeManager.Instance.actualChallengeButton.title == "MoveCamera" || ChallengeManager.Instance.actualChallengeButton.title == "UpsideDown" || ChallengeManager.Instance.actualChallengeButton.title == "RotateCamera")
         {
             // Überprüfen, ob der Spieler auf dem Boden steht und die Sprungtaste drückt
-            if (isGrounded && Input.GetTouch(0).phase == TouchPhase.Began/* Input.GetTouch(0).phase == TouchPhase.Began*/)
+            if (Input.touchCount > 0 && isGrounded && Input.GetTouch(0).phase == TouchPhase.Began/* Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
                 Jump();
                 //StartCoroutine(ElectricSoundCoroutine());
@@ -437,7 +437,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Gravity")
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began)/*Input.GetTouch(0).phase == TouchPhase.Began*/
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)/*Input.GetTouch(0).phase == TouchPhase.Began*/
             {
                 //rb.simulated = true;
                 // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
@@ -478,7 +478,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
         {
-            if (/*(isOnBotton || isOnTop) && */Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            if (/*(isOnBotton || isOnTop) && */Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
                 //rb.simulated = true;
                 // Wenn velocity.y positiv ist, setze sie auf -velocityValue, sonst auf +velocityValue
@@ -528,7 +528,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
                 rb.velocity = new Vector2(rb.velocity.x,0);
                 rb.AddForce(Vector2.up * 4.5f, ForceMode2D.Impulse);
@@ -559,7 +559,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (ChallengeManager.Instance.actualChallengeButton.title == "Clicking")
         {
-            if (isGrounded && Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
+            if (Input.touchCount > 0 && isGrounded && Input.GetTouch(0).phase == TouchPhase.Began/*Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
 
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -1022,6 +1022,32 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
+            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
+
+            if (collision.gameObject.GetComponent<Obstacle>() != null || collision.gameObject.GetComponent<MovingObstacle>() != null)
+            {
+                if (InventoryManager.Instance.GodMode)
+                {
+                    return;
+                }
+
+                speed = 0;
+                FireBallEffect.SetActive(false);
+                //MagneticBallEffect.SetActive(false);
+                BallEffect.SetActive(false);
+                BallEffect2.SetActive(false);
+
+                rb.simulated = true;
+                GetComponent<Collider2D>().enabled = false;
+
+                FindObjectOfType<FollowPlayer>().enabled = false;
+
+                StartCoroutine(WaitForReset());
+                //string currentSceneName = SceneManager.GetActiveScene().name;
+                //SceneManager.LoadScene(currentSceneName);
+                return;
+            }
+
             Vector2 position = new Vector2(transform.position.x, transform.position.y + 0.25f);
             Vector2 direction = Vector2.down;
 
@@ -1050,36 +1076,6 @@ public class PlayerMovement : MonoBehaviour
             if (somethingBeforeSpikes)
             {
                 return; // oder mach was auch immer du willst
-            }
-        
-
-            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
-            
-            if(LifePoints == 0)
-            {
-                if (InventoryManager.Instance.GodMode)
-                {
-                    return;
-                }
-
-                speed = 0;
-                FireBallEffect.SetActive(false);
-                //MagneticBallEffect.SetActive(false);
-                BallEffect.SetActive(false);
-                BallEffect2.SetActive(false);
-
-                rb.simulated = true;
-                GetComponent<Collider2D>().enabled = false;
-
-                FindObjectOfType<FollowPlayer>().enabled = false;
-
-                StartCoroutine(WaitForReset()); 
-                //string currentSceneName = SceneManager.GetActiveScene().name;
-                //SceneManager.LoadScene(currentSceneName);
-            }
-            else
-            {
-                LifePoints--;
             }
         }
     }

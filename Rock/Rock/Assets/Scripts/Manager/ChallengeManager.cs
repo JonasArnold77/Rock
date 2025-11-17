@@ -131,6 +131,7 @@ public class ChallengeManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().gameObject.GetComponent<Rigidbody2D>().sharedMaterial = null;
         FindObjectOfType<PlayerMovement>().speed = 5f;
         Physics2D.gravity = new Vector2(Physics2D.gravity.x, -9.91f);
+        FindObjectOfType<PlayerMovement>().raycastDistance = 0.6f;
         SaveManager.Instance.HardcoreModeOn = false;
         JumpButton.Instance.JumpButtonGO.SetActive(true);
         JumpButton.Instance.FollowScaleGO.SetActive(false);
