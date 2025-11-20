@@ -92,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
     private string CameraChallenge;
 
     public int StrongGravityYVelocity = 17;
+    public float FlappyJumpForce;
 
 
     void Start()
@@ -319,7 +320,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0)/*Input.GetTouch(0).phase == TouchPhase.Began*/)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * 4.5f, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * FlappyJumpForce, ForceMode2D.Impulse);
             }
             if (isGrounded)
             {
@@ -1024,7 +1025,7 @@ public class PlayerMovement : MonoBehaviour
 
             Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
 
-            if (collision.gameObject.GetComponent<Obstacle>() != null || collision.gameObject.GetComponent<MovingObstacle>() != null)
+            if (collision.gameObject.GetComponent<Spikes>() == null)
             {
                 if (InventoryManager.Instance.GodMode)
                 {

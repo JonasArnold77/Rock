@@ -177,8 +177,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -5.12
-  startType: {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
-  endType: {fileID: 11400000, guid: 60f54f2f1d50af4479b7d9004ae430bf, type: 2}
+  startType:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 1
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 5635658863507936096}
@@ -188,6 +195,8 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType:
   - {fileID: 11400000, guid: c5e30368af7495f4ca073bddfec36fc1, type: 2}
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &361470601479149893
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,8 +341,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -5.12
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -342,6 +354,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &414217928050648336
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,8 +500,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -5.12
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -496,6 +513,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &511082497405021034
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,8 +659,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -650,6 +672,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &534361038830534424
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,8 +818,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -5.12
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -804,6 +831,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1122515280473853748
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,8 +977,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -958,6 +990,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1312454586167422740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,8 +1136,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -1112,6 +1149,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1493427375133425261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,8 +1425,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -1396,6 +1438,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2445991491084313861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,8 +1584,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -1550,6 +1597,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2836030360303980946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,8 +1743,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -5.12
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -1704,6 +1756,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2909408164377816892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,8 +1902,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -1858,6 +1915,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &3873023595390827583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,8 +2061,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -5.12
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -2012,6 +2074,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5003529321039980581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,8 +2220,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -2166,6 +2233,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5057840555108329108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,8 +2379,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -2320,6 +2392,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5301843796006678149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,8 +2538,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -5.12
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -2474,6 +2551,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5305372260925127822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3138,8 +3217,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -3148,6 +3230,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &7426535951540889921
 GameObject:
   m_ObjectHideFlags: 0
@@ -3292,8 +3376,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -3302,6 +3389,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8001337456980273873
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,8 +3535,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: {fileID: 0}
-  endType: {fileID: 0}
+  startType:
+  - {fileID: 0}
+  endType:
+  - {fileID: 0}
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
@@ -3456,6 +3548,8 @@ MonoBehaviour:
   RuntimeID: 0
   type: {fileID: 0}
   _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8048708797223746765
 GameObject:
   m_ObjectHideFlags: 0

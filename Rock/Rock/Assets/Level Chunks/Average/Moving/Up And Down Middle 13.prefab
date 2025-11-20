@@ -1203,6 +1203,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 328af9dbb17225f43b19e34ffc6ef8b4, type: 2}
   - {fileID: 11400000, guid: eb2256fa750d2144083d92735b4a958f, type: 2}
   IsBigChunk: 1
+  SurviveRate: 0
 --- !u!114 &8623407294978508135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1854,7 +1855,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1897,6 +1898,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &365517764874733474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2605,6 +2607,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &524951276480575053
 GameObject:
   m_ObjectHideFlags: 0
@@ -3767,7 +3770,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3810,6 +3813,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &818197604421059882
 GameObject:
   m_ObjectHideFlags: 0
@@ -6172,6 +6176,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1133625420278716127
 GameObject:
   m_ObjectHideFlags: 0
@@ -6540,7 +6545,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -6583,6 +6588,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1154346516576125105
 GameObject:
   m_ObjectHideFlags: 0
@@ -6825,6 +6831,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1201182361716591159
 GameObject:
   m_ObjectHideFlags: 0
@@ -7109,7 +7116,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -7152,6 +7159,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1232352334944459452
 GameObject:
   m_ObjectHideFlags: 0
@@ -7562,6 +7570,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1368029558692651429
 GameObject:
   m_ObjectHideFlags: 0
@@ -7858,7 +7867,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -7901,6 +7910,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1383076061170283575
 GameObject:
   m_ObjectHideFlags: 0
@@ -8307,7 +8317,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8350,6 +8360,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1424763408107483993
 GameObject:
   m_ObjectHideFlags: 0
@@ -8466,7 +8477,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8509,6 +8520,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1428994178252952595
 GameObject:
   m_ObjectHideFlags: 0
@@ -8709,7 +8721,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8752,6 +8764,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1451990121487678398
 GameObject:
   m_ObjectHideFlags: 0
@@ -8952,7 +8965,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -8995,6 +9008,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1543347122746335470
 GameObject:
   m_ObjectHideFlags: 0
@@ -9522,7 +9536,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9565,6 +9579,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1702220221373471004
 GameObject:
   m_ObjectHideFlags: 0
@@ -10177,7 +10192,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10220,6 +10235,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1800135446706043063
 GameObject:
   m_ObjectHideFlags: 0
@@ -10844,6 +10860,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1880275761943862421
 GameObject:
   m_ObjectHideFlags: 0
@@ -10960,7 +10977,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -11003,6 +11020,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1894468873075677765
 GameObject:
   m_ObjectHideFlags: 0
@@ -12536,6 +12554,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2243091143339448707
 GameObject:
   m_ObjectHideFlags: 0
@@ -14114,6 +14133,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2466351722791443944
 GameObject:
   m_ObjectHideFlags: 0
@@ -14739,6 +14759,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2566332899470463926
 GameObject:
   m_ObjectHideFlags: 0
@@ -15237,7 +15258,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -15280,6 +15301,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2606535716731640612
 GameObject:
   m_ObjectHideFlags: 0
@@ -17148,6 +17170,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2852176820656483555
 GameObject:
   m_ObjectHideFlags: 0
@@ -17360,7 +17383,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17403,6 +17426,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2860151961259947975
 GameObject:
   m_ObjectHideFlags: 0
@@ -17687,7 +17711,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -17730,6 +17754,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2869031873584679733
 GameObject:
   m_ObjectHideFlags: 0
@@ -18056,6 +18081,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2939318402529054872
 GameObject:
   m_ObjectHideFlags: 0
@@ -18172,7 +18198,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18215,6 +18241,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2952928541191175248
 GameObject:
   m_ObjectHideFlags: 0
@@ -18499,7 +18526,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18542,6 +18569,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &3099381892032281258
 GameObject:
   m_ObjectHideFlags: 0
@@ -18826,7 +18854,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -18869,6 +18897,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &3171116284254688250
 GameObject:
   m_ObjectHideFlags: 0
@@ -21383,7 +21412,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -21426,6 +21455,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &3638152050143357270
 GameObject:
   m_ObjectHideFlags: 0
@@ -22197,7 +22227,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -22240,6 +22270,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &3771688835759724432
 GameObject:
   m_ObjectHideFlags: 0
@@ -22356,7 +22387,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -22399,6 +22430,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &3778072040243113857
 GameObject:
   m_ObjectHideFlags: 0
@@ -23317,7 +23349,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -23360,6 +23392,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &4011766716576846405
 GameObject:
   m_ObjectHideFlags: 0
@@ -24353,7 +24386,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -24396,6 +24429,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &4084872927470533169
 GameObject:
   m_ObjectHideFlags: 0
@@ -26074,6 +26108,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &4466606030132005613
 GameObject:
   m_ObjectHideFlags: 0
@@ -26610,7 +26645,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -26653,6 +26688,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &4652582884565353345
 GameObject:
   m_ObjectHideFlags: 0
@@ -27189,7 +27225,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -27232,6 +27268,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &4764315799104432448
 GameObject:
   m_ObjectHideFlags: 0
@@ -29238,6 +29275,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5019178981445103347
 GameObject:
   m_ObjectHideFlags: 0
@@ -29648,6 +29686,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5071859369324015931
 GameObject:
   m_ObjectHideFlags: 0
@@ -30104,6 +30143,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5105859590040116928
 GameObject:
   m_ObjectHideFlags: 0
@@ -30346,6 +30386,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5135676843814432681
 GameObject:
   m_ObjectHideFlags: 0
@@ -30630,7 +30671,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -30673,6 +30714,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5185552913395821791
 GameObject:
   m_ObjectHideFlags: 0
@@ -31032,7 +31074,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -31075,6 +31117,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5235496780585630810
 GameObject:
   m_ObjectHideFlags: 0
@@ -31401,6 +31444,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5257214151666566283
 GameObject:
   m_ObjectHideFlags: 0
@@ -32841,6 +32885,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5599850200483439872
 GameObject:
   m_ObjectHideFlags: 0
@@ -33171,7 +33216,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -33214,6 +33259,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5624086667051751214
 GameObject:
   m_ObjectHideFlags: 0
@@ -34682,7 +34728,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -34725,6 +34771,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5858463725933666586
 GameObject:
   m_ObjectHideFlags: 0
@@ -35970,7 +36017,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -36013,6 +36060,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &6171013747789047641
 GameObject:
   m_ObjectHideFlags: 0
@@ -36171,6 +36219,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &6172237669722612213
 GameObject:
   m_ObjectHideFlags: 0
@@ -39360,7 +39409,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -39403,6 +39452,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &6680133807069300034
 GameObject:
   m_ObjectHideFlags: 0
@@ -41063,6 +41113,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &6946686239218095295
 GameObject:
   m_ObjectHideFlags: 0
@@ -41607,7 +41658,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -41650,6 +41701,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &7062605608693630144
 GameObject:
   m_ObjectHideFlags: 0
@@ -42270,7 +42322,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -42313,6 +42365,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &7204146616227806964
 GameObject:
   m_ObjectHideFlags: 0
@@ -43857,7 +43910,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -43900,6 +43953,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &7421586919556313534
 GameObject:
   m_ObjectHideFlags: 0
@@ -44142,6 +44196,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &7432392475148088600
 GameObject:
   m_ObjectHideFlags: 0
@@ -45257,7 +45312,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -45300,6 +45355,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &7633653237855564339
 GameObject:
   m_ObjectHideFlags: 0
@@ -47595,6 +47651,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8008711452491625243
 GameObject:
   m_ObjectHideFlags: 0
@@ -47879,7 +47936,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -47922,6 +47979,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8038247551747755534
 GameObject:
   m_ObjectHideFlags: 0
@@ -48206,7 +48264,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -48249,6 +48307,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8091856518818165500
 GameObject:
   m_ObjectHideFlags: 0
@@ -49461,7 +49520,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -49504,6 +49563,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8343367985703809975
 GameObject:
   m_ObjectHideFlags: 0
@@ -50503,6 +50563,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8542410169204975875
 GameObject:
   m_ObjectHideFlags: 0
@@ -53046,7 +53107,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -53089,6 +53150,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8889838707194507979
 GameObject:
   m_ObjectHideFlags: 0
@@ -53839,7 +53901,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -53882,6 +53944,7 @@ MonoBehaviour:
   type: {fileID: 0}
   _ChallengeType: []
   IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &9003262989901590642
 GameObject:
   m_ObjectHideFlags: 0

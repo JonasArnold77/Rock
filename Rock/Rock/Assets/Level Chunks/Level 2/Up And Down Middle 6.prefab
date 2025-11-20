@@ -515,14 +515,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: -2.36
-  startType: 2
-  endType: 2
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 2
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 814075645281488298}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &257690244638322616
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,7 +644,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -668,14 +673,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &511082497405021034
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,14 +830,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &946563020624533211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,14 +1209,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1166470836387140409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,14 +1748,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1364317990719100282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,7 +1877,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1881,14 +1906,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1478027490416346889
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,7 +2119,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2118,14 +2148,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &1844313950507212150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,14 +2558,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2250091430725715743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,14 +2883,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &2508381733349953331
 GameObject:
   m_ObjectHideFlags: 0
@@ -3607,14 +3652,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &3076751312914693138
 GameObject:
   m_ObjectHideFlags: 0
@@ -5027,14 +5077,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5015150362818461794
 GameObject:
   m_ObjectHideFlags: 0
@@ -5309,14 +5364,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5119436071453664591
 GameObject:
   m_ObjectHideFlags: 0
@@ -5433,7 +5493,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5462,14 +5522,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5160012677323014493
 GameObject:
   m_ObjectHideFlags: 0
@@ -5670,7 +5735,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5699,14 +5764,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &5411315020038306899
 GameObject:
   m_ObjectHideFlags: 0
@@ -6684,14 +6754,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &6299297687896740028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7532,14 +7607,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &7504119675486369201
 GameObject:
   m_ObjectHideFlags: 0
@@ -7824,7 +7904,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -7853,14 +7933,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8001337456980273873
 GameObject:
   m_ObjectHideFlags: 0
@@ -8005,14 +8090,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 2.84
-  startType: 0
-  endType: 0
+  startType: []
+  endType: []
+  FinalEndType: {fileID: 0}
   DifficultyLevel: 0
   PlayerTransform: {fileID: 0}
   AreaCollider: {fileID: 0}
-  ChunkType: 0
+  ChunkType: {fileID: 0}
   Title: 
   RuntimeID: 0
+  type: {fileID: 0}
+  _ChallengeType: []
+  IsBigChunk: 0
+  SurviveRate: 0
 --- !u!1 &8097100604157763195
 GameObject:
   m_ObjectHideFlags: 0
