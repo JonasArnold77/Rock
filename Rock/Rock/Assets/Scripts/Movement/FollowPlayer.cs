@@ -50,11 +50,11 @@ public class FollowPlayer : MonoBehaviour
         {
             if (ChallengeManager.Instance.actualChallengeButton.title == "Flappy")
             {
-                FindObjectOfType<PlayerMovement>().speed = 6.5f;
+                FindObjectOfType<PlayerMovement>().speed = 6.25f;
             }
             else if (ChallengeManager.Instance.actualChallengeButton.title == "Follow")
             {
-                FindObjectOfType<PlayerMovement>().horizontalSpeed = 9.5f;
+                FindObjectOfType<PlayerMovement>().horizontalSpeed = 9.75f;
             }
             else if (ChallengeManager.Instance.actualChallengeButton.title == "StrongGravity")
             {

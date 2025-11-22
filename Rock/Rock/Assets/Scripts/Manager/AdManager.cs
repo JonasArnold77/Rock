@@ -18,6 +18,8 @@ public class AdManager : MonoBehaviour
     public PlayerMovement player;
 
     public static AdManager Instance;
+
+    public GameObject InputBlockingPanelGO;
     private void Awake()
     {
         Instance = this;   
@@ -27,6 +29,7 @@ public class AdManager : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMovement>();
         StartCoroutine(Init());
+        InputBlockingPanelGO.SetActive(false);
     }
 
     public IEnumerator Init()
@@ -84,10 +87,13 @@ public class AdManager : MonoBehaviour
 
     public IEnumerator StartInterstitial()
     {
-        yield break;
         GetComponent<LevelPlaySample>().interstitialAd.LoadAd();
 
+        InputBlockingPanelGO.SetActive(true);
+
         yield return new WaitUntil(() => GetComponent<LevelPlaySample>().interstitialAd.IsAdReady());
+
+        InputBlockingPanelGO.SetActive(false);
 
         GetComponent<LevelPlaySample>().interstitialAd.ShowAd();
     }

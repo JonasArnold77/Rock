@@ -119,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
         {
             ClickingSphereCollider = FindObjectOfType<ClickingSphere>().GetComponent<Collider2D>();
         }
-        
 
         
 
@@ -192,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
         {
             MoveToRight();
         }
-        
+
 
 #if UNITY_EDITOR && UNITY_ANDROID
 
