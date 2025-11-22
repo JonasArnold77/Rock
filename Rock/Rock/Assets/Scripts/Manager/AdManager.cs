@@ -34,6 +34,7 @@ public class AdManager : MonoBehaviour
 
     public IEnumerator Init()
     {
+        yield break;
         yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
 
         if(SaveManager.Instance.FirstSecondsWithoutAd > 0)

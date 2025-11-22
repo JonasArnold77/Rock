@@ -1022,7 +1022,7 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
+            
 
             if (collision.gameObject.GetComponent<Spikes>() == null)
             {
@@ -1030,6 +1030,8 @@ public class PlayerMovement : MonoBehaviour
                 {
                     return;
                 }
+
+                Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
 
                 speed = 0;
                 FireBallEffect.SetActive(false);
@@ -1076,6 +1078,31 @@ public class PlayerMovement : MonoBehaviour
             if (somethingBeforeSpikes)
             {
                 return; // oder mach was auch immer du willst
+            }
+            else
+            {
+                if (InventoryManager.Instance.GodMode)
+                {
+                    return;
+                }
+
+                Instantiate(PrefabManager.Instance.DieEffect, position: transform.position, new Quaternion(0f, 0.707106769f, -0.707106769f, 0));
+
+                speed = 0;
+                FireBallEffect.SetActive(false);
+                //MagneticBallEffect.SetActive(false);
+                BallEffect.SetActive(false);
+                BallEffect2.SetActive(false);
+
+                rb.simulated = true;
+                GetComponent<Collider2D>().enabled = false;
+
+                FindObjectOfType<FollowPlayer>().enabled = false;
+
+                StartCoroutine(WaitForReset());
+                //string currentSceneName = SceneManager.GetActiveScene().name;
+                //SceneManager.LoadScene(currentSceneName);
+                return;
             }
         }
     }
