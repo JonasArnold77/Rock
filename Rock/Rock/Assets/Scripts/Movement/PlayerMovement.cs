@@ -1055,6 +1055,11 @@ public class PlayerMovement : MonoBehaviour
 
             RaycastHit2D[] hits = Physics2D.RaycastAll(position, direction, raycastDistance, groundLayer);
 
+            if(hits.Length == 0)
+            {
+                return;
+            }
+
             // Nach Distanz sortieren
             Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 

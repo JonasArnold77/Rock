@@ -40,6 +40,16 @@ public class LevelChunkManager : MonoBehaviour
     {
         yield return new WaitUntil(() => LevelManager.Instance.GameIsInitialized);
 
+        var AddingChunksList = AllChunks.Where(a => a.GetComponent<Obstacle>().SurviveRate > 0).ToList();
+
+        foreach(var c in AddingChunksList)
+        {
+            for (int i = 0; i<c.GetComponent<Obstacle>().SurviveRate; i++)
+            {
+                AllChunks.Add(c);
+            }
+        }
+
         if (ChallengeManager.Instance.actualChallengeButton.title == "BouncyMode")
         {
             Chunks = AllChunks.Where(a => a.GetComponent<Obstacle>()._ChallengeType.Contains(ChallengeManager.Instance.ChallengeTypeDB.BouncyMode)).ToList();
