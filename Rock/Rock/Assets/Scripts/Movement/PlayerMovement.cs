@@ -94,6 +94,8 @@ public class PlayerMovement : MonoBehaviour
     public int StrongGravityYVelocity = 17;
     public float FlappyJumpForce;
 
+    public TraumaInducer _TraumaInducer;
+
 
     void Start()
     {
@@ -120,8 +122,11 @@ public class PlayerMovement : MonoBehaviour
             ClickingSphereCollider = FindObjectOfType<ClickingSphere>().GetComponent<Collider2D>();
         }
 
-        
-
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    StartCoroutine(FindObjectOfType<TraumaInducer>().DoShakeScreen());
+        //}
+       
 
 #if UNITY_ANDROID
         //FindObjectOfType<JumpButton>().GetComponent<Button>().onClick.AddListener(() => JumpButtonClicked());
@@ -176,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
 #endif
 
 
+
         if (!GameIsStarted || DeathMenu.Instance.gameObject.activeSelf)
         {
             rb.simulated = false;
@@ -191,6 +197,8 @@ public class PlayerMovement : MonoBehaviour
         {
             MoveToRight();
         }
+
+       
 
 
 #if UNITY_EDITOR && UNITY_ANDROID

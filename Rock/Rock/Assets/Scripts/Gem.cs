@@ -45,6 +45,8 @@ public class Gem : MonoBehaviour
                 }
             }
 
+            StartCoroutine(FindObjectOfType<TraumaInducer>().DoShakeScreen());
+
             InventoryManager.Instance.MoneyAmount++;
             SaveManager.Instance.Money++;
             Sidebar.Instance.MoneyAmountText.text = "" + InventoryManager.Instance.MoneyAmount;
