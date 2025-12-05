@@ -57,6 +57,8 @@ public class LevelManager : MonoBehaviour
 
     public int CountTillStair = 2;
 
+    public int CountTillHardLevels;
+    public List<int> UsedBeginningChunks = new List<int>();
 
     public List<int> RuntimeIDsUsed = new List<int>();
 
@@ -327,7 +329,7 @@ public class LevelManager : MonoBehaviour
                         countOfArea = UnityEngine.Random.Range(3, 4);
                     } 
                 }
-                else if (/*InitIsDone &&*/ chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
+                else if (/*InitIsDone &&*/ chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp  && CountTillHardLevels <= 0)
                 {
                     if (lastSpawnedObject.GetComponent<Obstacle>().IsBigChunk)
                     {
@@ -354,6 +356,16 @@ public class LevelManager : MonoBehaviour
                 .Where(c => c.GetComponent<Obstacle>().startType.Contains(chunkType))
                 .ToList();
 
+            if(CountTillHardLevels > 0 && potentialChunks.Where(c => c.GetComponent<Obstacle>().IsBeginningChunk && c.GetComponent<Obstacle>().ChunkType == actualChunkType && !UsedBeginningChunks.Contains(c.GetComponent<Obstacle>().RuntimeID)).ToList().Count>0)
+            {
+                CountTillHardLevels--;
+                potentialChunks = potentialChunks.Where(c => c.GetComponent<Obstacle>().IsBeginningChunk && c.GetComponent<Obstacle>().ChunkType == actualChunkType && !UsedBeginningChunks.Contains(c.GetComponent<Obstacle>().RuntimeID)).ToList();
+            }
+            else
+            {
+                CountTillHardLevels = 0;
+            }
+
             //if (actualChunkType == ChunkTypeDb.FloorIsLava)
             //{
             //    chunkType = HeigtTypeDb.Bottom;
@@ -362,9 +374,9 @@ public class LevelManager : MonoBehaviour
             //        .ToList();
             //}
 
-            if (chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp)
+            if (chunkType != HeigtTypeDb.StairDown && chunkType != HeigtTypeDb.StairUp && CountTillHardLevels == 0)
             {
-                if(potentialChunks
+                if (potentialChunks
                     .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType && !RuntimeIDsUsed.Contains(c.GetComponent<Obstacle>().RuntimeID))
                     .ToList().Count > 0)
                 {
@@ -378,7 +390,7 @@ public class LevelManager : MonoBehaviour
                                             .Where(c => c.GetComponent<Obstacle>().ChunkType == actualChunkType && lastObject.GetComponent<Obstacle>().RuntimeID != c.GetComponent<Obstacle>().RuntimeID)
                                             .ToList();
                     RuntimeIDsUsed.Clear();
-                }    
+                }
             }
 
             if (potentialChunks.Count > 0 && !LevelChunkManager.Instance.TestMode)
@@ -466,6 +478,12 @@ public class LevelManager : MonoBehaviour
         {
             objectPrefab.GetComponent<Obstacle>().SurviveRate--;
         }
+
+        if (CountTillHardLevels > 0)
+        {
+            UsedBeginningChunks.Add(objectPrefab.GetComponent<Obstacle>().RuntimeID);
+        }
+        
 
         newObject.GetComponent<Obstacle>().Title = objectPrefab.name;
 

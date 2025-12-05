@@ -31,6 +31,8 @@ public class Obstacle : MonoBehaviour
 
     public int SurviveRate;
 
+    public bool IsBeginningChunk;
+
     private void Start()
     {
         if (AreaCollider == null)
