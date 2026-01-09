@@ -62,6 +62,8 @@ public class LevelManager : MonoBehaviour
 
     public List<int> RuntimeIDsUsed = new List<int>();
 
+    public bool IsNormalChallenge;
+
     private void Awake()
     {
         Instance = this;
@@ -71,11 +73,21 @@ public class LevelManager : MonoBehaviour
     {
         StartCoroutine(InitGame());
         //HardcoreLevelList = ShuffleList(LevelChunkManager.Instance.HardcoreChunks.Where(h => !h.GetComponent<Obstacle>().startType.Contains(HeigtTypeDb.StairUp)  && !h.GetComponent<Obstacle>().startType.Contains(HeigtTypeDb.StairDown)).ToList());
+    
     }
 
     private IEnumerator InitGame()
     {
         yield return new WaitUntil(() => GameIsInitialized);
+
+        var challengeString = ChallengeManager.Instance.FindSaveByChallengeName(SaveManager.Instance.CameraChallengesStrings, ChallengeManager.Instance.actualChallengeButton.title);
+        int index = SaveManager.Instance.CameraChallengesStrings.IndexOf(challengeString);
+        var CameraChallenge = (string)ChallengeManager.Instance.GetSaveParameter(challengeString, "challenge");
+
+        if (CameraChallenge == "Normal")
+        {
+            IsNormalChallenge = true;
+        }
 
         StartMenu.Instance.text.text = ChallengeManager.Instance.actualChallengeButton.description;
 
@@ -356,7 +368,7 @@ public class LevelManager : MonoBehaviour
                 .Where(c => c.GetComponent<Obstacle>().startType.Contains(chunkType))
                 .ToList();
 
-            if(CountTillHardLevels > 0 && potentialChunks.Where(c => c.GetComponent<Obstacle>().IsBeginningChunk && c.GetComponent<Obstacle>().ChunkType == actualChunkType && !UsedBeginningChunks.Contains(c.GetComponent<Obstacle>().RuntimeID)).ToList().Count>0)
+            if(IsNormalChallenge && CountTillHardLevels > 0 && potentialChunks.Where(c => c.GetComponent<Obstacle>().IsBeginningChunk && c.GetComponent<Obstacle>().ChunkType == actualChunkType && !UsedBeginningChunks.Contains(c.GetComponent<Obstacle>().RuntimeID)).ToList().Count>0)
             {
                 CountTillHardLevels--;
                 potentialChunks = potentialChunks.Where(c => c.GetComponent<Obstacle>().IsBeginningChunk && c.GetComponent<Obstacle>().ChunkType == actualChunkType && !UsedBeginningChunks.Contains(c.GetComponent<Obstacle>().RuntimeID)).ToList();

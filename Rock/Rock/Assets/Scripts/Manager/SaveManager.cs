@@ -175,8 +175,8 @@ public class SaveManager : MonoBehaviour
             FindObjectOfType<ClickingSphere>().gameObject.SetActive(false);
         }
 
-        LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList()[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList().Count)];
-        //LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.UpAndDown;
+        //LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList()[UnityEngine.Random.Range(0, LevelManager.Instance.ChunkTypeDb.ChunkTypes.ToList().Count)];
+        LevelManager.Instance.actualChunkType = LevelManager.Instance.ChunkTypeDb.UpAndDown;
 
         LevelManager.Instance.GameIsInitialized = true;
 
