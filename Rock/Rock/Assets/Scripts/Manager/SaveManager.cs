@@ -217,7 +217,7 @@ public class SaveManager : MonoBehaviour
             LastChunk = "";
         }
 
-        QuickSaveWriter.Create("Inventory78", settings)
+        QuickSaveWriter.Create("Inventory79", settings)
                        .Write("Highscore", Highscore)
                        .Write("XpPoints", XpPoints)
                        .Write("Money", Money)
@@ -245,11 +245,11 @@ public class SaveManager : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory78.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave/Inventory79.json");
 #elif UNITY_STANDALONE_WIN
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory78.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory79.json");
 #elif UNITY_EDITOR
-        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory78.json");
+        string saveFilePath = Path.Combine(Application.persistentDataPath, @"QuickSave\Inventory79.json");
 #endif
 
 
@@ -264,7 +264,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            QuickSaveReader.Create("Inventory78", settings)
+            QuickSaveReader.Create("Inventory79", settings)
                        .Read<int>("Highscore", (r) => { Highscore = r; })
                        .Read<int>("XpPoints", (r) => { XpPoints = r; })
                        .Read<int>("Money", (r) => { Money = r; })
