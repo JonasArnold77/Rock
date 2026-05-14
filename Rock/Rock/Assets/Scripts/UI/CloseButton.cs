@@ -15,6 +15,8 @@ public class CloseButton : MonoBehaviour
 
     private void CloseWindow()
     {
+        AdManager.Instance.ShowInterstitial();
+
         if (WindowList.Count > 0)
         {
             WindowList.ForEach(w => w.SetActive(false));
